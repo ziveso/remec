@@ -1,6 +1,7 @@
 package touchyou;
 
-import java.awt.FlowLayout;
+
+import java.awt.*;
 import javax.swing.JFrame;
 
 /**
@@ -18,15 +19,14 @@ public class TouchYou extends JFrame {
 
 	public TouchYou() {
 		initComponents();
-		setLayout(new FlowLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(1, 2));
 		pack();
 	}
 
 	private void initComponents() {
 		add(new LeftPanel());
 		add(new RightPanel());
-
 	}
 
 	/**
