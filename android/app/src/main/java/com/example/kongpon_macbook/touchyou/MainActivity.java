@@ -21,20 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d("D", "hi");
-                    Socket server = new Socket(IP, PORT);
-                    DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                    out.writeUTF("hi i am jacky");
-                } catch (IOException e) {
-                    Log.d("TAG", "ERROR");
-                    e.printStackTrace();
-                }
-            }
-        }).start();
         final EditText input = new EditText(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Target IP Address");
