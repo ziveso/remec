@@ -37,7 +37,7 @@ public class RightPanel extends JPanel {
 
 		Image img = new ImageIcon("./src/images/phone.png").getImage();
 		// Resize the image
-		img = getScaledImage(img, 414, 768);
+		img = getScaledImage(img, 200, 400);
 		phone.setIcon(new ImageIcon(img));
 		this.add(phone,BorderLayout.WEST);
 		
