@@ -1,5 +1,11 @@
 package touchyou;
 
+/**
+ * Command class contains essential information of a command button.
+ * 
+ * @author Kongpon Charanwattanakit
+ *
+ */
 public class Command {
     private int id;
     private String combination;
