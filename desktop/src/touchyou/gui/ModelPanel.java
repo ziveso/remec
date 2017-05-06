@@ -5,8 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,14 +23,13 @@ public class ModelPanel extends JPanel {
 	protected ModelPanel(int width, int height) {
 		// now 489 * 599
 		setPreferredSize(new Dimension(width, height));
-
 		setBorder(GuiUtil.getBorder());
+		setOpaque(false);
 		initcomponent();
 	}
 
 	private void initcomponent() {
-		URL url = this.getClass().getResource(Image_URL);
-		img = new ImageIcon(url).getImage();
+		img = GuiUtil.getImage(Image_URL);
 		setMobileSize(300, 500);
 		JLabel mobile = new JLabel(new ImageIcon(img));
 		add(mobile);
@@ -41,7 +38,7 @@ public class ModelPanel extends JPanel {
 	public void setMobileSize(int width, int height) {
 		img = getScaledImage(img, width, height);
 	}
-	
+
 	private Image getScaledImage(Image srcImg, int w, int h) {
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();
