@@ -11,7 +11,7 @@ import touchyou.util.GuiUtil;
  *
  */
 
-public class Component extends JFrame {
+public class MainFrame extends JFrame {
 
 	/**
 	 * The serial ID from JFrame.
@@ -24,7 +24,7 @@ public class Component extends JFrame {
 	/**
 	 * construct component.
 	 */
-	public Component() {
+	public MainFrame() {
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setSize(Width, Height);
 		super.setLayout(new BorderLayout());
@@ -35,7 +35,7 @@ public class Component extends JFrame {
 	 * create layout.
 	 */
 	private void initComponent() {
-		super.add(new EditAction(Width * 3 / 10, Height), BorderLayout.WEST);
-		super.add(new ConfigAction(Width * 7 / 10, Height), BorderLayout.CENTER);
+		super.add(new SettingPanel(Width * 3 / 10, Height), BorderLayout.WEST);
+		super.add(new WidgetPanel(Width * 7 / 10, Height), BorderLayout.CENTER);
 	}
 }

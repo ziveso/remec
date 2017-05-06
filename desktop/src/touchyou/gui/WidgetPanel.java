@@ -15,7 +15,7 @@ import touchyou.util.GuiUtil;
  * @author Thitiwat Thongbor
  *
  */
-public class ConfigAction extends JPanel {
+public class WidgetPanel extends JPanel {
 	/**
 	 * defalut serial ID.
 	 */
@@ -32,7 +32,7 @@ public class ConfigAction extends JPanel {
 	 * @param height
 	 *            is the height of this part in INTEGER.
 	 */
-	public ConfigAction(int width, int height) {
+	public WidgetPanel(int width, int height) {
 		this.width = width;
 		this.height = height;
 		setPreferredSize(new Dimension(width, height));
@@ -47,7 +47,7 @@ public class ConfigAction extends JPanel {
 	 * does not do anything.
 	 */
 	private void initComponent() {
-		add(new Mobile(width * 7 / 10 - 1, height - 1), 0);
+		add(new ModelPanel(width * 7 / 10 - 1, height - 1), 0);
 		JPanel config = new JPanel(new BorderLayout());
 		config.add(new AddAction(width * 3 / 10 - 1, height * 7 / 10 - 1), BorderLayout.NORTH);
 		config.add(new SyncButton(width * 3 / 10 - 1, height * 3 / 10 - 1), BorderLayout.SOUTH);

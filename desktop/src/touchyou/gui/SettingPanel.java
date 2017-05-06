@@ -10,7 +10,7 @@ import touchyou.util.GuiUtil;
  * @author Thitiwat Thongbor
  *
  */
-public class EditAction extends JPanel {
+public class SettingPanel extends JPanel {
 
 
 	/**
@@ -23,7 +23,7 @@ public class EditAction extends JPanel {
 	 * @param width
 	 * @param height
 	 */
-	public EditAction(int width, int height) {
+	public SettingPanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
 
 		// make it easier to edit.

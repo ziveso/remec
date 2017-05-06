@@ -11,6 +11,6 @@ public class TouchyouGui {
 	 * run the GUI.
 	 */
 	public void run() {
-		new Component().setVisible(true);
+		new MainFrame().setVisible(true);
 	}
 }
