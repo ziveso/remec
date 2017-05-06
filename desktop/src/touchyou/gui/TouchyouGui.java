@@ -1,5 +1,7 @@
 package touchyou.gui;
 
+import touchyou.App;
+
 /**
  * create the GUI for TouchYou JAVA Application.
  * 
@@ -7,10 +9,16 @@ package touchyou.gui;
  *
  */
 public class TouchyouGui {
-	/**
-	 * run the GUI.
-	 */
-	public void run() {
-		new MainFrame().setVisible(true);
-	}
+    private App app;
+
+    public TouchyouGui(App app) {
+	this.app = app;
+    }
+
+    /**
+     * run the GUI.
+     */
+    public void run() {
+	new MainFrame(app).setVisible(true);
+    }
 }

@@ -25,11 +25,9 @@ public class SyncButton extends JButton {
      * @param width
      * @param height
      */
-    public SyncButton(int width, int height) {
+    public SyncButton(int width, int height, App app) {
 	super("SYNC");
 	this.setPreferredSize(new Dimension(width, height));
-	this.addActionListener((e) -> {
-	    App.server.sendToAllClients("SYNC NOW");
-	});
+	this.addActionListener((e) -> app.sync());
     }
 }

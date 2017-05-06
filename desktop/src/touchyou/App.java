@@ -11,17 +11,38 @@ import touchyou.gui.TouchyouGui;
  *
  */
 public class App {
+    public static int PORT = 3000;
+    public TCPServer server;
+    public Profile profile;
 
-    public static TCPServer server;
+    public App() {
+	server = new TCPServer(PORT);
+    }
 
-    private App() {
-	this.run();
-	new TouchyouGui().run();
+    public void sync() {
+	// TODO sync commands to mobile device
+	server.sendToAllClients("sync request");
+    }
+
+    public void save(String path) {
+	// TODO write data to .profile file
+    }
+
+    public void open(String path) {
+	profile = generateProfile(path);
+    }
+
+    public Profile getProfile() {
+	return profile;
+    }
+
+    private Profile generateProfile(String path) {
+	// TODO generate Profile object from .profile file
+	return null;
     }
 
     private void run() {
 	try {
-	    server = new TCPServer(3000);
 	    server.listen();
 	} catch (IOException e) {
 	    // TODO Auto-generated catch block
@@ -36,6 +57,8 @@ public class App {
      *            is not used.
      */
     public static void main(String[] args) {
-	new App();
+	App app = new App();
+	app.run();
+	new TouchyouGui(app).run();
     }
 }

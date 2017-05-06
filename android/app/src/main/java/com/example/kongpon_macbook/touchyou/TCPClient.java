@@ -35,6 +35,5 @@ public class TCPClient extends AbstractClient {
         Intent intent = new Intent(context, RemoteActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
-
     }
 }
