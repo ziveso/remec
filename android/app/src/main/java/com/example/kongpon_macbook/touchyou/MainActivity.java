@@ -37,11 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            TCPClient client = new TCPClient(IP, PORT);
+                            TCPClient client = new TCPClient(IP, PORT, MainActivity.this);
                             client.openConnection();
-                            Intent intent = new Intent(MainActivity.this, RemoteActivity.class);
-                            startActivity(intent);
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

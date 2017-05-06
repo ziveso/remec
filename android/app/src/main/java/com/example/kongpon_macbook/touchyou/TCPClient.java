@@ -1,5 +1,9 @@
 package com.example.kongpon_macbook.touchyou;
 
+import android.app.ActivityOptions;
+import android.content.Context;
+import android.content.Intent;
+
 import com.lloseng.ocsf.client.AbstractClient;
 
 /**
@@ -7,8 +11,12 @@ import com.lloseng.ocsf.client.AbstractClient;
  */
 
 public class TCPClient extends AbstractClient {
-    public TCPClient(String host, int port) {
+
+    private Context context;
+
+    public TCPClient(String host, int port, Context context) {
         super(host, port);
+        this.context = context;
     }
 
     @Override
@@ -24,5 +32,9 @@ public class TCPClient extends AbstractClient {
     @Override
     protected void connectionEstablished() {
         super.connectionEstablished();
+        Intent intent = new Intent(context, RemoteActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+
     }
 }
