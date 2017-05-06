@@ -1,5 +1,7 @@
 package touchyou;
 
+import touchyou.gui.TouchyouGui;
+
 /**
  * Main class running the touchyou graphical user interface.
  * 
@@ -7,11 +9,9 @@ package touchyou;
  *
  */
 public class App {
-	private TouchYou gui;
 	
 	private App(){
-		gui = new TouchYou();
-		gui.run();
+		new TouchyouGui().run();;
 	}
 	
 	/**
