@@ -2,3 +2,5 @@
 *.project
 *.class
 /bin/
+*.psd
+
