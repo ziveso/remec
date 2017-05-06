@@ -29,7 +29,6 @@ public class Widget extends JPanel {
 		setPreferredSize(new Dimension(width, height));
 		// make it easy to fix.
 		setBorder(GuiUtil.getBorder());
-
 		initComponent();
 	}
 

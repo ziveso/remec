@@ -1,6 +1,7 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
@@ -46,7 +47,13 @@ public class MainFrame extends JFrame {
 		};
 		jp.add(new Setting(Width * 3 / 10, Height), BorderLayout.WEST);
 		jp.add(new Model(Width * 4 / 10, Height), BorderLayout.CENTER);
-		jp.add(new Widget(Width * 3 / 10, Height), BorderLayout.EAST);
+
+		JPanel wg = new JPanel(new BorderLayout(0, 0));
+		wg.setPreferredSize(new Dimension(Width * 3 / 10, Height));
+		wg.add(new Widget(Width * 2 / 10, Height), BorderLayout.NORTH);
+		wg.add(new SyncButton(Width * 2 / 10, Height * 3 / 10 - 1), BorderLayout.SOUTH);
+
+		jp.add(wg, BorderLayout.EAST);
 		super.add(jp);
 	}
 }
