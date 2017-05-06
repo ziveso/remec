@@ -1,21 +1,20 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import touchyou.util.GuiUtil;
 
 public class ModelPanel extends JPanel {
 
 	private final String Image_URL = "/images/phone.png";
 	private Image img;
+	private static JPanel mobile;
 
 	/**
 	 * 
@@ -31,14 +30,29 @@ public class ModelPanel extends JPanel {
 	}
 
 	private void initcomponent() {
+
+		mobile = new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(img, 0, 0, null);
+			}
+
+		};
 		img = GuiUtil.getImage(Image_URL);
 		setMobileSize(300, 500);
-		JLabel mobile = new JLabel(new ImageIcon(img));
 		add(mobile);
 	}
 
 	public void setMobileSize(int width, int height) {
+		mobile.setPreferredSize(new Dimension(width, height));
 		img = getScaledImage(img, width, height);
+		this.validate();
 	}
 
 	private Image getScaledImage(Image srcImg, int w, int h) {
@@ -50,5 +64,13 @@ public class ModelPanel extends JPanel {
 		g2.dispose();
 
 		return resizedImg;
+	}
+
+	public static JPanel getMobile() {
+		return mobile;
+	}
+
+	public static void updateComponent() {
+		mobile.validate();
 	}
 }
