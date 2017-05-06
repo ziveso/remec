@@ -25,6 +25,7 @@ public class Component extends JFrame {
 	 * construct component.
 	 */
 	public Component() {
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setSize(Width, Height);
 		super.setLayout(new BorderLayout());
 		initComponent();
