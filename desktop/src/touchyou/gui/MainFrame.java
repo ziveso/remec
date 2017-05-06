@@ -1,14 +1,17 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import touchyou.util.GuiUtil;
-
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class MainFrame extends JFrame {
 
 	/**
@@ -33,11 +36,11 @@ public class MainFrame extends JFrame {
 	 * create layout.
 	 */
 	private void initComponent() {
-		JPanel jp = new JPanel(new BorderLayout(0, 0)) {
+		JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)) {
 			/**
 			 * 
 			 */
-			private static final long serialVersionUID = 8955978584032699840L;
+			private static final long serialVersionUID = 5082511633852881405L;
 
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -45,15 +48,18 @@ public class MainFrame extends JFrame {
 				g.drawImage(GuiUtil.getImage("/images/background.jpg"), 0, 0, null);
 			}
 		};
-		jp.add(new Setting(Width * 3 / 10, Height), BorderLayout.WEST);
-		jp.add(new Model(Width * 4 / 10, Height), BorderLayout.CENTER);
+		int setting_width = Width * 3 / 10;
+		int model_width = Width * 5 / 10;
+		int pane_width = Width * 2 / 10;
+		pane.add(new Setting(setting_width, Height));
+		pane.add(new Model(model_width, Height));
 
-		JPanel wg = new JPanel(new BorderLayout(0, 0));
-		wg.setPreferredSize(new Dimension(Width * 3 / 10, Height));
-		wg.add(new Widget(Width * 2 / 10, Height), BorderLayout.NORTH);
-		wg.add(new SyncButton(Width * 2 / 10, Height * 3 / 10 - 1), BorderLayout.SOUTH);
+		JPanel widget = new JPanel(new BorderLayout(0, 0));
+		widget.setOpaque(false); // make in transparent
+		widget.add(new Widget(pane_width, Height * 7 / 10), BorderLayout.NORTH);
+		widget.add(new SyncButton(pane_width, Height * 3 / 10), BorderLayout.SOUTH);
 
-		jp.add(wg, BorderLayout.EAST);
-		super.add(jp);
+		pane.add(widget);
+		super.add(pane);
 	}
 }
