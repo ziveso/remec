@@ -44,7 +44,7 @@ public class WidgetPanel extends JPanel {
 
 		// TODO Add action click to expand.
 
-		JPanel button_field = new Button();
+		JPanel button_field = new ButtonField();
 		add(button_field);
 
 		JPanel arrow_field = new JPanel();
@@ -64,7 +64,7 @@ public class WidgetPanel extends JPanel {
 		validate();
 	}
 
-	private class Button extends JPanel {
+	private class ButtonField extends JPanel {
 
 		private JLabel hint;
 		private JTextField command_key;
@@ -76,7 +76,7 @@ public class WidgetPanel extends JPanel {
 		 */
 		private static final long serialVersionUID = 8391021197211750760L;
 
-		Button() {
+		ButtonField() {
 			super(new GridLayout(0, 1));
 
 			JButton button = new JButton("Button");
