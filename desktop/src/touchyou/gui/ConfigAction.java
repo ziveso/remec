@@ -3,7 +3,6 @@ package touchyou.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import touchyou.util.GuiUtil;
@@ -36,6 +35,7 @@ public class ConfigAction extends JPanel {
 		this.width = width;
 		this.height = height;
 		setPreferredSize(new Dimension(width, height));
+		setOpaque(false);
 		// make it easy to edit
 		setBorder(GuiUtil.getBorder());
 		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
@@ -48,12 +48,23 @@ public class ConfigAction extends JPanel {
 	 */
 	private void initComponent() {
 		add(new Mobile(width * 7 / 10 - 1, height - 1), 0);
-		JPanel config = new JPanel(new BorderLayout());
+		JPanel config = new JPanel(new BorderLayout()){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5949522480753700728L;
+
+			@Override
+			public void setOpaque(boolean isOpaque) {
+				super.setOpaque(false);
+			}
+		};
+		
 		config.add(new AddAction(width * 3 / 10 - 1, height * 7 / 10 - 1), BorderLayout.NORTH);
 		config.add(new SyncButton(width * 3 / 10 - 1, height * 3 / 10 - 1), BorderLayout.SOUTH);
 		add(config, 1);
 	}
-
+	
 	/**
 	 * Inner Class responsible for everything in Adding Button in the right
 	 * part. edit this part.
@@ -72,6 +83,7 @@ public class ConfigAction extends JPanel {
 		public AddAction(int width, int height) {
 			this.width = width;
 			this.height = height;
+			setOpaque(false);
 			setPreferredSize(new Dimension(width, height));
 			// make it easy to fix.
 			setBorder(GuiUtil.getBorder());

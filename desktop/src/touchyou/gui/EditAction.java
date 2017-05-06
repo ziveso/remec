@@ -12,7 +12,6 @@ import touchyou.util.GuiUtil;
  */
 public class EditAction extends JPanel {
 
-
 	/**
 	 * 
 	 */
@@ -28,6 +27,6 @@ public class EditAction extends JPanel {
 
 		// make it easier to edit.
 		setBorder(GuiUtil.getBorder());
+		this.setOpaque(false);
 	}
-
 }

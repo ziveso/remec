@@ -1,8 +1,11 @@
 package touchyou.util;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
 /**
@@ -24,5 +27,10 @@ public class GuiUtil {
 	 */
 	public static Border getBorder() {
 		return BorderFactory.createLineBorder(Color.BLACK);
+	}
+
+	public static Image getImage(String URL) {
+		URL url = GuiUtil.class.getResource(URL);
+		return new ImageIcon(url).getImage();
 	}
 }

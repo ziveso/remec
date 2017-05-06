@@ -1,7 +1,11 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import touchyou.util.GuiUtil;
 
 /**
@@ -27,7 +31,6 @@ public class Component extends JFrame {
 	public Component() {
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		super.setSize(Width, Height);
-		super.setLayout(new BorderLayout());
 		initComponent();
 	}
 
@@ -35,7 +38,20 @@ public class Component extends JFrame {
 	 * create layout.
 	 */
 	private void initComponent() {
-		super.add(new EditAction(Width * 3 / 10, Height), BorderLayout.WEST);
-		super.add(new ConfigAction(Width * 7 / 10, Height), BorderLayout.CENTER);
+		JPanel jp = new JPanel(new BorderLayout(0, 0)) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 8955978584032699840L;
+
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(GuiUtil.getImage("/images/background.jpg"), 0, 0, null);
+			}
+		};
+		jp.add(new EditAction(Width * 3 / 10, Height), BorderLayout.WEST);
+		jp.add(new ConfigAction(Width * 7 / 10, Height), BorderLayout.CENTER);
+		super.add(jp);
 	}
 }
