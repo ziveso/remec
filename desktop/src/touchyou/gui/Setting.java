@@ -1,17 +1,12 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+
 import javax.swing.JPanel;
+
 import touchyou.util.GuiUtil;
 
-/**
- * Left side of the program.
- * 
- * @author Thitiwat Thongbor
- *
- */
-public class SettingPanel extends JPanel {
-
+public class Setting extends JPanel {
 	/**
 	 * 
 	 */
@@ -22,7 +17,7 @@ public class SettingPanel extends JPanel {
 	 * @param width
 	 * @param height
 	 */
-	public SettingPanel(int width, int height) {
+	public Setting(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
 
 		// make it easier to edit.

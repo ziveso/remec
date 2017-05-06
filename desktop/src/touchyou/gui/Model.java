@@ -5,22 +5,24 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import touchyou.util.GuiUtil;
 
-public class ModelPanel extends JPanel {
+public class Model extends JPanel {
+
 	private final String Image_URL = "/images/phone.png";
 	private Image img;
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3593230878415293635L;
 
-	protected ModelPanel(int width, int height) {
+	protected Model(int width, int height) {
 		// now 489 * 599
 		setPreferredSize(new Dimension(width, height));
 		setBorder(GuiUtil.getBorder());
