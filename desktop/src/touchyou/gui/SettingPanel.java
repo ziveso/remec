@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 import touchyou.util.GuiUtil;
 
-public class Setting extends JPanel {
+public class SettingPanel extends JPanel {
 	/**
 	 * 
 	 */
@@ -17,7 +17,7 @@ public class Setting extends JPanel {
 	 * @param width
 	 * @param height
 	 */
-	public Setting(int width, int height) {
+	public SettingPanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
 
 		// make it easier to edit.

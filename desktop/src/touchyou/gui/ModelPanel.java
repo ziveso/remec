@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import touchyou.util.GuiUtil;
 
-public class Model extends JPanel {
+public class ModelPanel extends JPanel {
 
 	private final String Image_URL = "/images/phone.png";
 	private Image img;
@@ -22,7 +22,7 @@ public class Model extends JPanel {
 	 */
 	private static final long serialVersionUID = 3593230878415293635L;
 
-	protected Model(int width, int height) {
+	protected ModelPanel(int width, int height) {
 		// now 489 * 599
 		setPreferredSize(new Dimension(width, height));
 		setBorder(GuiUtil.getBorder());

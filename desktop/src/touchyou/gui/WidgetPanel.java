@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import touchyou.util.GuiUtil;
 
-public class Widget extends JPanel {
+public class WidgetPanel extends JPanel {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class Widget extends JPanel {
 	 * @param width
 	 * @param height
 	 */
-	public Widget(int width, int height) {
+	public WidgetPanel(int width, int height) {
 		this.width = width;
 		this.height = height;
 		setOpaque(false);

@@ -51,12 +51,12 @@ public class MainFrame extends JFrame {
 		int setting_width = Width * 3 / 10;
 		int model_width = Width * 5 / 10;
 		int pane_width = Width * 2 / 10;
-		pane.add(new Setting(setting_width, Height));
-		pane.add(new Model(model_width, Height));
+		pane.add(new SettingPanel(setting_width, Height));
+		pane.add(new ModelPanel(model_width, Height));
 
 		JPanel widget = new JPanel(new BorderLayout(0, 0));
 		widget.setOpaque(false); // make in transparent
-		widget.add(new Widget(pane_width, Height * 7 / 10), BorderLayout.NORTH);
+		widget.add(new WidgetPanel(pane_width, Height * 7 / 10), BorderLayout.NORTH);
 		widget.add(new SyncButton(pane_width, Height * 3 / 10), BorderLayout.SOUTH);
 
 		pane.add(widget);
