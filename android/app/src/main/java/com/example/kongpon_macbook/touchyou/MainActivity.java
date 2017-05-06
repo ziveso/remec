@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.DataOutput;
@@ -14,43 +15,29 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String IP = "118.174.195.77";
-    public static final int PORT = 8000;
+    public static final String IP = "192.168.2.106";
+    public static final int PORT = 3000;
+
+    public Button connectButton;
+    public EditText ipEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Thread(new Runnable() {
+
+        connectButton = (Button) findViewById(R.id.connectButton);
+        ipEditText = (EditText) findViewById(R.id.ipEditText);
+
+        connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                try {
-                    Log.d("D", "hi");
-                    Socket server = new Socket(IP, PORT);
-                    DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                    out.writeUTF("hi i am jacky");
-                } catch (IOException e) {
-                    Log.d("TAG", "ERROR");
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-        final EditText input = new EditText(this);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Target IP Address");
-        builder.setMessage("Enter Target IP Address:");
-        builder.setView(input);
-        builder.setPositiveButton("Connect", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            Socket server = new Socket(IP, PORT);
-                            DataOutputStream out = new DataOutputStream(server.getOutputStream());
-                            out.writeUTF("hi i am jacky");
-                            Log.d("D", "hi");
+                            TCPClient client = new TCPClient(IP, PORT);
+                            client.openConnection();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -58,6 +45,5 @@ public class MainActivity extends AppCompatActivity {
                 }).start();
             }
         });
-        builder.show();
     }
 }
