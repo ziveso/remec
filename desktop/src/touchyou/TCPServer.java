@@ -6,10 +6,6 @@ import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
 
 public class TCPServer extends AbstractServer {
-    public static void main(String[] args) throws IOException {
-	TCPServer server = new TCPServer(3000);
-	server.listen();
-    }
 
     public TCPServer(int port) {
 	super(port);
@@ -17,8 +13,27 @@ public class TCPServer extends AbstractServer {
     }
 
     @Override
+    protected void clientConnected(ConnectionToClient client) {
+	super.clientConnected(client);
+	System.out.println("Client connected.");
+	// Only 1 remote allowed.
+	this.stopListening();
+    }
+
+    @Override
+    protected synchronized void clientDisconnected(ConnectionToClient client) {
+	super.clientDisconnected(client);
+	System.out.println("Client disconnected.");
+	try {
+	    this.listen();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-	System.out.println(msg);
+	System.out.println("Client: " + msg);
     }
 
 }
