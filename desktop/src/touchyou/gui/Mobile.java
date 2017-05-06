@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 import touchyou.util.GuiUtil;
 
 public class Mobile extends JPanel {
-	private final String Image_URL = "./src/images/phone.png";
+	private final String Image_URL = "/images/phone.png";
 	private Image img;
 
 	/**
@@ -30,7 +31,8 @@ public class Mobile extends JPanel {
 	}
 
 	private void initcomponent() {
-		img = new ImageIcon(Image_URL).getImage();
+		URL url = this.getClass().getResource(Image_URL);
+		img = new ImageIcon(url).getImage();
 		setMobileSize(300, 500);
 		JLabel mobile = new JLabel(new ImageIcon(img));
 		add(mobile);
