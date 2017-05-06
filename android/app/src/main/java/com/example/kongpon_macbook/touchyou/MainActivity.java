@@ -1,6 +1,7 @@
 package com.example.kongpon_macbook.touchyou;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             TCPClient client = new TCPClient(IP, PORT);
                             client.openConnection();
+                            Intent intent = new Intent(MainActivity.this, RemoteActivity.class);
+                            startActivity(intent);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
