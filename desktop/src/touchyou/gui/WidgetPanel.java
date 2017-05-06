@@ -1,7 +1,12 @@
 package touchyou.gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -85,8 +90,6 @@ public class WidgetPanel extends JPanel {
 			add = new JButton("add");
 			add.addActionListener(e -> {
 				JButton but = new JButton(command_key.getText().toString());
-				// TODO ADD COMMAND TO BUTTON
-				// but.addActionListener();
 				ModelPanel.getMobile().add(but);
 				ModelPanel.updateComponent();
 			});
