@@ -1,7 +1,6 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import touchyou.gui.add.*;
 import touchyou.util.GuiUtil;

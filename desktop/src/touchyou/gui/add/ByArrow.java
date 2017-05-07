@@ -17,6 +17,7 @@ public class ByArrow extends JPanel {
 		super(new GridLayout(0, 1));
 		JButton arrow = new JButton("Arrow");
 		arrow.setPreferredSize(size);
+//		arrow.addActionListener();
 		add(arrow);
 	}
 }
