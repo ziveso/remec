@@ -95,7 +95,7 @@ public class WidgetPanel extends JPanel {
 				but.addMouseListener(ml);
 				but.addMouseMotionListener((MouseMotionListener) ml);
 				ModelPanel.getMobile().add(but);
-				but.setBounds(new Rectangle(new Point(50, 50), but.getPreferredSize()));
+				but.setBounds(GuiUtil.getInitBound(but.getPreferredSize()));
 				ModelPanel.updateComponent();
 			});
 

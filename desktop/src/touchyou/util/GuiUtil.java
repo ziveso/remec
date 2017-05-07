@@ -1,12 +1,17 @@
 package touchyou.util;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
+
+import touchyou.gui.ModelPanel;
 
 /**
  * Helper Class for writing the Application in GUI part
@@ -17,6 +22,8 @@ import javax.swing.border.Border;
 public class GuiUtil {
 	public static int WIDTH = 1000;
 	public static int HEIGHT = 600;
+	private static int x = 0;
+	private static int y = 10;
 
 	/**
 	 * get the Factory Border use it for debug. in case of you don't want border
@@ -32,5 +39,24 @@ public class GuiUtil {
 	public static Image getImage(String URL) {
 		URL url = GuiUtil.class.getResource(URL);
 		return new ImageIcon(url).getImage();
+	}
+
+	/**
+	 * 
+	 * @param dimension
+	 *            current witdth and height , use getPreferredSize();
+	 * @return
+	 */
+	public static Rectangle getInitBound(Dimension dimension) {
+		int max_width = (int) (ModelPanel.getMobile().getWidth()-dimension.getWidth());
+		int max_height = ModelPanel.getMobile().getHeight();
+		if (x + dimension.getWidth() > max_width) {
+			x = 0;
+			y += dimension.getHeight();
+		}
+		if (y + dimension.getHeight() > max_height){
+			y = 0;
+		}
+		return new Rectangle(new Point(x += dimension.getWidth(), y), dimension);
 	}
 }
