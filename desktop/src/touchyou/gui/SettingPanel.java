@@ -1,17 +1,17 @@
 package touchyou.gui;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import touchyou.util.GuiUtil;
-
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JRadioButton;
 
 public class SettingPanel extends JPanel {
 
@@ -133,5 +133,4 @@ public class SettingPanel extends JPanel {
 		add(rdbtnFollow, gbc_rdbtnFollow);
 
 	}
-
 }
