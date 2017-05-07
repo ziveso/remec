@@ -42,8 +42,9 @@ public class ModelPanel extends JPanel {
 				super.paintComponent(g);
 				g.drawImage(img, 0, 0, null);
 			}
-
 		};
+		
+		mobile.setLayout(null); // make it movable , no layout
 		img = GuiUtil.getImage(Image_URL);
 		setMobileSize(300, 500);
 		add(mobile);
@@ -71,6 +72,6 @@ public class ModelPanel extends JPanel {
 	}
 
 	public static void updateComponent() {
-		mobile.validate();
+		mobile.invalidate();
 	}
 }

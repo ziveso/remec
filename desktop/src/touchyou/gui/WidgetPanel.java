@@ -4,11 +4,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -90,7 +95,11 @@ public class WidgetPanel extends JPanel {
 			add = new JButton("add");
 			add.addActionListener(e -> {
 				JButton but = new JButton(command_key.getText().toString());
+				MouseListener ml = new Action();
+				but.addMouseListener(ml);
+				but.addMouseMotionListener((MouseMotionListener) ml);
 				ModelPanel.getMobile().add(but);
+				but.setBounds(new Rectangle(new Point(50, 50), but.getPreferredSize()));
 				ModelPanel.updateComponent();
 			});
 
@@ -113,6 +122,38 @@ public class WidgetPanel extends JPanel {
 			}
 			updateComponent();
 			return !visible;
+		}
+	}
+
+	/**
+	 * movable class.
+	 * 
+	 * @author Thitiwat Thongbor
+	 *
+	 */
+	private class Action extends MouseAdapter {
+		private Point myPoint = new Point(0, 0);
+		private Point myComponent = new Point(0, 0);
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			super.mousePressed(e);
+			myPoint = e.getLocationOnScreen();
+			myComponent = e.getComponent().getLocation();
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			super.mouseReleased(e);
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			super.mouseDragged(e);
+			int deltaX = (int) (e.getLocationOnScreen().getX() - myPoint.getX());
+			int deltaY = (int) (e.getLocationOnScreen().getY() - myPoint.getY());
+			e.getComponent().setLocation((int) (myComponent.getX() + deltaX), (int) (myComponent.getY() + deltaY));
+			ModelPanel.updateComponent();
 		}
 	}
 }
