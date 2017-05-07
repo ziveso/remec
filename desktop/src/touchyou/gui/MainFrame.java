@@ -28,6 +28,8 @@ public class MainFrame extends JFrame {
     private final int Width = GuiUtil.WIDTH;
     private final int Height = GuiUtil.HEIGHT;
 
+    public static JPanel widget;
+
     /**
      * construct MainFrame.
      */
@@ -67,5 +69,9 @@ public class MainFrame extends JFrame {
 
 	pane.add(widget);
 	super.add(pane);
+    }
+
+    public static JPanel getWidget() {
+	return widget;
     }
 }
