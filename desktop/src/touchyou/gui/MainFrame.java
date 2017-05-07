@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
 	JMenuBar menubar = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenuItem newprofile = new JMenuItem("New Profile");
-	
+
 	JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)) {
 	    /**
 	     * 
@@ -63,10 +63,10 @@ public class MainFrame extends JFrame {
 		g.drawImage(GuiUtil.getImage("/images/background.jpg"), 0, 0, null);
 	    }
 	};
-	int setting_width = Width * 3 / 10;
+
 	int model_width = Width * 5 / 10;
 	int pane_width = Width * 2 / 10;
-	pane.add(new SettingPanel(setting_width, Height));
+	pane.add(new SettingPanel(app));
 	pane.add(new ModelPanel(model_width, Height));
 
 	JPanel widget = new JPanel(new BorderLayout(0, 0));
@@ -76,6 +76,7 @@ public class MainFrame extends JFrame {
 
 	pane.add(widget);
 	super.add(pane);
+	this.pack();
     }
 
     public static JPanel getWidget() {
