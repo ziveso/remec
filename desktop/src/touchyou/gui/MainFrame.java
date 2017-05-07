@@ -5,6 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import touchyou.App;
@@ -44,6 +47,10 @@ public class MainFrame extends JFrame {
      * create layout.
      */
     private void initComponent() {
+	JMenuBar menubar = new JMenuBar();
+	JMenu file = new JMenu("File");
+	JMenuItem newprofile = new JMenuItem("New Profile");
+	
 	JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)) {
 	    /**
 	     * 
