@@ -28,6 +28,8 @@ public class MainFrame extends JFrame {
 	private final int Width = GuiUtil.WIDTH;
 	private final int Height = GuiUtil.HEIGHT;
 
+	public static JPanel widget;
+
 	/**
 	 * construct MainFrame.
 	 */
@@ -60,12 +62,16 @@ public class MainFrame extends JFrame {
 		pane.add(new SettingPanel(setting_width, Height));
 		pane.add(new ModelPanel(model_width, Height));
 
-		JPanel widget = new JPanel(new BorderLayout(0, 0));
+		widget = new JPanel(new BorderLayout(0, 0));
 		widget.setOpaque(false); // make in transparent
 		widget.add(new WidgetPanel(pane_width, Height * 7 / 10), BorderLayout.NORTH);
 		widget.add(new SyncButton(pane_width, Height * 3 / 10, app), BorderLayout.SOUTH);
 
 		pane.add(widget);
 		super.add(pane);
+	}
+
+	public static JPanel getWidget() {
+		return widget;
 	}
 }
