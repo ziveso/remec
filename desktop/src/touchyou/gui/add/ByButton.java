@@ -60,7 +60,8 @@ public class ByButton extends JPanel {
 			remove(command_key);
 			remove(add);
 		}
-		MainFrame.getWidget().validate();
+		this.validate();
+		MainFrame.updateWidget();
 		return !visible;
 	}
 }
