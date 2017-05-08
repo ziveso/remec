@@ -40,7 +40,7 @@ public class ByButton extends JButton {
 	    but.setOpaque(true);
 	    but.addMouseListener(ml);
 	    but.addMouseMotionListener((MouseMotionListener) ml);
-	    but.setPreferredSize(new Dimension(50, 50));
+	    but.setPreferredSize(new Dimension(100 , 100));
 	    but.addMouseListener(new MouseListener() {
 
 		@Override
