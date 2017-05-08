@@ -56,6 +56,7 @@ public class SettingPanel extends JPanel {
 		add(lblName, gbc_lblName);
 
 		textField = new JTextField();
+		textField.setText(app.getProfile().getName());
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 4;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
@@ -74,6 +75,7 @@ public class SettingPanel extends JPanel {
 		add(lblNewLabel, gbc_lblNewLabel);
 
 		combination = new JTextField();
+		combination.setText(app.getProfile().getName());
 		GridBagConstraints gbc_combination = new GridBagConstraints();
 		gbc_combination.gridwidth = 4;
 		gbc_combination.insets = new Insets(0, 0, 5, 0);
@@ -236,6 +238,13 @@ public class SettingPanel extends JPanel {
 		gbc_btnCancel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCancel.gridx = 5;
 		gbc_btnCancel.gridy = 14;
+		btnCancel.addActionListener((e) -> {
+			iconpath.setText("");
+			combination.setText("");
+			textField.setText("");
+			textField_1.setText("");
+			textField_2.setText("");
+		});
 		add(btnCancel, gbc_btnCancel);
 
 	}
