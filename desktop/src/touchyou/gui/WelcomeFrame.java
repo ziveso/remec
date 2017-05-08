@@ -1,56 +1,38 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JList;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.border.EtchedBorder;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import javafx.scene.layout.Border;
-
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.border.CompoundBorder;
-import javax.swing.JButton;
+import touchyou.App;
 
 public class WelcomeFrame extends JFrame {
 
     private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-	EventQueue.invokeLater(new Runnable() {
-	    public void run() {
-		try {
-		    WelcomeFrame frame = new WelcomeFrame();
-		    frame.setVisible(true);
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-	    }
-	});
-    }
+    private App app;
 
     /**
      * Create the frame.
      */
-    public WelcomeFrame() {
+    public WelcomeFrame(App app) {
+	this.app = app;
 	setMinimumSize(new Dimension(650, 400));
 	setTitle("Touch You Pro");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +57,7 @@ public class WelcomeFrame extends JFrame {
 	gbc_panel.gridx = 0;
 	gbc_panel.gridy = 0;
 	contentPane.add(panel, BorderLayout.NORTH);
-	
+
 	JLabel lblNewLabel_2 = new JLabel("Welcome to Touch You Pro 2017");
 	lblNewLabel_2.setFont(new Font("Lantinghei TC", Font.PLAIN, 30));
 	panel.add(lblNewLabel_2);
@@ -128,20 +110,24 @@ public class WelcomeFrame extends JFrame {
 	lblNewLabel.setBackground(new Color(192, 192, 192));
 	lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	menuPanel.add(lblNewLabel, BorderLayout.NORTH);
-	
+
 	JPanel panel_2 = new JPanel();
 	menuPanel.add(panel_2, BorderLayout.CENTER);
-	panel_2.setLayout(new GridLayout(0,1, 0, 20));
-	
+	panel_2.setLayout(new GridLayout(0, 1, 0, 20));
+
 	JButton btnNewButton_1 = new JButton("Create a new Touch You profile");
+	btnNewButton_1.addActionListener(e -> {
+	    new TouchyouGui(app).run();
+	    this.dispose();
+	});
 	panel_2.add(btnNewButton_1);
-	
+
 	JButton btnNewButton_2 = new JButton("Open existing Touch You profile");
 	panel_2.add(btnNewButton_2);
-	
+
 	JButton btnNewButton_3 = new JButton("Download custom profile from Touch You cloud");
 	panel_2.add(btnNewButton_3);
-	
+
 	JButton btnNewButton = new JButton("Settings");
 	panel_2.add(btnNewButton);
     }

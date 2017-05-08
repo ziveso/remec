@@ -17,10 +17,8 @@ public final class MouseMotion extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		super.mousePressed(e);
-		System.out.println(myComponent);
 		myPoint = e.getLocationOnScreen();
 		myComponent = e.getComponent().getLocation();
-
 	}
 
 	@Override

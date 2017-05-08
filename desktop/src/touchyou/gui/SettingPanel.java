@@ -11,11 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.Command;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
+
 /**
  * 
  * @author Thitiwat Thongbor
@@ -40,7 +40,7 @@ public class SettingPanel extends JPanel {
      * Create the panel.
      */
     public SettingPanel(App app) {
-    	setBorder(new EmptyBorder(8, 8, 8, 8));
+	setBorder(new EmptyBorder(8, 8, 8, 8));
 	this.app = app;
 	this.setPreferredSize(new Dimension(331, 600));
 	GridBagLayout gridBagLayout = new GridBagLayout();
@@ -49,7 +49,7 @@ public class SettingPanel extends JPanel {
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
-	
+
 	JLabel lblProfile = new JLabel("Profile:");
 	GridBagConstraints gbc_lblProfile = new GridBagConstraints();
 	gbc_lblProfile.anchor = GridBagConstraints.WEST;
@@ -57,7 +57,7 @@ public class SettingPanel extends JPanel {
 	gbc_lblProfile.gridx = 0;
 	gbc_lblProfile.gridy = 0;
 	add(lblProfile, gbc_lblProfile);
-	
+
 	profilename = new JLabel("New label");
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
 	gbc_profilename.anchor = GridBagConstraints.EAST;
@@ -178,14 +178,15 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnFollow.gridx = 2;
 	gbc_rdbtnFollow.gridy = 7;
 	add(rdbtnFollow, gbc_rdbtnFollow);
-	
+
 	ButtonGroup modeGroup = new ButtonGroup();
 	modeGroup.add(rdbtnSingleTouch);
 	modeGroup.add(rdbtnFollow);
 
     }
-    
-    public void update(Command command){
-    	this.combination.setText(command.getCombination());
+
+    public void update(Command command) {
+	this.combination.setText(command.getCombination());
     }
+
 }

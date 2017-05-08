@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import touchyou.gui.TouchyouGui;
+import touchyou.gui.WelcomeFrame;
 
 /**
  * Touchyou model.
@@ -146,7 +147,7 @@ public class App {
     public static void main(String[] args) {
 	App app = new App();
 	app.run();
-	new TouchyouGui(app).run();
+	new WelcomeFrame(app).setVisible(true);
     }
 }
 
