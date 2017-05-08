@@ -67,7 +67,7 @@ public class MainFrame extends JFrame {
 		int model_width = Width * 5 / 10;
 		int pane_width = Width * 2 / 10;
 		pane.add(new SettingPanel(app));
-		pane.add(new ModelPanel(model_width, Height));
+		pane.add(new ModelPanel(model_width, Height, app));
 
 		widget = new JPanel(new BorderLayout(0, 0));
 		widget.setOpaque(false); // make in transparent
