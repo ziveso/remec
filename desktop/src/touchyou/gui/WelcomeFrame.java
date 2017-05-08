@@ -33,6 +33,7 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame(App app) {
+    	setResizable(false);
 	this.app = app;
 	setMinimumSize(new Dimension(650, 400));
 	setTitle("Touch You Pro");
