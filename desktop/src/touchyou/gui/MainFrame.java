@@ -81,6 +81,8 @@ public class MainFrame extends JFrame {
 		pane.add(widget);
 		super.add(pane);
 		this.pack();
+		setLocationRelativeTo(null);
+
 	}
 
 	public static void updateWidget() {

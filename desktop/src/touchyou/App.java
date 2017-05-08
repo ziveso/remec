@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import touchyou.gui.TouchyouGui;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import touchyou.gui.WelcomeFrame;
 
 /**
@@ -69,23 +71,33 @@ public class App {
     }
 
     /**
-     * Set profile to a given .profile file.
+     * Set profile to a given .profile file path.
      * 
      * @param path
      *            is the .profile file path
      */
     public void open(String path) {
-	profile = generateProfile(path);
+	profile = generateProfile(new File(path));
+    }
+
+    /**
+     * Set profile to a given .profile file.
+     * 
+     * @param file
+     *            is the .profile file
+     */
+    public void open(File file) {
+	profile = generateProfile(file);
     }
 
     /**
      * Return Profile object from .profile file.
      * 
-     * @param path
-     *            is the .profile file path
+     * @param file
+     *            is the .profile file
      * @return a Profile instance
      */
-    private Profile generateProfile(String path) {
+    private Profile generateProfile(File file) {
 	// TODO generate Profile object from .profile file
 	// TODO finished without testing
 	BufferedReader reader = null;
@@ -96,7 +108,7 @@ public class App {
 			(c, l) -> c.setWidth(Double.parseDouble(l)), (c, l) -> c.setHeight(Double.parseDouble(l)),
 			(c, l) -> c.setX(Double.parseDouble(l)), (c, l) -> c.setY(Double.parseDouble(l)) };
 
-		reader = new BufferedReader(new FileReader(new File(path)));
+		reader = new BufferedReader(new FileReader(file));
 		Profile profile = new Profile(reader.readLine());
 		String line;
 		Command command = new Command();
@@ -145,6 +157,15 @@ public class App {
      *            is not used.
      */
     public static void main(String[] args) {
+	try {
+	    System.setProperty("apple.laf.useScreenMenuBar", "true");
+	    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
+	    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+		| UnsupportedLookAndFeelException e) {
+	    e.printStackTrace();
+	}
+
 	App app = new App();
 	app.run();
 	new WelcomeFrame(app).setVisible(true);

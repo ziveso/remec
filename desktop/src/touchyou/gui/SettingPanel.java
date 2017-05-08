@@ -60,6 +60,7 @@ public class SettingPanel extends JPanel {
 
 	profilename = new JLabel("New label");
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
+	gbc_profilename.fill = GridBagConstraints.VERTICAL;
 	gbc_profilename.anchor = GridBagConstraints.EAST;
 	gbc_profilename.gridwidth = 2;
 	gbc_profilename.insets = new Insets(0, 0, 5, 5);
@@ -79,7 +80,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_combination = new GridBagConstraints();
 	gbc_combination.gridwidth = 3;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
-	gbc_combination.fill = GridBagConstraints.HORIZONTAL;
+	gbc_combination.fill = GridBagConstraints.BOTH;
 	gbc_combination.gridx = 2;
 	gbc_combination.gridy = 1;
 	add(combination, gbc_combination);
@@ -106,7 +107,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_iconpath = new GridBagConstraints();
 	gbc_iconpath.gridwidth = 2;
 	gbc_iconpath.insets = new Insets(0, 0, 5, 5);
-	gbc_iconpath.fill = GridBagConstraints.HORIZONTAL;
+	gbc_iconpath.fill = GridBagConstraints.BOTH;
 	gbc_iconpath.gridx = 2;
 	gbc_iconpath.gridy = 3;
 	add(iconpath, gbc_iconpath);
@@ -114,7 +115,7 @@ public class SettingPanel extends JPanel {
 
 	JButton btnBrowse = new JButton("Browse");
 	GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
-	gbc_btnBrowse.fill = GridBagConstraints.HORIZONTAL;
+	gbc_btnBrowse.fill = GridBagConstraints.BOTH;
 	gbc_btnBrowse.insets = new Insets(0, 0, 5, 0);
 	gbc_btnBrowse.gridx = 4;
 	gbc_btnBrowse.gridy = 3;
@@ -129,13 +130,12 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCaptureFromScreen.gridy = 4;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
-	JButton btnCapture = new JButton("Capture");
+	JButton btnCapture = new CaptureButton(app, this.getParent(), "Capture");
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
-	gbc_btnCapture.fill = GridBagConstraints.HORIZONTAL;
+	gbc_btnCapture.fill = GridBagConstraints.BOTH;
 	gbc_btnCapture.weightx = 10.0;
 	gbc_btnCapture.gridwidth = 3;
-	gbc_btnCapture.anchor = GridBagConstraints.WEST;
 	gbc_btnCapture.gridx = 2;
 	gbc_btnCapture.gridy = 5;
 	add(btnCapture, gbc_btnCapture);
