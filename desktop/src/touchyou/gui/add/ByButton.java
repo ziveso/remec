@@ -42,40 +42,40 @@ public class ByButton extends JButton {
 	    but.addMouseMotionListener((MouseMotionListener) ml);
 	    but.setPreferredSize(new Dimension(50, 50));
 	    but.addMouseListener(new MouseListener() {
-	        
-	        @Override
-	        public void mouseReleased(MouseEvent e) {
-	    	// TODO Auto-generated method stub
-	    	
-	        }
-	        
-	        @Override
-	        public void mousePressed(MouseEvent e) {
-			Component[] comps = ModelPanel.getMobile().getComponents();
-			for (Component c : comps) {
-			    JButton button = (JButton) c;
-			    button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			}
-			but.setBorder(BorderFactory.createLineBorder(Color.RED, 2));	    	
-	        }
-	        
-	        @Override
-	        public void mouseExited(MouseEvent e) {
-	    	// TODO Auto-generated method stub
-	    	
-	        }
-	        
-	        @Override
-	        public void mouseEntered(MouseEvent e) {
-	    	// TODO Auto-generated method stub
-	    	
-	        }
-	        
-	        @Override
-	        public void mouseClicked(MouseEvent e) {
-	    	// TODO Auto-generated method stub
-	    	
-	        }
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		    // TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		    Component[] comps = ModelPanel.getMobile().getComponents();
+		    for (Component c : comps) {
+			JButton button = (JButton) c;
+			button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		    }
+		    but.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		    // TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		    // TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+		    // TODO Auto-generated method stub
+
+		}
 	    });
 	    ModelPanel.getMobile().add(but);
 	    but.setBounds(GuiUtil.getInitBound(but.getPreferredSize()));

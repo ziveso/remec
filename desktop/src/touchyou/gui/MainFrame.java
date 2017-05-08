@@ -50,6 +50,10 @@ public class MainFrame extends JFrame {
 		JMenuBar menubar = new JMenuBar();
 		JMenu file = new JMenu("File");
 		JMenuItem newprofile = new JMenuItem("New Profile");
+		file.add(newprofile);
+		menubar.add(file);
+		this.setJMenuBar(menubar);
+		
 
 		JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)) {
 			/**

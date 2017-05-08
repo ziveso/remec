@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 
 import touchyou.App;
 import touchyou.Command;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 /**
  * 
  * @author Thitiwat Thongbor
@@ -28,26 +30,49 @@ public class SettingPanel extends JPanel {
     private App app;
     private JTextField iconpath;
     private JTextField combination;
+    private JLabel profilename;
+    private JRadioButton rdbtnImportFromComputer;
+    private JRadioButton rdbtnCaptureFromScreen;
+    private JRadioButton rdbtnSingleTouch;
+    private JRadioButton rdbtnFollow;
 
     /**
      * Create the panel.
      */
     public SettingPanel(App app) {
+    	setBorder(new EmptyBorder(8, 8, 8, 8));
 	this.app = app;
 	this.setPreferredSize(new Dimension(331, 600));
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 0, 112, 0, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
+	
+	JLabel lblProfile = new JLabel("Profile:");
+	GridBagConstraints gbc_lblProfile = new GridBagConstraints();
+	gbc_lblProfile.anchor = GridBagConstraints.WEST;
+	gbc_lblProfile.insets = new Insets(0, 0, 5, 5);
+	gbc_lblProfile.gridx = 0;
+	gbc_lblProfile.gridy = 0;
+	add(lblProfile, gbc_lblProfile);
+	
+	profilename = new JLabel("New label");
+	GridBagConstraints gbc_profilename = new GridBagConstraints();
+	gbc_profilename.anchor = GridBagConstraints.EAST;
+	gbc_profilename.gridwidth = 2;
+	gbc_profilename.insets = new Insets(0, 0, 5, 5);
+	gbc_profilename.gridx = 3;
+	gbc_profilename.gridy = 0;
+	add(profilename, gbc_profilename);
 
 	JLabel lblNewLabel = new JLabel("Command:");
 	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 	gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 	gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 	gbc_lblNewLabel.gridx = 0;
-	gbc_lblNewLabel.gridy = 0;
+	gbc_lblNewLabel.gridy = 1;
 	add(lblNewLabel, gbc_lblNewLabel);
 
 	combination = new JTextField();
@@ -56,7 +81,7 @@ public class SettingPanel extends JPanel {
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
 	gbc_combination.fill = GridBagConstraints.HORIZONTAL;
 	gbc_combination.gridx = 2;
-	gbc_combination.gridy = 0;
+	gbc_combination.gridy = 1;
 	add(combination, gbc_combination);
 	combination.setColumns(10);
 
@@ -65,16 +90,16 @@ public class SettingPanel extends JPanel {
 	gbc_lblIcon.anchor = GridBagConstraints.WEST;
 	gbc_lblIcon.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIcon.gridx = 0;
-	gbc_lblIcon.gridy = 1;
+	gbc_lblIcon.gridy = 2;
 	add(lblIcon, gbc_lblIcon);
 
-	JRadioButton rdbtnImportFromComputer = new JRadioButton("Import From Computer");
+	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
 	gbc_rdbtnImportFromComputer.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnImportFromComputer.gridwidth = 3;
 	gbc_rdbtnImportFromComputer.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnImportFromComputer.gridx = 2;
-	gbc_rdbtnImportFromComputer.gridy = 1;
+	gbc_rdbtnImportFromComputer.gridy = 2;
 	add(rdbtnImportFromComputer, gbc_rdbtnImportFromComputer);
 
 	iconpath = new JTextField();
@@ -83,7 +108,7 @@ public class SettingPanel extends JPanel {
 	gbc_iconpath.insets = new Insets(0, 0, 5, 5);
 	gbc_iconpath.fill = GridBagConstraints.HORIZONTAL;
 	gbc_iconpath.gridx = 2;
-	gbc_iconpath.gridy = 2;
+	gbc_iconpath.gridy = 3;
 	add(iconpath, gbc_iconpath);
 	iconpath.setColumns(10);
 
@@ -92,16 +117,16 @@ public class SettingPanel extends JPanel {
 	gbc_btnBrowse.fill = GridBagConstraints.HORIZONTAL;
 	gbc_btnBrowse.insets = new Insets(0, 0, 5, 0);
 	gbc_btnBrowse.gridx = 4;
-	gbc_btnBrowse.gridy = 2;
+	gbc_btnBrowse.gridy = 3;
 	add(btnBrowse, gbc_btnBrowse);
 
-	JRadioButton rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
+	rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
 	GridBagConstraints gbc_rdbtnCaptureFromScreen = new GridBagConstraints();
 	gbc_rdbtnCaptureFromScreen.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnCaptureFromScreen.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnCaptureFromScreen.gridwidth = 3;
 	gbc_rdbtnCaptureFromScreen.gridx = 2;
-	gbc_rdbtnCaptureFromScreen.gridy = 3;
+	gbc_rdbtnCaptureFromScreen.gridy = 4;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
 	JButton btnCapture = new JButton("Capture");
@@ -112,7 +137,7 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.gridwidth = 3;
 	gbc_btnCapture.anchor = GridBagConstraints.WEST;
 	gbc_btnCapture.gridx = 2;
-	gbc_btnCapture.gridy = 4;
+	gbc_btnCapture.gridy = 5;
 	add(btnCapture, gbc_btnCapture);
 
 	ButtonGroup iconGroup = new ButtonGroup();
@@ -134,24 +159,24 @@ public class SettingPanel extends JPanel {
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
 	gbc_lblMode.insets = new Insets(0, 0, 5, 5);
 	gbc_lblMode.gridx = 0;
-	gbc_lblMode.gridy = 5;
+	gbc_lblMode.gridy = 6;
 	add(lblMode, gbc_lblMode);
 
-	JRadioButton rdbtnSingleTouch = new JRadioButton("Single Touch");
+	rdbtnSingleTouch = new JRadioButton("Single Touch");
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
 	gbc_rdbtnSingleTouch.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnSingleTouch.gridwidth = 3;
 	gbc_rdbtnSingleTouch.gridx = 2;
-	gbc_rdbtnSingleTouch.gridy = 5;
+	gbc_rdbtnSingleTouch.gridy = 6;
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
-	JRadioButton rdbtnFollow = new JRadioButton("Follow");
+	rdbtnFollow = new JRadioButton("Follow");
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
 	gbc_rdbtnFollow.gridwidth = 3;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
-	gbc_rdbtnFollow.gridy = 6;
+	gbc_rdbtnFollow.gridy = 7;
 	add(rdbtnFollow, gbc_rdbtnFollow);
 	
 	ButtonGroup modeGroup = new ButtonGroup();
