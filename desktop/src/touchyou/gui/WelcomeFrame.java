@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -117,7 +118,9 @@ public class WelcomeFrame extends JFrame {
 
 	JButton btnNewButton_1 = new JButton("Create a new Touch You profile");
 	btnNewButton_1.addActionListener(e -> {
-	    new TouchyouGui(app).run();
+	    SwingUtilities.invokeLater(() -> {
+		new TouchyouGui(app).run();
+	    });
 	    this.dispose();
 	});
 	panel_2.add(btnNewButton_1);

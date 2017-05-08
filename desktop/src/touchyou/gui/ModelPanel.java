@@ -40,8 +40,6 @@ public class ModelPanel extends JPanel {
 	}
 
 	private void initcomponent() {
-		CardLayout mobilepanel = new CardLayout();
-		JPanel mainPanel = new JPanel(mobilepanel);
 		mobile = new JPanel() {
 			/**
 			 * 
@@ -58,9 +56,7 @@ public class ModelPanel extends JPanel {
 		mobile.setLayout(null); // make it movable , no layout
 		img = GuiUtil.getImage(Image_URL);
 		setMobileSize(300, 500);
-		mainPanel.add(new SelectProfile(300, 500, app, mobilepanel, mainPanel));
-		mainPanel.add(mobile);
-		add(mainPanel);
+		add(mobile);
 	}
 
 	public void setMobileSize(int width, int height) {
