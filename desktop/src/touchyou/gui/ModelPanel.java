@@ -34,7 +34,6 @@ public class ModelPanel extends JPanel {
 	}
 
 	private void initcomponent() {
-
 		mobile = new JPanel() {
 			/**
 			 * 
