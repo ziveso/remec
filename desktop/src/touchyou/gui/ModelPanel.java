@@ -1,5 +1,6 @@
 package touchyou.gui;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,7 +9,10 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+
+import touchyou.App;
 import touchyou.util.GuiUtil;
+
 /**
  * 
  * @author Thitiwat Thongbor
@@ -19,13 +23,15 @@ public class ModelPanel extends JPanel {
 	private final String Image_URL = "/images/phone.png";
 	private Image img;
 	private static JPanel mobile;
+	private App app;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3593230878415293635L;
 
-	protected ModelPanel(int width, int height) {
+	protected ModelPanel(int width, int height, App app) {
+		this.app = app;
 		// now 489 * 599
 		setPreferredSize(new Dimension(width, height));
 		setBorder(GuiUtil.getBorder());
@@ -34,6 +40,8 @@ public class ModelPanel extends JPanel {
 	}
 
 	private void initcomponent() {
+		CardLayout mobilepanel = new CardLayout();
+		JPanel mainPanel = new JPanel(mobilepanel);
 		mobile = new JPanel() {
 			/**
 			 * 
@@ -46,11 +54,13 @@ public class ModelPanel extends JPanel {
 				g.drawImage(img, 0, 0, null);
 			}
 		};
-		
+
 		mobile.setLayout(null); // make it movable , no layout
 		img = GuiUtil.getImage(Image_URL);
 		setMobileSize(300, 500);
-		add(mobile);
+		mainPanel.add(new SelectProfile(300, 500, app, mobilepanel, mainPanel));
+		mainPanel.add(mobile);
+		add(mainPanel);
 	}
 
 	public void setMobileSize(int width, int height) {
