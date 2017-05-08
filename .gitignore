@@ -5,3 +5,5 @@
 *.psd
 
 /desktop/nbproject/private/
+
+/desktop/bin/
