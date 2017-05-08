@@ -4,7 +4,11 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class ByMacro extends JPanel {
 
 	/**

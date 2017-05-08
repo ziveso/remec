@@ -9,7 +9,11 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 import touchyou.util.GuiUtil;
-
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class ModelPanel extends JPanel {
 
 	private final String Image_URL = "/images/phone.png";

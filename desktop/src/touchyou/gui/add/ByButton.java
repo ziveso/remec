@@ -10,58 +10,39 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import touchyou.App;
+import touchyou.Command;
 import touchyou.gui.MainFrame;
 import touchyou.gui.ModelPanel;
 import touchyou.util.GuiUtil;
-
-public class ByButton extends JPanel {
-
-	private JLabel hint;
-	private JTextField command_key;
-	private JButton add;
-	private boolean visible = true;
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
+public class ByButton extends JButton {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8391021197211750760L;
 
-	public ByButton(Dimension size) {
-		super(new GridLayout(0, 1));
-
-		JButton button = new JButton("Button");
-		hint = new JLabel("Command : ");
-		command_key = new JTextField(1);
-		add = new JButton("add");
-		add.addActionListener(e -> {
-			JButton but = new JButton(command_key.getText().toString());
+	public ByButton(Dimension size, App app) {
+		super("Button");
+		this.addActionListener(e -> {
+			JButton but = new JButton();
 			MouseListener ml = new MouseMotion();
+			Command com = new Command();
+			com.setCombination("ALT + F4");
+			// TODO set id
+			app.getProfile().addCommand(com);
 			but.addMouseListener(ml);
 			but.addMouseMotionListener((MouseMotionListener) ml);
+			but.setPreferredSize(new Dimension(50, 50));
 			ModelPanel.getMobile().add(but);
 			but.setBounds(GuiUtil.getInitBound(but.getPreferredSize()));
 			ModelPanel.updateComponent();
 		});
-
-		button.setPreferredSize(size);
-		button.addActionListener((e) -> {
-			visible = setActionVisible(visible);
-		});
-		this.add(button);
-	}
-
-	private boolean setActionVisible(boolean visible) {
-		if (visible) {
-			add(hint);
-			add(command_key);
-			add(add);
-		} else {
-			remove(hint);
-			remove(command_key);
-			remove(add);
-		}
-		this.validate();
-		MainFrame.updateWidget();
-		return !visible;
+		this.setPreferredSize(size);
 	}
 }

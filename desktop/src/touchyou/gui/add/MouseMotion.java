@@ -5,7 +5,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import touchyou.gui.ModelPanel;
-
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public final class MouseMotion extends MouseAdapter {
 	private Point myPoint = new Point(0, 0);
 	private Point myComponent = new Point(0, 0);
@@ -13,8 +17,10 @@ public final class MouseMotion extends MouseAdapter {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		super.mousePressed(e);
+		System.out.println(myComponent);
 		myPoint = e.getLocationOnScreen();
 		myComponent = e.getComponent().getLocation();
+
 	}
 
 	@Override

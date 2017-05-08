@@ -17,7 +17,7 @@ import touchyou.gui.TouchyouGui;
 public class App {
     public static int PORT = 3000;
     public TCPServer server;
-    public Profile profile;
+    public Profile profile = new Profile("Demo");
 
     /**
      * Initialize TouchYou server.

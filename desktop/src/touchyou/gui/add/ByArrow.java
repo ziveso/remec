@@ -5,7 +5,11 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class ByArrow extends JPanel {
 	
 	/**

@@ -13,7 +13,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import touchyou.App;
-
+import touchyou.Command;
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class SettingPanel extends JPanel {
 
     /**
@@ -153,5 +158,9 @@ public class SettingPanel extends JPanel {
 	modeGroup.add(rdbtnSingleTouch);
 	modeGroup.add(rdbtnFollow);
 
+    }
+    
+    public void update(Command command){
+    	this.combination.setText(command.getCombination());
     }
 }
