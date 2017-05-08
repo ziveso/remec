@@ -1,6 +1,7 @@
 package touchyou.gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -46,12 +47,13 @@ public class ModelPanel extends JPanel {
 			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				g.drawImage(img, 0, 0, null);
-			}
+			// @Override
+			// protected void paintComponent(Graphics g) {
+			// super.paintComponent(g);
+			// g.drawImage(img, 0, 0, null);
+			// }
 		};
+		mobile.setBackground(Color.white);
 
 		mobile.setLayout(null); // make it movable , no layout
 		img = GuiUtil.getImage(Image_URL);
