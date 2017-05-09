@@ -43,7 +43,8 @@ public class ByButton extends JButton {
 	    cr.registerComponent(but);
 	    ml.setDragInsets(new Insets(10, 10, 10, 10));
 	    Command com = new Command();
-	    com.setCombination("ALT + F4");
+	    com.setCombination("Test");
+	    com.setMode(1);
 	    // TODO set id
 	    app.getProfile().addCommand(com);
 	    but.setBorder(BorderFactory.createLineBorder(Color.BLACK));
