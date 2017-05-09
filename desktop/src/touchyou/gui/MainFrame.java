@@ -14,6 +14,13 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 /**
  * 
@@ -33,66 +40,68 @@ public class MainFrame extends JFrame {
     private final int Width = GuiUtil.WIDTH;
     private final int Height = GuiUtil.HEIGHT;
 
-
     /**
      * construct MainFrame.
      */
     public MainFrame(App app) {
-    	setTitle("Touch You 0.1.4 Beta");
-	super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	super.setSize(Width, Height);
 	this.app = app;
-	this.setResizable(false);
+	setTitle("Touch You 0.1.4 Beta");
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setSize(Width, Height);
 
 	JMenuBar menubar = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenuItem newprofile = new JMenuItem("New Profile");
 	file.add(newprofile);
 	menubar.add(file);
-	this.setJMenuBar(menubar);
+	setJMenuBar(menubar);
 
-	JPanel pane = new JPanel(new FlowLayout());
-	pane.setBackground(GuiUtil.getBackgroundColor());
+	JPanel workingPanel = new JPanel();
+	workingPanel.setBackground(GuiUtil.getBackgroundColor());
 
 	int model_width = Width * 5 / 10;
 	int pane_width = Width * 2 / 10;
+	GridBagLayout gbl_workingPanel = new GridBagLayout();
+	gbl_workingPanel.columnWidths = new int[] { 71, 331, 203, 0 };
+	gbl_workingPanel.rowHeights = new int[] { 515, 0 };
+	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+	workingPanel.setLayout(gbl_workingPanel);
 	SettingPanel settingPanel = new SettingPanel(app, this);
-	pane.add(settingPanel);
+	GridBagConstraints gbc_settingPanel = new GridBagConstraints();
+	gbc_settingPanel.fill = GridBagConstraints.BOTH;
+	gbc_settingPanel.insets = new Insets(5, 5, 0, 5);
+	gbc_settingPanel.gridx = 0;
+	gbc_settingPanel.gridy = 0;
+	workingPanel.add(settingPanel, gbc_settingPanel);
+	getContentPane().add(workingPanel);
 	ModelPanel modelPanel = new ModelPanel(model_width, Height, app);
-	pane.add(modelPanel);
+	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
+	gbc_modelPanel.insets = new Insets(0, 0, 0, 5);
+	gbc_modelPanel.fill = GridBagConstraints.BOTH;
+	gbc_modelPanel.gridx = 1;
+	gbc_modelPanel.gridy = 0;
+	workingPanel.add(modelPanel, gbc_modelPanel);
 
 	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height, app);
-	pane.add(widgetPanel);
-	super.add(pane);
-
-	JPanel panel = new JPanel();
-	getContentPane().add(panel, BorderLayout.SOUTH);
-	GridBagLayout gbl_panel = new GridBagLayout();
-	gbl_panel.columnWidths = new int[] { 485, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	gbl_panel.rowHeights = new int[] { 16, 0 };
-	gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-	gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
-	panel.setLayout(gbl_panel);
-
-	JLabel lblNewLabel = new JLabel("New label");
-	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-	gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-	gbc_lblNewLabel.anchor = GridBagConstraints.NORTHWEST;
-	gbc_lblNewLabel.gridx = 0;
-	gbc_lblNewLabel.gridy = 0;
-	panel.add(lblNewLabel, gbc_lblNewLabel);
-	SyncButton syncButton = new SyncButton(pane_width, Height / 10, app);
-	GridBagConstraints gbc_syncButton = new GridBagConstraints();
-	gbc_syncButton.gridx = 17;
-	gbc_syncButton.gridy = 0;
-	panel.add(syncButton, gbc_syncButton);
+	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
+	gbc_widgetPanel.fill = GridBagConstraints.BOTH;
+	gbc_widgetPanel.insets = new Insets(5, 0, 0, 0);
+	gbc_widgetPanel.gridx = 2;
+	gbc_widgetPanel.gridy = 0;
+	workingPanel.add(widgetPanel, gbc_widgetPanel);
+	
+	StatusPanel statusPanel = new StatusPanel();
+	statusPanel.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null), new EmptyBorder(5, 5, 5, 5)));
+	GridBagLayout gridBagLayout = (GridBagLayout) statusPanel.getLayout();
+	gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0};
+	getContentPane().add(statusPanel, BorderLayout.SOUTH);
 
 	this.pack();
 	setLocationRelativeTo(null);
     }
 
-//    public static void updateWidget() {
-//	widgetPanel.validate();
-//    }
+    // public static void updateWidget() {
+    // widgetPanel.validate();
+    // }
 }

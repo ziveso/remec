@@ -2,6 +2,7 @@ package touchyou.gui.add;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,6 +15,7 @@ public class MouseOver extends MouseAdapter {
 	public MouseOver(Component component) {
 		this.component = component;
 		this.currentFont = component.getFont();
+		component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 
 	@Override

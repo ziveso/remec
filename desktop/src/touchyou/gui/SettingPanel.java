@@ -47,11 +47,10 @@ public class SettingPanel extends JPanel {
 	this.mainframe = mainframe;
 	setBorder(GuiUtil.getBorder());
 	this.app = app;
-	this.setPreferredSize(new Dimension(331, 523));
 	GridBagLayout gridBagLayout = new GridBagLayout();
-	gridBagLayout.columnWidths = new int[] { 0, 28, 0, 112, 0, 0 };
+	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
+	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
@@ -67,11 +66,11 @@ public class SettingPanel extends JPanel {
 	profilename = new JLabel("New label");
 	profilename.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
+	gbc_profilename.gridwidth = 2;
 	gbc_profilename.fill = GridBagConstraints.VERTICAL;
 	gbc_profilename.anchor = GridBagConstraints.EAST;
-	gbc_profilename.gridwidth = 2;
-	gbc_profilename.insets = new Insets(0, 0, 5, 5);
-	gbc_profilename.gridx = 3;
+	gbc_profilename.insets = new Insets(0, 0, 5, 0);
+	gbc_profilename.gridx = 2;
 	gbc_profilename.gridy = 0;
 	add(profilename, gbc_profilename);
 
@@ -86,7 +85,7 @@ public class SettingPanel extends JPanel {
 
 	combination = new JTextField();
 	GridBagConstraints gbc_combination = new GridBagConstraints();
-	gbc_combination.gridwidth = 3;
+	gbc_combination.gridwidth = 2;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
 	gbc_combination.fill = GridBagConstraints.BOTH;
 	gbc_combination.gridx = 2;
@@ -107,15 +106,15 @@ public class SettingPanel extends JPanel {
 	rdbtnImportFromComputer.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
 	gbc_rdbtnImportFromComputer.anchor = GridBagConstraints.WEST;
-	gbc_rdbtnImportFromComputer.gridwidth = 3;
+	gbc_rdbtnImportFromComputer.gridwidth = 2;
 	gbc_rdbtnImportFromComputer.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnImportFromComputer.gridx = 2;
 	gbc_rdbtnImportFromComputer.gridy = 2;
 	add(rdbtnImportFromComputer, gbc_rdbtnImportFromComputer);
 
 	iconpath = new JTextField();
+	iconpath.setEditable(false);
 	GridBagConstraints gbc_iconpath = new GridBagConstraints();
-	gbc_iconpath.gridwidth = 2;
 	gbc_iconpath.insets = new Insets(0, 0, 5, 5);
 	gbc_iconpath.fill = GridBagConstraints.BOTH;
 	gbc_iconpath.gridx = 2;
@@ -127,7 +126,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
 	gbc_btnBrowse.fill = GridBagConstraints.BOTH;
 	gbc_btnBrowse.insets = new Insets(0, 0, 5, 0);
-	gbc_btnBrowse.gridx = 4;
+	gbc_btnBrowse.gridx = 3;
 	gbc_btnBrowse.gridy = 3;
 	add(btnBrowse, gbc_btnBrowse);
 
@@ -136,7 +135,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_rdbtnCaptureFromScreen = new GridBagConstraints();
 	gbc_rdbtnCaptureFromScreen.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnCaptureFromScreen.anchor = GridBagConstraints.WEST;
-	gbc_rdbtnCaptureFromScreen.gridwidth = 3;
+	gbc_rdbtnCaptureFromScreen.gridwidth = 2;
 	gbc_rdbtnCaptureFromScreen.gridx = 2;
 	gbc_rdbtnCaptureFromScreen.gridy = 4;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
@@ -146,7 +145,7 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
 	gbc_btnCapture.fill = GridBagConstraints.BOTH;
 	gbc_btnCapture.weightx = 10.0;
-	gbc_btnCapture.gridwidth = 3;
+	gbc_btnCapture.gridwidth = 2;
 	gbc_btnCapture.gridx = 2;
 	gbc_btnCapture.gridy = 5;
 	add(btnCapture, gbc_btnCapture);
@@ -179,7 +178,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
 	gbc_rdbtnSingleTouch.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
-	gbc_rdbtnSingleTouch.gridwidth = 3;
+	gbc_rdbtnSingleTouch.gridwidth = 2;
 	gbc_rdbtnSingleTouch.gridx = 2;
 	gbc_rdbtnSingleTouch.gridy = 6;
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
@@ -187,7 +186,7 @@ public class SettingPanel extends JPanel {
 	rdbtnFollow = new JRadioButton("Follow");
 	rdbtnFollow.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
-	gbc_rdbtnFollow.gridwidth = 3;
+	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
 	gbc_rdbtnFollow.gridy = 7;
