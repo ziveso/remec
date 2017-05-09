@@ -36,23 +36,13 @@ public class ModelPanel extends JPanel {
 		// now 489 * 599
 		setPreferredSize(new Dimension(width, height));
 		setBorder(GuiUtil.getBorder());
-		setOpaque(false);
+		this.setBackground(new Color(40, 40, 40)); // almost black;
+		setOpaque(true);
 		initcomponent();
 	}
 
 	private void initcomponent() {
-		mobile = new JPanel() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			// @Override
-			// protected void paintComponent(Graphics g) {
-			// super.paintComponent(g);
-			// g.drawImage(img, 0, 0, null);
-			// }
-		};
+		mobile = new JPanel();
 		mobile.setBackground(Color.white);
 
 		mobile.setLayout(null); // make it movable , no layout
