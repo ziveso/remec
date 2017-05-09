@@ -5,13 +5,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 /**
  * 
  * @author Thitiwat Thongbor
  *
  */
 public class ByArrow extends JPanel {
-	
+
 	/**
 	 * 
 	 */
@@ -19,9 +20,10 @@ public class ByArrow extends JPanel {
 
 	public ByArrow(Dimension size) {
 		super(new GridLayout(0, 1));
+		this.setOpaque(false);
 		JButton arrow = new JButton("Arrow");
 		arrow.setPreferredSize(size);
-//		arrow.addActionListener();
+		// arrow.addActionListener();
 		add(arrow);
 	}
 }

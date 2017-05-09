@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 /**
  * 
  * @author Thitiwat Thongbor
@@ -18,6 +19,7 @@ public class ByMacro extends JPanel {
 
 	public ByMacro(Dimension size) {
 		JButton macro = new JButton("macro");
+		this.setOpaque(false);
 		macro.setPreferredSize(size);
 		add(macro);
 	}

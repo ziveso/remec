@@ -53,20 +53,9 @@ public class MainFrame extends JFrame {
 		file.add(newprofile);
 		menubar.add(file);
 		this.setJMenuBar(menubar);
-		
 
-		JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0)) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 5082511633852881405L;
-
-			@Override
-			protected void paintComponent(Graphics g) {
-				super.paintComponent(g);
-				g.drawImage(GuiUtil.getImage("/images/background.jpg"), 0, 0, null);
-			}
-		};
+		JPanel pane = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		pane.setBackground(GuiUtil.getBackgroundColor());
 
 		int model_width = Width * 5 / 10;
 		int pane_width = Width * 2 / 10;
