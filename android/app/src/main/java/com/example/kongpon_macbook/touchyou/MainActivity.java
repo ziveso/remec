@@ -9,6 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.DataOutput;
 import java.io.DataOutputStream;
@@ -16,7 +19,6 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String IP = "192.168.2.106";
     public static final int PORT = 3000;
 
     public Button connectButton;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            TCPClient client = new TCPClient(IP, PORT, MainActivity.this);
+                            TCPClient client = new TCPClient(ipEditText.getText().toString() , PORT, MainActivity.this);
                             client.openConnection();
                         } catch (IOException e) {
                             e.printStackTrace();

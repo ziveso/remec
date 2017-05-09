@@ -45,7 +45,7 @@ public class SettingPanel extends JPanel {
     public SettingPanel(App app, JFrame mainframe) {
     	setOpaque(false);
 	this.mainframe = mainframe;
-	setBorder(GuiUtil.getBorder());
+//	setBorder(GuiUtil.getBorder());
 	this.app = app;
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };

@@ -22,8 +22,7 @@ public class StatusPanel extends JPanel {
      * Create the panel.
      */
     public StatusPanel() {
-	setBackground(Color.DARK_GRAY);
-	
+	setBackground(GuiUtil.getBackgroundColor());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 137, 200, 0 };
 	gridBagLayout.rowHeights = new int[] { 53, 0 };

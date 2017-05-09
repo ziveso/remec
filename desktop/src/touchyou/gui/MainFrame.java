@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
 	setLocationRelativeTo(null);
     }
 
-    // public static void updateWidget() {
-    // widgetPanel.validate();
-    // }
+//     public static void updateWidget() {
+//     widgetPanel.validate();
+//     }
 }

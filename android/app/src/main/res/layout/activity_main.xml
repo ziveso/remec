@@ -45,4 +45,15 @@
         app:layout_constraintTop_toBottomOf="@+id/ipEditText"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/Status"
+        android:layout_width="382dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="-9dp" />
 </android.support.constraint.ConstraintLayout>
