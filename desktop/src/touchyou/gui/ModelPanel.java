@@ -58,6 +58,7 @@ public class ModelPanel extends JPanel {
 	}
 
 	public static void updateComponent() {
-		mobile.invalidate();
+	    mobile.repaint();
+	    mobile.revalidate();
 	}
 }

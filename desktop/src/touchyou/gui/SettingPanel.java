@@ -17,6 +17,8 @@ import javax.swing.border.EmptyBorder;
 import touchyou.App;
 import touchyou.Command;
 import touchyou.util.GuiUtil;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * 
@@ -38,14 +40,15 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
     private JFrame mainframe;
+    private Command currentCommand;
 
     /**
      * Create the panel.
      */
     public SettingPanel(App app, JFrame mainframe) {
-    	setOpaque(false);
+	setOpaque(false);
 	this.mainframe = mainframe;
-//	setBorder(GuiUtil.getBorder());
+	// setBorder(GuiUtil.getBorder());
 	this.app = app;
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
@@ -174,6 +177,11 @@ public class SettingPanel extends JPanel {
 	add(lblMode, gbc_lblMode);
 
 	rdbtnSingleTouch = new JRadioButton("Single Touch");
+	rdbtnSingleTouch.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		currentCommand.setMode(0);
+	    }
+	});
 	rdbtnSingleTouch.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
 	gbc_rdbtnSingleTouch.insets = new Insets(0, 0, 5, 0);
@@ -184,6 +192,11 @@ public class SettingPanel extends JPanel {
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
+	rdbtnFollow.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		currentCommand.setMode(1);
+	    }
+	});
 	rdbtnFollow.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
 	gbc_rdbtnFollow.gridwidth = 2;
@@ -199,7 +212,20 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
+	this.currentCommand = command;
 	this.combination.setText(command.getCombination());
+	this.iconpath.setText(command.getImagePath());
+	System.out.println(command.getMode());
+	switch (command.getMode()) {
+	case 0:
+	    rdbtnSingleTouch.setSelected(true);
+	    break;
+	case 1:
+	    rdbtnFollow.setSelected(true);
+	    break;
+	default:
+	    break;
+	}
     }
 
 }

@@ -83,25 +83,25 @@ public class MainFrame extends JFrame {
 	gbc_modelPanel.gridy = 0;
 	workingPanel.add(modelPanel, gbc_modelPanel);
 
-	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height, app);
+	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height, app, settingPanel);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
 	gbc_widgetPanel.fill = GridBagConstraints.BOTH;
 	gbc_widgetPanel.insets = new Insets(5, 0, 0, 0);
 	gbc_widgetPanel.gridx = 2;
 	gbc_widgetPanel.gridy = 0;
 	workingPanel.add(widgetPanel, gbc_widgetPanel);
-	
+
 	StatusPanel statusPanel = new StatusPanel();
 	statusPanel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null));
 	GridBagLayout gridBagLayout = (GridBagLayout) statusPanel.getLayout();
-	gridBagLayout.columnWeights = new double[]{0.0, 1.0};
+	gridBagLayout.columnWeights = new double[] { 0.0, 1.0 };
 	getContentPane().add(statusPanel, BorderLayout.SOUTH);
 
 	this.pack();
 	setLocationRelativeTo(null);
     }
 
-//     public static void updateWidget() {
-//     widgetPanel.validate();
-//     }
+    // public static void updateWidget() {
+    // widgetPanel.validate();
+    // }
 }

@@ -83,4 +83,19 @@ public class Profile {
 	return this.commands.removeIf((command) -> command.getId() == id);
     }
 
+    /**
+     * Return a command with a given ID, null if not exist.
+     * 
+     * @param id
+     *            is the ID of the command
+     * @return command with a specified id
+     */
+    public Command getCommand(int id) {
+	for (Command command : commands) {
+	    if (command.getId() == id)
+		return command;
+	}
+	return null;
+    }
+
 }
