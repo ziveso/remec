@@ -37,6 +37,8 @@ public final class MouseMotion extends MouseAdapter {
 		drag(e);
 	}
 
+	private Point currentPoint = null;
+
 	private void drag(MouseEvent currentMouse) {
 		Component comp = currentMouse.getComponent();
 		int deltaX = (int) (currentMouse.getLocationOnScreen().getX() - myPoint.getX());
@@ -52,12 +54,14 @@ public final class MouseMotion extends MouseAdapter {
 			// y = current y;
 			// x is out on left.
 			// y already in scope.
+			currentPoint = new Point(minWidth, moveY);
 			move(comp, minWidth, moveY);
 		} else if (comp.getX() < minWidth && comp.getY() < minHeight) {
 			// x = 0
 			// y = 0
 			// x , y mouse is out on top left.
-			move(comp, minWidth, maxHeight);
+			currentPoint = new Point(minWidth, minHeight);
+			move(comp, minWidth, minHeight);
 		} else if (comp.getX() < minWidth && comp.getY() > maxHeight) {
 			// x = 0
 			// y = max y - comp height
@@ -68,37 +72,47 @@ public final class MouseMotion extends MouseAdapter {
 			// y = current y
 			// x is out on right
 			// y in scope
+			currentPoint = new Point(maxWidth, moveY);
 			move(comp, maxWidth, moveY);
 		} else if (comp.getX() > maxWidth && comp.getY() < minHeight) {
 			// x = max width
 			// y = 0
 			// x , y is out at top right
+			currentPoint = new Point(maxWidth, minHeight);
 			move(comp, maxWidth, minHeight);
 		} else if (comp.getX() > maxWidth && comp.getY() > maxHeight) {
 			// x = max width
 			// y = max height
 			// x , y is out at bot right
+			currentPoint = new Point(maxWidth, maxHeight);
 			move(comp, maxWidth, maxHeight);
 		} else if (comp.getY() < minHeight && (comp.getX() > minWidth && comp.getX() < maxWidth)) {
 			// x = current x
 			// y = 0
 			// x is on the pane
 			// y is out at top
+			currentPoint = new Point(moveX, minHeight);
 			move(comp, moveX, minHeight);
 		} else if (comp.getY() > maxHeight && (comp.getX() > minWidth && comp.getX() < maxWidth)) {
 			// x = current x
 			// y = max height
 			// x is on the pane
 			// y is out at bot
+			currentPoint = new Point(moveX, maxHeight);
 			move(comp, moveX, maxHeight);
 		} else {
 			// move freely
+			currentPoint = null;
 			move(comp, moveX, moveY);
 		}
 		ModelPanel.updateComponent();
 	}
 
 	private void move(Component component, int x, int y) {
-		component.setLocation(x, y);
+		if(currentPoint==null){			
+			component.setLocation(x, y);
+		} else {
+			component.setLocation(currentPoint);
+		}
 	}
 }
