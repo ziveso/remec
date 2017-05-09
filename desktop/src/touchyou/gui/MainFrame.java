@@ -94,7 +94,7 @@ public class MainFrame extends JFrame {
 	StatusPanel statusPanel = new StatusPanel();
 	statusPanel.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null), new EmptyBorder(5, 5, 5, 5)));
 	GridBagLayout gridBagLayout = (GridBagLayout) statusPanel.getLayout();
-	gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0};
+	gridBagLayout.columnWeights = new double[]{0.0, 1.0};
 	getContentPane().add(statusPanel, BorderLayout.SOUTH);
 
 	this.pack();
