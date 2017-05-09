@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.gui.add.MouseOver;
 import touchyou.util.GuiUtil;
 
 /**

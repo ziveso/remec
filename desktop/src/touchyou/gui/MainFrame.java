@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 		super.setSize(Width, Height);
 		this.app = app;
 		initComponent();
+		this.setResizable(false);
 	}
 
 	/**

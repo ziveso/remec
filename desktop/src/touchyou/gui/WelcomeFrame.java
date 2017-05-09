@@ -29,6 +29,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import jdk.nashorn.internal.scripts.JO;
 import touchyou.App;
+import touchyou.util.GuiUtil;
 
 public class WelcomeFrame extends JFrame {
 
@@ -40,6 +41,8 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame(App app) {
+    	Color background = GuiUtil.getBackgroundColor();
+    	Color foreground = GuiUtil.getForegroundColor();
 	setTitle("Touch You Pro");
 	setLocation(new Point(0, 0));
 	setResizable(false);
@@ -48,13 +51,13 @@ public class WelcomeFrame extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 650, 210);
 	contentPane = new JPanel();
-	contentPane.setBackground(new Color(245, 245, 245));
+	contentPane.setBackground(background);
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(new BorderLayout());
 
 	JPanel panel = new JPanel();
-	panel.setBackground(new Color(245, 245, 245));
+	panel.setBackground(background);
 	panel.setBorder(new EmptyBorder(5, 5, 10, 5));
 	GridBagConstraints gbc_panel = new GridBagConstraints();
 	gbc_panel.insets = new Insets(0, 0, 5, 0);
@@ -64,6 +67,7 @@ public class WelcomeFrame extends JFrame {
 	contentPane.add(panel, BorderLayout.NORTH);
 
 	JLabel lblNewLabel_2 = new JLabel("Welcome to Touch You Pro 2017");
+	lblNewLabel_2.setForeground(foreground);
 	lblNewLabel_2.setFont(new Font("Lantinghei TC", Font.PLAIN, 30));
 	panel.add(lblNewLabel_2);
 
@@ -89,7 +93,7 @@ public class WelcomeFrame extends JFrame {
 	panel_1.add(listPanel, gbc_listPanel);
 	listPanel.setBorder(new LineBorder(new Color(192, 192, 192)));
 	listPanel.setLayout(new BorderLayout(0, 0));
-
+	
 	JList list = new JList();
 	listPanel.add(list);
 
