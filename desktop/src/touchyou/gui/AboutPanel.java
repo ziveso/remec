@@ -110,7 +110,7 @@ public class AboutPanel extends JPanel {
     	
     	JTextPane textPane12 = new JTextPane();
     	textPane12.setContentType("text/html");
-    	textPane12.setText("<html>\nThitiwat Thongbor<br>\nEmail: thitgorn@gmail.com<br>\nGitHub: <a href=\"https://github.com/thitgorn\">https://github.com/thitgorn</a><br>\n</html>");
+    	textPane12.setText("<html>\nThitiwat Thongbor<br>\nEmail: thitiwat.tho1@ku.th<br>\nGitHub: <a href=\"https://github.com/thitgorn\">https://github.com/thitgorn</a><br>\n</html>");
     	textPane12.setOpaque(false);
     	textPane12.setEditable(false);
     	GridBagConstraints gbc_textPane12 = new GridBagConstraints();

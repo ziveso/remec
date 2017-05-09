@@ -34,14 +34,14 @@ public final class MouseMotion extends MouseAdapter {
 		super.mouseDragged(e);
 		int deltaX = (int) (e.getLocationOnScreen().getX() - myPoint.getX());
 		int deltaY = (int) (e.getLocationOnScreen().getY() - myPoint.getY());
-
+		
 		if (isOnScreen(deltaX, deltaY, e)) {
 			e.getComponent().setLocation((int) (myComponent.getX() + deltaX), (int) (myComponent.getY() + deltaY));
 		}
 		ModelPanel.updateComponent();
 	}
 
-	private boolean isOnScreen(int deltaX, int deltaY, MouseEvent e) {
+	private boolean isOnScreen(int deltaX , int deltaY , MouseEvent e) {
 		int maxWidth = ModelPanel.getMobile().getWidth() - e.getComponent().getWidth();
 		int maxHeight = ModelPanel.getMobile().getHeight() - e.getComponent().getHeight();
 		return (myComponent.getX() + deltaX >= 0) && (myComponent.getX() + deltaX <= maxWidth)
