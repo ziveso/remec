@@ -38,6 +38,10 @@ public class ByButton extends JButton {
 	    JButton but = new JButton();
 	    ComponentMover ml = new ComponentMover();
 	    ml.setSnapSize(new Dimension(25, 25));
+	    ComponentResizer cr = new ComponentResizer();
+	    cr.setSnapSize(new Dimension(10, 10));
+	    cr.registerComponent(but);
+	    ml.setDragInsets(new Insets(10, 10, 10, 10));
 	    Command com = new Command();
 	    com.setCombination("ALT + F4");
 	    // TODO set id
