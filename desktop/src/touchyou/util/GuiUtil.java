@@ -61,4 +61,12 @@ public class GuiUtil {
 		x += width;
 		return new Rectangle(new Point(x - width, y), dimension);
 	}
+
+	public static Color getBackgroundColor() {
+		return new Color(72, 72, 72);
+	}
+
+	public static Color getForegroundColor() {
+		return Color.WHITE;
+	}
 }
