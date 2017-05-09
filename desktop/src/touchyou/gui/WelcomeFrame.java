@@ -12,9 +12,10 @@ import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,7 +28,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import jdk.nashorn.internal.scripts.JO;
 import touchyou.App;
 import touchyou.util.GuiUtil;
 
@@ -41,6 +41,7 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame(App app) {
+    	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     	Color background = GuiUtil.getBackgroundColor();
     	Color foreground = GuiUtil.getForegroundColor();
 	setTitle("Touch You Pro");
@@ -51,13 +52,13 @@ public class WelcomeFrame extends JFrame {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 650, 210);
 	contentPane = new JPanel();
-	contentPane.setBackground(background);
+	contentPane.setBackground(new Color(72,72,72));
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(new BorderLayout());
 
 	JPanel panel = new JPanel();
-	panel.setBackground(background);
+	panel.setBackground(new Color(72,72,72));
 	panel.setBorder(new EmptyBorder(5, 5, 10, 5));
 	GridBagConstraints gbc_panel = new GridBagConstraints();
 	gbc_panel.insets = new Insets(0, 0, 5, 0);
@@ -72,6 +73,7 @@ public class WelcomeFrame extends JFrame {
 	panel.add(lblNewLabel_2);
 
 	JPanel panel_1 = new JPanel();
+	panel_1.setBackground(new Color(72,72,72));
 	GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 	gbc_panel_1.fill = GridBagConstraints.BOTH;
 	gbc_panel_1.gridx = 0;
@@ -91,10 +93,15 @@ public class WelcomeFrame extends JFrame {
 	gbc_listPanel.gridx = 0;
 	gbc_listPanel.gridy = 0;
 	panel_1.add(listPanel, gbc_listPanel);
-	listPanel.setBorder(new LineBorder(new Color(192, 192, 192)));
 	listPanel.setLayout(new BorderLayout(0, 0));
 	
-	JList list = new JList();
+	JList<String> list = new JList();
+	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+	DefaultListModel<String> model = new DefaultListModel<>();
+	list.setModel(model);
+	for (String f : new File("/").list()) {
+	    model.addElement(f);
+	}
 	listPanel.add(list);
 
 	JLabel lblNewLabel_1 = new JLabel("Profile List");
@@ -110,7 +117,6 @@ public class WelcomeFrame extends JFrame {
 	gbc_menuPanel.gridx = 1;
 	gbc_menuPanel.gridy = 0;
 	panel_1.add(menuPanel, gbc_menuPanel);
-	menuPanel.setBorder(new LineBorder(new Color(192, 192, 192)));
 	menuPanel.setLayout(new BorderLayout(0, 0));
 
 	JLabel lblNewLabel = new JLabel("Quick Start");
@@ -130,7 +136,7 @@ public class WelcomeFrame extends JFrame {
 	    @Override
 	    public void mouseEntered(MouseEvent e) {
 		JButton button = (JButton) e.getSource();
-		button.setBackground(Color.decode("#e0e7ff"));
+		button.setBackground(Color.LIGHT_GRAY);
 	    }
 
 	    @Override

@@ -21,7 +21,7 @@ import touchyou.gui.ModelPanel;
  */
 public class GuiUtil {
 	public static int WIDTH = 1000;
-	public static int HEIGHT = 600;
+	public static int HEIGHT = 500;
 	private static int x = 0;
 	private static int y = 0;
 

@@ -54,6 +54,39 @@ public class CaptureButton extends JButton {
 	private Point start, stop;
 	private Rectangle rect;
 
+	public CaptureFrame() {
+	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	    this.setUndecorated(true);
+	    this.setBackground(new Color(0, 0, 0, 0.01f));
+	    this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
+	    this.add(new Drawer());
+
+	    this.addKeyListener(new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent e) {
+		    switch (e.getKeyCode()) {
+		    case KeyEvent.VK_ESCAPE:
+			CaptureFrame.this.dispose();
+			break;
+		    case KeyEvent.VK_ENTER:
+			CaptureFrame.this.dispose();
+			break;
+		    default:
+			break;
+		    }
+		}
+	    });
+
+	    this.addWindowListener(new WindowAdapter() {
+		@Override
+		public void windowClosed(WindowEvent e) {
+		    SwingUtilities.invokeLater(() -> {
+			mainframe.setVisible(true);
+		    });
+		}
+	    });
+	}
+
 	private class Drawer extends JPanel {
 	    public Drawer() {
 		this.setOpaque(true);
@@ -93,39 +126,6 @@ public class CaptureButton extends JButton {
 		    g2d.fillRect(rect.x, rect.y, rect.width, rect.height);
 		}
 	    }
-	}
-
-	public CaptureFrame() {
-	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	    this.setUndecorated(true);
-	    this.setBackground(new Color(0,0,0, 0.01f));
-	    this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
-	    this.add(new Drawer());
-
-	    this.addKeyListener(new KeyAdapter() {
-		@Override
-		public void keyPressed(KeyEvent e) {
-		    switch (e.getKeyCode()) {
-		    case KeyEvent.VK_ESCAPE:
-			CaptureFrame.this.dispose();
-			break;
-		    case KeyEvent.VK_ENTER:
-			CaptureFrame.this.dispose();
-			break;
-		    default:
-			break;
-		    }
-		}
-	    });
-
-	    this.addWindowListener(new WindowAdapter() {
-		@Override
-		public void windowClosed(WindowEvent e) {
-		    SwingUtilities.invokeLater(() -> {
-			mainframe.setVisible(true);
-		    });
-		}
-	    });
 	}
     }
 
