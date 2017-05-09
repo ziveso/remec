@@ -41,6 +41,7 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame(App app) {
+    	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     	Color background = GuiUtil.getBackgroundColor();
     	Color foreground = GuiUtil.getForegroundColor();
 	setTitle("Touch You Pro");
@@ -92,10 +93,10 @@ public class WelcomeFrame extends JFrame {
 	gbc_listPanel.gridx = 0;
 	gbc_listPanel.gridy = 0;
 	panel_1.add(listPanel, gbc_listPanel);
-	listPanel.setBorder(new LineBorder(new Color(192, 192, 192)));
 	listPanel.setLayout(new BorderLayout(0, 0));
 	
 	JList<String> list = new JList();
+	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
 	for (String f : new File("/").list()) {
@@ -116,7 +117,6 @@ public class WelcomeFrame extends JFrame {
 	gbc_menuPanel.gridx = 1;
 	gbc_menuPanel.gridy = 0;
 	panel_1.add(menuPanel, gbc_menuPanel);
-	menuPanel.setBorder(new LineBorder(new Color(192, 192, 192)));
 	menuPanel.setLayout(new BorderLayout(0, 0));
 
 	JLabel lblNewLabel = new JLabel("Quick Start");

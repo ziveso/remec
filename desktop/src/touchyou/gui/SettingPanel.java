@@ -43,11 +43,11 @@ public class SettingPanel extends JPanel {
      * Create the panel.
      */
     public SettingPanel(App app, JFrame mainframe) {
+    	setOpaque(false);
 	this.mainframe = mainframe;
-	setBorder(new EmptyBorder(8, 8, 8, 8));
+	setBorder(GuiUtil.getBorder());
 	this.app = app;
-	this.setPreferredSize(new Dimension(331, 600));
-	this.setOpaque(false);
+	this.setPreferredSize(new Dimension(331, 523));
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 0, 112, 0, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };

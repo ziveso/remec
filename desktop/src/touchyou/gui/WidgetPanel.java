@@ -1,6 +1,9 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import touchyou.App;
@@ -35,18 +38,10 @@ public class WidgetPanel extends JPanel {
 		this.height = height;
 		setOpaque(false);
 		setPreferredSize(new Dimension(width, height));
+		this.setLayout(new GridLayout(8,1,0,8));
 		// make it easy to fix.
 		setBorder(GuiUtil.getBorder());
-		initComponent();
-	}
-
-	/**
-	 * create everything that is needed by program.
-	 */
-	private void initComponent() {
 		size = new Dimension(width, height / 8);
-
-		// TODO Add action click to expand.
 
 		add(new ByButton(size , app));
 		add(new ByArrow(size));

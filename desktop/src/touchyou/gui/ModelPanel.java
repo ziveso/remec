@@ -1,5 +1,6 @@
 package touchyou.gui;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,6 +11,8 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.util.GuiUtil;
@@ -33,21 +36,18 @@ public class ModelPanel extends JPanel {
 
 	protected ModelPanel(int width, int height, App app) {
 		this.app = app;
-		// now 489 * 599
-		setPreferredSize(new Dimension(width, height));
-		setBorder(GuiUtil.getBorder());
-		this.setBackground(new Color(40, 40, 40)); // almost black;
-		setOpaque(true);
-		initcomponent();
-	}
-
-	private void initcomponent() {
 		mobile = new JPanel();
 		mobile.setBackground(Color.white);
-
 		mobile.setLayout(null); // make it movable , no layout
 		img = GuiUtil.getImage(Image_URL);
-		setMobileSize(300, 500);
+		int mobileWidth = 300;
+		setMobileSize(mobileWidth, GuiUtil.HEIGHT);
+		// now 489 * 599
+		int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth)/2.0);
+		setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0, sideGap, 0, sideGap)));
+
+		this.setBackground(new Color(40, 40, 40)); // almost black;
+		setOpaque(true);
 		add(mobile);
 	}
 
