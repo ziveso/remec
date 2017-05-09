@@ -3,6 +3,7 @@ package touchyou.gui.add;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,7 +36,7 @@ public class ByButton extends JButton {
 	this.setOpaque(true);
 	this.addActionListener(e -> {
 	    JButton but = new JButton();
-	    MouseListener ml = new MouseMotion();
+	    ComponentMover ml = new ComponentMover();
 	    Command com = new Command();
 	    com.setCombination("ALT + F4");
 	    // TODO set id
@@ -43,7 +44,6 @@ public class ByButton extends JButton {
 	    but.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    but.setOpaque(true);
 	    but.addMouseListener(ml);
-	    but.addMouseMotionListener((MouseMotionListener) ml);
 	    but.setPreferredSize(new Dimension(50, 50));
 	    but.addMouseListener(new MouseAdapter() {
 		@Override
