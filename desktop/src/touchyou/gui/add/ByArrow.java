@@ -1,5 +1,6 @@
 package touchyou.gui.add;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
@@ -7,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,14 @@ public class ByArrow extends JPanel {
 	 */
 	private static final long serialVersionUID = -7527425268579123369L;
 	private App app;
-	private List<Component> list = new ArrayList<>();
+	private Dimension size;
+	private JButton left, right, up, down;
+	private int DEFAULT_HEIGHT;
+	JPanel subpanel;
 
 	public ByArrow(Dimension size, App app) {
-		super(new GridLayout());
+		super(new BorderLayout());
+		this.size = size;
 		this.app = app;
 		this.setOpaque(false);
 		JButton arrow = new JButton("Arrow");
@@ -42,7 +48,15 @@ public class ByArrow extends JPanel {
 		arrow.setBackground(Color.WHITE);
 		arrow.addMouseListener(new MouseOver(arrow));
 		arrow.addActionListener(new Toggle());
-		add(arrow);
+		add(arrow, BorderLayout.NORTH);
+
+		subpanel = new JPanel(new GridLayout(2, 2));
+		left = new JButton("<");
+		right = new JButton(">");
+		up = new JButton("^");
+		down = new JButton("V");
+		DEFAULT_HEIGHT = ImageObserver.HEIGHT;
+		add(subpanel, BorderLayout.CENTER);
 	}
 
 	private class Toggle implements ActionListener {
@@ -52,28 +66,25 @@ public class ByArrow extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			isToggle = !isToggle;
 			if (isToggle) {
-				addButton("<", "V", ">", "^");
+				addComp();
 			} else {
-				removeButton("<", "V", ">", "^");
+				removeComp();
 			}
-			validate();
+			MainFrame.updateWidget();
 		}
 
-		private void addButton(String... Strings) {
-			for (String string : Strings) {
-				JButton jb = new JButton(string);
-				jb.setPreferredSize(new Dimension(getWidth(), 500));
-				list.add(jb);
-				add(jb);
-			}
+		private void addComp() {
+			subpanel.add(left);
+			subpanel.add(right);
+			subpanel.add(up);
+			subpanel.add(down);
 		}
 
-		private void removeButton(String... Strings) {
-			for (int i = 0; i < Strings.length; i++) {
-				remove(list.get(i));
-			}
-			list.clear();
+		private void removeComp() {
+			subpanel.remove(left);
+			subpanel.remove(right);
+			subpanel.remove(up);
+			subpanel.remove(down);
 		}
-
 	}
 }

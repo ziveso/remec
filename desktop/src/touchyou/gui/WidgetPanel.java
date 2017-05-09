@@ -1,52 +1,63 @@
 package touchyou.gui;
 
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import touchyou.App;
-import touchyou.gui.add.*;
-import touchyou.util.GuiUtil;
+import touchyou.gui.add.ByArrow;
+import touchyou.gui.add.ByButton;
 
-/**
- * 
- * @author Thitiwat Thongbor
- *
- */
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.GridLayout;
+import javax.swing.JTree;
+
 public class WidgetPanel extends JPanel {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -1234634479725945937L;
-    private final int width;
-    private final int height;
-    private Dimension size;
-    private App app;
+	/**
+	 * Create the panel.
+	 */
+	public WidgetPanel(int width, int height, App app) {
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		setLayout(gridBagLayout);
 
-    /**
-     * Contruct this part
-     * 
-     * @param width
-     * @param height
-     * @param app
-     */
-    public WidgetPanel(int width, int height, App app, SettingPanel settingPanel) {
-	this.app = app;
-	this.width = width;
-	this.height = height;
-	setOpaque(false);
-	setPreferredSize(new Dimension(width, height));
-	this.setLayout(new GridLayout(8, 1, 0, 8));
-	// make it easy to fix.
-	// setBorder(GuiUtil.getBorder());
-	size = new Dimension(width, height / 8);
+		JButton btnNewButton = new ByButton(new Dimension(width, height / 10), app, null);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridwidth = 4;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 0;
+		add(btnNewButton, gbc_btnNewButton);
 
-	add(new ByButton(size, app, settingPanel));
-	add(new ByArrow(size, app));
-	add(new ComponentTree());
-    }
+		JPanel btnNewButton_1 = new ByArrow(new Dimension(width, height / 10), app);
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.gridwidth = 4;
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_1.gridx = 0;
+		gbc_btnNewButton_1.gridy = 1;
+		add(btnNewButton_1, gbc_btnNewButton_1);
+
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 4;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 2;
+		add(panel, gbc_panel);
+		panel.setLayout(new BorderLayout(0, 0));
+
+		JButton btnNewButton_2 = new JButton("New button");
+		panel.add(btnNewButton_2, BorderLayout.NORTH);
+
+		JTree tree = new JTree();
+		panel.add(tree, BorderLayout.CENTER);
+	}
 }
