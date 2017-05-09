@@ -40,6 +40,8 @@ public class MainFrame extends JFrame {
     private final int Width = GuiUtil.WIDTH;
     private final int Height = GuiUtil.HEIGHT;
 
+	private static WidgetPanel widgetPanel;
+
     /**
      * construct MainFrame.
      */
@@ -83,7 +85,7 @@ public class MainFrame extends JFrame {
 	gbc_modelPanel.gridy = 0;
 	workingPanel.add(modelPanel, gbc_modelPanel);
 
-	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height, app);
+	widgetPanel = new WidgetPanel(pane_width, Height, app);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
 	gbc_widgetPanel.fill = GridBagConstraints.BOTH;
 	gbc_widgetPanel.insets = new Insets(5, 0, 0, 0);
@@ -101,7 +103,7 @@ public class MainFrame extends JFrame {
 	setLocationRelativeTo(null);
     }
 
-//     public static void updateWidget() {
-//     widgetPanel.validate();
-//     }
+     public static void updateWidget() {
+    	 widgetPanel.validate();
+     }
 }
