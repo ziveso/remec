@@ -1,5 +1,6 @@
 package touchyou.gui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -45,6 +46,6 @@ public class WidgetPanel extends JPanel {
 
 		add(new ByButton(size , app));
 		add(new ByArrow(size , app));
-//		add(new ByMacro(size));
+		add(new ComponentTree());
 	}
 }

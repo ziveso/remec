@@ -1,10 +1,14 @@
 package touchyou.gui.add;
 
+import java.awt.Button;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,9 +29,10 @@ public class ByArrow extends JPanel {
 	 */
 	private static final long serialVersionUID = -7527425268579123369L;
 	private App app;
+	private List<Component> list = new ArrayList<>();
 
 	public ByArrow(Dimension size, App app) {
-		super(new GridLayout(0, 1));
+		super(new GridLayout());
 		this.app = app;
 		this.setOpaque(false);
 		JButton arrow = new JButton("Arrow");
@@ -42,21 +47,32 @@ public class ByArrow extends JPanel {
 
 	private class Toggle implements ActionListener {
 		private boolean isToggle = false;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			isToggle = !isToggle;
-			if(isToggle){
-				addButton("<" , "V" , ">" , "^");
-				validate();
+			if (isToggle) {
+				addButton("<", "V", ">", "^");
+			} else {
+				removeButton("<", "V", ">", "^");
 			}
+			validate();
 		}
-		
-		private void addButton(String ... Strings){
-			for(String string : Strings){
+
+		private void addButton(String... Strings) {
+			for (String string : Strings) {
 				JButton jb = new JButton(string);
 				jb.setPreferredSize(new Dimension(getWidth(), 500));
+				list.add(jb);
 				add(jb);
 			}
+		}
+
+		private void removeButton(String... Strings) {
+			for (int i = 0; i < Strings.length; i++) {
+				remove(list.get(i));
+			}
+			list.clear();
 		}
 
 	}
