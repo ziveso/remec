@@ -22,7 +22,7 @@ public class MouseOver extends MouseAdapter {
 	public void mouseEntered(MouseEvent e) {
 		super.mouseEntered(e);
 		component.setFont(new Font(currentFont.getName(), 0, currentFont.getSize() + 2));
-		component.setBackground(Color.GRAY);
+		component.setBackground(Color.decode("#FF8019"));
 		component.setForeground(Color.white);
 	}
 

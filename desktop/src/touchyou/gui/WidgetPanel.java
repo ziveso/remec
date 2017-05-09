@@ -40,7 +40,7 @@ public class WidgetPanel extends JPanel {
 		setPreferredSize(new Dimension(width, height));
 		this.setLayout(new GridLayout(8,1,0,8));
 		// make it easy to fix.
-		setBorder(GuiUtil.getBorder());
+//		setBorder(GuiUtil.getBorder());
 		size = new Dimension(width, height / 8);
 
 		add(new ByButton(size , app));
