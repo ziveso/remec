@@ -31,21 +31,7 @@ public class ByButton extends JButton {
 		super("Button");
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setBackground(Color.WHITE);
-		this.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				setBackground(Color.GRAY);
-				setForeground(Color.white);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
-				setForeground(Color.BLACK);
-				setBackground(Color.WHITE);
-			}
-		});
+		this.addMouseListener(new MouseOver(this));
 		this.setOpaque(true);
 		this.addActionListener(e -> {
 			JButton but = new JButton();

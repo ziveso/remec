@@ -1,8 +1,10 @@
 package touchyou.gui.add;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -23,6 +25,10 @@ public class ByArrow extends JPanel {
 		this.setOpaque(false);
 		JButton arrow = new JButton("Arrow");
 		arrow.setPreferredSize(size);
+		arrow.setOpaque(true);
+		arrow.setBorder(BorderFactory.createEmptyBorder());
+		arrow.setBackground(Color.WHITE);
+		arrow.addMouseListener(new MouseOver(arrow));
 		// arrow.addActionListener();
 		add(arrow);
 	}
