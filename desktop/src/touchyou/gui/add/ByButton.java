@@ -37,6 +37,7 @@ public class ByButton extends JButton {
 	this.addActionListener(e -> {
 	    JButton but = new JButton();
 	    ComponentMover ml = new ComponentMover();
+	    ml.setSnapSize(new Dimension(25, 25));
 	    Command com = new Command();
 	    com.setCombination("ALT + F4");
 	    // TODO set id
