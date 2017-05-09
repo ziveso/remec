@@ -41,9 +41,9 @@ public class ModelPanel extends JPanel {
 		int mobileHeight = 500;
 		setMobileSize(mobileWidth, mobileHeight);
 		int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth)/2.0);
-		setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0, sideGap, 0, sideGap)));
-
-		this.setBackground(new Color(40, 40, 40)); // almost black;
+//		setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0, sideGap, 0, sideGap)));
+		setBorder(new EmptyBorder(0, sideGap, 0, sideGap));
+		this.setBackground(Color.decode("#282828")); // almost black;
 		setOpaque(true);
 		add(mobile);
 	}

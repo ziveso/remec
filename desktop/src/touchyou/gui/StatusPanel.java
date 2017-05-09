@@ -31,6 +31,7 @@ public class StatusPanel extends JPanel {
 	setLayout(gridBagLayout);
 
 	JPanel panel = new JPanel();
+	panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 	panel.setOpaque(false);
 	GridBagConstraints gbc_panel = new GridBagConstraints();
 	gbc_panel.insets = new Insets(0, 0, 0, 5);
