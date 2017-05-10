@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -26,6 +27,11 @@ import java.awt.GridBagConstraints;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * @author Thitiwat Thongbor
+ *
+ */
 public class WidgetPanel extends JPanel {
 
 	private static JPanel listPanel;
@@ -115,10 +121,24 @@ public class WidgetPanel extends JPanel {
 		listPanel.validate();
 	}
 
+	/**
+	 * update text in component tree and , update the Button text.
+	 * 
+	 * @param command
+	 *            of button.
+	 */
 	public static void updateCombination(Command command) {
-		int id = command.getId();
+		int id = command.getId(); // id of button.
+
+		// update component tree
 		JLabel update = list.get(id);
 		update.setText(command.getCombination());
+
+		// update component in mobile. passing by id.
+		JButton comps = (JButton) ModelPanel.getMobile().getComponent(id);
+		comps.setText(command.getCombination());
+
 		listPanel.validate();
+		ModelPanel.getMobile().validate();
 	}
 }
