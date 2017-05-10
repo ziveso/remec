@@ -19,6 +19,10 @@ import touchyou.Command;
 import touchyou.util.GuiUtil;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * 
@@ -87,6 +91,18 @@ public class SettingPanel extends JPanel {
 	add(lblNewLabel, gbc_lblNewLabel);
 
 	combination = new JTextField();
+	combination.addKeyListener(new KeyAdapter() {
+	    @Override
+	    public void keyPressed(KeyEvent e) {
+		currentCommand.setCombination(combination.getText());
+	    }
+	});
+	combination.addFocusListener(new FocusAdapter() {
+	    @Override
+	    public void focusLost(FocusEvent e) {
+		currentCommand.setCombination(combination.getText());
+	    }
+	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
 	gbc_combination.gridwidth = 2;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
@@ -215,7 +231,6 @@ public class SettingPanel extends JPanel {
 	this.currentCommand = command;
 	this.combination.setText(command.getCombination());
 	this.iconpath.setText(command.getImagePath());
-	System.out.println(command.getMode());
 	switch (command.getMode()) {
 	case 0:
 	    rdbtnSingleTouch.setSelected(true);

@@ -77,19 +77,6 @@ public class ByButton extends JButton {
 	    this.addMouseListener(commandMouseAdapter);
 	    this.setBounds(GuiUtil.getInitBound(this.getPreferredSize()));
 	    this.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-	    this.addFocusListener(new FocusListener() {
-
-		@Override
-		public void focusLost(FocusEvent e) {
-		    System.out.println("lost focus");
-		}
-
-		@Override
-		public void focusGained(FocusEvent e) {
-		    // TODO Auto-generated method stub
-
-		}
-	    });
 	}
 
     }
