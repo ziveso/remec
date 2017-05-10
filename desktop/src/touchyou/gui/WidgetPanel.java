@@ -85,8 +85,10 @@ public class WidgetPanel extends JPanel {
 			boolean isShowing = listPanel.isShowing();
 			if (isShowing) {
 				btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
+				btnShowComponentTree.setText("+ Show Component tree");
 			} else {
 				btnShowComponentTree.setBackground(Color.green);
+				btnShowComponentTree.setText("- Show Component tree");
 			}
 			listPanel.setVisible(!isShowing);
 		});
