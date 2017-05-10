@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -27,6 +28,7 @@ public class App {
      */
     public App() {
 	server = new TCPServer(PORT);
+	System.out.println("Server Running on port: "+ PORT);
     }
 
     /**
