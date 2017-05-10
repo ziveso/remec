@@ -89,6 +89,10 @@ public class CombinationFactory {
 
 		// create JLabel for component tree
 		JLabel lb = new JLabel(command.getCombination());
+		// add mouse action
+		lb.addMouseListener(new ClickComponentTree());
+		// set color
+		lb.setOpaque(true);
 		// align center
 		lb.setHorizontalAlignment(SwingConstants.CENTER);
 		lb.setBorder(GuiUtil.getBorder());
@@ -101,6 +105,8 @@ public class CombinationFactory {
 		listPanel.validate();
 
 	}
+
+	// TODO , not finish yet.
 
 	public void removeCombination(Command command) {
 		int id = command.getId();
@@ -159,9 +165,50 @@ public class CombinationFactory {
 				JButton button = (JButton) c;
 				button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
-			System.out.println(source.getActionCommand());
+			int ID = Integer.parseInt(source.getActionCommand());
 			source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-			settingPanel.update(app.getProfile().getCommand(Integer.parseInt(source.getActionCommand())));
+			settingPanel.update(app.getProfile().getCommand(ID));
+
+			// update component tree.
+			for (Integer key : list.keySet()) {
+				JLabel trees = list.get(key);
+				if (key == ID) {
+					trees.setBackground(Color.blue);
+				} else {
+					trees.setBackground(null);
+				}
+			}
+		}
+	}
+
+	private final class ClickComponentTree extends MouseAdapter {
+		@Override
+		public void mousePressed(MouseEvent e) {
+			JLabel press = (JLabel) e.getSource();
+			// Find Id
+			int ID = -1; // imposible value
+
+			// change color in list. and get ID
+			for (Integer key : list.keySet()) {
+				if (press == list.get(key)) {
+					ID = key;
+				}
+				list.get(key).setBackground(null);
+			}
+			press.setBackground(Color.blue);
+
+			// select in mobile panel.
+			Component[] comps = ModelPanel.getMobile().getComponents();
+			for (Component c : comps) {
+				JButton button = (JButton) c;
+				if (ID == Integer.parseInt(button.getActionCommand())) {
+					button.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+				} else {
+					button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				}
+			}
+
+			settingPanel.update(app.getProfile().getCommand(ID));
 		}
 	}
 }
