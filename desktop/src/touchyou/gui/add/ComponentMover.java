@@ -27,6 +27,7 @@ public class ComponentMover extends MouseAdapter {
 	private boolean changeCursor = true;
 	private boolean autoLayout = false;
 
+	@SuppressWarnings("rawtypes")
 	private Class destinationClass;
 	private Component destinationComponent;
 	private Component destination;
@@ -57,6 +58,7 @@ public class ComponentMover extends MouseAdapter {
 	 *            the Components to be registered for forwarding drag events to
 	 *            the ancestor Component.
 	 */
+	@SuppressWarnings("rawtypes")
 	public ComponentMover(Class destinationClass, Component... components) {
 		this.destinationClass = destinationClass;
 		registerComponent(components);

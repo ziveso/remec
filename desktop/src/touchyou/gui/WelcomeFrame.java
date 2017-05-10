@@ -26,7 +26,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.App;
@@ -43,7 +42,6 @@ public class WelcomeFrame extends JFrame {
      */
     public WelcomeFrame(App app) {
     	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    	Color background = GuiUtil.getBackgroundColor();
     	Color foreground = GuiUtil.getForegroundColor();
 	setTitle("Touch You Pro");
 	setLocation(new Point(0, 0));

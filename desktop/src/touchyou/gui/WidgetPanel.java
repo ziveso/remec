@@ -4,28 +4,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import touchyou.App;
-import touchyou.Command;
-import touchyou.gui.add.ByButton;
-import touchyou.gui.add.MouseOver;
-import touchyou.util.GuiUtil;
-
+import touchyou.gui.add.AddButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridBagConstraints;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 
@@ -35,14 +24,10 @@ import java.util.Map;
 public class WidgetPanel extends JPanel {
 
 	private static JPanel listPanel;
-	private SettingPanel settingPanel;
-	private static Map<Integer, JLabel> list = new HashMap<>();
-
 	/**
 	 * Create the panel.
 	 */
 	public WidgetPanel(int width, int height, App app, SettingPanel settingPanel) {
-		this.settingPanel = settingPanel;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -50,7 +35,7 @@ public class WidgetPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		JButton btnNewButton = new ByButton(new Dimension(width, height / 10), app, settingPanel);
+		JButton btnNewButton = new AddButton(new Dimension(width, height / 10), app, settingPanel);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 4;
 		gbc_btnNewButton.gridx = 0;
@@ -105,40 +90,9 @@ public class WidgetPanel extends JPanel {
 		panel.add(listPanel, BorderLayout.CENTER);
 	}
 
-	public static void addToList(Command command) {
-		JLabel lb = new JLabel(command.getCombination());
-		lb.setHorizontalAlignment(SwingConstants.CENTER);
-		lb.setBorder(GuiUtil.getBorder());
-		list.put(command.getId(), lb);
-		listPanel.add(list.get(command.getId()));
-		listPanel.validate();
+	public static JPanel getListPanel() {
+		return listPanel;
 	}
 
-	public static void removeFromList(Command command) {
-		int id = command.getId();
-		JLabel delete = list.get(id);
-		listPanel.remove(delete);
-		listPanel.validate();
-	}
-
-	/**
-	 * update text in component tree and , update the Button text.
-	 * 
-	 * @param command
-	 *            of button.
-	 */
-	public static void updateCombination(Command command) {
-		int id = command.getId(); // id of button.
-
-		// update component tree
-		JLabel update = list.get(id);
-		update.setText(command.getCombination());
-
-		// update component in mobile. passing by id.
-		JButton comps = (JButton) ModelPanel.getMobile().getComponent(id);
-		comps.setText(command.getCombination());
-
-		listPanel.validate();
-		ModelPanel.getMobile().validate();
-	}
+	
 }

@@ -1,6 +1,5 @@
 package touchyou.gui;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;

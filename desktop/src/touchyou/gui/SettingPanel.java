@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.gui.add.CombinationFactory;
 import touchyou.util.GuiUtil;
 import javax.swing.SwingConstants;
 
@@ -95,7 +96,7 @@ public class SettingPanel extends JPanel {
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		currentCommand.setCombination(combination.getText());
-		WidgetPanel.updateCombination(currentCommand);
+		CombinationFactory.getInstance().updateCombination(currentCommand);
 	    }
 	});
 	combination.addFocusListener(new FocusAdapter() {
