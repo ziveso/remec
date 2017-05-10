@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import touchyou.App;
 import touchyou.Command;
 import touchyou.util.GuiUtil;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -89,6 +90,7 @@ public class SettingPanel extends JPanel {
 	add(lblNewLabel, gbc_lblNewLabel);
 
 	combination = new JTextField();
+	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.addKeyListener(new KeyAdapter() {
 	    @Override
 	    public void keyPressed(KeyEvent e) {
