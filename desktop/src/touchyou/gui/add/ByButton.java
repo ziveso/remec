@@ -15,6 +15,7 @@ import touchyou.App;
 import touchyou.Command;
 import touchyou.gui.ModelPanel;
 import touchyou.gui.SettingPanel;
+import touchyou.gui.WidgetPanel;
 import touchyou.util.GuiUtil;
 
 /**
@@ -72,6 +73,9 @@ public class ByButton extends JButton {
 	    this.addMouseListener(commandMouseAdapter);
 	    this.setBounds(GuiUtil.getInitBound(this.getPreferredSize()));
 	    this.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+	    
+	    //add to tree component.
+	    WidgetPanel.addToList(command);
 	}
 
     }

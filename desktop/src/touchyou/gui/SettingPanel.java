@@ -95,6 +95,7 @@ public class SettingPanel extends JPanel {
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		currentCommand.setCombination(combination.getText());
+		WidgetPanel.updateCombination(currentCommand);
 	    }
 	});
 	combination.addFocusListener(new FocusAdapter() {

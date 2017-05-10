@@ -1,16 +1,18 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import touchyou.App;
 import touchyou.Command;
 import touchyou.gui.add.ByButton;
 import touchyou.gui.add.MouseOver;
+import touchyou.util.GuiUtil;
 
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -18,20 +20,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.swing.JList;
 
 public class WidgetPanel extends JPanel {
 
-	private JPanel listPanel;
+	private static JPanel listPanel;
 	private SettingPanel settingPanel;
-	private Map<Integer, JLabel> list = new HashMap<>();
+	private static Map<Integer, JLabel> list = new HashMap<>();
 
 	/**
 	 * Create the panel.
@@ -65,33 +64,56 @@ public class WidgetPanel extends JPanel {
 		btnShowComponentTree.setPreferredSize(new Dimension(width, 30));
 		btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
 		btnShowComponentTree.setBorder(BorderFactory.createEmptyBorder());
-		btnShowComponentTree.addMouseListener(new MouseOver(btnShowComponentTree));
+		btnShowComponentTree.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				btnShowComponentTree.setFont(new Font(btnShowComponentTree.getFont().toString(), 0,
+						btnShowComponentTree.getFont().getSize() + 2));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				btnShowComponentTree.setFont(new Font(btnShowComponentTree.getFont().toString(), 0,
+						btnShowComponentTree.getFont().getSize() - 2));
+			}
+		});
 		btnShowComponentTree.setOpaque(true);
 		panel.add(btnShowComponentTree, BorderLayout.NORTH);
 		btnShowComponentTree.addActionListener(e -> {
-			listPanel.setVisible(!listPanel.isShowing());
+			boolean isShowing = listPanel.isShowing();
+			if (isShowing) {
+				btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
+			} else {
+				btnShowComponentTree.setBackground(Color.green);
+			}
+			listPanel.setVisible(!isShowing);
 		});
 
-		listPanel = new JPanel(new GridLayout(0, 1));
+		listPanel = new JPanel(new GridLayout(20, 1, 0, 2));
 		listPanel.setVisible(false);
 
 		panel.add(listPanel, BorderLayout.CENTER);
 	}
 
-	public void addToList(Command command) {
-		list.put(command.getId(), new JLabel(command.getCombination()));
+	public static void addToList(Command command) {
+		JLabel lb = new JLabel(command.getCombination());
+		lb.setHorizontalAlignment(SwingConstants.CENTER);
+		lb.setBorder(GuiUtil.getBorder());
+		list.put(command.getId(), lb);
 		listPanel.add(list.get(command.getId()));
 		listPanel.validate();
 	}
 
-	public void removeFromList(Command command) {
+	public static void removeFromList(Command command) {
 		int id = command.getId();
 		JLabel delete = list.get(id);
 		listPanel.remove(delete);
 		listPanel.validate();
 	}
 
-	public void update(Command command) {
+	public static void updateCombination(Command command) {
 		int id = command.getId();
 		JLabel update = list.get(id);
 		update.setText(command.getCombination());
