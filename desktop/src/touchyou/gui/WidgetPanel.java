@@ -36,15 +36,7 @@ public class WidgetPanel extends JPanel {
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		add(btnNewButton, gbc_btnNewButton);
-
-		JPanel btnNewButton_1 = new ByArrow(new Dimension(width, height / 10), app);
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.gridwidth = 4;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 1;
-		add(btnNewButton_1, gbc_btnNewButton_1);
-
+		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 4;
@@ -54,10 +46,7 @@ public class WidgetPanel extends JPanel {
 		add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Show Component Tree");
 		panel.add(btnNewButton_2, BorderLayout.NORTH);
-
-		JTree tree = new JTree();
-		panel.add(tree, BorderLayout.CENTER);
 	}
 }
