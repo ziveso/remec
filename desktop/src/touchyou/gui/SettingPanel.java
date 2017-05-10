@@ -93,7 +93,7 @@ public class SettingPanel extends JPanel {
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyPressed(KeyEvent e) {
+	    public void keyReleased(KeyEvent e) {
 		currentCommand.setCombination(combination.getText());
 	    }
 	});
