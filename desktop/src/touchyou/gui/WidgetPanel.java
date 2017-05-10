@@ -5,18 +5,22 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import touchyou.App;
-import touchyou.gui.add.ByArrow;
 import touchyou.gui.add.ByButton;
+import touchyou.gui.add.MouseOver;
 
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.GridLayout;
-import javax.swing.JTree;
+import javax.swing.JList;
 
 public class WidgetPanel extends JPanel {
+
+	private JList<String> list;
 
 	/**
 	 * Create the panel.
@@ -46,7 +50,22 @@ public class WidgetPanel extends JPanel {
 		add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		JButton btnNewButton_2 = new JButton("Show Component Tree");
-		panel.add(btnNewButton_2, BorderLayout.NORTH);
+		JButton btnShowComponentTree = new JButton("+ Show Component Tree");
+		btnShowComponentTree.setPreferredSize(new Dimension(width, 30));
+		btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
+		btnShowComponentTree.setBorder(BorderFactory.createEmptyBorder());
+		btnShowComponentTree.addMouseListener(new MouseOver(btnShowComponentTree));
+		btnShowComponentTree.setOpaque(true);
+		panel.add(btnShowComponentTree, BorderLayout.NORTH);
+		btnShowComponentTree.addActionListener(e -> {
+			list.setVisible(!list.isShowing());
+		});
+		
+		DefaultListModel<String> lm = new DefaultListModel<>();
+		lm.addElement("Test");
+		list = new JList<>(lm);
+		list.setVisible(false);
+				
+		panel.add(list, BorderLayout.CENTER);
 	}
 }
