@@ -49,6 +49,8 @@ public class SettingPanel extends JPanel {
 	private Command currentCommand;
 	private JRadioButton rdbtnUsePreferIcon;
 	private JComboBox<JLabel> comboBox;
+	private JButton btnApply;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
@@ -60,9 +62,9 @@ public class SettingPanel extends JPanel {
 		this.app = app;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JLabel lblProfile = new JLabel("Profile:");
@@ -166,7 +168,7 @@ public class SettingPanel extends JPanel {
 		GridBagConstraints gbc_rdbtnUsePreferIcon = new GridBagConstraints();
 		gbc_rdbtnUsePreferIcon.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnUsePreferIcon.gridwidth = 2;
-		gbc_rdbtnUsePreferIcon.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnUsePreferIcon.insets = new Insets(0, 0, 5, 0);
 		gbc_rdbtnUsePreferIcon.gridx = 2;
 		gbc_rdbtnUsePreferIcon.gridy = 6;
 		add(rdbtnUsePreferIcon, gbc_rdbtnUsePreferIcon);
@@ -174,7 +176,7 @@ public class SettingPanel extends JPanel {
 		comboBox = new JComboBox<JLabel>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 2;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 7;
@@ -235,6 +237,7 @@ public class SettingPanel extends JPanel {
 		});
 		rdbtnFollow.setForeground(GuiUtil.getForegroundColor());
 		GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
+		gbc_rdbtnFollow.insets = new Insets(0, 0, 5, 0);
 		gbc_rdbtnFollow.gridwidth = 2;
 		gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnFollow.gridx = 2;
@@ -244,7 +247,25 @@ public class SettingPanel extends JPanel {
 		ButtonGroup modeGroup = new ButtonGroup();
 		modeGroup.add(rdbtnSingleTouch);
 		modeGroup.add(rdbtnFollow);
+		
+		btnApply = new JButton("APPLY");
+		btnApply.addActionListener(e -> applyCommand());
+		GridBagConstraints gbc_btnApply = new GridBagConstraints();
+		gbc_btnApply.insets = new Insets(0, 0, 0, 5);
+		gbc_btnApply.gridx = 2;
+		gbc_btnApply.gridy = 12;
+		add(btnApply, gbc_btnApply);
+		
+		btnCancel = new JButton("CANCEL");
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.gridx = 3;
+		gbc_btnCancel.gridy = 12;
+		add(btnCancel, gbc_btnCancel);
 
+	}
+	
+	private void applyCommand(){
+		currentCommand.setCombination(combination.getText().toString());
 	}
 
 	public void update(Command command) {

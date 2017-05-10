@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import touchyou.App;
+import touchyou.Command;
 import touchyou.gui.add.ByButton;
 import touchyou.gui.add.MouseOver;
 
@@ -16,6 +17,8 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.List;
+
 import javax.swing.JList;
 
 public class WidgetPanel extends JPanel {
@@ -40,7 +43,7 @@ public class WidgetPanel extends JPanel {
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		add(btnNewButton, gbc_btnNewButton);
-		
+
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 4;
@@ -59,13 +62,17 @@ public class WidgetPanel extends JPanel {
 		panel.add(btnShowComponentTree, BorderLayout.NORTH);
 		btnShowComponentTree.addActionListener(e -> {
 			list.setVisible(!list.isShowing());
+			// TODO
+			// List<Command> all_comp = app.getProfile().getCommands();
+			// for(Command comp : all_comp){
+			// System.out.println(comp.getCombination());
+			// }
 		});
-		
+
 		DefaultListModel<String> lm = new DefaultListModel<>();
-		lm.addElement("Test");
 		list = new JList<>(lm);
 		list.setVisible(false);
-				
+
 		panel.add(list, BorderLayout.CENTER);
 	}
 }
