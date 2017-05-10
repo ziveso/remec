@@ -1,9 +1,14 @@
 package touchyou.gui;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,17 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.Command;
 import touchyou.util.GuiUtil;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * 
@@ -100,7 +98,7 @@ public class SettingPanel extends JPanel {
 	combination.addFocusListener(new FocusAdapter() {
 	    @Override
 	    public void focusLost(FocusEvent e) {
-		currentCommand.setCombination(combination.getText());
+//		currentCommand.setCombination(combination.getText());
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
@@ -242,5 +240,4 @@ public class SettingPanel extends JPanel {
 	    break;
 	}
     }
-
 }

@@ -11,11 +11,13 @@ public class MouseOver extends MouseAdapter {
 
 	private Component component;
 	private Font currentFont;
+	private Color currentBackground;
 
 	public MouseOver(Component component) {
 		this.component = component;
 		this.currentFont = component.getFont();
 		component.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		currentBackground = component.getBackground();
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class MouseOver extends MouseAdapter {
 	public void mouseExited(MouseEvent e) {
 		super.mouseExited(e);
 		component.setForeground(Color.BLACK);
-		component.setBackground(Color.WHITE);
+		component.setBackground(currentBackground);
 		component.setFont(currentFont);
 	}
 }
