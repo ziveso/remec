@@ -21,6 +21,7 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import java.awt.Dimension;
 
 /**
  * 
@@ -49,7 +50,7 @@ public class MainFrame extends JFrame {
 	this.app = app;
 	setTitle("Touch You 0.1.4 Beta");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setSize(Width, Height);
+	setSize(1004, 635);
 
 	JMenuBar menubar = new JMenuBar();
 	JMenu file = new JMenu("File");
@@ -64,12 +65,13 @@ public class MainFrame extends JFrame {
 	int model_width = Width * 5 / 10;
 	int pane_width = Width * 2 / 10;
 	GridBagLayout gbl_workingPanel = new GridBagLayout();
-	gbl_workingPanel.columnWidths = new int[] { 71, 331, 203, 0 };
+	gbl_workingPanel.columnWidths = new int[] { 272, 331, 203, 0 };
 	gbl_workingPanel.rowHeights = new int[] { 515, 0 };
 	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 	workingPanel.setLayout(gbl_workingPanel);
 	SettingPanel settingPanel = new SettingPanel(app, this);
+	settingPanel.setMinimumSize(new Dimension(200, 227));
 	GridBagConstraints gbc_settingPanel = new GridBagConstraints();
 	gbc_settingPanel.fill = GridBagConstraints.BOTH;
 	gbc_settingPanel.insets = new Insets(5, 5, 0, 5);

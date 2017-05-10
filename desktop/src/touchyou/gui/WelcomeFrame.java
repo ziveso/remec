@@ -97,7 +97,7 @@ public class WelcomeFrame extends JFrame {
 	listPanel.setLayout(new BorderLayout(0, 0));
 	
 	JList<String> list = new JList();
-	list.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+	list.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);

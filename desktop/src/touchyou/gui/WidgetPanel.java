@@ -48,7 +48,6 @@ public class WidgetPanel extends JPanel {
 		JButton btnNewButton = new ByButton(new Dimension(width, height / 10), app, settingPanel);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.gridwidth = 4;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		add(btnNewButton, gbc_btnNewButton);
