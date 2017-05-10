@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -96,13 +97,14 @@ public class WelcomeFrame extends JFrame {
 	listPanel.setLayout(new BorderLayout(0, 0));
 	
 	JList<String> list = new JList();
+	list.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
 	for (String f : new File("/").list()) {
 	    model.addElement(f);
 	}
-	listPanel.add(list);
+	listPanel.add(new JScrollPane(list));
 
 	JLabel lblNewLabel_1 = new JLabel("Profile List");
 	lblNewLabel_1.setOpaque(true);
