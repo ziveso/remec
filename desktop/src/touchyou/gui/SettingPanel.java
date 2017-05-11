@@ -43,7 +43,6 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnCaptureFromScreen;
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
-    private Command currentCommand;
     private JRadioButton rdbtnNone;
 
     /**
@@ -91,7 +90,7 @@ public class SettingPanel extends JPanel {
 	combination = new JTextField();
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.setEditable(false);
-	combination.addKeyListener(new RecordKey(combination , currentCommand));
+	combination.addKeyListener(new RecordKey(combination , Controller.getInstance().getCurrentCommand()));
 	GridBagConstraints gbc_combination = new GridBagConstraints();
 	gbc_combination.gridwidth = 2;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
@@ -200,7 +199,7 @@ public class SettingPanel extends JPanel {
 	rdbtnSingleTouch = new JRadioButton("Single Touch");
 	rdbtnSingleTouch.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		currentCommand.setMode(0);
+		Controller.getInstance().getCurrentCommand().setMode(0);
 	    }
 	});
 	rdbtnSingleTouch.setForeground(GuiUtil.getForegroundColor());
@@ -215,7 +214,7 @@ public class SettingPanel extends JPanel {
 	rdbtnFollow = new JRadioButton("Follow");
 	rdbtnFollow.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		currentCommand.setMode(1);
+		Controller.getInstance().getCurrentCommand().setMode(1);
 	    }
 	});
 	rdbtnFollow.setForeground(GuiUtil.getForegroundColor());
@@ -233,7 +232,6 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
-	this.currentCommand = command;
 	this.combination.setText(command.getCombination());
 	this.iconpath.setText(command.getImagePath());
 	switch (command.getMode()) {
