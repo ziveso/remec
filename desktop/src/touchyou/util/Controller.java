@@ -77,6 +77,7 @@ public class Controller {
     public void addCommand() {
 	/* Create new Command */
 	Command command = new Command();
+	command.setCombination("");
 	command.setId(id++);
 	app.getProfile().addCommand(command);
 	/* notify other Panels */

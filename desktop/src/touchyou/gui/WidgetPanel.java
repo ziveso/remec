@@ -105,6 +105,7 @@ public class WidgetPanel extends JPanel {
     public void addCommand(Command command) {
 	int id = command.getId();
 	JLabel addlb = new JLabel(command.getCombination());
+	addlb.setOpaque(true);
 	addlb.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	trees.put(id, addlb);
 	// TODO add onclick listener
@@ -119,6 +120,9 @@ public class WidgetPanel extends JPanel {
 	for (Integer key : trees.keySet()) {
 	    JLabel labels = trees.get(key);
 	    if (key == id) {
+		if(!labels.getText().equals(command.getCombination())){
+		    labels.setText(command.getCombination());
+		}
 		labels.setBackground(Color.blue);
 	    } else {
 		labels.setBackground(null);
