@@ -1,5 +1,7 @@
 package touchyou.util;
 
+import java.awt.Component;
+
 import javax.swing.SwingUtilities;
 
 import touchyou.App;
@@ -38,6 +40,12 @@ public class Controller {
      */
     public static Controller getInstance() {
 	return controller;
+    }
+
+    public void enableSettingPanel() {
+	for (Component c : settingPanel.getComponents()) {
+	    c.setEnabled(true);
+	}
     }
 
     /**
