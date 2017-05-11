@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
@@ -54,7 +55,7 @@ public class CaptureButton extends JButton {
 	public CaptureFrame() {
 	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    this.setUndecorated(true);
-	    this.setBackground(new Color(0, 0, 0, 0.01f));
+	    this.setBackground(new Color(0, 0, 0, 0.001f));
 	    this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
 	    this.add(new Drawer());
 
@@ -67,6 +68,8 @@ public class CaptureButton extends JButton {
 			break;
 		    case KeyEvent.VK_ENTER:
 			try {
+			    rect.y += CaptureFrame.this.getLocationOnScreen().getY();
+			    System.out.println(CaptureFrame.this.getLocationOnScreen().getY());
 			    BufferedImage img = new Robot().createScreenCapture(rect);
 			    Controller.getInstance().getCurrentCommand().setImage(img);
 			    Controller.getInstance().updateCurrentCommand();

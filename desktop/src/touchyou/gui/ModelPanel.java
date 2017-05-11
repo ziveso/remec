@@ -4,11 +4,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -96,7 +100,9 @@ public class ModelPanel extends JPanel {
 	    JButton button = (JButton) c;
 	    button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    if (Integer.parseInt(button.getActionCommand()) == id) {
-		button.setBorder(BorderFactory.createLineBorder(Color.red , 2));
+		button.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+		button.setIcon(new ImageIcon(command.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
+			Image.SCALE_AREA_AVERAGING)));
 	    }
 	}
     }
