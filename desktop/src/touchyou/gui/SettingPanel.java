@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
 
 /**
@@ -91,6 +92,7 @@ public class SettingPanel extends JPanel {
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		currentCommand.setCombination(combination.getText());
+		Controller.getInstance().update(currentCommand);
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();

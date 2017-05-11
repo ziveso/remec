@@ -80,15 +80,24 @@ public class ModelPanel extends JPanel {
 	commandBtn.setPreferredSize(new Dimension(50, 50));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
+	commandBtn.setBounds(0, 0, 50, 50);
+	mover.registerComponent(commandBtn);
+	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
+	this.add(commandBtn);
+	Controller.getInstance().update(command);
 
     }
 
     public void update(Command command) {
+	int id = command.getId();
 	Component[] comps = getComponents();
 	for (Component c : comps) {
 	    JButton button = (JButton) c;
 	    button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    if (Integer.parseInt(button.getActionCommand()) == id) {
+		button.setBorder(BorderFactory.createLineBorder(Color.red , 2));
+	    }
 	}
     }
 
@@ -96,14 +105,7 @@ public class ModelPanel extends JPanel {
 	@Override
 	public void mousePressed(MouseEvent e) {
 	    JButton source = (JButton) e.getSource();
-
-	    Component[] comps = getComponents();
-	    for (Component c : comps) {
-		JButton button = (JButton) c;
-		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    }
 	    String id = source.getActionCommand();
-	    source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
 	    Controller.getInstance().update(Controller.getInstance().getCommandById(id));
 	}
     }

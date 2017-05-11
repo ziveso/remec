@@ -105,12 +105,16 @@ public class WidgetPanel extends JPanel {
     public void addCommand(Command command) {
 	int id = command.getId();
 	JLabel addlb = new JLabel(command.getCombination());
+	addlb.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	trees.put(id, addlb);
 	// TODO add onclick listener
 	listPanel.add(addlb);
     }
 
     public void update(Command command) {
+	if(command == null){
+	    return;
+	}
 	int id = command.getId();
 	for (Integer key : trees.keySet()) {
 	    JLabel labels = trees.get(key);
