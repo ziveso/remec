@@ -42,7 +42,7 @@ public class Controller {
 	return controller;
     }
 
-    public void enableSettingPanel() {
+    private void enableSettingPanel() {
 	for (Component c : settingPanel.getComponents()) {
 	    c.setEnabled(true);
 	}
@@ -73,6 +73,8 @@ public class Controller {
      *            is the command that is being dealt with
      */
     public void update(Command command) {
+	if (app.getProfile().getCommands().size() > 0)
+	    enableSettingPanel();
 	settingPanel.update(command);
 	widgetPanel.update(command);
 	modelPanel.update(command);
