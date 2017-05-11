@@ -27,7 +27,6 @@ import touchyou.util.GuiUtil;
  */
 public class ModelPanel extends JPanel {
 
-    private JPanel mobile;
     private App app;
     private MouseAdapter commandMouseAdapter;
     private ComponentMover mover;
@@ -38,7 +37,7 @@ public class ModelPanel extends JPanel {
      */
     private static final long serialVersionUID = 3593230878415293635L;
 
-    protected ModelPanel(int width, int height, App app) {
+    protected ModelPanel(App app) {
 	mover = new ComponentMover();
 	mover.setSnapSize(new Dimension(6, 6));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
@@ -47,9 +46,9 @@ public class ModelPanel extends JPanel {
 	resizer.setSnapSize(new Dimension(6, 6));
 	this.app = app;
 	commandMouseAdapter = new CommandMouseAdapter();
-	mobile = new JPanel();
-	mobile.setBackground(Color.white);
-	mobile.setLayout(null); // make it movable , no layout
+	this.setOpaque(true);
+	setBackground(Color.white);
+	setLayout(null); // make it movable , no layout
 
 	/**
 	 * pixel phone has 1080 x 1776 resolution.
@@ -58,27 +57,19 @@ public class ModelPanel extends JPanel {
 	int mobileWidth = 1080 / 4;
 	int mobileHeight = 1776 / 4;
 	setMobileSize(mobileWidth, mobileHeight);
-	int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth) / 2.0);
+	
 	// setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0,
 	// sideGap, 0, sideGap)));
-	setBorder(new EmptyBorder(0, sideGap, 0, sideGap));
-	this.setBackground(Color.decode("#282828")); // almost black;
-	setOpaque(true);
-	add(mobile);
+	
     }
 
     public void setMobileSize(int width, int height) {
-	mobile.setPreferredSize(new Dimension(width, height));
+	setPreferredSize(new Dimension(width, height));
 	this.validate();
     }
-
-    public JPanel getMobile() {
-	return mobile;
-    }
-
     public void updateComponent() {
-	mobile.repaint();
-	mobile.revalidate();
+	repaint();
+	revalidate();
     }
 
     public void addCommand(Command command) {
@@ -95,7 +86,7 @@ public class ModelPanel extends JPanel {
     }
 
     public void update(Command command) {
-	Component[] comps = getMobile().getComponents();
+	Component[] comps = getComponents();
 	for (Component c : comps) {
 	    JButton button = (JButton) c;
 	    button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -107,7 +98,7 @@ public class ModelPanel extends JPanel {
 	public void mousePressed(MouseEvent e) {
 	    JButton source = (JButton) e.getSource();
 
-	    Component[] comps = getMobile().getComponents();
+	    Component[] comps = getComponents();
 	    for (Component c : comps) {
 		JButton button = (JButton) c;
 		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
