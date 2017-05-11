@@ -34,7 +34,6 @@ public class SettingPanel extends JPanel {
      * 
      */
     private static final long serialVersionUID = -5468288983318943380L;
-    private App app;
     private JTextField iconpath;
     private JTextField combination;
     private JLabel profilename;
@@ -42,17 +41,14 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnCaptureFromScreen;
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
-    private JFrame mainframe;
     private Command currentCommand;
 
     /**
      * Create the panel.
      */
-    public SettingPanel(App app, JFrame mainframe) {
+    public SettingPanel() {
 	setOpaque(false);
-	this.mainframe = mainframe;
 	// setBorder(GuiUtil.getBorder());
-	this.app = app;
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -100,7 +96,7 @@ public class SettingPanel extends JPanel {
 	combination.addFocusListener(new FocusAdapter() {
 	    @Override
 	    public void focusLost(FocusEvent e) {
-		// currentCommand.setCombination(combination.getText());
+		currentCommand.setCombination(combination.getText());
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
@@ -159,7 +155,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCaptureFromScreen.gridy = 4;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
-	JButton btnCapture = new CaptureButton(app, mainframe, "Capture");
+	JButton btnCapture = new CaptureButton();
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
 	gbc_btnCapture.fill = GridBagConstraints.BOTH;

@@ -1,6 +1,7 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -9,10 +10,15 @@ import javax.swing.JPanel;
 
 import touchyou.App;
 import touchyou.util.GuiUtil;
+import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import java.awt.Color;
+import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;

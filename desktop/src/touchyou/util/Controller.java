@@ -1,7 +1,10 @@
 package touchyou.util;
 
+import javax.swing.SwingUtilities;
+
 import touchyou.App;
 import touchyou.Command;
+import touchyou.gui.MainFrame;
 import touchyou.gui.ModelPanel;
 import touchyou.gui.SettingPanel;
 import touchyou.gui.WidgetPanel;
@@ -14,13 +17,27 @@ import touchyou.gui.WidgetPanel;
  * @author Kongpon Charanwattanakit
  *
  */
+/**
+ * @author Kongpon Charanwattanakit
+ *
+ */
 public class Controller {
     private static Controller controller = new Controller();
     private App app;
+    private MainFrame mainFrame;
     private SettingPanel settingPanel;
     private WidgetPanel widgetPanel;
     private ModelPanel modelPanel;
     private int id;
+
+    /**
+     * Return an instance of the Controller.
+     * 
+     * @return Controller instance
+     */
+    public static Controller getInstance() {
+	return controller;
+    }
 
     /**
      * Update every panels to point at the same Command.
@@ -48,13 +65,16 @@ public class Controller {
 	update(command);
     }
 
-    /**
-     * Return an instance of the Controller.
-     * 
-     * @return Controller instance
-     */
-    public static Controller getInstance() {
-	return controller;
+    public void showMainFrame() {
+	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
+    }
+
+    public void hideMainFrame() {
+	SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
+    }
+
+    public void setMainFrame(MainFrame mainFrame) {
+	this.mainFrame = mainFrame;
     }
 
     public void setSettingPanel(SettingPanel settingPanel) {

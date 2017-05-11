@@ -8,8 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -22,21 +20,15 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import touchyou.App;
+import touchyou.util.Controller;
 
 public class CaptureButton extends JButton {
 
-    private App app;
-    private JFrame mainframe;
-
-    public CaptureButton(App app, JFrame mainframe, String title) {
-	super(title);
-	this.app = app;
-	this.mainframe = mainframe;
+    public CaptureButton() {
+	super("Capture");
 	this.addActionListener(new StartCapture());
     }
 
@@ -44,7 +36,7 @@ public class CaptureButton extends JButton {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    SwingUtilities.invokeLater(() -> {
-		mainframe.setVisible(false);
+		Controller.getInstance().hideMainFrame();
 		new CaptureFrame().setVisible(true);
 	    });
 	}
@@ -81,7 +73,7 @@ public class CaptureButton extends JButton {
 		@Override
 		public void windowClosed(WindowEvent e) {
 		    SwingUtilities.invokeLater(() -> {
-			mainframe.setVisible(true);
+			Controller.getInstance().showMainFrame();
 		    });
 		}
 	    });
