@@ -2,7 +2,10 @@ package touchyou.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
 
 /**
@@ -22,6 +26,7 @@ public class ModelPanel extends JPanel {
 
     private JPanel mobile;
     private App app;
+    private MouseAdapter commandMouseAdapter;
 
     /**
      * 
@@ -30,6 +35,7 @@ public class ModelPanel extends JPanel {
 
     protected ModelPanel(int width, int height, App app) {
 	this.app = app;
+	commandMouseAdapter = new CommandMouseAdapter();
 	mobile = new JPanel();
 	mobile.setBackground(Color.white);
 	mobile.setLayout(null); // make it movable , no layout
@@ -64,7 +70,16 @@ public class ModelPanel extends JPanel {
 	mobile.revalidate();
     }
 
-    public void addToMobile(JButton commandBtn) {
+    public void addCommand(Command command) {
+	JButton commandBtn = new JButton();
+	/* Set JButton's behavior */
+	commandBtn.setActionCommand(String.valueOf(command.getId()));
+	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	commandBtn.setOpaque(true);
+	commandBtn.setPreferredSize(new Dimension(50, 50));
+	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+	commandBtn.addMouseListener(commandMouseAdapter);
+	// TODO Add commandBtn to mobile with auto layout
 
     }
 
@@ -74,6 +89,21 @@ public class ModelPanel extends JPanel {
 	    JButton button = (JButton) c;
 	    button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	}
+    }
 
+    private final class CommandMouseAdapter extends MouseAdapter {
+	@Override
+	public void mousePressed(MouseEvent e) {
+	    JButton source = (JButton) e.getSource();
+
+	    Component[] comps = getMobile().getComponents();
+	    for (Component c : comps) {
+		JButton button = (JButton) c;
+		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	    }
+	    int ID = Integer.parseInt(source.getActionCommand());
+	    source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+	    Controller.getInstance().update(app.getProfile().getCommand(ID));
+	}
     }
 }

@@ -29,7 +29,6 @@ public class Controller {
     private ModelPanel modelPanel;
     private ComponentMover mover;
     private ComponentResizer resizer;
-    private MouseAdapter commandMouseAdapter;
 
     private int id;
 
@@ -41,7 +40,6 @@ public class Controller {
 	resizer = new ComponentResizer();
 	resizer.setSnapSize(new Dimension(6, 6));
 
-	commandMouseAdapter = new CommandMouseAdapter();
     }
 
     public static Controller getInstance() {
@@ -88,36 +86,18 @@ public class Controller {
 	JButton commandBtn = new JButton();
 	resizer.registerComponent(commandBtn);
 	mover.registerComponent(commandBtn);
-	/* Set JButton's behavior */
-	commandBtn.setActionCommand(String.valueOf(id));
-	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	commandBtn.setOpaque(true);
-	commandBtn.setPreferredSize(new Dimension(50, 50));
-	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
-	commandBtn.addMouseListener(commandMouseAdapter);
+
 	/* Create new Command */
 	Command command = new Command();
 	command.setId(id++);
 	app.getProfile().addCommand(command);
 	/* notify other Panels */
-	modelPanel.addToMobile(commandBtn);
+	modelPanel.addCommand(command);
+	widgetPanel.addCommand(command);
+	/* Update every panels to point at the same Command */
 	update(command);
 
     }
 
-    private final class CommandMouseAdapter extends MouseAdapter {
-	@Override
-	public void mousePressed(MouseEvent e) {
-	    JButton source = (JButton) e.getSource();
-
-	    Component[] comps = modelPanel.getMobile().getComponents();
-	    for (Component c : comps) {
-		JButton button = (JButton) c;
-		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	    }
-	    int ID = Integer.parseInt(source.getActionCommand());
-	    source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-	    Controller.getInstance().update(app.getProfile().getCommand(ID));
-	}
-    }
+  
 }
