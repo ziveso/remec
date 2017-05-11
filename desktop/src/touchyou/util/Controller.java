@@ -44,9 +44,9 @@ public class Controller {
      * Clear every panels.
      */
     public void clear() {
-	// settingPanel.clear(command);
-	// widgetPanel.clear(command);
-	// modelPanel.clear(command);
+	settingPanel.clear();
+	widgetPanel.clear();
+	modelPanel.clear();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Controller {
     public Command getCurrentCommand() {
 	return currentCommand;
     }
-    
+
     public String getProfileName() {
 	return app.getProfile().getName();
     }

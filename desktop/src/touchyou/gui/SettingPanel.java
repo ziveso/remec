@@ -1,12 +1,12 @@
 package touchyou.gui;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -14,20 +14,16 @@ import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import touchyou.App;
 import touchyou.Command;
 import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
-import java.awt.Color;
 
 /**
  * 
@@ -267,5 +263,11 @@ public class SettingPanel extends JPanel {
 
 	}
 
+    }
+    
+    public void clear() {
+	for (Component c : this.getComponents()) {
+	    c.setEnabled(false);
+	}
     }
 }

@@ -115,4 +115,8 @@ public class ModelPanel extends JPanel {
 	    Controller.getInstance().update(Controller.getInstance().getCommandById(id));
 	}
     }
+
+    public void clear() {
+	this.removeAll();
+    }
 }
