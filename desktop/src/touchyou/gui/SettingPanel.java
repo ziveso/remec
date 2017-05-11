@@ -94,13 +94,8 @@ public class SettingPanel extends JPanel {
 
 	combination = new JTextField();
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
-	combination.addKeyListener(new KeyAdapter() {
-	    @Override
-	    public void keyReleased(KeyEvent e) {
-		currentCommand.setCombination(combination.getText());
-		Controller.getInstance().update(currentCommand);
-	    }
-	});
+	combination.setEditable(false);
+	combination.addKeyListener(new RecordKey(combination , currentCommand));
 	GridBagConstraints gbc_combination = new GridBagConstraints();
 	gbc_combination.gridwidth = 2;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);
