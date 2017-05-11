@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import touchyou.App;
 import touchyou.Command;
@@ -105,20 +106,30 @@ public class WidgetPanel extends JPanel {
     public void addCommand(Command command) {
 	int id = command.getId();
 	JLabel addlb = new JLabel(command.getCombination());
+	addlb.setOpaque(true);
 	addlb.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	addlb.setHorizontalAlignment(SwingConstants.CENTER);
+	addlb.addMouseListener(new MouseAdapter() {
+	    @Override
+	    public void mousePressed(MouseEvent e) {
+		Controller.getInstance().update(command);
+	    }
+	});
 	trees.put(id, addlb);
-	// TODO add onclick listener
 	listPanel.add(addlb);
     }
 
     public void update(Command command) {
-	if(command == null){
+	if (command == null) {
 	    return;
 	}
 	int id = command.getId();
 	for (Integer key : trees.keySet()) {
 	    JLabel labels = trees.get(key);
 	    if (key == id) {
+		if (!labels.getText().equals(command.getCombination())) {
+		    labels.setText(command.getCombination());
+		}
 		labels.setBackground(Color.blue);
 	    } else {
 		labels.setBackground(null);

@@ -9,20 +9,25 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.App;
 import touchyou.Command;
 import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
+import java.awt.Color;
 
 /**
  * 
@@ -43,6 +48,7 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
     private Command currentCommand;
+    private JRadioButton rdbtnNone;
 
     /**
      * Create the panel.
@@ -52,9 +58,9 @@ public class SettingPanel extends JPanel {
 	// setBorder(GuiUtil.getBorder());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -66,7 +72,7 @@ public class SettingPanel extends JPanel {
 	gbc_lblProfile.gridy = 0;
 	add(lblProfile, gbc_lblProfile);
 
-	profilename = new JLabel("New label");
+	profilename = new JLabel(Controller.getInstance().getProfileName());
 	profilename.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
 	gbc_profilename.gridwidth = 2;
@@ -113,6 +119,15 @@ public class SettingPanel extends JPanel {
 	gbc_lblIcon.gridy = 2;
 	add(lblIcon, gbc_lblIcon);
 
+	rdbtnNone = new JRadioButton("None");
+	rdbtnNone.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnNone = new GridBagConstraints();
+	gbc_rdbtnNone.anchor = GridBagConstraints.WEST;
+	gbc_rdbtnNone.insets = new Insets(0, 0, 5, 5);
+	gbc_rdbtnNone.gridx = 2;
+	gbc_rdbtnNone.gridy = 2;
+	add(rdbtnNone, gbc_rdbtnNone);
+
 	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
 	rdbtnImportFromComputer.setForeground(GuiUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
@@ -120,7 +135,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnImportFromComputer.gridwidth = 2;
 	gbc_rdbtnImportFromComputer.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnImportFromComputer.gridx = 2;
-	gbc_rdbtnImportFromComputer.gridy = 2;
+	gbc_rdbtnImportFromComputer.gridy = 3;
 	add(rdbtnImportFromComputer, gbc_rdbtnImportFromComputer);
 
 	iconpath = new JTextField();
@@ -129,16 +144,17 @@ public class SettingPanel extends JPanel {
 	gbc_iconpath.insets = new Insets(0, 0, 5, 5);
 	gbc_iconpath.fill = GridBagConstraints.BOTH;
 	gbc_iconpath.gridx = 2;
-	gbc_iconpath.gridy = 3;
+	gbc_iconpath.gridy = 4;
 	add(iconpath, gbc_iconpath);
 	iconpath.setColumns(10);
 
 	JButton btnBrowse = new JButton("Browse");
+	btnBrowse.addActionListener(new Browse());
 	GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
 	gbc_btnBrowse.fill = GridBagConstraints.BOTH;
 	gbc_btnBrowse.insets = new Insets(0, 0, 5, 0);
 	gbc_btnBrowse.gridx = 3;
-	gbc_btnBrowse.gridy = 3;
+	gbc_btnBrowse.gridy = 4;
 	add(btnBrowse, gbc_btnBrowse);
 
 	rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
@@ -148,7 +164,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCaptureFromScreen.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnCaptureFromScreen.gridwidth = 2;
 	gbc_rdbtnCaptureFromScreen.gridx = 2;
-	gbc_rdbtnCaptureFromScreen.gridy = 4;
+	gbc_rdbtnCaptureFromScreen.gridy = 5;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
 	JButton btnCapture = new CaptureButton();
@@ -158,10 +174,11 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.weightx = 10.0;
 	gbc_btnCapture.gridwidth = 2;
 	gbc_btnCapture.gridx = 2;
-	gbc_btnCapture.gridy = 5;
+	gbc_btnCapture.gridy = 6;
 	add(btnCapture, gbc_btnCapture);
 
 	ButtonGroup iconGroup = new ButtonGroup();
+	iconGroup.add(rdbtnNone);
 	iconGroup.add(rdbtnImportFromComputer);
 	iconGroup.add(rdbtnCaptureFromScreen);
 	rdbtnImportFromComputer.addActionListener(e -> {
@@ -174,6 +191,11 @@ public class SettingPanel extends JPanel {
 	    btnBrowse.setEnabled(false);
 	    btnCapture.setEnabled(true);
 	});
+	rdbtnNone.addActionListener(e -> {
+	    iconpath.setEnabled(false);
+	    btnBrowse.setEnabled(false);
+	    btnCapture.setEnabled(false);
+	});
 
 	JLabel lblMode = new JLabel("Mode:");
 	lblMode.setForeground(GuiUtil.getForegroundColor());
@@ -181,7 +203,7 @@ public class SettingPanel extends JPanel {
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
 	gbc_lblMode.insets = new Insets(0, 0, 5, 5);
 	gbc_lblMode.gridx = 0;
-	gbc_lblMode.gridy = 6;
+	gbc_lblMode.gridy = 7;
 	add(lblMode, gbc_lblMode);
 
 	rdbtnSingleTouch = new JRadioButton("Single Touch");
@@ -196,7 +218,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnSingleTouch.gridwidth = 2;
 	gbc_rdbtnSingleTouch.gridx = 2;
-	gbc_rdbtnSingleTouch.gridy = 6;
+	gbc_rdbtnSingleTouch.gridy = 7;
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
@@ -210,7 +232,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
-	gbc_rdbtnFollow.gridy = 7;
+	gbc_rdbtnFollow.gridy = 8;
 	add(rdbtnFollow, gbc_rdbtnFollow);
 
 	ButtonGroup modeGroup = new ButtonGroup();
@@ -233,5 +255,22 @@ public class SettingPanel extends JPanel {
 	default:
 	    break;
 	}
+    }
+
+    private class Browse implements ActionListener {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	    JFileChooser fc = new JFileChooser();
+	    fc.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png"));
+	    int returnVal = fc.showOpenDialog(SettingPanel.this);
+	    if (returnVal == JFileChooser.APPROVE_OPTION) {
+		File file = fc.getSelectedFile();
+		iconpath.setText(file.getPath());
+	    } else {
+	    }
+
+	}
+
     }
 }
