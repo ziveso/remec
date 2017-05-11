@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.gui.add.MouseOver;
 
 /**
  * 
@@ -43,6 +44,10 @@ public class WidgetPanel extends JPanel {
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 	JButton btnNewButton = new JButton("Add Button");
+	btnNewButton.setOpaque(true);
+	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
+	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
+	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 	gbc_btnNewButton.gridwidth = 4;
 	gbc_btnNewButton.gridx = 0;
