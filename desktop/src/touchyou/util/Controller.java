@@ -27,18 +27,11 @@ public class Controller {
     private SettingPanel settingPanel;
     private WidgetPanel widgetPanel;
     private ModelPanel modelPanel;
-    private ComponentMover mover;
-    private ComponentResizer resizer;
+   
 
     private int id;
 
     private Controller() {
-	mover = new ComponentMover();
-	mover.setSnapSize(new Dimension(6, 6));
-	mover.setDragInsets(new Insets(10, 10, 10, 10));
-
-	resizer = new ComponentResizer();
-	resizer.setSnapSize(new Dimension(6, 6));
 
     }
 
@@ -86,7 +79,6 @@ public class Controller {
 	JButton commandBtn = new JButton();
 	resizer.registerComponent(commandBtn);
 	mover.registerComponent(commandBtn);
-
 	/* Create new Command */
 	Command command = new Command();
 	command.setId(id++);
@@ -96,7 +88,6 @@ public class Controller {
 	widgetPanel.addCommand(command);
 	/* Update every panels to point at the same Command */
 	update(command);
-
     }
 
   

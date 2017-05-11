@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 //                    String local = InetAddress.getLocalHost().getHostAddress();
 //                String local = getLocalIpAddress();
-//                String[] ip_component = local.split("\\.");
+//                String[] ip_component = local.sgplit("\\.");
 //                String subnet = ip_component[0] + "." + ip_component[1] + "." + ip_component[2] + ".";
 //                String subnet = "192.168.2.";
 //                for (int i = 106; i <= 255; i++) {

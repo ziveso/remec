@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.gui.add.ComponentMover;
+import touchyou.gui.add.ComponentResizer;
 import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
 
@@ -27,6 +30,8 @@ public class ModelPanel extends JPanel {
     private JPanel mobile;
     private App app;
     private MouseAdapter commandMouseAdapter;
+    private ComponentMover mover;
+    private ComponentResizer resizer;
 
     /**
      * 
@@ -34,6 +39,12 @@ public class ModelPanel extends JPanel {
     private static final long serialVersionUID = 3593230878415293635L;
 
     protected ModelPanel(int width, int height, App app) {
+	mover = new ComponentMover();
+	mover.setSnapSize(new Dimension(6, 6));
+	mover.setDragInsets(new Insets(10, 10, 10, 10));
+
+	resizer = new ComponentResizer();
+	resizer.setSnapSize(new Dimension(6, 6));
 	this.app = app;
 	commandMouseAdapter = new CommandMouseAdapter();
 	mobile = new JPanel();
