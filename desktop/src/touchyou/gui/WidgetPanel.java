@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import touchyou.App;
 import touchyou.Command;
 import touchyou.gui.add.MouseOver;
+import touchyou.util.Controller;
 
 /**
  * 
@@ -30,13 +31,11 @@ public class WidgetPanel extends JPanel {
 
     private Map<Integer, JLabel> trees = new HashMap<>();
     private JPanel listPanel;
-    private App app;
 
     /**
      * Create the panel.
      */
     public WidgetPanel(int width, int height, App app, SettingPanel settingPanel) {
-	this.app = app;
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -48,6 +47,7 @@ public class WidgetPanel extends JPanel {
 	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
+	btnNewButton.addActionListener(e->Controller.getInstance().addCombination());
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 	gbc_btnNewButton.gridwidth = 4;
 	gbc_btnNewButton.gridx = 0;
@@ -102,15 +102,16 @@ public class WidgetPanel extends JPanel {
 	panel.add(listPanel, BorderLayout.CENTER);
     }
 
+    public void addCommand(Command command) {
+	int id = command.getId();
+	JLabel addlb = new JLabel(command.getCombination());
+	trees.put(id, addlb);
+	// TODO add onclick listener
+	listPanel.add(addlb);
+    }
+
     public void update(Command command) {
 	int id = command.getId();
-	if (!trees.containsKey(id)) {
-	    JLabel addlb = new JLabel(command.getCombination());
-	    trees.put(id, addlb);
-	    // TODO add onclick listener
-	    listPanel.add(addlb);
-	}
-
 	for (Integer key : trees.keySet()) {
 	    JLabel labels = trees.get(key);
 	    if (key == id) {
