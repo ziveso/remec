@@ -73,12 +73,6 @@ public class Controller {
     }
 
     public void addCombination() {
-	/*
-	 * Create JButton and register to ComponentResizer and ComponentMover
-	 */
-	JButton commandBtn = new JButton();
-	resizer.registerComponent(commandBtn);
-	mover.registerComponent(commandBtn);
 	/* Create new Command */
 	Command command = new Command();
 	command.setId(id++);
