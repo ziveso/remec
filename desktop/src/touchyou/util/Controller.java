@@ -29,7 +29,7 @@ public class Controller {
     private ModelPanel modelPanel;
     private ComponentMover mover;
     private ComponentResizer resizer;
-    private MouseAdapter commandMouseAdapter = new CommandMouseAdapter();
+    private MouseAdapter commandMouseAdapter;
 
     private int id;
 
@@ -37,8 +37,11 @@ public class Controller {
 	mover = new ComponentMover();
 	mover.setSnapSize(new Dimension(6, 6));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
+
 	resizer = new ComponentResizer();
 	resizer.setSnapSize(new Dimension(6, 6));
+
+	commandMouseAdapter = new CommandMouseAdapter();
     }
 
     public static Controller getInstance() {
@@ -80,22 +83,25 @@ public class Controller {
 
     public void addCombination() {
 	/*
-	 * Create JButton and register to ComponentResizer and ComponentMover.
+	 * Create JButton and register to ComponentResizer and ComponentMover
 	 */
 	JButton commandBtn = new JButton();
 	resizer.registerComponent(commandBtn);
 	mover.registerComponent(commandBtn);
-	/* Set JButton's behavior. */
+	/* Set JButton's behavior */
 	commandBtn.setActionCommand(String.valueOf(id));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);
 	commandBtn.setPreferredSize(new Dimension(50, 50));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
-	/* Create new Command. */
+	/* Create new Command */
 	Command command = new Command();
 	command.setId(id++);
 	app.getProfile().addCommand(command);
+	/* notify other Panels */
+	modelPanel.addToMobile(commandBtn);
+	update(command);
 
     }
 

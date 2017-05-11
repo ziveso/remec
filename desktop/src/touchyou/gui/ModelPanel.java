@@ -64,6 +64,10 @@ public class ModelPanel extends JPanel {
 	mobile.revalidate();
     }
 
+    public void addToMobile(JButton commandBtn) {
+
+    }
+
     public void update(Command command) {
 	Component[] comps = getMobile().getComponents();
 	for (Component c : comps) {
