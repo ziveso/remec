@@ -105,7 +105,7 @@ public class CombinationFactory {
 		// put the command matches by lb in the list.
 		list.put(command.getId(), lb);
 		// add it!.
-		listPanel = WidgetPanel.getListPanel();
+//		listPanel = WidgetPanel.getListPanel();
 		listPanel.add(list.get(command.getId()));
 		// update the screen
 		listPanel.validate();
