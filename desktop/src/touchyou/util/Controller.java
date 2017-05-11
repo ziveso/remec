@@ -93,6 +93,10 @@ public class Controller {
     public Command getCurrentCommand() {
 	return currentCommand;
     }
+    
+    public String getProfileName() {
+	return app.getProfile().getName();
+    }
 
     public void showMainFrame() {
 	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
