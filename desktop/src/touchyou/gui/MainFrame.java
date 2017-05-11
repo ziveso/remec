@@ -21,6 +21,8 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.Dimension;
 
 /**
@@ -79,13 +81,20 @@ public class MainFrame extends JFrame {
 	gbc_settingPanel.gridy = 0;
 	workingPanel.add(settingPanel, gbc_settingPanel);
 	getContentPane().add(workingPanel);
-	ModelPanel modelPanel = new ModelPanel(model_width, Height, app);
+	JPanel Bound = new JPanel();
+	Bound.setPreferredSize(new Dimension(model_width, Height));
+//	int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth) / 2.0);
+	Bound.setBorder(new EmptyBorder(0, 0, 0, 0));
+	Bound.setBackground(Color.decode("#282828")); // almost black;
+	Bound.setOpaque(true);
+	ModelPanel modelPanel = new ModelPanel(app);
+	Bound.add(modelPanel);
 	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
 	gbc_modelPanel.insets = new Insets(0, 0, 0, 5);
 	gbc_modelPanel.fill = GridBagConstraints.BOTH;
 	gbc_modelPanel.gridx = 1;
 	gbc_modelPanel.gridy = 0;
-	workingPanel.add(modelPanel, gbc_modelPanel);
+	workingPanel.add(Bound, gbc_modelPanel);
 
 	widgetPanel = new WidgetPanel(pane_width, Height, app, settingPanel);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
