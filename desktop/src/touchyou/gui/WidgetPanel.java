@@ -1,27 +1,24 @@
 package touchyou.gui;
 
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.JPanel;
-import touchyou.App;
-import touchyou.Command;
-import touchyou.gui.add.AddButton;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.awt.GridBagConstraints;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import touchyou.App;
+import touchyou.Command;
 
 /**
  * 
@@ -45,8 +42,7 @@ public class WidgetPanel extends JPanel {
 	gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
-
-	JButton btnNewButton = new AddButton(new Dimension(width, height / 10), app, settingPanel);
+	JButton btnNewButton = new JButton("Add Button");
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 	gbc_btnNewButton.gridwidth = 4;
 	gbc_btnNewButton.gridx = 0;
