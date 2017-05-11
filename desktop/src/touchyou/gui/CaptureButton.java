@@ -1,5 +1,6 @@
 package touchyou.gui;
 
+import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -8,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -17,9 +20,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -61,6 +66,16 @@ public class CaptureButton extends JButton {
 			CaptureFrame.this.dispose();
 			break;
 		    case KeyEvent.VK_ENTER:
+			try {
+			    BufferedImage img = new Robot().createScreenCapture(rect);
+			    Controller.getInstance().getCurrentCommand().setImage(img);
+			    Controller.getInstance().updateCurrentCommand();
+			} catch (AWTException e1) {
+			    JOptionPane.showMessageDialog(CaptureFrame.this,
+				    "Failed to capture the screen with error: " + e1.getMessage(), "Info",
+				    JOptionPane.WARNING_MESSAGE);
+			    e1.printStackTrace();
+			}
 			CaptureFrame.this.dispose();
 			break;
 		    default:

@@ -1,5 +1,7 @@
 package touchyou;
 
+import java.awt.Image;
+
 /**
  * Command class contains essential information of a command button.
  * 
@@ -15,7 +17,16 @@ public class Command {
      */
     private int mode;
     private String imagePath;
+    private Image image;
     private double width, height, x, y;
+
+    public Image getImage() {
+	return image;
+    }
+
+    public void setImage(Image image) {
+	this.image = image;
+    }
 
     public void setId(int id) {
 	this.id = id;

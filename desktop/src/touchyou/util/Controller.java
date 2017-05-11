@@ -28,6 +28,7 @@ public class Controller {
     private SettingPanel settingPanel;
     private WidgetPanel widgetPanel;
     private ModelPanel modelPanel;
+    private Command currentCommand;
     private int id;
 
     /**
@@ -40,6 +41,24 @@ public class Controller {
     }
 
     /**
+     * Clear every panels.
+     */
+    public void clear() {
+	// settingPanel.clear(command);
+	// widgetPanel.clear(command);
+	// modelPanel.clear(command);
+    }
+
+    /**
+     * Update every panels to point at the current command.
+     */
+    public void updateCurrentCommand() {
+	settingPanel.update(currentCommand);
+	widgetPanel.update(currentCommand);
+	modelPanel.update(currentCommand);
+    }
+
+    /**
      * Update every panels to point at the same Command.
      * 
      * @param command
@@ -49,6 +68,7 @@ public class Controller {
 	settingPanel.update(command);
 	widgetPanel.update(command);
 	modelPanel.update(command);
+	currentCommand = command;
     }
 
     /**
@@ -67,6 +87,10 @@ public class Controller {
 
     public Command getCommandById(String id) {
 	return app.getProfile().getCommand(Integer.parseInt(id));
+    }
+
+    public Command getCurrentCommand() {
+	return currentCommand;
     }
 
     public void showMainFrame() {
