@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,26 +59,6 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                    String local = InetAddress.getLocalHost().getHostAddress();
-//                String local = getLocalIpAddress();
-//                String[] ip_component = local.sgplit("\\.");
-//                String subnet = ip_component[0] + "." + ip_component[1] + "." + ip_component[2] + ".";
-//                String subnet = "192.168.2.";
-//                for (int i = 106; i <= 255; i++) {
-//                    String host = subnet + i;
-//                    try {
-//                        Socket socket = new Socket();
-//                        // This limits the time allowed to establish a connection in the case
-//                        // that the connection is refused or server doesn't exist.
-//                        Log.d("Request send", "Requesting " + host);
-//                        TCPClient req = new TCPClient(host, PORT, MainActivity.this);
-//                        req.openConnection();
-//                        // Connected
-//                        availableHost.add(String.valueOf(socket.getInetAddress()));
-//                    } catch (IOException e) {
-//                        // Can't connect
-//                    }
-//                }
                 availableHost.add(wifiIpAddress(MainActivity.this));
                 availableHost.add(getLocalIpAddress());
             }
