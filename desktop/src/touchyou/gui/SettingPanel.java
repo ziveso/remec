@@ -17,12 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import touchyou.App;
 import touchyou.Command;
-import touchyou.gui.add.CombinationFactory;
 import touchyou.util.GuiUtil;
-import javax.swing.SwingConstants;
 
 /**
  * 
@@ -96,7 +95,6 @@ public class SettingPanel extends JPanel {
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		currentCommand.setCombination(combination.getText());
-		CombinationFactory.getInstance().updateCombination(currentCommand);
 	    }
 	});
 	combination.addFocusListener(new FocusAdapter() {
