@@ -107,6 +107,7 @@ public class MainFrame extends JFrame {
 
 	this.pack();
 	setLocationRelativeTo(null);
+	Controller.getInstance().clear();
 
     }
 
