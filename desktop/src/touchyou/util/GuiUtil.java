@@ -48,7 +48,7 @@ public class GuiUtil {
 	 * @return
 	 */
 	public static Rectangle getInitBound(Dimension dimension) {
-		int max_width = (int) (ModelPanel.getMobile().getWidth() - dimension.getWidth());
+		int max_width = (int) (ModelPanel.getMobile().getWidth());
 		int max_height = ModelPanel.getMobile().getHeight();
 		if (x + dimension.getWidth() > max_width) {
 			x = 0;

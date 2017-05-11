@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.Formatter;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
         listView = (ListView) findViewById(R.id.listView);
         final List<String> availableHost = new ArrayList<>();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        Log.d("test" , height + " " + width);
         new Thread(new Runnable() {
             @Override
             public void run() {

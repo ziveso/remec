@@ -21,6 +21,7 @@ import touchyou.Command;
 import touchyou.gui.ModelPanel;
 import touchyou.gui.SettingPanel;
 import touchyou.gui.WidgetPanel;
+import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
 
 /**
@@ -50,6 +51,11 @@ public class CombinationFactory {
 		this.commandMouseAdapter = new CommandMouseAdapter();
 	}
 
+	/**
+	 * get the combinationFactory.
+	 * 
+	 * @return combination factory
+	 */
 	public static CombinationFactory getInstance() {
 		if (cf == null) {
 			cf = new CombinationFactory();
@@ -167,7 +173,7 @@ public class CombinationFactory {
 			}
 			int ID = Integer.parseInt(source.getActionCommand());
 			source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-			settingPanel.update(app.getProfile().getCommand(ID));
+			Controller.getInstance().update(app.getProfile().getCommand(ID));
 
 			// update component tree.
 			for (Integer key : list.keySet()) {

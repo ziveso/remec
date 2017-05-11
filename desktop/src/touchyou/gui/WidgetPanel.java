@@ -5,9 +5,12 @@ import java.awt.Font;
 
 import javax.swing.JPanel;
 import touchyou.App;
+import touchyou.Command;
 import touchyou.gui.add.AddButton;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -90,8 +93,13 @@ public class WidgetPanel extends JPanel {
 		panel.add(listPanel, BorderLayout.CENTER);
 	}
 
-	public static JPanel getListPanel() {
-		return listPanel;
+	public void addListPanel(JLabel list) {
+		listPanel.add(list);
+	}
+
+	public void update(Command command) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
