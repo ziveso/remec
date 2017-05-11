@@ -27,7 +27,6 @@ import touchyou.util.GuiUtil;
  */
 public class ModelPanel extends JPanel {
 
-    private App app;
     private MouseAdapter commandMouseAdapter;
     private ComponentMover mover;
     private ComponentResizer resizer;
@@ -37,14 +36,13 @@ public class ModelPanel extends JPanel {
      */
     private static final long serialVersionUID = 3593230878415293635L;
 
-    protected ModelPanel(App app) {
+    protected ModelPanel() {
 	mover = new ComponentMover();
 	mover.setSnapSize(new Dimension(6, 6));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
 
 	resizer = new ComponentResizer();
 	resizer.setSnapSize(new Dimension(6, 6));
-	this.app = app;
 	commandMouseAdapter = new CommandMouseAdapter();
 	this.setOpaque(true);
 	setBackground(Color.white);
@@ -57,16 +55,17 @@ public class ModelPanel extends JPanel {
 	int mobileWidth = 1080 / 4;
 	int mobileHeight = 1776 / 4;
 	setMobileSize(mobileWidth, mobileHeight);
-	
+
 	// setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0,
 	// sideGap, 0, sideGap)));
-	
+
     }
 
     public void setMobileSize(int width, int height) {
 	setPreferredSize(new Dimension(width, height));
 	this.validate();
     }
+
     public void updateComponent() {
 	repaint();
 	revalidate();
@@ -103,9 +102,9 @@ public class ModelPanel extends JPanel {
 		JButton button = (JButton) c;
 		button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	    }
-	    int ID = Integer.parseInt(source.getActionCommand());
+	    String id = source.getActionCommand();
 	    source.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-	    Controller.getInstance().update(app.getProfile().getCommand(ID));
+	    Controller.getInstance().update(Controller.getInstance().getCommandById(id));
 	}
     }
 }

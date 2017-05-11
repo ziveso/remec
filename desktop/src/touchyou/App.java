@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import touchyou.gui.WelcomeFrame;
+import touchyou.util.Controller;
 
 /**
  * Touchyou model.
@@ -167,10 +168,10 @@ public class App {
 		| UnsupportedLookAndFeelException e) {
 	    e.printStackTrace();
 	}
-
 	App app = new App();
+	Controller.getInstance().setApp(app);
 	app.run();
-	new WelcomeFrame(app).setVisible(true);
+	new WelcomeFrame().setVisible(true);
     }
 }
 

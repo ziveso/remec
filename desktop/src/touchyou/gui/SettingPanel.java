@@ -93,12 +93,6 @@ public class SettingPanel extends JPanel {
 		currentCommand.setCombination(combination.getText());
 	    }
 	});
-	combination.addFocusListener(new FocusAdapter() {
-	    @Override
-	    public void focusLost(FocusEvent e) {
-		currentCommand.setCombination(combination.getText());
-	    }
-	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
 	gbc_combination.gridwidth = 2;
 	gbc_combination.insets = new Insets(0, 0, 5, 0);

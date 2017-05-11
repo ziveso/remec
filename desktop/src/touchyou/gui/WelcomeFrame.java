@@ -28,36 +28,32 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import touchyou.App;
 import touchyou.util.GuiUtil;
 
 public class WelcomeFrame extends JFrame {
 
     private JPanel contentPane;
 
-    private App app;
-
     /**
      * Create the frame.
      */
-    public WelcomeFrame(App app) {
-    	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    	Color foreground = GuiUtil.getForegroundColor();
+    public WelcomeFrame() {
+	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+	Color foreground = GuiUtil.getForegroundColor();
 	setTitle("Touch You Pro");
 	setLocation(new Point(0, 0));
 	setResizable(false);
-	this.app = app;
 	setMinimumSize(new Dimension(650, 400));
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 650, 210);
 	contentPane = new JPanel();
-	contentPane.setBackground(new Color(72,72,72));
+	contentPane.setBackground(new Color(72, 72, 72));
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
 	contentPane.setLayout(new BorderLayout());
 
 	JPanel panel = new JPanel();
-	panel.setBackground(new Color(72,72,72));
+	panel.setBackground(new Color(72, 72, 72));
 	panel.setBorder(new EmptyBorder(5, 5, 10, 5));
 	GridBagConstraints gbc_panel = new GridBagConstraints();
 	gbc_panel.insets = new Insets(0, 0, 5, 0);
@@ -72,7 +68,7 @@ public class WelcomeFrame extends JFrame {
 	panel.add(lblNewLabel_2);
 
 	JPanel panel_1 = new JPanel();
-	panel_1.setBackground(new Color(72,72,72));
+	panel_1.setBackground(new Color(72, 72, 72));
 	GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 	gbc_panel_1.fill = GridBagConstraints.BOTH;
 	gbc_panel_1.gridx = 0;
@@ -93,7 +89,7 @@ public class WelcomeFrame extends JFrame {
 	gbc_listPanel.gridy = 0;
 	panel_1.add(listPanel, gbc_listPanel);
 	listPanel.setLayout(new BorderLayout(0, 0));
-	
+
 	JList<String> list = new JList();
 	list.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -165,7 +161,7 @@ public class WelcomeFrame extends JFrame {
 	    fileChooser.setFileFilter(new FileNameExtensionFilter("Profile files (*.profile)", "profile"));
 	    int result = fileChooser.showOpenDialog(this);
 	    if (result == JFileChooser.APPROVE_OPTION) {
-		app.open(fileChooser.getSelectedFile());
+		// app.open(fileChooser.getSelectedFile());
 		runMainFrame();
 	    }
 	});
@@ -216,7 +212,7 @@ public class WelcomeFrame extends JFrame {
 
     private void runMainFrame() {
 	SwingUtilities.invokeLater(() -> {
-	    new TouchyouGui(app).run();
+	    new MainFrame().setVisible(true);
 	    this.dispose();
 	});
     }

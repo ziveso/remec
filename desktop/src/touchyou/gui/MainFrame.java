@@ -1,29 +1,23 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-
-import touchyou.App;
-import touchyou.util.GuiUtil;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.SoftBevelBorder;
 
-import java.awt.Dimension;
+import touchyou.util.Controller;
+import touchyou.util.GuiUtil;
 
 /**
  * 
@@ -37,19 +31,14 @@ public class MainFrame extends JFrame {
      */
     private static final long serialVersionUID = -8718047311675995150L;
 
-    private App app;
-
     // get the width and height from Util class.
     private final int Width = GuiUtil.WIDTH;
     private final int Height = GuiUtil.HEIGHT;
 
-	private static WidgetPanel widgetPanel;
-
     /**
      * construct MainFrame.
      */
-    public MainFrame(App app) {
-	this.app = app;
+    public MainFrame() {
 	setTitle("Touch You 0.1.4 Beta");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setSize(1004, 635);
@@ -72,7 +61,7 @@ public class MainFrame extends JFrame {
 	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 	workingPanel.setLayout(gbl_workingPanel);
-	SettingPanel settingPanel = new SettingPanel(app, this);
+	SettingPanel settingPanel = new SettingPanel();
 	settingPanel.setMinimumSize(new Dimension(200, 227));
 	GridBagConstraints gbc_settingPanel = new GridBagConstraints();
 	gbc_settingPanel.fill = GridBagConstraints.BOTH;
@@ -83,11 +72,11 @@ public class MainFrame extends JFrame {
 	getContentPane().add(workingPanel);
 	JPanel Bound = new JPanel();
 	Bound.setPreferredSize(new Dimension(model_width, Height));
-//	int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth) / 2.0);
+	// int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth) / 2.0);
 	Bound.setBorder(new EmptyBorder(0, 0, 0, 0));
 	Bound.setBackground(Color.decode("#282828")); // almost black;
 	Bound.setOpaque(true);
-	ModelPanel modelPanel = new ModelPanel(app);
+	ModelPanel modelPanel = new ModelPanel();
 	Bound.add(modelPanel);
 	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
 	gbc_modelPanel.insets = new Insets(0, 0, 0, 5);
@@ -96,7 +85,7 @@ public class MainFrame extends JFrame {
 	gbc_modelPanel.gridy = 0;
 	workingPanel.add(Bound, gbc_modelPanel);
 
-	widgetPanel = new WidgetPanel(pane_width, Height, app, settingPanel);
+	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
 	gbc_widgetPanel.fill = GridBagConstraints.BOTH;
 	gbc_widgetPanel.insets = new Insets(5, 0, 0, 0);
@@ -110,10 +99,15 @@ public class MainFrame extends JFrame {
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0 };
 	getContentPane().add(statusPanel, BorderLayout.SOUTH);
 
+	Controller controller = Controller.getInstance();
+	controller.setMainFrame(this);
+	controller.setModelPanel(modelPanel);
+	controller.setSettingPanel(settingPanel);
+	controller.setWidgetPanel(widgetPanel);
+
 	this.pack();
 	setLocationRelativeTo(null);
+
     }
-     public static void updateWidget() {
-    	 widgetPanel.validate();
-     }
+
 }

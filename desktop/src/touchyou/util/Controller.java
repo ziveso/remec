@@ -65,12 +65,20 @@ public class Controller {
 	update(command);
     }
 
+    public Command getCommandById(String id) {
+	return app.getProfile().getCommand(Integer.parseInt(id));
+    }
+
     public void showMainFrame() {
 	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
     }
 
     public void hideMainFrame() {
 	SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
+    }
+
+    public void setApp(App app) {
+	this.app = app;
     }
 
     public void setMainFrame(MainFrame mainFrame) {
