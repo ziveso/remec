@@ -6,6 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -15,18 +16,13 @@ import java.util.List;
 
 public class ServerFinder {
 
-    DatagramSocket c;
-    List<String> availableHost;
 
-    ServerFinder(List<String> list) {
-        this.availableHost = list;
-    }
-
-    public void find() {
+    public static String[] getAvailableHost() {
+        List<String> availableHost = new ArrayList<>();
         // Find the server using UDP broadcast
         try {
             //Open a random port to send the package
-            c = new DatagramSocket();
+            DatagramSocket c = new DatagramSocket();
             c.setBroadcast(true);
 
             byte[] sendData = "DISCOVER_FUIFSERVER_REQUEST".getBytes();
@@ -35,7 +31,7 @@ public class ServerFinder {
             try {
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 8888);
                 c.send(sendPacket);
-                System.out.println(getClass().getName() + ">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
+                System.out.println(">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
             } catch (Exception e) {
             }
 
@@ -60,11 +56,11 @@ public class ServerFinder {
                         c.send(sendPacket);
                     } catch (Exception e) {
                     }
-                    System.out.println(getClass().getName() + ">>> Request packet sent to: " + broadcast.getHostAddress() + "; Interface: " + networkInterface.getDisplayName());
+                    System.out.println(">>> Request packet sent to: " + broadcast.getHostAddress() + "; Interface: " + networkInterface.getDisplayName());
                 }
             }
 
-            System.out.println(getClass().getName() + ">>> Done looping over all network interfaces. Now waiting for a reply!");
+            System.out.println(">>> Done looping over all network interfaces. Now waiting for a reply!");
 
             //Wait for a response
             byte[] recvBuf = new byte[15000];
@@ -72,13 +68,14 @@ public class ServerFinder {
             c.receive(receivePacket);
 
             //We have a response
-            System.out.println(getClass().getName() + ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
+            System.out.println(">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
 
             //Check if the message is correct
             String message = new String(receivePacket.getData()).trim();
             if (message.equals("DISCOVER_FUIFSERVER_RESPONSE")) {
                 System.out.println("Client : found server at " + receivePacket.getAddress());
-                String avail = receivePacket.getAddress().toString().substring(1);
+                String host = receivePacket.getAddress().toString().substring(1);
+                availableHost.add(host);
                 //DO SOMETHING WITH THE SERVER'S IP (for example, store it in your controller)
 //            Controller_Base.setServerIp(receivePacket.getAddress());
             }
@@ -88,5 +85,6 @@ public class ServerFinder {
         } catch (IOException ex) {
 //          Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return availableHost.toArray(new String[availableHost.size()]);
     }
 }
