@@ -107,6 +107,7 @@ public class MainFrame extends JFrame {
 	controller.setModelPanel(modelPanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
+	controller.loadProfile();
 
 	this.pack();
 	setLocationRelativeTo(null);

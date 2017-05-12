@@ -11,8 +11,10 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.OptionPaneUI;
 
 import touchyou.gui.WelcomeFrame;
 import touchyou.util.Controller;
@@ -140,7 +142,7 @@ public class App {
 		    line = line.split("=")[1];
 		    methods[i].run(command, line);
 		    if (i == 7) {
-			Controller.getInstance().addCommand(command);
+			profile.addCommand(command);
 		    }
 		}
 	    } finally {

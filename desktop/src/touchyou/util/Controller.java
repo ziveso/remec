@@ -91,14 +91,11 @@ public class Controller {
 	command.setCombination("");
 	command.setId(id++);
 	app.getProfile().addCommand(command);
-	/* notify other Panels */
-	modelPanel.addCommand(command);
-	widgetPanel.addCommand(command);
-	update(command);
+	addCommand(command);
     }
 
     /**
-     * update Command to the profile.
+     * Update Command to the profile.
      */
     public void addCommand(Command command) {
 	/* notify other Panels */
@@ -158,6 +155,10 @@ public class Controller {
 
     public void save() {
 	app.save();
+    }
+
+    public void loadProfile() {
+	app.getProfile().getCommands().forEach(this::addCommand);
     }
 
 }
