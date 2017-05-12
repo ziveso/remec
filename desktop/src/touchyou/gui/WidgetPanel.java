@@ -98,7 +98,7 @@ public class WidgetPanel extends JPanel {
 	    listPanel.setVisible(!isShowing);
 	});
 
-	listPanel = new JPanel(new GridLayout(20, 1, 0, 2));
+	listPanel = new JPanel(new GridLayout(20, 1, 0, 0));
 	listPanel.setVisible(false);
 
 	panel.add(listPanel, BorderLayout.CENTER);
@@ -131,7 +131,7 @@ public class WidgetPanel extends JPanel {
 		if (!labels.getText().equals(command.getCombination())) {
 		    labels.setText(command.getCombination());
 		}
-		labels.setBackground(Color.blue);
+		labels.setBackground(Color.ORANGE);
 	    } else {
 		labels.setBackground(null);
 	    }
