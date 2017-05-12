@@ -1,25 +1,21 @@
 package touchyou.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import touchyou.App;
 import touchyou.Command;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
@@ -31,8 +27,8 @@ import touchyou.util.Controller;
  */
 public class WidgetPanel extends JPanel {
 
-    private Map<Integer, JLabel> trees = new HashMap<>();
-    private JPanel listPanel;
+    private DefaultListModel<Command> model;
+    private JList<Command> list;
 
     /**
      * Create the panel.
@@ -65,82 +61,35 @@ public class WidgetPanel extends JPanel {
 	add(panel, gbc_panel);
 	panel.setLayout(new BorderLayout(0, 0));
 
-	JButton btnShowComponentTree = new JButton("+ Show Component Tree");
-	btnShowComponentTree.setPreferredSize(new Dimension(width, 30));
-	btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
-	btnShowComponentTree.setBorder(BorderFactory.createEmptyBorder());
-	btnShowComponentTree.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mouseEntered(MouseEvent e) {
-		super.mouseEntered(e);
-		btnShowComponentTree.setFont(new Font(btnShowComponentTree.getFont().toString(), 0,
-			btnShowComponentTree.getFont().getSize() + 2));
-	    }
+	JLabel lblComponentTree = new JLabel("Component Tree");
+	panel.add(lblComponentTree, BorderLayout.NORTH);
 
+	list = new JList<>();
+	model = new DefaultListModel<>();
+	list.setModel(model);
+	list.addListSelectionListener(new ListSelectionListener() {
 	    @Override
-	    public void mouseExited(MouseEvent e) {
-		super.mouseExited(e);
-		btnShowComponentTree.setFont(new Font(btnShowComponentTree.getFont().toString(), 0,
-			btnShowComponentTree.getFont().getSize() - 2));
+	    public void valueChanged(ListSelectionEvent e) {
+		Controller.getInstance().update(list.getSelectedValue());
 	    }
 	});
-	btnShowComponentTree.setOpaque(true);
-	panel.add(btnShowComponentTree, BorderLayout.NORTH);
-	btnShowComponentTree.addActionListener(e -> {
-	    boolean isShowing = listPanel.isShowing();
-	    if (isShowing) {
-		btnShowComponentTree.setBackground(Color.LIGHT_GRAY);
-		btnShowComponentTree.setText("+ Show Component tree");
-	    } else {
-		btnShowComponentTree.setBackground(Color.green);
-		btnShowComponentTree.setText("- Show Component tree");
-	    }
-	    listPanel.setVisible(!isShowing);
-	});
-
-	listPanel = new JPanel(new GridLayout(20, 1, 0, 0));
-	listPanel.setVisible(false);
-
-	panel.add(listPanel, BorderLayout.CENTER);
+	panel.add(list, BorderLayout.CENTER);
     }
 
     public void addCommand(Command command) {
-	int id = command.getId();
-	JLabel addlb = new JLabel(command.getCombination());
-	addlb.setOpaque(true);
-	addlb.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	addlb.setHorizontalAlignment(SwingConstants.CENTER);
-	addlb.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mousePressed(MouseEvent e) {
-		Controller.getInstance().update(command);
-	    }
-	});
-	trees.put(id, addlb);
-	listPanel.add(addlb);
+	model.addElement(command);
     }
 
     public void update(Command command) {
 	if (command == null) {
 	    return;
 	}
-	int id = command.getId();
-	for (Integer key : trees.keySet()) {
-	    JLabel labels = trees.get(key);
-	    if (key == id) {
-		if (!labels.getText().equals(command.getCombination())) {
-		    labels.setText(command.getCombination());
-		}
-		labels.setBackground(Color.ORANGE);
-	    } else {
-		labels.setBackground(null);
-	    }
-	}
+	list.setSelectedValue(command, true);
 	this.validate();
     }
 
     public void clear() {
-	trees.clear();
+	// model.clear();
     }
 
 }
