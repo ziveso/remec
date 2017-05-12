@@ -232,6 +232,7 @@ public class WelcomeFrame extends JFrame {
     private void runMainFrame() {
 	SwingUtilities.invokeLater(() -> {
 	    new MainFrame().setVisible(true);
+	    Controller.getInstance().startBroadcast();
 	    this.dispose();
 	});
     }
