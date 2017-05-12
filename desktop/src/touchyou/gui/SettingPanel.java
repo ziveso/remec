@@ -97,6 +97,7 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
+		e.consume();
 		if (pressing == 0) {
 		    string = new StringBuffer();
 		}
@@ -115,6 +116,7 @@ public class SettingPanel extends JPanel {
 		    string.append(e.getKeyChar() + " +");
 		}
 		combination.setText(string.toString());
+		return;
 		
 	    }
 	    
