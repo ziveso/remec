@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import touchyou.util.Controller;
-import touchyou.util.GuiUtil;
+import touchyou.util.GUIUtil;
 
 /**
  * 
@@ -32,8 +32,8 @@ public class MainFrame extends JFrame {
     private static final long serialVersionUID = -8718047311675995150L;
 
     // get the width and height from Util class.
-    private final int Width = GuiUtil.WIDTH;
-    private final int Height = GuiUtil.HEIGHT;
+    private final int Width = GUIUtil.WIDTH;
+    private final int Height = GUIUtil.HEIGHT;
 
     /**
      * construct MainFrame.
@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 	setJMenuBar(menubar);
 
 	JPanel workingPanel = new JPanel();
-	workingPanel.setBackground(GuiUtil.getBackgroundColor());
+	workingPanel.setBackground(GUIUtil.getBackgroundColor());
 
 	int model_width = Width * 5 / 10;
 	int pane_width = Width * 2 / 10;

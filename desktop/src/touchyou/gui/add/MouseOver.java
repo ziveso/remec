@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import touchyou.util.GUIUtil;
+
 public class MouseOver extends MouseAdapter {
 
 	private Component component;
@@ -24,7 +26,7 @@ public class MouseOver extends MouseAdapter {
 	public void mouseEntered(MouseEvent e) {
 		super.mouseEntered(e);
 		component.setFont(new Font(currentFont.getName(), 0, currentFont.getSize() + 2));
-		component.setBackground(Color.decode("#FF8019"));
+		component.setBackground(GUIUtil.getOrange());
 		component.setForeground(Color.white);
 	}
 

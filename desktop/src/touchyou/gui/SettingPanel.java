@@ -26,7 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.Command;
 import touchyou.util.Controller;
-import touchyou.util.GuiUtil;
+import touchyou.util.GUIUtil;
 
 /**
  * 
@@ -62,7 +62,7 @@ public class SettingPanel extends JPanel {
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
-	lblProfile.setForeground(GuiUtil.getForegroundColor());
+	lblProfile.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblProfile = new GridBagConstraints();
 	gbc_lblProfile.anchor = GridBagConstraints.WEST;
 	gbc_lblProfile.insets = new Insets(0, 0, 5, 5);
@@ -71,7 +71,7 @@ public class SettingPanel extends JPanel {
 	add(lblProfile, gbc_lblProfile);
 
 	profilename = new JLabel(Controller.getInstance().getProfileName());
-	profilename.setForeground(GuiUtil.getForegroundColor());
+	profilename.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
 	gbc_profilename.gridwidth = 2;
 	gbc_profilename.fill = GridBagConstraints.VERTICAL;
@@ -82,7 +82,7 @@ public class SettingPanel extends JPanel {
 	add(profilename, gbc_profilename);
 
 	JLabel lblNewLabel = new JLabel("Command:");
-	lblNewLabel.setForeground(GuiUtil.getForegroundColor());
+	lblNewLabel.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 	gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 	gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -136,7 +136,7 @@ public class SettingPanel extends JPanel {
 	combination.setColumns(10);
 
 	JLabel lblIcon = new JLabel("Icon:");
-	lblIcon.setForeground(GuiUtil.getForegroundColor());
+	lblIcon.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblIcon = new GridBagConstraints();
 	gbc_lblIcon.anchor = GridBagConstraints.WEST;
 	gbc_lblIcon.insets = new Insets(0, 0, 5, 5);
@@ -154,7 +154,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnNone, gbc_rdbtnNone);
 
 	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
-	rdbtnImportFromComputer.setForeground(GuiUtil.getForegroundColor());
+	rdbtnImportFromComputer.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
 	gbc_rdbtnImportFromComputer.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnImportFromComputer.gridwidth = 2;
@@ -183,7 +183,7 @@ public class SettingPanel extends JPanel {
 	add(btnBrowse, gbc_btnBrowse);
 
 	rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
-	rdbtnCaptureFromScreen.setForeground(GuiUtil.getForegroundColor());
+	rdbtnCaptureFromScreen.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnCaptureFromScreen = new GridBagConstraints();
 	gbc_rdbtnCaptureFromScreen.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnCaptureFromScreen.anchor = GridBagConstraints.WEST;
@@ -223,7 +223,7 @@ public class SettingPanel extends JPanel {
 	});
 
 	JLabel lblMode = new JLabel("Mode:");
-	lblMode.setForeground(GuiUtil.getForegroundColor());
+	lblMode.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblMode = new GridBagConstraints();
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
 	gbc_lblMode.insets = new Insets(0, 0, 5, 5);
@@ -237,7 +237,7 @@ public class SettingPanel extends JPanel {
 		Controller.getInstance().getCurrentCommand().setMode(0);
 	    }
 	});
-	rdbtnSingleTouch.setForeground(GuiUtil.getForegroundColor());
+	rdbtnSingleTouch.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
 	gbc_rdbtnSingleTouch.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
@@ -252,7 +252,7 @@ public class SettingPanel extends JPanel {
 		Controller.getInstance().getCurrentCommand().setMode(1);
 	    }
 	});
-	rdbtnFollow.setForeground(GuiUtil.getForegroundColor());
+	rdbtnFollow.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
 	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;

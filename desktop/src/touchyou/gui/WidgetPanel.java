@@ -2,8 +2,10 @@ package touchyou.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.net.DatagramSocket;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +15,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import touchyou.Command;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
+import touchyou.util.GUIUtil;
 
 /**
  * 
@@ -65,6 +69,7 @@ public class WidgetPanel extends JPanel {
 	panel.add(lblComponentTree, BorderLayout.NORTH);
 
 	list = new JList<>();
+	list.setFont(new Font(Font.MONOSPACED, 0, 18));
 	model = new DefaultListModel<>();
 	list.setModel(model);
 	list.addListSelectionListener(new ListSelectionListener() {
@@ -73,7 +78,7 @@ public class WidgetPanel extends JPanel {
 		Controller.getInstance().update(list.getSelectedValue());
 	    }
 	});
-	panel.add(list, BorderLayout.CENTER);
+	panel.add(new JScrollPane(list), BorderLayout.CENTER);
     }
 
     public void addCommand(Command command) {

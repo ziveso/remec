@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
-import touchyou.util.GuiUtil;
+import touchyou.util.GUIUtil;
 import java.awt.Color;
 
 public class StatusPanel extends JPanel {
@@ -22,7 +22,7 @@ public class StatusPanel extends JPanel {
      * Create the panel.
      */
     public StatusPanel() {
-	setBackground(GuiUtil.getBackgroundColor());
+	setBackground(GUIUtil.getBackgroundColor());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 137, 200, 0 };
 	gridBagLayout.rowHeights = new int[] { 53, 0 };

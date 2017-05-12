@@ -19,7 +19,7 @@ import touchyou.gui.ModelPanel;
  * @author Thitiwat Thongbor
  *
  */
-public class GuiUtil {
+public class GUIUtil {
     public static int WIDTH = 1000;
     public static int HEIGHT = 500;
     private static int x = 0;
@@ -37,13 +37,16 @@ public class GuiUtil {
     }
 
     public static Image getImage(String URL) {
-	URL url = GuiUtil.class.getResource(URL);
+	URL url = GUIUtil.class.getResource(URL);
 	return new ImageIcon(url).getImage();
     }
 
     public static Color getBackgroundColor() {
 	// return new Color(72, 72, 72);
 	return Color.decode("#424242");
+    }
+    public static Color getOrange() {
+	return Color.decode("#FF8019");
     }
 
     public static Color getForegroundColor() {

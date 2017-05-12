@@ -24,7 +24,7 @@ import touchyou.Command;
 import touchyou.gui.add.ComponentMover;
 import touchyou.gui.add.ComponentResizer;
 import touchyou.util.Controller;
-import touchyou.util.GuiUtil;
+import touchyou.util.GUIUtil;
 
 /**
  * 

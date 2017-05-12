@@ -32,7 +32,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
-import touchyou.util.GuiUtil;
+import touchyou.util.GUIUtil;
 
 public class WelcomeFrame extends JFrame {
 
@@ -43,7 +43,7 @@ public class WelcomeFrame extends JFrame {
      */
     public WelcomeFrame() {
 	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-	Color foreground = GuiUtil.getForegroundColor();
+	Color foreground = GUIUtil.getForegroundColor();
 	setTitle("Touch You Pro");
 	setLocation(new Point(0, 0));
 	setResizable(false);
