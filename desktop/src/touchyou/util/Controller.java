@@ -1,6 +1,7 @@
 package touchyou.util;
 
 import java.awt.Component;
+import java.io.File;
 
 import javax.swing.SwingUtilities;
 
@@ -105,6 +106,7 @@ public class Controller {
     }
 
     public String getProfileName() {
+	System.out.println(app.getProfile());
 	return app.getProfile().getName();
     }
 
@@ -134,6 +136,14 @@ public class Controller {
 
     public void setModelPanel(ModelPanel modelPanel) {
 	this.modelPanel = modelPanel;
+    }
+    
+    public void newProfile(String profileName){
+	app.createNewProfile(profileName);
+    }
+    
+    public void openProfile(File file){
+	app.open(file);
     }
 
 }

@@ -26,7 +26,7 @@ import touchyou.util.Controller;
 public class App {
     public static int PORT = 3000;
     public TCPServer server;
-    public Profile profile = new Profile("Demo");
+    public Profile profile;
 
     /**
      * Initialize TouchYou server.
@@ -124,7 +124,7 @@ public class App {
 			(c, l) -> c.setX(Double.parseDouble(l)), (c, l) -> c.setY(Double.parseDouble(l)) };
 
 		reader = new BufferedReader(new FileReader(file));
-		Profile profile = new Profile(reader.readLine());
+		profile = new Profile(reader.readLine());
 		String line;
 		Command command = new Command();
 		for (int i = 0; (line = reader.readLine()) != null; i++) {
@@ -209,12 +209,6 @@ public class App {
 	    e.printStackTrace();
 	}
 	App app = new App();
-	app.createNewProfile("Demo");
-	Command c = new Command();
-	c.setCombination("23:242:100");
-	c.setMode(1);
-	app.getProfile().addCommand(c);
-	app.save();
 	Controller.getInstance().setApp(app);
 	app.run();
 	new WelcomeFrame().setVisible(true);

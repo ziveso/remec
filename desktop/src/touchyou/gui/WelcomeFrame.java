@@ -28,6 +28,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import touchyou.util.Controller;
 import touchyou.util.GuiUtil;
 
 public class WelcomeFrame extends JFrame {
@@ -95,8 +96,10 @@ public class WelcomeFrame extends JFrame {
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
-	for (String f : new File("/").list()) {
-	    model.addElement(f);
+	for (String f : new File("./profiles/").list()) {
+	    if (f.contains(".profile")) {
+		model.addElement(f);
+	    }
 	}
 	listPanel.add(new JScrollPane(list));
 
@@ -149,7 +152,7 @@ public class WelcomeFrame extends JFrame {
 	btnNew.setOpaque(true);
 	btnNew.setBackground(new Color(245, 245, 245));
 	btnNew.addActionListener(e -> {
-	    runMainFrame();
+	    new NewProfileFrame().setVisible(true);
 	});
 	btnNew.addMouseListener(mouseAdapter);
 	panel_2.add(btnNew);
@@ -157,11 +160,12 @@ public class WelcomeFrame extends JFrame {
 	JButton btnOpen = new JButton("Open existing Touch You profile");
 	btnOpen.addActionListener(e -> {
 	    JFileChooser fileChooser = new JFileChooser();
+	    fileChooser.setCurrentDirectory(new File("./profiles/"));
 	    fileChooser.setAcceptAllFileFilterUsed(false);
 	    fileChooser.setFileFilter(new FileNameExtensionFilter("Profile files (*.profile)", "profile"));
 	    int result = fileChooser.showOpenDialog(this);
 	    if (result == JFileChooser.APPROVE_OPTION) {
-		// app.open(fileChooser.getSelectedFile());
+		Controller.getInstance().openProfile(fileChooser.getSelectedFile());
 		runMainFrame();
 	    }
 	});
