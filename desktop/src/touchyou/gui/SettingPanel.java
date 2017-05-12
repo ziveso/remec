@@ -11,6 +11,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -92,43 +94,30 @@ public class SettingPanel extends JPanel {
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.setEditable(false);
 	combination.addKeyListener(new KeyListener() {
-	    private StringBuffer string;
 	    private int pressing = 0;
+	    private List<Integer> key = new ArrayList<>();
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
-		
+
 		e.consume();
 		if (pressing == 0) {
-		    string = new StringBuffer();
+		    key.clear();
 		}
 		pressing++;
-		switch (e.getKeyCode()) {
-		case 16:
-		    string.append("Shift +");
-		    break;
-		case 17:
-		    string.append("Ctrl +");
-		    break;
-		case 18:
-		    string.append("Alt +");
-		    break;
-		default:
-		    string.append(e.getKeyChar() + " +");
-		}
-		combination.setText(string.toString());
-		return;
-		
+		key.add(e.getKeyCode());
 	    }
-	    
+
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		pressing--;
 		if (pressing == 0) {
-		    string.deleteCharAt(string.length() - 1);
+		    StringBuffer string = new StringBuffer();
+		    for (int key : key) {
+			string.append(key + ":");
+		    }
 		    Controller.getInstance().getCurrentCommand().setCombination(string.toString());
 		    Controller.getInstance().updateCurrentCommand();
-		    string = null;
 		}
 	    }
 
@@ -308,7 +297,7 @@ public class SettingPanel extends JPanel {
 	}
 
     }
-    
+
     public void clear() {
 	for (Component c : this.getComponents()) {
 	    c.setEnabled(false);
