@@ -79,8 +79,8 @@ public class MainFrame extends JFrame {
 	Bound.setBorder(new EmptyBorder(0, 0, 0, 0));
 	Bound.setBackground(Color.decode("#282828")); // almost black;
 	Bound.setOpaque(true);
-	ModelPanel modelPanel = new ModelPanel();
-	Bound.add(modelPanel);
+	MobilePanel mobilePanel = new MobilePanel();
+	Bound.add(mobilePanel);
 	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
 	gbc_modelPanel.insets = new Insets(0, 0, 0, 5);
 	gbc_modelPanel.fill = GridBagConstraints.BOTH;
@@ -104,7 +104,7 @@ public class MainFrame extends JFrame {
 
 	Controller controller = Controller.getInstance();
 	controller.setMainFrame(this);
-	controller.setModelPanel(modelPanel);
+	controller.setMobilePanel(mobilePanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
 

@@ -11,7 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
-import touchyou.gui.ModelPanel;
+import touchyou.gui.MobilePanel;
 
 /**
  * Helper Class for writing the Application in GUI part

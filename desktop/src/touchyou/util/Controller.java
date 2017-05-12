@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
-import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -13,7 +12,7 @@ import touchyou.App;
 import touchyou.Command;
 import touchyou.UDPBroadcast;
 import touchyou.gui.MainFrame;
-import touchyou.gui.ModelPanel;
+import touchyou.gui.MobilePanel;
 import touchyou.gui.SettingPanel;
 import touchyou.gui.WidgetPanel;
 
@@ -31,7 +30,7 @@ public class Controller {
     private MainFrame mainFrame;
     private SettingPanel settingPanel;
     private WidgetPanel widgetPanel;
-    private ModelPanel modelPanel;
+    private MobilePanel mobilePanel;
     private Command currentCommand;
     private UDPBroadcast broadcaster;
     private int id;
@@ -40,23 +39,39 @@ public class Controller {
 	broadcaster = new UDPBroadcast();
     }
 
+    /**
+     * Allow android devices to search for this computer.
+     */
     public void startBroadcast() {
 	broadcaster.startBroadcast();
     }
 
+    /**
+     * Stop UDP broadcasting, android devices would not be able to search for
+     * this computer.
+     */
     public void stopBroadcast() {
 	broadcaster.stopBroadcast();
     }
 
+    /**
+     * Check if a component can be placed at this mouse location.
+     * 
+     * @param current
+     *            is the subject component
+     * @param mouse
+     *            is current mouse position on the mobilePanel
+     * @return true if is placable, false otherwise
+     */
     public boolean placeable(Component current, Point mouse) {
-	for (Component c : modelPanel.getComponents()) {
+	for (Component c : mobilePanel.getComponents()) {
 	    if (current != c) {
 		double width = current.getWidth();
 		double height = current.getHeight();
 		int x = (int) (mouse.getX() - width / 2);
 		int y = (int) (mouse.getY() - height / 2);
 		Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int) height);
-		System.out.println(invisibleRect+"  "+current.getBounds());
+		System.out.println(invisibleRect + "  " + current.getBounds());
 		if (invisibleRect.intersects(c.getBounds())) {
 		    System.out.println("collides with " + ((JButton) c).getText());
 		    return false;
@@ -64,8 +79,6 @@ public class Controller {
 	    }
 	}
 	return true;
-	// return Arrays.stream(modelPanel.getComponents()).anyMatch(c ->
-	// rect.intersects(c.getBounds()));
     }
 
     /**
@@ -89,7 +102,7 @@ public class Controller {
     public void clear() {
 	settingPanel.clear();
 	widgetPanel.clear();
-	modelPanel.clear();
+	mobilePanel.clear();
     }
 
     /**
@@ -98,7 +111,7 @@ public class Controller {
     public void updateCurrentCommand() {
 	settingPanel.update(currentCommand);
 	widgetPanel.update(currentCommand);
-	modelPanel.update(currentCommand);
+	mobilePanel.update(currentCommand);
     }
 
     /**
@@ -112,7 +125,7 @@ public class Controller {
 	    enableSettingPanel();
 	settingPanel.update(command);
 	widgetPanel.update(command);
-	modelPanel.update(command);
+	mobilePanel.update(command);
 	currentCommand = command;
     }
 
@@ -135,7 +148,7 @@ public class Controller {
      */
     public void addCommand(Command command) {
 	/* notify other Panels */
-	modelPanel.addCommand(command);
+	mobilePanel.addCommand(command);
 	widgetPanel.addCommand(command);
 	update(command);
     }
@@ -177,8 +190,8 @@ public class Controller {
 	this.widgetPanel = widgetPanel;
     }
 
-    public void setModelPanel(ModelPanel modelPanel) {
-	this.modelPanel = modelPanel;
+    public void setMobilePanel(MobilePanel mobilePanel) {
+	this.mobilePanel = mobilePanel;
     }
 
     public void newProfile(String profileName) {

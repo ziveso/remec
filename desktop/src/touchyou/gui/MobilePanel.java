@@ -31,7 +31,7 @@ import touchyou.util.GUIUtil;
  * @author Thitiwat Thongbor
  *
  */
-public class ModelPanel extends JPanel {
+public class MobilePanel extends JPanel {
 
     private MouseAdapter commandMouseAdapter;
     private ComponentMover mover;
@@ -42,7 +42,7 @@ public class ModelPanel extends JPanel {
      */
     private static final long serialVersionUID = 3593230878415293635L;
 
-    protected ModelPanel() {
+    protected MobilePanel() {
 	mover = new ComponentMover();
 	mover.setSnapSize(new Dimension(6, 6));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
