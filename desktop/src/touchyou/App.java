@@ -7,14 +7,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.OptionPaneUI;
 
 import touchyou.gui.WelcomeFrame;
 import touchyou.util.Controller;
@@ -57,8 +52,6 @@ public class App {
      * @param path
      */
     public void save(String path) {
-	// TODO write data to .profile file
-	// TODO finished without testing
 	PrintWriter writer = null;
 	try {
 	    writer = new PrintWriter(path, "UTF-8");
@@ -115,8 +108,6 @@ public class App {
      * @return a Profile instance
      */
     private Profile generateProfile(File file) {
-	// TODO generate Profile object from .profile file
-	// TODO finished without testing
 	BufferedReader reader = null;
 	Profile profile = null;
 	try {
@@ -171,34 +162,6 @@ public class App {
     private void run() {
 	try {
 	    server.listen();
-	    // new Thread(() -> {
-	    // try {
-	    // new ServerSocket(12345, 10).accept();
-	    // System.out.println("connected");
-	    // } catch (IOException e) {
-	    // // TODO Auto-generated catch block
-	    // e.printStackTrace();
-	    // }
-	    //
-	    // }).start();
-	    // new Thread(() -> {
-	    // try {
-	    // String myip = "192.168.2.106";
-	    // Socket socket = new Socket();
-	    // socket.connect(new InetSocketAddress(myip, 3000), 2000);
-	    // System.out.println("finished trying");
-	    //
-	    // socket = new Socket();
-	    // socket.connect(new InetSocketAddress("192.168.2.107", 3000),
-	    // 2000);
-	    // System.out.println("finished trying");
-	    //
-	    // } catch (IOException e) {
-	    // // TODO Auto-generated catch block
-	    // e.printStackTrace();
-	    // }
-	    //
-	    // }).start();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
