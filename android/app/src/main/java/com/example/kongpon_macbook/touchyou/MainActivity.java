@@ -14,6 +14,7 @@ import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,12 +42,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final int PORT = 3000;
-    public static final int TIMEOUT = 1000;
     //    public Button connectButton;
     //    public EditText ipEditText;
     private ListView listView;
-    private int i;
-    private String hostName;
+    final List<String> availableHost = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    public static TCPClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +55,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //  connectButton = (Button) findViewById(R.id.connectButton);
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
+        /* Initialize views */
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView = (ListView) findViewById(R.id.listView);
-        final List<String> availableHost = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView.setAdapter(adapter);
-        new Thread(new Runnable() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void run() {
-                new ServerFinder(availableHost).find();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String host = (String) parent.getAdapter().getItem(position);
+                System.out.println(host);
+                connect(host);
             }
-        }).start();
+        });
+
+        findServers();
+    }
+
+    private void connect(String host) {
+        new AsyncTask<String, Integer, Void>() {
+            @Override
+            protected Void doInBackground(String... params) {
+                client = new TCPClient(params[0], PORT, MainActivity.this);
+                try {
+                    client.openConnection();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }.execute(host);
+    }
+
+    private void findServers() {
+        new AsyncTask<String, Integer, String[]>() {
+            @Override
+            protected String[] doInBackground(String... params) {
+                return ServerFinder.getAvailableHost();
+            }
+
+            @Override
+            protected void onPostExecute(String[] strings) {
+                super.onPostExecute(strings);
+                System.out.println(Arrays.toString(strings));
+                availableHost.addAll(Arrays.asList(strings));
+                adapter.notifyDataSetChanged();
+            }
+        }.execute();
     }
 
 
