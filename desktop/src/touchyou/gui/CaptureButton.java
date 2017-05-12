@@ -49,7 +49,7 @@ public class CaptureButton extends JButton {
     }
 
     private final class CaptureFrame extends JDialog {
-	private Point start, stop;
+	private Point start;
 	private Rectangle rect;
 
 	public CaptureFrame() {
@@ -113,11 +113,6 @@ public class CaptureButton extends JButton {
 		    @Override
 		    public void mousePressed(MouseEvent e) {
 			start = e.getPoint();
-		    }
-
-		    @Override
-		    public void mouseReleased(MouseEvent e) {
-			stop = e.getPoint();
 		    }
 		});
 	    }

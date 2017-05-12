@@ -102,7 +102,7 @@ public class ModelPanel extends JPanel {
 	    if (Integer.parseInt(button.getActionCommand()) == id) {
 		button.setBorder(BorderFactory.createLineBorder(Color.red, 2));
 		button.setIcon(new ImageIcon(command.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
-			Image.SCALE_AREA_AVERAGING)));
+			Image.SCALE_SMOOTH)));
 	    }
 	}
     }

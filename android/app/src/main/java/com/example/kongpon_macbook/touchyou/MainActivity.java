@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -29,6 +31,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     //    public Button connectButton;
     //    public EditText ipEditText;
     private ListView listView;
+    private int i;
+    private String hostName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +55,58 @@ public class MainActivity extends AppCompatActivity {
         //  connectButton = (Button) findViewById(R.id.connectButton);
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
         listView = (ListView) findViewById(R.id.listView);
-        final List<String> availableHost = new ArrayList<>();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-        Log.d("test" , height + " " + width);
+        List<String> availableHost = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
+        listView.setAdapter(adapter);
+        findAvailableHost(availableHost);
+    }
+
+    private void findAvailableHost(final List<String> availableHost) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                availableHost.add(wifiIpAddress(MainActivity.this));
-                availableHost.add(getLocalIpAddress());
-            }
-        }).start();
+                int timeout = 300;
+                String myip = wifiIpAddress(MainActivity.this);
+                String subnet = myip.substring(0, myip.lastIndexOf('.') + 1);
+                Socket req;
+                for (int i = 100; i < 120; i++) {
+                    req = new Socket();
+                    try {
+                        req.setSoTimeout(300);
+                    } catch (SocketException e) {
+                        e.printStackTrace();
+                    }
+                    InetSocketAddress host = new InetSocketAddress(subnet + i, PORT);
+                    hostName = host.getHostName();
+                    try {
+                        req.connect(host, timeout);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
-        listView.setAdapter(adapter);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                availableHost.add(hostName);
+                            }
+                        });
+                    } catch (IOException e) {
+                        try {
+                            req.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(MainActivity.this, "couldn't connect to " + hostName, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+            }
+        }).
+
+                start();
+
     }
+
 
     protected String wifiIpAddress(Context context) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);

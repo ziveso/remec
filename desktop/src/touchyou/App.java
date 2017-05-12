@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 import javax.swing.UIManager;
@@ -29,7 +31,7 @@ public class App {
      */
     public App() {
 	server = new TCPServer(PORT);
-	System.out.println("Server Running on port: "+ PORT);
+	System.out.println("Server Running on port: " + PORT);
     }
 
     /**
@@ -148,6 +150,33 @@ public class App {
     private void run() {
 	try {
 	    server.listen();
+//	    new Thread(() -> {
+//		try {
+//		    new ServerSocket(12345, 10).accept();
+//		    System.out.println("connected");
+//		} catch (IOException e) {
+//		    // TODO Auto-generated catch block
+//		    e.printStackTrace();
+//		}
+//
+//	    }).start();
+//	    new Thread(() -> {
+//		try {
+//		    String myip = "192.168.2.106";
+//		    Socket socket = new Socket();
+//		    socket.connect(new InetSocketAddress(myip, 3000), 2000);
+//		    System.out.println("finished trying");
+//
+//		    socket = new Socket();
+//		    socket.connect(new InetSocketAddress("192.168.2.107", 3000), 2000);
+//		    System.out.println("finished trying");
+//		    
+//		} catch (IOException e) {
+//		    // TODO Auto-generated catch block
+//		    e.printStackTrace();
+//		}
+//
+//	    }).start();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
