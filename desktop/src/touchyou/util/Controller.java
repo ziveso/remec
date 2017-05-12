@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 
 import touchyou.App;
 import touchyou.Command;
+import touchyou.UDPBroadcast;
 import touchyou.gui.MainFrame;
 import touchyou.gui.ModelPanel;
 import touchyou.gui.SettingPanel;
@@ -20,10 +21,6 @@ import touchyou.gui.WidgetPanel;
  * @author Kongpon Charanwattanakit
  *
  */
-/**
- * @author Kongpon Charanwattanakit
- *
- */
 public class Controller {
     private static Controller controller = new Controller();
     private App app;
@@ -32,7 +29,20 @@ public class Controller {
     private WidgetPanel widgetPanel;
     private ModelPanel modelPanel;
     private Command currentCommand;
+    private UDPBroadcast broadcaster;
     private int id;
+
+    private Controller() {
+	broadcaster = new UDPBroadcast();
+    }
+
+    public void startBroadcast() {
+	broadcaster.startBroadcast();
+    }
+
+    public void stopBroadcast() {
+	broadcaster.stopBroadcast();
+    }
 
     /**
      * Return an instance of the Controller.
