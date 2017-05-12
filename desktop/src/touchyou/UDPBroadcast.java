@@ -5,6 +5,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+/**
+ * UDP Broadcaster for broadcasting this computer IP Address to android devices.
+ * 
+ * @author Kongpon Charanwattanakit
+ *
+ */
 public class UDPBroadcast {
     DatagramSocket socket;
 

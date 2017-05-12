@@ -15,7 +15,7 @@ import touchyou.gui.WelcomeFrame;
 import touchyou.util.Controller;
 
 /**
- * Touchyou model.
+ * Model for TouchYou application.
  * 
  * @author Kongpon Charanwattanakit
  *
