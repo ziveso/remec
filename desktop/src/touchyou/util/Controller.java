@@ -1,8 +1,12 @@
 package touchyou.util;
 
 import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.File;
+import java.util.Arrays;
 
+import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import touchyou.App;
@@ -42,6 +46,26 @@ public class Controller {
 
     public void stopBroadcast() {
 	broadcaster.stopBroadcast();
+    }
+
+    public boolean placeable(Component current, Point mouse) {
+	for (Component c : modelPanel.getComponents()) {
+	    if (current != c) {
+		double width = current.getWidth();
+		double height = current.getHeight();
+		int x = (int) (mouse.getX() - width / 2);
+		int y = (int) (mouse.getY() - height / 2);
+		Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int) height);
+		System.out.println(invisibleRect+"  "+current.getBounds());
+		if (invisibleRect.intersects(c.getBounds())) {
+		    System.out.println("collides with " + ((JButton) c).getText());
+		    return false;
+		}
+	    }
+	}
+	return true;
+	// return Arrays.stream(modelPanel.getComponents()).anyMatch(c ->
+	// rect.intersects(c.getBounds()));
     }
 
     /**
