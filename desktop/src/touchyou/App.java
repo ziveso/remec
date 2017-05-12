@@ -116,24 +116,31 @@ public class App {
 	// TODO generate Profile object from .profile file
 	// TODO finished without testing
 	BufferedReader reader = null;
+	Profile profile = null;
 	try {
 	    try {
-		CommandSetter[] methods = { (c, l) -> c.setId(Integer.parseInt(l)), (c, l) -> c.setCombination(l),
-			(c, l) -> c.setMode(Integer.parseInt(l)), (c, l) -> c.setImagePath(l),
-			(c, l) -> c.setWidth(Double.parseDouble(l)), (c, l) -> c.setHeight(Double.parseDouble(l)),
-			(c, l) -> c.setX(Double.parseDouble(l)), (c, l) -> c.setY(Double.parseDouble(l)) };
+		CommandSetter[] methods = { (c, l) -> c.setId(Integer.parseInt(l)), // 0
+			(c, l) -> c.setCombination(l), // 1
+			(c, l) -> c.setMode(Integer.parseInt(l)), // 2
+			(c, l) -> c.setImagePath(l), // 3
+			(c, l) -> c.setWidth(Double.parseDouble(l)), // 4
+			(c, l) -> c.setHeight(Double.parseDouble(l)), // 5
+			(c, l) -> c.setX(Double.parseDouble(l)), // 6
+			(c, l) -> c.setY(Double.parseDouble(l)) };// 7
 
 		reader = new BufferedReader(new FileReader(file));
 		String name = reader.readLine();
-		profile = new Profile(name.substring(5)); // ignore name= .
+		profile = new Profile(name.split("=")[1]);
 		String line;
 		Command command = new Command();
 		for (int i = 0; (line = reader.readLine()) != null; i++) {
-		    methods[i].run(command, line);
-		    if (i >= 7) {
+		    if (i > 7) {
 			i = 0;
+		    }
+		    line = line.split("=")[1];
+		    methods[i].run(command, line);
+		    if (i == 7) {
 			profile.addCommand(command);
-			System.out.println(command);
 		    }
 		}
 	    } finally {
