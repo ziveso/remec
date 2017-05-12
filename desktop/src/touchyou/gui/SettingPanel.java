@@ -112,14 +112,17 @@ public class SettingPanel extends JPanel {
 		case 18:
 		    string.append("Alt +");
 		    break;
+		case 157:
+		    string.append("Cmd +");
+		    break;
 		default:
 		    string.append(e.getKeyChar() + " +");
 		}
 		combination.setText(string.toString());
 		return;
-		
+
 	    }
-	    
+
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		pressing--;
@@ -132,9 +135,7 @@ public class SettingPanel extends JPanel {
 	    }
 
 	    @Override
-	    public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+	    public void keyTyped(KeyEvent e) {// not use//
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
@@ -308,7 +309,7 @@ public class SettingPanel extends JPanel {
 	}
 
     }
-    
+
     public void clear() {
 	for (Component c : this.getComponents()) {
 	    c.setEnabled(false);
