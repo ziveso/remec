@@ -55,56 +55,15 @@ public class MainActivity extends AppCompatActivity {
         //  connectButton = (Button) findViewById(R.id.connectButton);
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
         listView = (ListView) findViewById(R.id.listView);
-        List<String> availableHost = new ArrayList<>();
+        final List<String> availableHost = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView.setAdapter(adapter);
-        findAvailableHost(availableHost);
-    }
-
-    private void findAvailableHost(final List<String> availableHost) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int timeout = 300;
-                String myip = wifiIpAddress(MainActivity.this);
-                String subnet = myip.substring(0, myip.lastIndexOf('.') + 1);
-                Socket req;
-                for (int i = 100; i < 120; i++) {
-                    req = new Socket();
-                    try {
-                        req.setSoTimeout(300);
-                    } catch (SocketException e) {
-                        e.printStackTrace();
-                    }
-                    InetSocketAddress host = new InetSocketAddress(subnet + i, PORT);
-                    hostName = host.getHostName();
-                    try {
-                        req.connect(host, timeout);
-
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                availableHost.add(hostName);
-                            }
-                        });
-                    } catch (IOException e) {
-                        try {
-                            req.close();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(MainActivity.this, "couldn't connect to " + hostName, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
+                new ServerFinder(availableHost).find();
             }
-        }).
-
-                start();
-
+        }).start();
     }
 
 

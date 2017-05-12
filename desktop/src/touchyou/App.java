@@ -145,7 +145,6 @@ public class App {
 		    if (i == 7) {
 			profile.addCommand(command);
 		    }
-		    System.out.println(command);
 		}
 	    } finally {
 		reader.close();
