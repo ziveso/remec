@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -152,7 +153,12 @@ public class WelcomeFrame extends JFrame {
 	btnNew.setOpaque(true);
 	btnNew.setBackground(new Color(245, 245, 245));
 	btnNew.addActionListener(e -> {
-	    new NewProfileFrame().setVisible(true);
+	    Icon icon = null;
+	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : " , "Creating New Profile" , JOptionPane.QUESTION_MESSAGE , icon , null , null);
+	    if(name!=null){
+		Controller.getInstance().newProfile(name);
+		runMainFrame();
+	    }
 	});
 	btnNew.addMouseListener(mouseAdapter);
 	panel_2.add(btnNew);
