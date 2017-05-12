@@ -140,7 +140,7 @@ public class App {
 		    line = line.split("=")[1];
 		    methods[i].run(command, line);
 		    if (i == 7) {
-			profile.addCommand(command);
+			Controller.getInstance().addCommand(command);
 		    }
 		}
 	    } finally {

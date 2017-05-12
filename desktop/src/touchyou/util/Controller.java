@@ -97,6 +97,16 @@ public class Controller {
 	update(command);
     }
 
+    /**
+     * update Command to the profile.
+     */
+    public void addCommand(Command command) {
+	/* notify other Panels */
+	modelPanel.addCommand(command);
+	widgetPanel.addCommand(command);
+	update(command);
+    }
+
     public Command getCommandById(String id) {
 	return app.getProfile().getCommand(Integer.parseInt(id));
     }
@@ -137,12 +147,12 @@ public class Controller {
     public void setModelPanel(ModelPanel modelPanel) {
 	this.modelPanel = modelPanel;
     }
-    
-    public void newProfile(String profileName){
+
+    public void newProfile(String profileName) {
 	app.createNewProfile(profileName);
     }
-    
-    public void openProfile(File file){
+
+    public void openProfile(File file) {
 	app.open(file);
     }
 
