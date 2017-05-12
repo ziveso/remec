@@ -98,6 +98,8 @@ public class Command {
 
     @Override
     public String toString() {
+	if (combination.trim().isEmpty())
+	    return "EMPTY COMMAND";
 	return combination;
     }
 }
