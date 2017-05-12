@@ -1,9 +1,0 @@
-name=Demo
-id=0
-com=23:242:100
-mo=1
-img=null
-w=0.0
-h=0.0
-x=0.0
-y=0.0

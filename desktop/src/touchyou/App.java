@@ -124,7 +124,8 @@ public class App {
 			(c, l) -> c.setX(Double.parseDouble(l)), (c, l) -> c.setY(Double.parseDouble(l)) };
 
 		reader = new BufferedReader(new FileReader(file));
-		profile = new Profile(reader.readLine());
+		String name = reader.readLine();
+		profile = new Profile(name.substring(5)); // ignore name= .
 		String line;
 		Command command = new Command();
 		for (int i = 0; (line = reader.readLine()) != null; i++) {
@@ -132,7 +133,7 @@ public class App {
 		    if (i >= 7) {
 			i = 0;
 			profile.addCommand(command);
-			command = new Command();
+			System.out.println(command);
 		    }
 		}
 	    } finally {

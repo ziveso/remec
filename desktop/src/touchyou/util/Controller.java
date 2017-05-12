@@ -146,4 +146,8 @@ public class Controller {
 	app.open(file);
     }
 
+    public void save() {
+	app.save();
+    }
+
 }

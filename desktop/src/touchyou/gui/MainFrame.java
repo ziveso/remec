@@ -46,7 +46,10 @@ public class MainFrame extends JFrame {
 	JMenuBar menubar = new JMenuBar();
 	JMenu file = new JMenu("File");
 	JMenuItem newprofile = new JMenuItem("New Profile");
+	JMenuItem save = new JMenuItem("save");
+	save.addActionListener(e->Controller.getInstance().save());
 	file.add(newprofile);
+	file.add(save);
 	menubar.add(file);
 	setJMenuBar(menubar);
 
