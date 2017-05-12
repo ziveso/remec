@@ -81,10 +81,10 @@ public class ModelPanel extends JPanel {
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);
-	commandBtn.setPreferredSize(new Dimension(50, 50));
+	commandBtn.setPreferredSize(new Dimension((int) command.getWidth(), (int) command.getHeight()));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
-	commandBtn.setBounds(0, 0, 50, 50);
+	commandBtn.setBounds( (int) command.getX(), (int) command.getY(), (int) command.getWidth(), (int) command.getHeight());
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
@@ -94,7 +94,6 @@ public class ModelPanel extends JPanel {
 	command.setY(commandBtn.getY());
 	this.add(commandBtn);
 	Controller.getInstance().update(command);
-
     }
 
     public void update(Command command) {

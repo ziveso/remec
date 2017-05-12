@@ -90,6 +90,8 @@ public class Controller {
 	Command command = new Command();
 	command.setCombination("");
 	command.setId(id++);
+	command.setWidth(50);
+	command.setHeight(50);
 	app.getProfile().addCommand(command);
 	addCommand(command);
     }
@@ -158,7 +160,6 @@ public class Controller {
     }
 
     public void loadProfile() {
-	app.getProfile().getCommands().forEach(System.out::println);
 	app.getProfile().getCommands().forEach(this::addCommand);
     }
 
