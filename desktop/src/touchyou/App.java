@@ -138,12 +138,14 @@ public class App {
 		for (int i = 0; (line = reader.readLine()) != null; i++) {
 		    if (i > 7) {
 			i = 0;
+			command = new Command();
 		    }
 		    line = line.split("=")[1];
 		    methods[i].run(command, line);
 		    if (i == 7) {
 			profile.addCommand(command);
 		    }
+		    System.out.println(command);
 		}
 	    } finally {
 		reader.close();

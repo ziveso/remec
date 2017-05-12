@@ -23,7 +23,7 @@ public class Command {
 
     public Image getImage() {
 	if (image == null) {
-	    return new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
+	    return new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 	}
 	return image;
     }
@@ -96,4 +96,8 @@ public class Command {
 	this.x = x;
     }
 
+    @Override
+    public String toString() {
+	return combination;
+    }
 }

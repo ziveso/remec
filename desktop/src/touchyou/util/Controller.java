@@ -158,6 +158,7 @@ public class Controller {
     }
 
     public void loadProfile() {
+	app.getProfile().getCommands().forEach(System.out::println);
 	app.getProfile().getCommands().forEach(this::addCommand);
     }
 
