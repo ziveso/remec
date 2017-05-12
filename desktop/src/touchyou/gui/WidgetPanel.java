@@ -89,7 +89,8 @@ public class WidgetPanel extends JPanel {
     }
 
     public void clear() {
-	// model.clear();
+	model.clear();
+	this.validate();
     }
 
 }

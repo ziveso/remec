@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
@@ -15,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
@@ -84,7 +86,10 @@ public class ModelPanel extends JPanel {
 	commandBtn.setPreferredSize(new Dimension((int) command.getWidth(), (int) command.getHeight()));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
-	commandBtn.setBounds( (int) command.getX(), (int) command.getY(), (int) command.getWidth(), (int) command.getHeight());
+	commandBtn.setBounds((int) command.getX(), (int) command.getY(), (int) command.getWidth(),
+		(int) command.getHeight());
+	commandBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+	commandBtn.setFont(new Font(commandBtn.getFont().getFontName() , 0 , 30));
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
@@ -107,6 +112,7 @@ public class ModelPanel extends JPanel {
 		button.setIcon(new ImageIcon(command.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
 			Image.SCALE_SMOOTH)));
 	    }
+	    button.setText(command.toString());
 	}
     }
 

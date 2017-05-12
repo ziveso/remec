@@ -88,8 +88,8 @@ public class Controller {
     public void addCommand() {
 	/* Create new Command */
 	Command command = new Command();
-	command.setCombination("");
-	command.setId(id++);
+	command.setCombination(" ");
+	command.setId(++id);
 	command.setWidth(50);
 	command.setHeight(50);
 	app.getProfile().addCommand(command);
@@ -160,6 +160,11 @@ public class Controller {
     }
 
     public void loadProfile() {
+	app.getProfile().getCommands().forEach((e) -> {
+	    if (e.getId() > id) {
+		id = e.getId();
+	    }
+	});
 	app.getProfile().getCommands().forEach(this::addCommand);
     }
 
