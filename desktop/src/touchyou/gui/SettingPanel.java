@@ -97,6 +97,7 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
+		
 		e.consume();
 		if (pressing == 0) {
 		    string = new StringBuffer();
@@ -133,8 +134,7 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(e);
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();

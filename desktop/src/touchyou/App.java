@@ -2,9 +2,11 @@ package touchyou;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -43,6 +45,10 @@ public class App {
 	server.sendToAllClients(profile);
     }
 
+    public void save() {
+	save("./profiles/" + profile.getName() + ".profile");
+    }
+
     /**
      * Save profile data to .profile file.
      * 
@@ -51,28 +57,32 @@ public class App {
     public void save(String path) {
 	// TODO write data to .profile file
 	// TODO finished without testing
+	PrintWriter writer = null;
 	try {
-	    PrintWriter writer = null;
-	    try {
-		File file = new File(path);
-		writer = new PrintWriter(file);
-		writer.println("name=" + profile.getName());
-		for (Command command : profile.getCommands()) {
-		    writer.println("id=" + command.getId());
-		    writer.println("com=" + command.getCombination());
-		    writer.println("mo=" + command.getMode());
-		    writer.println("img" + command.getImagePath());
-		    writer.println("w=" + command.getWidth());
-		    writer.println("h=" + command.getHeight());
-		    writer.println("x=" + command.getX());
-		    writer.println("y=" + command.getY());
-		}
-	    } finally {
-		writer.close();
+	    writer = new PrintWriter(path, "UTF-8");
+	    writer.println("name=" + profile.getName());
+	    for (Command command : profile.getCommands()) {
+		writer.println("id=" + command.getId());
+		writer.println("com=" + command.getCombination());
+		writer.println("mo=" + command.getMode());
+		writer.println("img=" + command.getImagePath());
+		writer.println("w=" + command.getWidth());
+		writer.println("h=" + command.getHeight());
+		writer.println("x=" + command.getX());
+		writer.println("y=" + command.getY());
 	    }
-	} catch (IOException e) {
+	} catch (FileNotFoundException | UnsupportedEncodingException e) {
 	    e.printStackTrace();
+	} finally {
+	    writer.close();
 	}
+    }
+
+    public void createNewProfile(String profileName) {
+	profile = new Profile(profileName);
+	String filepath = "./profiles/" + profileName + ".profile";
+	save(filepath);
+	open(filepath);
     }
 
     /**
@@ -150,33 +160,34 @@ public class App {
     private void run() {
 	try {
 	    server.listen();
-//	    new Thread(() -> {
-//		try {
-//		    new ServerSocket(12345, 10).accept();
-//		    System.out.println("connected");
-//		} catch (IOException e) {
-//		    // TODO Auto-generated catch block
-//		    e.printStackTrace();
-//		}
-//
-//	    }).start();
-//	    new Thread(() -> {
-//		try {
-//		    String myip = "192.168.2.106";
-//		    Socket socket = new Socket();
-//		    socket.connect(new InetSocketAddress(myip, 3000), 2000);
-//		    System.out.println("finished trying");
-//
-//		    socket = new Socket();
-//		    socket.connect(new InetSocketAddress("192.168.2.107", 3000), 2000);
-//		    System.out.println("finished trying");
-//		    
-//		} catch (IOException e) {
-//		    // TODO Auto-generated catch block
-//		    e.printStackTrace();
-//		}
-//
-//	    }).start();
+	    // new Thread(() -> {
+	    // try {
+	    // new ServerSocket(12345, 10).accept();
+	    // System.out.println("connected");
+	    // } catch (IOException e) {
+	    // // TODO Auto-generated catch block
+	    // e.printStackTrace();
+	    // }
+	    //
+	    // }).start();
+	    // new Thread(() -> {
+	    // try {
+	    // String myip = "192.168.2.106";
+	    // Socket socket = new Socket();
+	    // socket.connect(new InetSocketAddress(myip, 3000), 2000);
+	    // System.out.println("finished trying");
+	    //
+	    // socket = new Socket();
+	    // socket.connect(new InetSocketAddress("192.168.2.107", 3000),
+	    // 2000);
+	    // System.out.println("finished trying");
+	    //
+	    // } catch (IOException e) {
+	    // // TODO Auto-generated catch block
+	    // e.printStackTrace();
+	    // }
+	    //
+	    // }).start();
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
@@ -198,6 +209,12 @@ public class App {
 	    e.printStackTrace();
 	}
 	App app = new App();
+	app.createNewProfile("Demo");
+	Command c = new Command();
+	c.setCombination("23:242:100");
+	c.setMode(1);
+	app.getProfile().addCommand(c);
+	app.save();
 	Controller.getInstance().setApp(app);
 	app.run();
 	new WelcomeFrame().setVisible(true);
