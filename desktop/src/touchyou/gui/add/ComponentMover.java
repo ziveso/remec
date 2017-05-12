@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
+import touchyou.util.Controller;
+
 /**
  * This class allows you to move a Component by using a mouse. The Component
  * moved can be a high level Window (ie. Window, Frame, Dialog) in which case
@@ -342,5 +344,7 @@ public class ComponentMover extends MouseAdapter {
 				destination.validate();
 			}
 		}
+		Controller.getInstance().getCurrentCommand().setX(destination.getX());
+		Controller.getInstance().getCurrentCommand().setY(destination.getY());
 	}
 }

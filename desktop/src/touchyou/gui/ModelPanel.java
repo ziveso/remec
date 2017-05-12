@@ -88,6 +88,10 @@ public class ModelPanel extends JPanel {
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
+	command.setWidth(commandBtn.getWidth());
+	command.setHeight(commandBtn.getHeight());
+	command.setX(commandBtn.getX());
+	command.setY(commandBtn.getY());
 	this.add(commandBtn);
 	Controller.getInstance().update(command);
 
