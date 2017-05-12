@@ -89,7 +89,7 @@ public class ModelPanel extends JPanel {
 	commandBtn.setBounds((int) command.getX(), (int) command.getY(), (int) command.getWidth(),
 		(int) command.getHeight());
 	commandBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-	commandBtn.setFont(new Font(commandBtn.getFont().getFontName() , 0 , 30));
+	commandBtn.setFont(new Font(commandBtn.getFont().getFontName(), 0, 24));
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
@@ -111,8 +111,8 @@ public class ModelPanel extends JPanel {
 		button.setBorder(BorderFactory.createLineBorder(Color.red, 2));
 		button.setIcon(new ImageIcon(command.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
 			Image.SCALE_SMOOTH)));
+		button.setText(command.toString());
 	    }
-	    button.setText(command.toString());
 	}
     }
 
