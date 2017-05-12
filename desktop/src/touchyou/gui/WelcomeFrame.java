@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
@@ -92,7 +94,7 @@ public class WelcomeFrame extends JFrame {
 	panel_1.add(listPanel, gbc_listPanel);
 	listPanel.setLayout(new BorderLayout(0, 0));
 
-	JList<String> list = new JList();
+	JList<String> list = new JList<>();
 	list.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
@@ -102,6 +104,12 @@ public class WelcomeFrame extends JFrame {
 		model.addElement(f);
 	    }
 	}
+	list.addListSelectionListener((e) -> {
+	    String profileName = list.getSelectedValue();
+	    File file = new File("./profiles/" + profileName);
+	    Controller.getInstance().openProfile(file);
+	    runMainFrame();
+	});
 	listPanel.add(new JScrollPane(list));
 
 	JLabel lblNewLabel_1 = new JLabel("Profile List");
@@ -154,8 +162,9 @@ public class WelcomeFrame extends JFrame {
 	btnNew.setBackground(new Color(245, 245, 245));
 	btnNew.addActionListener(e -> {
 	    Icon icon = null;
-	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : " , "Creating New Profile" , JOptionPane.QUESTION_MESSAGE , icon , null , null);
-	    if(name!=null){
+	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
+		    JOptionPane.QUESTION_MESSAGE, icon, null, null);
+	    if (name != null) {
 		Controller.getInstance().newProfile(name);
 		runMainFrame();
 	    }
