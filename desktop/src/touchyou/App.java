@@ -58,7 +58,7 @@ public class App {
 	    String packet = String.format("%s;%d;%f;%f;%f;%f", combination, mode, width, height, x, y);
 	    server.sendToAllClients(packet);
 	});
-
+	server.sendToAllClients("FINISH");
     }
 
     public void save() {
