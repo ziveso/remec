@@ -19,16 +19,17 @@ public class MenuBar extends JMenuBar {
 	 * FILE MENU
 	 */
 	JMenu file = new JMenu("File");
-	JMenuItem open = new JMenuItem("OPEN");
-	JMenuItem save = new JMenuItem("SAVE");
-	JMenuItem saveAs = new JMenuItem("SAVE AS");
 	JMenuItem newprofile = new JMenuItem("New Profile");
-	JMenuItem exit = new JMenuItem("EXIT");
-	file.add(open);
-	file.add(save);
-	file.add(saveAs);
+	JMenuItem open = new JMenuItem("Open Profile...");
+	JMenuItem save = new JMenuItem("Save");
+	JMenuItem saveAs = new JMenuItem("Save As...");
+	JMenuItem exit = new JMenuItem("Quit Touch You");
 	file.addSeparator();
 	file.add(newprofile);
+	file.add(open);
+	file.addSeparator();
+	file.add(save);
+	file.add(saveAs);
 	file.addSeparator();
 	file.add(exit);
 	this.add(file);
@@ -56,9 +57,9 @@ public class MenuBar extends JMenuBar {
 	 * EDIT MENU
 	 */
 	JMenu edit = new JMenu("Edit");
-	JMenuItem undo = new JMenuItem("UNDO");
-	JMenuItem redo = new JMenuItem("REDO");
-	JMenuItem reset = new JMenuItem("RESET");
+	JMenuItem undo = new JMenuItem("Undo");
+	JMenuItem redo = new JMenuItem("Redo");
+	JMenuItem reset = new JMenuItem("Reset");
 	edit.add(undo);
 	edit.add(redo);
 	edit.addSeparator();
@@ -69,7 +70,7 @@ public class MenuBar extends JMenuBar {
 	 * PHONE MENU
 	 */
 	JMenu phone = new JMenu("Phone");
-	JMenuItem sync = new JMenuItem("SYNC");
+	JMenuItem sync = new JMenuItem("Sync");
 	phone.add(sync);
 	this.add(phone);
 
