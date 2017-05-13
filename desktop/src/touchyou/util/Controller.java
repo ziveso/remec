@@ -39,6 +39,10 @@ public class Controller {
 	broadcaster = new UDPBroadcast();
     }
 
+    public void sync() {
+	app.sync();
+    }
+
     /**
      * Allow android devices to search for this computer.
      */
@@ -206,9 +210,9 @@ public class Controller {
     public void save() {
 	app.save();
     }
-    
+
     public void saveAs(File file) {
-	String path = file.getAbsolutePath()+".profile";
+	String path = file.getAbsolutePath() + ".profile";
 	app.save(path);
     }
 

@@ -47,7 +47,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int PORT = 3000;
+    public static final int PORT = 5910;
     static ProgressDialog pd;
     private final List<Host> availableHost = new ArrayList<>();
     private ListView listView;
@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
-                    Controller.getInstance().setConnection(client);
                 } catch (IOException e) {
                     System.out.println("Connection Timeout");
+                    e.printStackTrace();
                 }
                 return null;
             }

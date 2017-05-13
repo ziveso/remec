@@ -3,6 +3,8 @@ package touchyou;
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
 
+import touchyou.util.Controller;
+
 /**
  * A TCP/IP socket server for communication with Android device.
  * 
@@ -25,6 +27,12 @@ public class TCPServer extends AbstractServer {
     protected void clientConnected(ConnectionToClient client) {
 	super.clientConnected(client);
 	System.out.println("Client connected.");
+	Controller.getInstance().sync();
+    }
+    @Override
+    protected synchronized void clientException(ConnectionToClient client, Throwable exception) {
+        super.clientException(client, exception);
+        exception.printStackTrace();
     }
 
     @Override

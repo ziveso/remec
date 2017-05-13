@@ -1,6 +1,8 @@
 package touchyou;
 
+import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -21,7 +24,7 @@ import touchyou.util.Controller;
  *
  */
 public class App {
-    public static int PORT = 3000;
+    public static int PORT = 5910;
     public TCPServer server;
     public Profile profile;
 
@@ -37,9 +40,25 @@ public class App {
      * Transfer profile data to mobile device.
      */
     public void sync() {
-	// TODO sync commands to mobile device
-	server.sendToAllClients("sync request");
-	server.sendToAllClients(profile);
+	profile.getCommands().forEach(command -> {
+	    ByteArrayOutputStream b = new ByteArrayOutputStream();
+	    byte[] image = null;
+	    try {
+		ImageIO.write((RenderedImage) command.getImage(), "png", b);
+		image = b.toByteArray();
+	    } catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    String combination = command.getCombination();
+	    int mode = command.getMode();
+	    double width = command.getWidth();
+	    double height = command.getHeight();
+	    double x = command.getX();
+	    double y = command.getY();
+	    String packet = String.format("%s;%d;%f;%f;%f;%f", combination, mode, width, height, x, y);
+	    server.sendToAllClients(packet);
+	});
+
     }
 
     public void save() {

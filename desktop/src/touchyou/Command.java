@@ -95,7 +95,7 @@ public class Command {
     public void setX(double x) {
 	this.x = x;
     }
-
+    
     @Override
     public String toString() {
 	if (combination.trim().isEmpty())
