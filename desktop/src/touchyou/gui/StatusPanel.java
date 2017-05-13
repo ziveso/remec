@@ -47,17 +47,17 @@ public class StatusPanel extends JPanel {
 	gbc_panel.gridy = 0;
 	add(panel, gbc_panel);
 	panel.setLayout(new GridLayout(0, 1, 0, 0));
-	
+
 	JPanel panel_1 = new JPanel();
 	panel_1.setOpaque(false);
 	panel.add(panel_1);
 	GridBagLayout gbl_panel_1 = new GridBagLayout();
-	gbl_panel_1.columnWidths = new int[]{145, 37, 38, 0, 0};
-	gbl_panel_1.rowHeights = new int[]{20, 0};
-	gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-	gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+	gbl_panel_1.columnWidths = new int[] { 145, 37, 38, 0, 0 };
+	gbl_panel_1.rowHeights = new int[] { 20, 0 };
+	gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+	gbl_panel_1.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 	panel_1.setLayout(gbl_panel_1);
-	
+
 	JLabel lblRemoteConnection = new JLabel("Remote Connection:");
 	GridBagConstraints gbc_lblRemoteConnection = new GridBagConstraints();
 	gbc_lblRemoteConnection.anchor = GridBagConstraints.WEST;
@@ -67,7 +67,7 @@ public class StatusPanel extends JPanel {
 	gbc_lblRemoteConnection.gridy = 0;
 	panel_1.add(lblRemoteConnection, gbc_lblRemoteConnection);
 	lblRemoteConnection.setForeground(Color.WHITE);
-	
+
 	JRadioButton rdbtnOn = new JRadioButton("On");
 	rdbtnOn.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOn = new GridBagConstraints();
@@ -79,7 +79,7 @@ public class StatusPanel extends JPanel {
 	    Controller.getInstance().startBroadcast();
 	});
 	panel_1.add(rdbtnOn, gbc_rdbtnOn);
-	
+
 	JRadioButton rdbtnOff = new JRadioButton("Off");
 	rdbtnOff.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOff = new GridBagConstraints();
@@ -91,7 +91,7 @@ public class StatusPanel extends JPanel {
 	    Controller.getInstance().stopBroadcast();
 	});
 	panel_1.add(rdbtnOff, gbc_rdbtnOff);
-	
+
 	ButtonGroup connectionGroup = new ButtonGroup();
 	connectionGroup.add(rdbtnOff);
 	connectionGroup.add(rdbtnOn);
@@ -109,7 +109,7 @@ public class StatusPanel extends JPanel {
 	lblConnectedFrom.setForeground(Color.WHITE);
 	panel.add(lblConnectedFrom);
 
-	SyncButton syncButton = new SyncButton(200, 50, (App) null);
+	SyncButton syncButton = new SyncButton(200, 50);
 	syncButton.setBackground(Color.WHITE);
 	syncButton.setBorder(new EmptyBorder(20, 20, 20, 20));
 	GridBagConstraints gbc_syncButton = new GridBagConstraints();
