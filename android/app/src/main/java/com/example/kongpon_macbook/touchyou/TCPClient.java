@@ -35,6 +35,7 @@ public class TCPClient extends AbstractClient {
         super.connectionEstablished();
         Intent intent = new Intent(context, RemoteActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        MainActivity.pd.dismiss();
         context.startActivity(intent);
     }
 }

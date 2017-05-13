@@ -69,12 +69,11 @@ public class ServerFinder {
 
             //We have a response
             System.out.println(">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
-
             //Check if the message is correct
             String message = new String(receivePacket.getData()).trim();
             if (message.equals("DISCOVER_FUIFSERVER_RESPONSE")) {
                 System.out.println("Client : found server at " + receivePacket.getAddress());
-                String host = receivePacket.getAddress().toString().substring(1);
+                String host = receivePacket.getAddress().getHostName();
                 availableHost.add(host);
                 //DO SOMETHING WITH THE SERVER'S IP (for example, store it in your controller)
 //            Controller_Base.setServerIp(receivePacket.getAddress());

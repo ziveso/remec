@@ -1,10 +1,7 @@
 package com.example.kongpon_macbook.touchyou;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import java.io.IOException;
 
 public class RemoteActivity extends Activity {
     @Override
@@ -14,12 +11,14 @@ public class RemoteActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    MainActivity.client.sendToServer("Hi");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Controller.getInstance().sendMessage("Hi");
             }
         }).start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Controller.getInstance().closeConnection();
     }
 }

@@ -48,12 +48,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static final int PORT = 3000;
-    //    public Button connectButton;
-    //    public EditText ipEditText;
+    static ProgressDialog pd;
     private ListView listView;
     final List<String> availableHost = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    public static TCPClient client;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -64,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
 
         /* Initialize views */
+        setTitle("Select a Host Computer");
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,9 +83,15 @@ public class MainActivity extends AppCompatActivity {
                 connect(host);
             }
         });
-
+        pd = new ProgressDialog(this);
         findServers();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findServers();
     }
 
     @Override
@@ -144,9 +149,11 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("On post execution");
                 availableHost.clear();
                 availableHost.addAll(Arrays.asList(strings));
-                adapter.notifyDataSetChanged();
-                if (availableHost.isEmpty())
+                if (availableHost.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
+                    availableHost.add("Could not find any available servers");
+                }
+                adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
 
             }
@@ -155,16 +162,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void connect(String host) {
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setTitle("Connecting to "+host);
+
+        pd.setTitle("Connecting to " + host);
         pd.setMessage("Connecting...");
         new AsyncTask<String, Integer, Void>() {
             @Override
             protected Void doInBackground(String... params) {
-                client = new TCPClient(params[0], PORT, MainActivity.this);
+                TCPClient client = new TCPClient(params[0], PORT, MainActivity.this);
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
+                    Controller.getInstance().setConnection(client);
                 } catch (IOException e) {
                     System.out.println("Connection Timeout");
                 }
