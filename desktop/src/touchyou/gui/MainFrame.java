@@ -6,11 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -42,16 +38,7 @@ public class MainFrame extends JFrame {
 	setTitle("Touch You 0.1.4 Beta");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setSize(1004, 635);
-
-	JMenuBar menubar = new JMenuBar();
-	JMenu file = new JMenu("File");
-	JMenuItem newprofile = new JMenuItem("New Profile");
-	JMenuItem save = new JMenuItem("save");
-	save.addActionListener(e -> Controller.getInstance().save());
-	file.add(newprofile);
-	file.add(save);
-	menubar.add(file);
-	setJMenuBar(menubar);
+	setJMenuBar(new MenuBar());
 
 	JPanel workingPanel = new JPanel();
 	workingPanel.setBackground(GUIUtil.getBackgroundColor());
@@ -107,12 +94,12 @@ public class MainFrame extends JFrame {
 	controller.setMobilePanel(mobilePanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
-
+	
 	this.pack();
+	statusPanel.requestFocusInWindow();
 	setLocationRelativeTo(null);
 	controller.clear();
 	controller.loadProfile();
-
     }
 
 }

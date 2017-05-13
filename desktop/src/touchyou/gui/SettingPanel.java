@@ -13,6 +13,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -99,7 +100,6 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
-
 		e.consume();
 		if (pressing == 0) {
 		    key.clear();
@@ -123,7 +123,6 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyTyped(KeyEvent e) {
-		System.out.println(e);
 	    }
 	});
 	GridBagConstraints gbc_combination = new GridBagConstraints();
@@ -263,7 +262,6 @@ public class SettingPanel extends JPanel {
 	ButtonGroup modeGroup = new ButtonGroup();
 	modeGroup.add(rdbtnSingleTouch);
 	modeGroup.add(rdbtnFollow);
-
     }
 
     public void update(Command command) {
