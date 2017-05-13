@@ -25,24 +25,66 @@ public class CommandInvoker {
     }
 
     /**
-     * Invoke a combination.
+     * Tap a combination.
      * 
      * @param combination
-     *            is the combination of key codes to invoke
+     *            is the combination of key codes to tap
      */
-    public void invoke(String combination) {
+    public void tap(String combination) {
 	String[] keys = combination.split(":");
-	Arrays.stream(keys).map(e -> String.valueOf(e)).forEach(this::invoke);
+	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::tap);
     }
 
     /**
-     * Invoke a combination
+     * Tap a combination.
      * 
      * @param keycodes
-     *            is array of key codes to invoke
+     *            is array of key codes to tap
      */
-    public void invoke(int... keycodes) {
+    public void tap(int... keycodes) {
+	press(keycodes);
+	release(keycodes);
+    }
+
+    /**
+     * Press a combination.
+     * 
+     * @param combination
+     *            is a combination of key code to press
+     */
+    public void press(String combination) {
+	String[] keys = combination.split(":");
+	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::press);
+    }
+
+    /**
+     * Press a combination.
+     * 
+     * @param keycodes
+     *            is array of key codes to press
+     */
+    public void press(int... keycodes) {
 	Arrays.stream(keycodes).forEach(keycode -> robot.keyPress(keycode));
-	Arrays.stream(keycodes).forEach(keycode -> robot.keyRelease(keycode));
+    }
+
+    /**
+     * Release a combination.
+     * 
+     * @param combination
+     *            is a combination of key code to release
+     */
+    public void release(String combination) {
+	String[] keys = combination.split(":");
+	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::release);
+    }
+
+    /**
+     * Release a combination.
+     * 
+     * @param keycodes
+     *            is array of key codes to press
+     */
+    public void release(int... keycodes) {
+	Arrays.stream(keycodes).forEach(keycode -> robot.keyPress(keycode));
     }
 }
