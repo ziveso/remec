@@ -19,10 +19,14 @@ public class TCPClient extends AbstractClient {
     }
 
     @Override
-    protected void handleMessageFromServer(final Object o) {
-        final String packet = (String) o;
+    protected void handleMessageFromServer(Object o) {
         System.out.println(o);
-        System.out.println(Controller.getInstance().commands.add((String) o));
+        if (o.equals("FINISH")) {
+            Controller.getInstance().notifyRemoteActivity();
+        }else {
+            String packet = (String) o;
+            System.out.println(Controller.getInstance().commands.add(packet));
+        }
     }
 
 
