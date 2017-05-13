@@ -23,6 +23,7 @@ import touchyou.Command;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -38,6 +39,7 @@ public class WidgetPanel extends JPanel {
      * Create the panel.
      */
     public WidgetPanel(int width, int height) {
+	this.setPreferredSize(new Dimension(width, height));
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -66,10 +68,16 @@ public class WidgetPanel extends JPanel {
 	panel.setLayout(new BorderLayout(0, 0));
 
 	JLabel lblComponentTree = new JLabel("Component Tree");
+	lblComponentTree.setHorizontalAlignment(SwingConstants.CENTER);
+	lblComponentTree.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+	lblComponentTree.setOpaque(true);
+	lblComponentTree.setBackground(GUIUtil.getBackgroundColor());
+	lblComponentTree.setForeground(GUIUtil.getForegroundColor());
+	lblComponentTree.setBorder(BorderFactory.createEtchedBorder());
 	panel.add(lblComponentTree, BorderLayout.NORTH);
 
 	list = new JList<>();
-	list.setFont(new Font(Font.MONOSPACED, 0, 18));
+	list.setFont(new Font(Font.MONOSPACED, 0, 14));
 	model = new DefaultListModel<>();
 	list.setModel(model);
 	list.addListSelectionListener(new ListSelectionListener() {

@@ -22,8 +22,6 @@ import touchyou.gui.MobilePanel;
 public class GUIUtil {
     public static int WIDTH = 1000;
     public static int HEIGHT = 500;
-    private static int x = 0;
-    private static int y = 0;
 
     /**
      * get the Factory Border use it for debug. in case of you don't want border

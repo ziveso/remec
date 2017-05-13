@@ -217,4 +217,9 @@ public class Controller {
 	app.getProfile().getCommands().forEach(this::addCommand);
     }
 
+    public Point getInitLocation(Command command) {
+	Point xy = new Point(0, 0);
+	return xy;
+    }
+
 }
