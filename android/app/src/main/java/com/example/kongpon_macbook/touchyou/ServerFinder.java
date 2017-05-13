@@ -61,7 +61,7 @@ public class ServerFinder {
             }
 
             System.out.println(">>> Done looping over all network interfaces. Now waiting for a reply!");
-
+            c.setSoTimeout(4000);
             //Wait for a response
             byte[] recvBuf = new byte[15000];
             DatagramPacket receivePacket = new DatagramPacket(recvBuf, recvBuf.length);

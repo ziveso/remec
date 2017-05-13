@@ -4,17 +4,24 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import touchyou.App;
+import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.JRadioButton;
 
 public class StatusPanel extends JPanel {
 
@@ -40,6 +47,55 @@ public class StatusPanel extends JPanel {
 	gbc_panel.gridy = 0;
 	add(panel, gbc_panel);
 	panel.setLayout(new GridLayout(0, 1, 0, 0));
+	
+	JPanel panel_1 = new JPanel();
+	panel_1.setOpaque(false);
+	panel.add(panel_1);
+	GridBagLayout gbl_panel_1 = new GridBagLayout();
+	gbl_panel_1.columnWidths = new int[]{145, 37, 38, 0, 0};
+	gbl_panel_1.rowHeights = new int[]{20, 0};
+	gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+	gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+	panel_1.setLayout(gbl_panel_1);
+	
+	JLabel lblRemoteConnection = new JLabel("Remote Connection:");
+	GridBagConstraints gbc_lblRemoteConnection = new GridBagConstraints();
+	gbc_lblRemoteConnection.anchor = GridBagConstraints.WEST;
+	gbc_lblRemoteConnection.insets = new Insets(0, 0, 0, 5);
+	gbc_lblRemoteConnection.fill = GridBagConstraints.VERTICAL;
+	gbc_lblRemoteConnection.gridx = 0;
+	gbc_lblRemoteConnection.gridy = 0;
+	panel_1.add(lblRemoteConnection, gbc_lblRemoteConnection);
+	lblRemoteConnection.setForeground(Color.WHITE);
+	
+	JRadioButton rdbtnOn = new JRadioButton("On");
+	rdbtnOn.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnOn = new GridBagConstraints();
+	gbc_rdbtnOn.anchor = GridBagConstraints.WEST;
+	gbc_rdbtnOn.insets = new Insets(0, 0, 0, 5);
+	gbc_rdbtnOn.gridx = 1;
+	gbc_rdbtnOn.gridy = 0;
+	rdbtnOn.addActionListener(e -> {
+	    Controller.getInstance().startBroadcast();
+	});
+	panel_1.add(rdbtnOn, gbc_rdbtnOn);
+	
+	JRadioButton rdbtnOff = new JRadioButton("Off");
+	rdbtnOff.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnOff = new GridBagConstraints();
+	gbc_rdbtnOff.anchor = GridBagConstraints.WEST;
+	gbc_rdbtnOff.insets = new Insets(0, 0, 0, 5);
+	gbc_rdbtnOff.gridx = 2;
+	gbc_rdbtnOff.gridy = 0;
+	rdbtnOff.addActionListener(e -> {
+	    Controller.getInstance().stopBroadcast();
+	});
+	panel_1.add(rdbtnOff, gbc_rdbtnOff);
+	
+	ButtonGroup connectionGroup = new ButtonGroup();
+	connectionGroup.add(rdbtnOff);
+	connectionGroup.add(rdbtnOn);
+	rdbtnOff.setSelected(true);
 
 	JLabel lblYourIpAddress = new JLabel("Your IP Address: ");
 	lblYourIpAddress.setForeground(Color.WHITE);
@@ -57,6 +113,7 @@ public class StatusPanel extends JPanel {
 	syncButton.setBackground(Color.WHITE);
 	syncButton.setBorder(new EmptyBorder(20, 20, 20, 20));
 	GridBagConstraints gbc_syncButton = new GridBagConstraints();
+	gbc_syncButton.fill = GridBagConstraints.VERTICAL;
 	gbc_syncButton.insets = new Insets(10, 10, 10, 10);
 	gbc_syncButton.anchor = GridBagConstraints.EAST;
 	gbc_syncButton.gridx = 1;
