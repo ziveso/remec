@@ -14,14 +14,31 @@ import java.net.InetAddress;
 public class UDPBroadcast {
     DatagramSocket socket;
 
-    public void stopBroadcast() {
-	socket.close();
+    /**
+     * Set broadcast status. True to start broadcasting, false to stop
+     * broadcasting.
+     * 
+     * @param choice
+     *            is the broadcast status
+     */
+    public void setBroadcast(boolean choice) {
+	if (socket == null || (choice && socket.isClosed())) {
+	    startBroadcast();
+	} else if (!choice) {
+	    stopBroadcast();
+	}
     }
 
-    public void startBroadcast() {
+    private void stopBroadcast() {
+	socket.close();
+	System.out.println(socket.isConnected());
+    }
+
+    private void startBroadcast() {
 	new Thread(() -> {
 	    try {
-		// Keep a socket open to listen to all the UDP trafic that is
+		// Keep a socket open to listen to all the UDP trafic that
+		// is
 		// destined for this port
 		socket = new DatagramSocket(8888, InetAddress.getByName("0.0.0.0"));
 		socket.setBroadcast(true);

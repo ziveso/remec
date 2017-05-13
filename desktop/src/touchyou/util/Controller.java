@@ -43,7 +43,8 @@ public class Controller {
      * Allow android devices to search for this computer.
      */
     public void startBroadcast() {
-	broadcaster.startBroadcast();
+	broadcaster.setBroadcast(true);
+	app.allowConnection(true);
     }
 
     /**
@@ -51,7 +52,8 @@ public class Controller {
      * this computer.
      */
     public void stopBroadcast() {
-	broadcaster.stopBroadcast();
+	broadcaster.setBroadcast(false);
+	app.allowConnection(false);
     }
 
     /**

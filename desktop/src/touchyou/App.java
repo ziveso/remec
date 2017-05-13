@@ -159,11 +159,30 @@ public class App {
     /**
      * Start listening on the server's port.
      */
-    private void run() {
+    private void enableConnection() {
 	try {
 	    server.listen();
 	} catch (IOException e) {
 	    e.printStackTrace();
+	}
+    }
+
+    /**
+     * Stop listening on the server's port.
+     */
+    private void disableConnection() {
+	try {
+	    server.close();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    public void allowConnection(boolean choice) {
+	if (choice && server.isClosed()) {
+	    enableConnection();
+	} else if (!choice) {
+	    disableConnection();
 	}
     }
 
@@ -184,7 +203,6 @@ public class App {
 	}
 	App app = new App();
 	Controller.getInstance().setApp(app);
-	app.run();
 	new WelcomeFrame().setVisible(true);
     }
 }
