@@ -15,7 +15,11 @@ import java.util.List;
  */
 
 public class ServerFinder {
-
+    /* port to send broadcast packets */
+    private static final int PORT = 5910;
+    /* maximum time to wait for reply */
+    private static final int TIMEOUT = 4000; // 4 seconds
+    private static final int MAX_PACKET_SIZE = 2048;
 
     public static Host[] getAvailableHost() {
         List<Host> availableHost = new ArrayList<>();
@@ -29,7 +33,7 @@ public class ServerFinder {
 
             //Try the 255.255.255.255 first
             try {
-                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), 8888);
+                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), PORT);
                 c.send(sendPacket);
                 System.out.println(">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
             } catch (Exception e) {
@@ -52,7 +56,7 @@ public class ServerFinder {
 
                     // Send the broadcast package!
                     try {
-                        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, 8888);
+                        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, PORT);
                         c.send(sendPacket);
                     } catch (Exception e) {
                     }
@@ -61,9 +65,9 @@ public class ServerFinder {
             }
 
             System.out.println(">>> Done looping over all network interfaces. Now waiting for a reply!");
-            c.setSoTimeout(4000);
+            c.setSoTimeout(TIMEOUT);
             //Wait for a response
-            byte[] recvBuf = new byte[15000];
+            byte[] recvBuf = new byte[MAX_PACKET_SIZE];
             DatagramPacket receivePacket = new DatagramPacket(recvBuf, recvBuf.length);
             c.receive(receivePacket);
 
@@ -73,9 +77,9 @@ public class ServerFinder {
             String message = new String(receivePacket.getData()).trim();
             if (message.contains("RESPONSE_FROM")) {
                 String name = message.split("=")[1];
-                System.out.println("Client : found server at " + receivePacket.getAddress()+" "+name);
+                System.out.println("Client : found server at " + receivePacket.getAddress() + " " + name);
                 String address = receivePacket.getAddress().getHostName();
-                availableHost.add(new Host(name,address));
+                availableHost.add(new Host(name, address));
                 //DO SOMETHING WITH THE SERVER'S IP (for example, store it in your controller)
 //            Controller_Base.setServerIp(receivePacket.getAddress());
             }
