@@ -100,6 +100,27 @@ public class Command {
     public String toString() {
 	if (combination.trim().isEmpty())
 	    return "EMPTY COMMAND";
-	return combination;
+	StringBuffer name = new StringBuffer();
+	String[] text = combination.split(":");
+	for (String txt : text) {
+	    switch (txt) {
+	    case "16":
+		name.append("SHIFT");
+		break;
+	    case "17":
+		name.append("ALT");
+		break;
+	    case "18":
+		name.append("CTRL");
+		break;
+	    case "157":
+		name.append("CMD");
+		break;
+	    default:
+		name.append((char) Integer.parseInt(txt));
+	    }
+	    name.append(" ");
+	}
+	return name.toString();
     }
 }
