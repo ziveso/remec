@@ -7,6 +7,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     final List<String> availableHost = new ArrayList<>();
     ArrayAdapter<String> adapter;
     public static TCPClient client;
+    SwipeRefreshLayout swipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,14 @@ public class MainActivity extends AppCompatActivity {
         //  connectButton = (Button) findViewById(R.id.connectButton);
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
         /* Initialize views */
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
+        swipe = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                findServers();
+            }
+        });        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,7 +78,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findServers();
+
     }
+
+
+    private void findServers() {
+        swipe.setRefreshing(true);
+        new AsyncTask<String, Integer, String[]>() {
+            @Override
+            protected String[] doInBackground(String... params) {
+                return ServerFinder.getAvailableHost();
+            }
+
+            @Override
+            protected void onPostExecute(String[] strings) {
+                super.onPostExecute(strings);
+                System.out.println(Arrays.toString(strings));
+                System.out.println("On post execution");
+                availableHost.addAll(Arrays.asList(strings));
+                adapter.notifyDataSetChanged();
+                if (availableHost.isEmpty())
+                    Toast.makeText(MainActivity.this, "Cannot find any host", Toast.LENGTH_SHORT).show();
+                swipe.setRefreshing(false);
+
+            }
+        }.execute();
+    }
+
 
     private void connect(String host) {
         new AsyncTask<String, Integer, Void>() {
@@ -85,24 +120,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }.execute(host);
     }
-
-    private void findServers() {
-        new AsyncTask<String, Integer, String[]>() {
-            @Override
-            protected String[] doInBackground(String... params) {
-                return ServerFinder.getAvailableHost();
-            }
-
-            @Override
-            protected void onPostExecute(String[] strings) {
-                super.onPostExecute(strings);
-                System.out.println(Arrays.toString(strings));
-                availableHost.addAll(Arrays.asList(strings));
-                adapter.notifyDataSetChanged();
-            }
-        }.execute();
-    }
-
 
     protected String wifiIpAddress(Context context) {
         WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
