@@ -231,4 +231,8 @@ public class Controller {
 	return xy;
     }
 
+    public void sync() {
+	app.sync();
+    }
+
 }

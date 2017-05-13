@@ -47,7 +47,6 @@ public class MenuBar extends JMenuBar {
 		System.out.println("save");
 	    });
 	    open.addActionListener(e -> {
-		// Controller.getInstance().clear();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File("./profiles/"));
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -59,17 +58,15 @@ public class MenuBar extends JMenuBar {
 		    Controller.getInstance().loadProfile();
 		}
 	    });
-	    // TODO SAVE AS
 	    saveAs.addActionListener(e -> {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setSelectedFile(new File(Controller.getInstance().getProfileName()));
 		fileChooser.setApproveButtonText("SAVE");
 		int retrival = fileChooser.showSaveDialog(null);
 		if (retrival == JFileChooser.APPROVE_OPTION) {
-		   Controller.getInstance().saveAs(fileChooser.getSelectedFile());
+		    Controller.getInstance().saveAs(fileChooser.getSelectedFile());
 		}
 	    });
-	    // TODO NEW PROFILE
 	    newprofile.addActionListener(e -> {
 		Icon icon = null;
 		String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
@@ -104,6 +101,13 @@ public class MenuBar extends JMenuBar {
 	edit.add(reset);
 	this.add(edit);
 
+	// Add action to EDIT MENU
+	{
+	    reset.addActionListener((e) -> {
+		Controller.getInstance().clear();
+	    });
+	}
+
 	/**
 	 * PHONE MENU
 	 */
@@ -111,6 +115,18 @@ public class MenuBar extends JMenuBar {
 	JMenuItem sync = new JMenuItem("Sync");
 	phone.add(sync);
 	this.add(phone);
+
+	// add action to Phone Menu
+	{
+	    sync.addActionListener((e) -> {
+		Controller.getInstance().sync();
+	    });
+	}
+
+	// add hotkey to Sync
+	{
+	    sync.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
+	}
 
 	/**
 	 * CONNECTION MENU
@@ -120,6 +136,22 @@ public class MenuBar extends JMenuBar {
 	JMenuItem disconnect = new JMenuItem("Disable Connection");
 	connection.add(connect);
 	connection.add(disconnect);
+
+	// add action to connection
+	{
+	    connect.addActionListener((e) -> {
+		// TODO ENABLE CONNECTION
+	    });
+	    disconnect.addActionListener((e) -> {
+		// TODO DISABLE CONNECTION
+	    });
+	}
+
+	// add hotkey to connection
+	{
+	    connect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+	    disconnect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+	}
 	this.add(connection);
 
     }
