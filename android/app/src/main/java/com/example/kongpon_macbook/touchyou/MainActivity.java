@@ -1,5 +1,6 @@
 package com.example.kongpon_macbook.touchyou;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     final List<String> availableHost = new ArrayList<>();
     ArrayAdapter<String> adapter;
     public static TCPClient client;
-    SwipeRefreshLayout swipe;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +64,15 @@ public class MainActivity extends AppCompatActivity {
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
 
         /* Initialize views */
-        swipe = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
 
-        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 findServers();
             }
         });
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
@@ -96,16 +99,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search_item) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Connect to Host");
-            builder.setMessage("Enter host IP Address:");
-            builder.setPositiveButton("Connect", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            LayoutInflater layoutInflaterAndroid = LayoutInflater.from(this);
+            final View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
+            AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(this);
+            alertDialogBuilderUserInput.setView(mView);
+            final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
 
-                }
-            });
-            builder.show();
+            alertDialogBuilderUserInput
+                    .setCancelable(false)
+                    .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogBox, int id) {
+                            String host = userInputDialogEditText.getText().toString();
+                            connect(host);
+                        }
+                    })
+
+                    .setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogBox, int id) {
+                                    dialogBox.cancel();
+                                }
+                            });
+
+            AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
+            alertDialogAndroid.show();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -113,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findServers() {
-        swipe.setRefreshing(true);
+        mSwipeRefreshLayout.setRefreshing(true);
         new AsyncTask<String, Integer, String[]>() {
             @Override
             protected String[] doInBackground(String... params) {
@@ -125,11 +142,12 @@ public class MainActivity extends AppCompatActivity {
                 super.onPostExecute(strings);
                 System.out.println(Arrays.toString(strings));
                 System.out.println("On post execution");
+                availableHost.clear();
                 availableHost.addAll(Arrays.asList(strings));
                 adapter.notifyDataSetChanged();
                 if (availableHost.isEmpty())
-                    Toast.makeText(MainActivity.this, "Cannot find any host", Toast.LENGTH_SHORT).show();
-                swipe.setRefreshing(false);
+                    Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
+                mSwipeRefreshLayout.setRefreshing(false);
 
             }
         }.execute();
@@ -137,18 +155,30 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void connect(String host) {
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("Connecting to "+host);
+        pd.setMessage("Connecting...");
         new AsyncTask<String, Integer, Void>() {
             @Override
             protected Void doInBackground(String... params) {
                 client = new TCPClient(params[0], PORT, MainActivity.this);
                 try {
+                    System.out.println("Start connecting");
                     client.openConnection();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Connection Timeout");
                 }
                 return null;
             }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                System.out.println("Done connecting");
+                pd.dismiss();
+            }
         }.execute(host);
+
+        pd.show();
     }
 
     protected String wifiIpAddress(Context context) {
