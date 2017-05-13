@@ -79,10 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Host host = (Host) parent.getAdapter().getItem(position);
-                if (host.getAddress() != null) {
-                    System.out.println(host);
-                    connect(host.getAddress());
-                }
+                System.out.println(host);
+                connect(host);
             }
         });
         pd = new ProgressDialog(this);
@@ -116,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogBox, int id) {
-                            String host = userInputDialogEditText.getText().toString();
-                            connect(host);
+                            String address = userInputDialogEditText.getText().toString();
+                            connect(new Host(null,  address));
                         }
                     })
 
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 availableHost.addAll(Arrays.asList(strings));
                 if (availableHost.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
-                    availableHost.add(new Host("Could not find any available servers",null));
+                    availableHost.add(new Host("Could not find any available servers", null));
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -163,13 +161,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void connect(String host) {
-        pd.setTitle("Connecting to " + host);
+    private void connect(Host host) {
+        if (host.getAddress() == null) return;
+        pd.setTitle("Connecting to " + host.toString());
         pd.setMessage("Connecting...");
-        new AsyncTask<String, Integer, Void>() {
+        new AsyncTask<Host, Integer, Void>() {
             @Override
-            protected Void doInBackground(String... params) {
-                TCPClient client = new TCPClient(params[0], PORT, MainActivity.this);
+            protected Void doInBackground(Host... params) {
+                TCPClient client = new TCPClient(params[0].getAddress(), PORT, MainActivity.this);
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();

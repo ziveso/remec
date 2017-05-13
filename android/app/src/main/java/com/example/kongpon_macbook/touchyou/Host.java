@@ -24,6 +24,7 @@ public class Host {
 
     public String toString() {
         if (address == null) return name;
+        if (name == null) return address;
         return String.format("%s (%s)", address, name);
     }
 }
