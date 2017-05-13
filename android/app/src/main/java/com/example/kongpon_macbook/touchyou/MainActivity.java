@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Controller.getInstance().mainActivity = this;
         /* Initialize views */
         setTitle("Select a Host Computer");
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
@@ -164,10 +164,15 @@ public class MainActivity extends AppCompatActivity {
         new AsyncTask<Host, Integer, Void>() {
             @Override
             protected Void doInBackground(Host... params) {
-                TCPClient client = new TCPClient(params[0].getAddress(), PORT, MainActivity.this);
+                TCPClient client = new TCPClient(params[0].getAddress(), PORT);
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
+                    Intent intent = new Intent(Controller.getInstance().mainActivity, RemoteActivity.class);
+                    Controller.getInstance().client = client;
+                    pd.dismiss();
+                    System.out.println("Changing page");
+                    Controller.getInstance().mainActivity.startActivity(intent);
                 } catch (IOException e) {
                     System.out.println("Connection Timeout");
                     e.printStackTrace();
