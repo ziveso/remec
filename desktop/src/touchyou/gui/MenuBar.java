@@ -3,11 +3,17 @@ package touchyou.gui;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
 
@@ -40,9 +46,41 @@ public class MenuBar extends JMenuBar {
 		Controller.getInstance().save();
 		System.out.println("save");
 	    });
-	    // TODO OPEN
+	    open.addActionListener(e -> {
+		// Controller.getInstance().clear();
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File("./profiles/"));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.setFileFilter(new FileNameExtensionFilter("Profile files (*.profile)", "profile"));
+		int result = fileChooser.showOpenDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    Controller.getInstance().openProfile(fileChooser.getSelectedFile());
+		    Controller.getInstance().clear();
+		    Controller.getInstance().loadProfile();
+		}
+	    });
 	    // TODO SAVE AS
+	    saveAs.addActionListener(e -> {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setSelectedFile(new File(Controller.getInstance().getProfileName()));
+		fileChooser.setApproveButtonText("SAVE");
+		int retrival = fileChooser.showSaveDialog(null);
+		if (retrival == JFileChooser.APPROVE_OPTION) {
+		   Controller.getInstance().saveAs(fileChooser.getSelectedFile());
+		}
+	    });
 	    // TODO NEW PROFILE
+	    newprofile.addActionListener(e -> {
+		Icon icon = null;
+		String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
+			JOptionPane.QUESTION_MESSAGE, icon, null, null);
+		if (name != null) {
+		    Controller.getInstance().newProfile(name);
+		    Controller.getInstance().clear();
+		    Controller.getInstance().loadProfile();
+		}
+
+	    });
 	    exit.addActionListener((e) -> System.exit(0));
 	}
 

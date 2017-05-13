@@ -206,8 +206,14 @@ public class Controller {
     public void save() {
 	app.save();
     }
+    
+    public void saveAs(File file) {
+	String path = file.getAbsolutePath()+".profile";
+	app.save(path);
+    }
 
     public void loadProfile() {
+	settingPanel.setProfileName(app.getProfile().getName());
 	app.getProfile().getCommands().forEach((e) -> {
 	    if (e.getId() > id) {
 		id = e.getId();

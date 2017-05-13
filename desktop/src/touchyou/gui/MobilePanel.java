@@ -128,5 +128,6 @@ public class MobilePanel extends JPanel {
 
     public void clear() {
 	this.removeAll();
+	this.repaint();
     }
 }
