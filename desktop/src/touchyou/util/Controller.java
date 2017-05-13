@@ -102,7 +102,6 @@ public class Controller {
      * Clear every panels.
      */
     public void clear() {
-	System.out.println("settingPanel clearing");
 	settingPanel.clear();
 	widgetPanel.clear();
 	mobilePanel.clear();
@@ -206,6 +205,11 @@ public class Controller {
 
     public void save() {
 	app.save();
+    }
+    
+    public void saveAs(File file) {
+	String path = file.getAbsolutePath()+".profile";
+	app.save(path);
     }
 
     public void loadProfile() {
