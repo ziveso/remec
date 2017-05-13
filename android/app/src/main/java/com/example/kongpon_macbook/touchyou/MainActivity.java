@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int PORT = 3000;
     static ProgressDialog pd;
     private ListView listView;
-    final List<String> availableHost = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    final List<Host> availableHost = new ArrayList<>();
+    ArrayAdapter<Host> adapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -72,15 +72,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
+        adapter = new ArrayAdapter<Host>(this, android.R.layout.simple_list_item_1, availableHost);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String host = (String) parent.getAdapter().getItem(position);
-                System.out.println(host);
-                connect(host);
+                Host host = (Host) parent.getAdapter().getItem(position);
+                if (!host.getAddress().equalsIgnoreCase("0")) {
+                    System.out.println(host);
+                    connect(host.getAddress());
+                }
             }
         });
         pd = new ProgressDialog(this);
@@ -136,14 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void findServers() {
         mSwipeRefreshLayout.setRefreshing(true);
-        new AsyncTask<String, Integer, String[]>() {
+        new AsyncTask<String, Integer, Host[]>() {
             @Override
-            protected String[] doInBackground(String... params) {
+            protected Host[] doInBackground(String... params) {
                 return ServerFinder.getAvailableHost();
             }
 
             @Override
-            protected void onPostExecute(String[] strings) {
+            protected void onPostExecute(Host[] strings) {
                 super.onPostExecute(strings);
                 System.out.println(Arrays.toString(strings));
                 System.out.println("On post execution");
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 availableHost.addAll(Arrays.asList(strings));
                 if (availableHost.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
-                    availableHost.add("Could not find any available servers");
+                    availableHost.add(new Host("Could not find any available servers","0"));
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -162,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void connect(String host) {
-
         pd.setTitle("Connecting to " + host);
         pd.setMessage("Connecting...");
         new AsyncTask<String, Integer, Void>() {

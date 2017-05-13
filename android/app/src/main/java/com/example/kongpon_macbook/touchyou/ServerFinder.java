@@ -17,15 +17,15 @@ import java.util.List;
 public class ServerFinder {
 
 
-    public static String[] getAvailableHost() {
-        List<String> availableHost = new ArrayList<>();
+    public static Host[] getAvailableHost() {
+        List<Host> availableHost = new ArrayList<>();
         // Find the server using UDP broadcast
         try {
             //Open a random port to send the package
             DatagramSocket c = new DatagramSocket();
             c.setBroadcast(true);
 
-            byte[] sendData = "DISCOVER_FUIFSERVER_REQUEST".getBytes();
+            byte[] sendData = "REQUEST_HANDSHAKE".getBytes();
 
             //Try the 255.255.255.255 first
             try {
@@ -71,10 +71,11 @@ public class ServerFinder {
             System.out.println(">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
             //Check if the message is correct
             String message = new String(receivePacket.getData()).trim();
-            if (message.equals("DISCOVER_FUIFSERVER_RESPONSE")) {
-                System.out.println("Client : found server at " + receivePacket.getAddress());
-                String host = receivePacket.getAddress().getHostName();
-                availableHost.add(host);
+            if (message.contains("RESPONSE_FROM")) {
+                String name = message.split("=")[1];
+                System.out.println("Client : found server at " + receivePacket.getAddress()+" "+name);
+                String address = receivePacket.getAddress().getHostName();
+                availableHost.add(new Host(name,address));
                 //DO SOMETHING WITH THE SERVER'S IP (for example, store it in your controller)
 //            Controller_Base.setServerIp(receivePacket.getAddress());
             }
@@ -84,6 +85,6 @@ public class ServerFinder {
         } catch (IOException ex) {
 //          Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return availableHost.toArray(new String[availableHost.size()]);
+        return availableHost.toArray(new Host[availableHost.size()]);
     }
 }
