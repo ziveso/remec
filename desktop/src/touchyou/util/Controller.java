@@ -4,6 +4,9 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -213,6 +216,11 @@ public class Controller {
 	    }
 	});
 	app.getProfile().getCommands().forEach(this::addCommand);
+    }
+
+    public Point getInitLocation(Command command) {
+	Point xy = new Point(0, 0);
+	return xy;
     }
 
 }
