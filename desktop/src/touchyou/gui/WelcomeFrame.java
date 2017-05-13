@@ -42,6 +42,7 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame() {
+	setJMenuBar(new MenuBar());
 	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	Color foreground = GUIUtil.getForegroundColor();
 	setTitle("Touch You Pro");
