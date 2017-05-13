@@ -6,17 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -47,17 +38,7 @@ public class MainFrame extends JFrame {
 	setTitle("Touch You 0.1.4 Beta");
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setSize(1004, 635);
-
-	JMenuBar menubar = new JMenuBar();
-	JMenu file = new JMenu("File");
-	JMenuItem newprofile = new JMenuItem("New Profile");
-	JMenuItem save = new JMenuItem("save");
-	save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S , Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-	save.addActionListener(e -> {Controller.getInstance().save();System.out.println("save");});
-	file.add(newprofile);
-	file.add(save);
-	menubar.add(file);
-	setJMenuBar(menubar);
+	setJMenuBar(new MenuBar());
 
 	JPanel workingPanel = new JPanel();
 	workingPanel.setBackground(GUIUtil.getBackgroundColor());
