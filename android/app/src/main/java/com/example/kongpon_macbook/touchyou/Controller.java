@@ -30,6 +30,9 @@ public class Controller {
         }
     }
 
+    public void notifyRemoteActivity() {
+        remoteActivity.update();
+    }
     public void closeConnection() {
         try {
             client.closeConnection();

@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
 
-import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
 import touchyou.App;
@@ -228,9 +227,4 @@ public class Controller {
 	Point xy = new Point(0, 0);
 	return xy;
     }
-
-    public void sync() {
-	app.sync();
-    }
-
 }
