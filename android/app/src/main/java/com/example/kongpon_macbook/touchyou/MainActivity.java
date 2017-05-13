@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Host host = (Host) parent.getAdapter().getItem(position);
-                if (!host.getAddress().equalsIgnoreCase("0")) {
+                if (host.getAddress() != null) {
                     System.out.println(host);
                     connect(host.getAddress());
                 }
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 availableHost.addAll(Arrays.asList(strings));
                 if (availableHost.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
-                    availableHost.add(new Host("Could not find any available servers","0"));
+                    availableHost.add(new Host("Could not find any available servers",null));
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);

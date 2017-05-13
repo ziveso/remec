@@ -21,7 +21,9 @@ public class Host {
     public String getAddress() {
         return address;
     }
+
     public String toString() {
-        return String.format("%s (%s)", name , address);
+        if (address == null) return name;
+        return String.format("%s (%s)", address, name);
     }
 }
