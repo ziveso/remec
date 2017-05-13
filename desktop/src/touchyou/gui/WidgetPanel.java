@@ -84,7 +84,8 @@ public class WidgetPanel extends JPanel {
 	list.addListSelectionListener(new ListSelectionListener() {
 	    @Override
 	    public void valueChanged(ListSelectionEvent e) {
-		Controller.getInstance().update(list.getSelectedValue());
+		if (list.getSelectedValue() != null)
+		    Controller.getInstance().update(list.getSelectedValue());
 	    }
 	});
 	panel.add(new JScrollPane(list), BorderLayout.CENTER);
@@ -103,8 +104,8 @@ public class WidgetPanel extends JPanel {
     }
 
     public void clear() {
+	list.clearSelection();
 	model.clear();
-	this.validate();
     }
 
 }

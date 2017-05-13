@@ -102,6 +102,7 @@ public class Controller {
      * Clear every panels.
      */
     public void clear() {
+	System.out.println("settingPanel clearing");
 	settingPanel.clear();
 	widgetPanel.clear();
 	mobilePanel.clear();
@@ -208,6 +209,7 @@ public class Controller {
     }
 
     public void loadProfile() {
+	settingPanel.setProfileName(app.getProfile().getName());
 	app.getProfile().getCommands().forEach((e) -> {
 	    if (e.getId() > id) {
 		id = e.getId();

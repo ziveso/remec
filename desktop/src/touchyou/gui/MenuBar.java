@@ -3,11 +3,15 @@ package touchyou.gui;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
 
@@ -39,9 +43,27 @@ public class MenuBar extends JMenuBar {
 		Controller.getInstance().save();
 		System.out.println("save");
 	    });
-	    // TODO OPEN
+	    open.addActionListener(e -> {
+		// Controller.getInstance().clear();
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setCurrentDirectory(new File("./profiles/"));
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.setFileFilter(new FileNameExtensionFilter("Profile files (*.profile)", "profile"));
+		int result = fileChooser.showOpenDialog(this);
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    Controller.getInstance().openProfile(fileChooser.getSelectedFile());
+		    Controller.getInstance().clear();
+		    Controller.getInstance().loadProfile();
+		}
+	    });
 	    // TODO SAVE AS
+	    saveAs.addActionListener(e -> {
+
+	    });
 	    // TODO NEW PROFILE
+	    newprofile.addActionListener(e -> {
+
+	    });
 	    exit.addActionListener((e) -> System.exit(0));
 	}
 

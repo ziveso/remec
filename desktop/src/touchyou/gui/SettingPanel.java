@@ -264,6 +264,10 @@ public class SettingPanel extends JPanel {
 	modeGroup.add(rdbtnFollow);
     }
 
+    public void setProfileName(String profileName) {
+	profilename.setText(profileName);
+    }
+
     public void update(Command command) {
 	this.combination.setText(command.getCombination());
 	this.iconpath.setText(command.getImagePath());
