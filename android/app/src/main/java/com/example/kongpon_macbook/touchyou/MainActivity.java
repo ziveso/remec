@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.text.format.Formatter;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //  connectButton = (Button) findViewById(R.id.connectButton);
         //  ipEditText = (EditText) findViewById(R.id.ipEditText);
+
         /* Initialize views */
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
 
@@ -65,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
                 findServers();
             }
-        });        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
+        });
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, availableHost);
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +86,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.search_item) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Connect to Host");
+            builder.setMessage("Enter host IP Address:");
+            builder.setPositiveButton("Connect", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void findServers() {
         swipe.setRefreshing(true);
