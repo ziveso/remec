@@ -4,9 +4,6 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
