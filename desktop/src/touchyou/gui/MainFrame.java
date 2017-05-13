@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -51,7 +52,8 @@ public class MainFrame extends JFrame {
 	JMenu file = new JMenu("File");
 	JMenuItem newprofile = new JMenuItem("New Profile");
 	JMenuItem save = new JMenuItem("save");
-	save.addActionListener(e -> Controller.getInstance().save());
+	save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S , Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+	save.addActionListener(e -> {Controller.getInstance().save();System.out.println("save");});
 	file.add(newprofile);
 	file.add(save);
 	menubar.add(file);
