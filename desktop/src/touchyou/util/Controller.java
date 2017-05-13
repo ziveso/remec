@@ -164,7 +164,6 @@ public class Controller {
     }
 
     public String getProfileName() {
-	System.out.println(app.getProfile());
 	return app.getProfile().getName();
     }
 

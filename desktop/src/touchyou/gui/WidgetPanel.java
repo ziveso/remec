@@ -47,9 +47,9 @@ public class WidgetPanel extends JPanel {
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 	JButton btnNewButton = new JButton("Add Button");
+	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
 	btnNewButton.setOpaque(true);
 	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
-	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
 	btnNewButton.addActionListener(e -> Controller.getInstance().addCommand());
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -59,6 +59,7 @@ public class WidgetPanel extends JPanel {
 	add(btnNewButton, gbc_btnNewButton);
 
 	JPanel panel = new JPanel();
+	panel.setPreferredSize(new Dimension(width, height * 9 / 10));
 	GridBagConstraints gbc_panel = new GridBagConstraints();
 	gbc_panel.gridwidth = 4;
 	gbc_panel.fill = GridBagConstraints.BOTH;

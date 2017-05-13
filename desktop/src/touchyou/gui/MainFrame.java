@@ -6,12 +6,16 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
@@ -107,12 +111,12 @@ public class MainFrame extends JFrame {
 	controller.setMobilePanel(mobilePanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
-
+	
 	this.pack();
+	statusPanel.requestFocusInWindow();
 	setLocationRelativeTo(null);
 	controller.clear();
 	controller.loadProfile();
-
     }
 
 }
