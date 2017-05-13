@@ -51,10 +51,10 @@ public class App {
 	    }
 	    String combination = command.getCombination();
 	    int mode = command.getMode();
-	    double width = command.getWidth();
-	    double height = command.getHeight();
-	    double x = command.getX();
-	    double y = command.getY();
+	    int width = command.getWidth();
+	    int height = command.getHeight();
+	    int x = command.getX();
+	    int y = command.getY();
 	    String packet = String.format("%s;%d;%f;%f;%f;%f", combination, mode, width, height, x, y);
 	    server.sendToAllClients(packet);
 	});
@@ -135,10 +135,10 @@ public class App {
 			(c, l) -> c.setCombination(l), // 1
 			(c, l) -> c.setMode(Integer.parseInt(l)), // 2
 			(c, l) -> c.setImagePath(l), // 3
-			(c, l) -> c.setWidth(Double.parseDouble(l)), // 4
-			(c, l) -> c.setHeight(Double.parseDouble(l)), // 5
-			(c, l) -> c.setX(Double.parseDouble(l)), // 6
-			(c, l) -> c.setY(Double.parseDouble(l)) };// 7
+			(c, l) -> c.setWidth(Integer.parseInt(l)), // 4
+			(c, l) -> c.setHeight(Integer.parseInt(l)), // 5
+			(c, l) -> c.setX(Integer.parseInt(l)), // 6
+			(c, l) -> c.setY(Integer.parseInt(l)) };// 7
 
 		reader = new BufferedReader(new FileReader(file));
 		String name = reader.readLine();

@@ -19,7 +19,7 @@ public class Command {
     private int mode;
     private String imagePath;
     private Image image;
-    private double width, height, x, y;
+    private int width, height, x, y;
 
     public Image getImage() {
 	if (image == null) {
@@ -56,11 +56,11 @@ public class Command {
 	this.mode = mode;
     }
 
-    public double getY() {
+    public int getY() {
 	return y;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
 	this.y = y;
     }
 
@@ -72,27 +72,27 @@ public class Command {
 	this.imagePath = imagepath;
     }
 
-    public double getWidth() {
+    public int getWidth() {
 	return width;
     }
 
-    public void setWidth(double width) {
+    public void setWidth(int width) {
 	this.width = width;
     }
 
-    public double getHeight() {
+    public int getHeight() {
 	return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(int height) {
 	this.height = height;
     }
 
-    public double getX() {
+    public int getX() {
 	return x;
     }
 
-    public void setX(double x) {
+    public void setX(int x) {
 	this.x = x;
     }
     
