@@ -49,17 +49,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static final int PORT = 3000;
     static ProgressDialog pd;
+    private final List<Host> availableHost = new ArrayList<>();
     private ListView listView;
-    final List<Host> availableHost = new ArrayList<>();
-    ArrayAdapter<Host> adapter;
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    private ArrayAdapter<Host> adapter;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //  connectButton = (Button) findViewById(R.id.connectButton);
-        //  ipEditText = (EditText) findViewById(R.id.ipEditText);
 
         /* Initialize views */
         setTitle("Select a Host Computer");
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogBox, int id) {
                             String address = userInputDialogEditText.getText().toString();
-                            connect(new Host(null,  address));
+                            connect(new Host(null, address));
                         }
                     })
 
