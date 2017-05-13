@@ -77,9 +77,7 @@ public class Controller {
 		int x = (int) (mouse.getX() - width / 2);
 		int y = (int) (mouse.getY() - height / 2);
 		Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int) height);
-		System.out.println(invisibleRect + "  " + current.getBounds());
 		if (invisibleRect.intersects(c.getBounds())) {
-		    System.out.println("collides with " + ((JButton) c).getText());
 		    return false;
 		}
 	    }
