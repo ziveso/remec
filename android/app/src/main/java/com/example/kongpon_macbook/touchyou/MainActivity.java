@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         pd = new ProgressDialog(this);
-        findServers();
-
     }
 
     @Override
