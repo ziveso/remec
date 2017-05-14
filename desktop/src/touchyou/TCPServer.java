@@ -27,12 +27,12 @@ public class TCPServer extends AbstractServer {
     protected void clientConnected(ConnectionToClient client) {
 	super.clientConnected(client);
 	System.out.println("Client connected.");
-	Controller.getInstance().sync();
     }
+
     @Override
     protected synchronized void clientException(ConnectionToClient client, Throwable exception) {
-        super.clientException(client, exception);
-        exception.printStackTrace();
+	super.clientException(client, exception);
+	exception.printStackTrace();
     }
 
     @Override
@@ -42,8 +42,13 @@ public class TCPServer extends AbstractServer {
     }
 
     @Override
-    protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-	System.out.println("Client: " + msg);
+    protected void handleMessageFromClient(Object o, ConnectionToClient client) {
+	System.out.println("Client: " + o);
+	String msg = (String) o;
+	if (msg.contains("SYNC_REQUEST")) {
+	    String[] size = msg.split("=")[1].split(";");
+	    Controller.getInstance().sync(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
+	}
     }
 
 }

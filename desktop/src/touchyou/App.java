@@ -1,5 +1,6 @@
 package touchyou;
 
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,7 @@ public class App {
     /**
      * Transfer profile data to mobile device.
      */
-    public void sync() {
+    public void sync(int wFactor, int hFactor) {
 	profile.getCommands().forEach(command -> {
 	    ByteArrayOutputStream b = new ByteArrayOutputStream();
 	    byte[] image = null;
@@ -52,14 +53,14 @@ public class App {
 	    }
 	    String combination = command.getCombination();
 	    int mode = command.getMode();
-	    double width = command.getWidth();
-	    double height = command.getHeight();
-	    double x = command.getX();
-	    double y = command.getY();
-	    String packet = String.format("%s;%d;%f;%f;%f;%f", combination, mode, width, height, x, y);
-	    server.sendToAllClients(packet);
+	    int width = command.getWidth() * wFactor;
+	    int height = command.getHeight() * hFactor;
+	    int x = command.getX() * wFactor;
+	    int y = command.getY() * hFactor;
+	    String packet = String.format("%s;%d;%d;%d;%d;%d;%s", combination, mode, width, height, x, y, command.toString());
+	    server.sendToAllClients("SYNC_RESPONSE=" + packet);
 	});
-	server.sendToAllClients("FINISH");
+	server.sendToAllClients("SYNC_END");
     }
 
     public void save() {

@@ -38,8 +38,13 @@ public class Controller {
 	broadcaster = new UDPBroadcast();
     }
 
-    public void sync() {
-	app.sync();
+    public void sync(int width, int height) {
+	int wFactor = (int)((double)width/mobilePanel.getWidth());
+	int hFactor = (int)((double)height/mobilePanel.getHeight());
+	System.out.println(width+" "+height);
+	System.out.println(mobilePanel.getWidth()+ " "+mobilePanel.getHeight());
+	System.out.println(wFactor + " " + hFactor);
+	app.sync(wFactor, hFactor);
     }
 
     /**

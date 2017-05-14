@@ -108,10 +108,10 @@ public class Command {
 		name.append("SHIFT");
 		break;
 	    case "17":
-		name.append("ALT");
+		name.append("CTRL");
 		break;
 	    case "18":
-		name.append("CTRL");
+		name.append("ALT");
 		break;
 	    case "157":
 		name.append("CMD");

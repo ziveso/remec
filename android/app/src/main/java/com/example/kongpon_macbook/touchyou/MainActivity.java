@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void connect(Host host) {
         if (host.getAddress() == null) return;
@@ -169,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Start connecting");
                     client.openConnection();
                     Intent intent = new Intent(Controller.getInstance().mainActivity, RemoteActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     Controller.getInstance().client = client;
                     pd.dismiss();
                     System.out.println("Changing page");

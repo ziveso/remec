@@ -30,7 +30,7 @@ public class SyncButton extends JButton {
 	public SyncButton(int width, int height) {
 		super("SYNC");
 		this.setPreferredSize(new Dimension(width, height));
-		this.addActionListener((e) -> Controller.getInstance().sync());
+//		this.addActionListener((e) -> Controller.getInstance().sync());
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setOpaque(true);
 		this.addMouseListener(new MouseOver(this));

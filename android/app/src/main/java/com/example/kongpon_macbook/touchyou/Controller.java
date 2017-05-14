@@ -22,7 +22,7 @@ public class Controller {
     private Controller() {
     }
 
-    public void sendMessage(String msg) {
+    public void sendMessage(final String msg) {
         try {
             client.sendToServer(msg);
         } catch (IOException e) {
@@ -33,6 +33,7 @@ public class Controller {
     public void notifyRemoteActivity() {
         remoteActivity.update();
     }
+
     public void closeConnection() {
         try {
             client.closeConnection();

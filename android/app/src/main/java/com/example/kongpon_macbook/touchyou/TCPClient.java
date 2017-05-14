@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 
 import com.example.kongpon_macbook.touchyou.client.AbstractClient;
 
+import java.util.ResourceBundle;
+
 
 /**
  * Created by kongpon-macbook on 5/6/2017 AD.
@@ -21,11 +23,12 @@ public class TCPClient extends AbstractClient {
     @Override
     protected void handleMessageFromServer(Object o) {
         System.out.println(o);
-        if (o.equals("FINISH")) {
+        String data = (String) o;
+        if (data.contains("SYNC_RESPONSE")) {
+            String command = data.split("=")[1];
+            Controller.getInstance().commands.add(command);
+        } else if (data.equals("SYNC_END")) {
             Controller.getInstance().notifyRemoteActivity();
-        }else {
-            String packet = (String) o;
-            System.out.println(Controller.getInstance().commands.add(packet));
         }
     }
 
@@ -34,6 +37,7 @@ public class TCPClient extends AbstractClient {
     protected void connectionClosed() {
         super.connectionClosed();
         System.out.println("Connection closed");
+        Controller.getInstance().remoteActivity.finish();
     }
 
     @Override
