@@ -2,8 +2,13 @@ package touchyou;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
 
 import javax.swing.KeyStroke;
+
+import com.sun.webkit.dom.KeyboardEventImpl;
 
 /**
  * Command class contains essential information of a command button.
@@ -102,29 +107,10 @@ public class Command {
     public String toString() {
 	if (combination.trim().isEmpty())
 	    return "EMPTY COMMAND";
-	StringBuffer name = new StringBuffer();
-	String[] text = combination.split(":");
-	for (String txt : text) {
-	    // switch (txt) {
-	    // case "16":
-	    // name.append("SHIFT");
-	    // break;
-	    // case "17":
-	    // name.append("CTRL");
-	    // break;
-	    // case "18":
-	    // name.append("ALT");
-	    // break;
-	    // case "157":
-	    // name.append("CMD");
-	    // break;
-	    // default:
-	    // name.append(KeyStroke.getKeyStroke(Integer.parseInt(txt), 0));
-	    // }
-	    name.append(KeyStroke.getKeyStroke(Integer.parseInt(txt), 0));
-
-//	    name.append(" ");
+	String[] texts = combination.split(":");
+	for (int i = 0; i < texts.length; i++) {
+	    texts[i] = KeyStroke.getKeyStroke(Integer.parseInt(texts[i]), 0).toString().substring(8);
 	}
-	return name.toString();
+	return String.join("+", texts).replaceAll("META", "CMD");
     }
 }

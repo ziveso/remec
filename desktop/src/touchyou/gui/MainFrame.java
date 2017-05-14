@@ -12,6 +12,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import javafx.geometry.Side;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 
@@ -51,6 +52,7 @@ public class MainFrame extends JFrame {
 	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 	workingPanel.setLayout(gbl_workingPanel);
+	
 	SettingPanel settingPanel = new SettingPanel();
 	settingPanel.setMinimumSize(new Dimension(200, 227));
 	GridBagConstraints gbc_settingPanel = new GridBagConstraints();
@@ -66,10 +68,11 @@ public class MainFrame extends JFrame {
 	Bound.setBorder(new EmptyBorder(0, 0, 0, 0));
 	Bound.setBackground(Color.decode("#282828")); // almost black;
 	Bound.setOpaque(true);
+	
 	MobilePanel mobilePanel = new MobilePanel();
 	Bound.add(mobilePanel);
 	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
-	gbc_modelPanel.insets = new Insets(0, 0, 0, 5);
+	gbc_modelPanel.insets = new Insets(0, 0, 0, 0);
 	gbc_modelPanel.fill = GridBagConstraints.BOTH;
 	gbc_modelPanel.gridx = 1;
 	gbc_modelPanel.gridy = 0;
@@ -94,7 +97,7 @@ public class MainFrame extends JFrame {
 	controller.setMobilePanel(mobilePanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
-	
+
 	this.pack();
 	statusPanel.requestFocusInWindow();
 	setLocationRelativeTo(null);

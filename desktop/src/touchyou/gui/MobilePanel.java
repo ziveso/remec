@@ -39,11 +39,11 @@ public class MobilePanel extends JPanel {
 
     protected MobilePanel() {
 	mover = new ComponentMover();
-	mover.setSnapSize(new Dimension(6, 6));
+	mover.setSnapSize(new Dimension(4,4));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
 
 	resizer = new ComponentResizer();
-	resizer.setSnapSize(new Dimension(6, 6));
+	resizer.setSnapSize(new Dimension(4,4));
 	commandMouseAdapter = new CommandMouseAdapter();
 	this.setOpaque(true);
 	setBackground(Color.white);

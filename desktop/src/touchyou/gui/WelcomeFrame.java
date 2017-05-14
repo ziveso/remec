@@ -99,7 +99,7 @@ public class WelcomeFrame extends JFrame {
 
 	JList<String> list = new JList<>();
 	list.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-	list.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+	list.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
 	for (String f : new File("./profiles/").list()) {
