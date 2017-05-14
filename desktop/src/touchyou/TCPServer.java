@@ -15,7 +15,7 @@ import touchyou.util.Controller;
  */
 public class TCPServer extends AbstractServer {
 
-    CommandInvoker invoke = new CommandInvoker();
+    private CommandInvoker invoke = new CommandInvoker();
 
     /**
      * Initialize the server with a given port.
