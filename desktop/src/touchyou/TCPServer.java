@@ -13,6 +13,8 @@ import touchyou.util.Controller;
  */
 public class TCPServer extends AbstractServer {
 
+    CommandInvoker invoke = new CommandInvoker();
+
     /**
      * Initialize the server with a given port.
      * 
@@ -43,21 +45,20 @@ public class TCPServer extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object o, ConnectionToClient client) {
-	CommandInvoker invoke = new CommandInvoker();
 	System.out.println("Client: " + o);
 	String msg = (String) o;
 	if (msg.contains("SYNC_REQUEST")) {
 	    String[] size = msg.split("=")[1].split(";");
 	    Controller.getInstance().sync(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
 	} else if (msg.contains("PRESS")) {
-	    String[] commands = msg.split(";");
+	    String[] commands = msg.split("=")[1].split(";");
 	    if (commands[0] == "0") {
 		invoke.tap(commands[1]);
 	    } else if (commands[0] == "1") {
 		invoke.press(commands[1]);
 	    }
 	} else if (msg.contains("RELEASE")) {
-	    String[] commands = msg.split(";");
+	    String[] commands = msg.split("=")[1].split(";");
 	    if (commands[0] == "1") {
 		invoke.release(commands[1]);
 	    }
