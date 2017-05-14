@@ -31,19 +31,8 @@ public class CommandInvoker {
      *            is the combination of key codes to tap
      */
     public void tap(String combination) {
-	String[] keys = combination.split(":");
-	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::tap);
-    }
-
-    /**
-     * Tap a combination.
-     * 
-     * @param keycodes
-     *            is array of key codes to tap
-     */
-    public void tap(int... keycodes) {
-	press(keycodes);
-	release(keycodes);
+	press(combination);
+	release(combination);
     }
 
     /**
@@ -54,17 +43,8 @@ public class CommandInvoker {
      */
     public void press(String combination) {
 	String[] keys = combination.split(":");
-	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::press);
-    }
-
-    /**
-     * Press a combination.
-     * 
-     * @param keycodes
-     *            is array of key codes to press
-     */
-    public void press(int... keycodes) {
-	Arrays.stream(keycodes).forEach(keycode -> robot.keyPress(keycode));
+	System.out.println("PRESSED");
+	Arrays.stream(keys).map(Integer::parseInt).forEach(robot::keyPress);
     }
 
     /**
@@ -75,16 +55,8 @@ public class CommandInvoker {
      */
     public void release(String combination) {
 	String[] keys = combination.split(":");
-	Arrays.stream(keys).map(e -> Integer.parseInt(e)).forEach(this::release);
+	System.out.println("RELEASED");
+	Arrays.stream(keys).map(Integer::parseInt).forEach(robot::keyRelease);
     }
 
-    /**
-     * Release a combination.
-     * 
-     * @param keycodes
-     *            is array of key codes to press
-     */
-    public void release(int... keycodes) {
-	Arrays.stream(keycodes).forEach(keycode -> robot.keyPress(keycode));
-    }
 }

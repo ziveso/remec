@@ -92,7 +92,7 @@ public class RemoteActivity extends Activity {
                     Controller.getInstance().sendMessage("RELEASE="+button.getTag());
                     break;
             }
-            return true;
+            return false;
         }
     }
 

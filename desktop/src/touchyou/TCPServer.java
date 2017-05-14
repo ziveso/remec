@@ -1,5 +1,7 @@
 package touchyou;
 
+import java.util.Arrays;
+
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
 
@@ -52,14 +54,15 @@ public class TCPServer extends AbstractServer {
 	    Controller.getInstance().sync(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
 	} else if (msg.contains("PRESS")) {
 	    String[] commands = msg.split("=")[1].split(";");
-	    if (commands[0] == "0") {
+	    System.out.println(Arrays.toString(commands));
+	    if (commands[0].equals("0")) {
 		invoke.tap(commands[1]);
-	    } else if (commands[0] == "1") {
+	    } else if (commands[0].equals("1")) {
 		invoke.press(commands[1]);
 	    }
 	} else if (msg.contains("RELEASE")) {
 	    String[] commands = msg.split("=")[1].split(";");
-	    if (commands[0] == "1") {
+	    if (commands[0].equals("1")) {
 		invoke.release(commands[1]);
 	    }
 	}
