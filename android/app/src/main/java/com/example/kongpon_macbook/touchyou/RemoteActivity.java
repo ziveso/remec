@@ -84,6 +84,7 @@ public class RemoteActivity extends Activity {
         public void onClick(View v) {
             Button button = (Button) v;
             System.out.println(v.getTag());
+            Controller.getInstance().sendMessage((String) v.getTag());
         }
     }
 

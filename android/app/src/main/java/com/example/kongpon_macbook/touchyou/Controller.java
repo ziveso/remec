@@ -23,11 +23,16 @@ public class Controller {
     }
 
     public void sendMessage(final String msg) {
-        try {
-            client.sendToServer(msg);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    client.sendToServer(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public void notifyRemoteActivity() {
