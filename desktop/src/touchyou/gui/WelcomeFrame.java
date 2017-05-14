@@ -27,8 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
@@ -36,6 +34,10 @@ import touchyou.util.GUIUtil;
 
 public class WelcomeFrame extends JFrame {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3124625665383364874L;
     private JPanel contentPane;
 
     /**

@@ -12,12 +12,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
 
 public class MenuBar extends JMenuBar {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3285079136056165470L;
 
     public MenuBar() {
 	int shortcut = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();

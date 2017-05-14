@@ -1,17 +1,12 @@
 package touchyou.util;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
-
-import touchyou.gui.MobilePanel;
 
 /**
  * Helper Class for writing the Application in GUI part

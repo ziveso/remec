@@ -5,9 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.net.DatagramSocket;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -16,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -23,7 +21,6 @@ import touchyou.Command;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
-import javax.swing.SwingConstants;
 
 /**
  * 
@@ -32,6 +29,10 @@ import javax.swing.SwingConstants;
  */
 public class WidgetPanel extends JPanel {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3158099123782561762L;
     private DefaultListModel<Command> model;
     private JList<Command> list;
 

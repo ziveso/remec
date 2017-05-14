@@ -4,14 +4,12 @@ import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -33,6 +31,11 @@ import touchyou.util.Controller;
 
 public class CaptureButton extends JButton {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5403131372428628249L;
+
     public CaptureButton() {
 	super("Capture");
 	this.addActionListener(new StartCapture());
@@ -49,6 +52,10 @@ public class CaptureButton extends JButton {
     }
 
     private final class CaptureFrame extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1965674097879739119L;
 	private Point start;
 	private Rectangle rect;
 
@@ -98,6 +105,11 @@ public class CaptureButton extends JButton {
 	}
 
 	private class Drawer extends JPanel {
+	    /**
+	     * 
+	     */
+	    private static final long serialVersionUID = 2718623225349403223L;
+
 	    public Drawer() {
 		this.setOpaque(true);
 		this.setBackground(new Color(0, 0, 0, 0.1f));

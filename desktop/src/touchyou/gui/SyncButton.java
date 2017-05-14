@@ -1,10 +1,10 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-import touchyou.App;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
 

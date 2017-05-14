@@ -1,19 +1,22 @@
 package touchyou.gui;
 
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
-import javax.swing.JTextPane;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
+
 import javax.swing.JEditorPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
 
 public class AboutPanel extends JPanel {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6121872920174830803L;
 
     /**
      * Create the panel.

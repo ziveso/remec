@@ -1,29 +1,29 @@
 package touchyou.gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import touchyou.App;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JRadioButton;
 
 public class StatusPanel extends JPanel {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2861841184923249614L;
 
     /**
      * Create the panel.

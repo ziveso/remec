@@ -5,8 +5,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.KeyStroke;
 
-import com.sun.glass.events.KeyEvent;
-
 /**
  * Command class contains essential information of a command button.
  * 

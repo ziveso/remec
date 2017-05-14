@@ -7,25 +7,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
-import touchyou.App;
 import touchyou.Command;
 import touchyou.gui.add.ComponentMover;
 import touchyou.gui.add.ComponentResizer;
 import touchyou.util.Controller;
-import touchyou.util.GUIUtil;
 
 /**
  * 
