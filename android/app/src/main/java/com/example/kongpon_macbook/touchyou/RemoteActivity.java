@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -32,18 +33,18 @@ public class RemoteActivity extends Activity {
         sync();
 
     }
+
     public void sync() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Point p = new Point();
                 getWindowManager().getDefaultDisplay().getSize(p);
-                String size = p.x+";"+p.y;
-                Controller.getInstance().sendMessage("SYNC_REQUEST="+size);
+                String size = p.x + ";" + p.y;
+                Controller.getInstance().sendMessage("SYNC_REQUEST=" + size);
             }
         }).start();
     }
-
 
 
     public void update() {
@@ -66,8 +67,20 @@ public class RemoteActivity extends Activity {
                     rect.topMargin = y;
                     final Button button = new Button(RemoteActivity.this);
                     button.setLayoutParams(rect);
-                    button.setTag(mode+";"+combination);
+                    button.setTag(mode + ";" + combination);
                     button.setOnClickListener(listener);
+                    button.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                    break;
+                            }
+                            return true;
+                        }
+                    });
                     button.setText(text);
                     r.addView(button);
                 }
