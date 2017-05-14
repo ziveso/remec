@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -32,18 +33,18 @@ public class RemoteActivity extends Activity {
         sync();
 
     }
+
     public void sync() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Point p = new Point();
                 getWindowManager().getDefaultDisplay().getSize(p);
-                String size = p.x+";"+p.y;
-                Controller.getInstance().sendMessage("SYNC_REQUEST="+size);
+                String size = p.x + ";" + p.y;
+                Controller.getInstance().sendMessage("SYNC_REQUEST=" + size);
             }
         }).start();
     }
-
 
 
     public void update() {
@@ -66,8 +67,8 @@ public class RemoteActivity extends Activity {
                     rect.topMargin = y;
                     final Button button = new Button(RemoteActivity.this);
                     button.setLayoutParams(rect);
-                    button.setTag(mode+";"+combination);
-                    button.setOnClickListener(listener);
+                    button.setTag(mode + ";" + combination);
+                    button.setOnTouchListener(listener);
                     button.setText(text);
                     r.addView(button);
                 }
@@ -78,13 +79,20 @@ public class RemoteActivity extends Activity {
         });
     }
 
-    private static final class CommandClickListener implements View.OnClickListener {
+    private static final class CommandClickListener implements View.OnTouchListener {
 
         @Override
-        public void onClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
             Button button = (Button) v;
-            System.out.println(v.getTag());
-            Controller.getInstance().sendMessage((String) v.getTag());
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    Controller.getInstance().sendMessage("PRESS="+button.getTag());
+                    break;
+                case MotionEvent.ACTION_UP:
+                    Controller.getInstance().sendMessage("RELEASE="+button.getTag());
+                    break;
+            }
+            return true;
         }
     }
 
