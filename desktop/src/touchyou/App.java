@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.ServerSocket;
 
 import javax.imageio.ImageIO;
 import javax.swing.UIManager;
@@ -51,10 +52,10 @@ public class App {
 	    }
 	    String combination = command.getCombination();
 	    int mode = command.getMode();
-	    int width = command.getWidth();
-	    int height = command.getHeight();
-	    int x = command.getX();
-	    int y = command.getY();
+	    double width = command.getWidth();
+	    double height = command.getHeight();
+	    double x = command.getX();
+	    double y = command.getY();
 	    String packet = String.format("%s;%d;%f;%f;%f;%f", combination, mode, width, height, x, y);
 	    server.sendToAllClients(packet);
 	});
