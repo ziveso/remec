@@ -3,6 +3,10 @@ package touchyou;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
+
 /**
  * Command class contains essential information of a command button.
  * 
@@ -95,7 +99,7 @@ public class Command {
     public void setX(int x) {
 	this.x = x;
     }
-    
+
     @Override
     public String toString() {
 	if (combination.trim().isEmpty())
@@ -103,23 +107,25 @@ public class Command {
 	StringBuffer name = new StringBuffer();
 	String[] text = combination.split(":");
 	for (String txt : text) {
-	    switch (txt) {
-	    case "16":
-		name.append("SHIFT");
-		break;
-	    case "17":
-		name.append("CTRL");
-		break;
-	    case "18":
-		name.append("ALT");
-		break;
-	    case "157":
-		name.append("CMD");
-		break;
-	    default:
-		name.append((char) Integer.parseInt(txt));
-	    }
-	    name.append(" ");
+	    // switch (txt) {
+	    // case "16":
+	    // name.append("SHIFT");
+	    // break;
+	    // case "17":
+	    // name.append("CTRL");
+	    // break;
+	    // case "18":
+	    // name.append("ALT");
+	    // break;
+	    // case "157":
+	    // name.append("CMD");
+	    // break;
+	    // default:
+	    // name.append(KeyStroke.getKeyStroke(Integer.parseInt(txt), 0));
+	    // }
+	    name.append(KeyStroke.getKeyStroke(Integer.parseInt(txt), 0));
+
+//	    name.append(" ");
 	}
 	return name.toString();
     }
