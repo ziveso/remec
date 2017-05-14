@@ -13,7 +13,7 @@ public class Command {
     private int id;
     private String combination;
     /**
-     * mode 0 = SINGLE_TOUCH <br>
+     * mode 0 = TAP <br>
      * mode 1 = FOLLOW
      */
     private int mode;
