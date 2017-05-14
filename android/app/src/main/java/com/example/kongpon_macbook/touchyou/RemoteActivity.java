@@ -66,7 +66,7 @@ public class RemoteActivity extends Activity {
                     rect.topMargin = y;
                     final Button button = new Button(RemoteActivity.this);
                     button.setLayoutParams(rect);
-                    button.setTag(combination);
+                    button.setTag(mode+";"+combination);
                     button.setOnClickListener(listener);
                     button.setText(text);
                     r.addView(button);
