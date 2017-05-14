@@ -24,7 +24,10 @@ public class TCPClient extends AbstractClient {
     protected void handleMessageFromServer(Object o) {
         System.out.println(o);
         String data = (String) o;
-        if (data.contains("SYNC_RESPONSE")) {
+        if (data.equals("SYNC_REQUEST")) {
+            Controller.getInstance().remoteActivity.sync();
+        }
+        else if (data.contains("SYNC_RESPONSE")) {
             String command = data.split("=")[1];
             Controller.getInstance().commands.add(command);
         } else if (data.equals("SYNC_END")) {

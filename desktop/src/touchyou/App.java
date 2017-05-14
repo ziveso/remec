@@ -57,7 +57,8 @@ public class App {
 	    int height = command.getHeight() * hFactor;
 	    int x = command.getX() * wFactor;
 	    int y = command.getY() * hFactor;
-	    String packet = String.format("%s;%d;%d;%d;%d;%d;%s", combination, mode, width, height, x, y, command.toString());
+	    String packet =
+		    String.format("%s;%d;%d;%d;%d;%d;%s", combination, mode, width, height, x, y, command.toString());
 	    server.sendToAllClients("SYNC_RESPONSE=" + packet);
 	});
 	server.sendToAllClients("SYNC_END");
@@ -225,6 +226,10 @@ public class App {
 	App app = new App();
 	Controller.getInstance().setApp(app);
 	new WelcomeFrame().setVisible(true);
+    }
+
+    public void sendSyncRequest() {
+	server.sendToAllClients("SYNC_REQUEST");
     }
 }
 

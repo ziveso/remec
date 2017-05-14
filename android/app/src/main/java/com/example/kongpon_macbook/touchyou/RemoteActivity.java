@@ -51,6 +51,7 @@ public class RemoteActivity extends Activity {
             @Override
             public void run() {
                 pd.show();
+                r.removeAllViews();
                 for (String commands : Controller.getInstance().commands) {
                     String[] command = commands.split(";");
                     String combination = command[0];
