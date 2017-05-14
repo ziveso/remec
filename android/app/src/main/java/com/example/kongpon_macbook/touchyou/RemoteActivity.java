@@ -68,19 +68,7 @@ public class RemoteActivity extends Activity {
                     final Button button = new Button(RemoteActivity.this);
                     button.setLayoutParams(rect);
                     button.setTag(mode + ";" + combination);
-                    button.setOnClickListener(listener);
-                    button.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            switch (event.getAction()) {
-                                case MotionEvent.ACTION_DOWN:
-                                    break;
-                                case MotionEvent.ACTION_UP:
-                                    break;
-                            }
-                            return true;
-                        }
-                    });
+                    button.setOnTouchListener(listener);
                     button.setText(text);
                     r.addView(button);
                 }
@@ -91,13 +79,20 @@ public class RemoteActivity extends Activity {
         });
     }
 
-    private static final class CommandClickListener implements View.OnClickListener {
+    private static final class CommandClickListener implements View.OnTouchListener {
 
         @Override
-        public void onClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
             Button button = (Button) v;
-            System.out.println(v.getTag());
-            Controller.getInstance().sendMessage((String) v.getTag());
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    Controller.getInstance().sendMessage("PRESS="+button.getTag());
+                    break;
+                case MotionEvent.ACTION_UP:
+                    Controller.getInstance().sendMessage("RELEASE="+button.getTag());
+                    break;
+            }
+            return true;
         }
     }
 
