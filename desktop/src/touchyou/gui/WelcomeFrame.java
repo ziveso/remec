@@ -102,10 +102,16 @@ public class WelcomeFrame extends JFrame {
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
-	for (String f : new File("./profiles/").list()) {
-	    if (f.contains(".profile")) {
-		model.addElement(f);
+	try {
+	    for (String f : new File("./profiles/").list()) {
+		if (f.contains(".profile")) {
+		    model.addElement(f);
+		}
 	    }
+	} catch (NullPointerException ne) {
+	    File file = new File("./profiles/");
+	    file.mkdir();
+	    System.out.println(file.getPath());
 	}
 	list.addListSelectionListener((e) -> {
 	    String profileName = list.getSelectedValue();
