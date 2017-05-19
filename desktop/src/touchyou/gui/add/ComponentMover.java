@@ -264,7 +264,7 @@ public class ComponentMover extends MouseAdapter {
 	Point dragged = e.getLocationOnScreen();
 	int dragX = getDragDistance(dragged.x, pressed.x, snapSize.width);
 	int dragY = getDragDistance(dragged.y, pressed.y, snapSize.height);
-
+	
 	int locationX = location.x + dragX;
 	int locationY = location.y + dragY;
 
@@ -289,7 +289,9 @@ public class ComponentMover extends MouseAdapter {
 	// Adjustments are finished, move the component
 
 	Point p = SwingUtilities.convertPoint(destination, e.getPoint(), destination.getParent());
-	if (Controller.getInstance().placeable(destination,  p))
+	if (!Controller.getInstance().placeable(destination,  p )){
+	    return ;
+	}
 	    destination.setLocation(locationX, locationY);
     }
 

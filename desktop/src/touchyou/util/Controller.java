@@ -4,6 +4,9 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.SwingUtilities;
 
@@ -75,21 +78,48 @@ public class Controller {
      *            is the subject component
      * @param mouse
      *            is current mouse position on the mobilePanel
+     * @param press_y
+     * @param press_x
      * @return true if is placable, false otherwise
      */
     public boolean placeable(Component current, Point mouse) {
-	for (Component c : mobilePanel.getComponents()) {
-	    if (current != c) {
-		double width = current.getWidth();
-		double height = current.getHeight();
-		int x = (int) (mouse.getX() - width / 2);
-		int y = (int) (mouse.getY() - height / 2);
-		Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int) height);
-		if (invisibleRect.intersects(c.getBounds())) {
-		    return false;
-		}
+	// constance between grap
+	int grap = 3;
+	Component[] components = mobilePanel.getComponents();
+	// TODO FIZ IT!!
+	// create rectangle
+	List<Rectangle> recs = new ArrayList<>();
+	for (Component c : components) {
+	    if (c == current)
+		continue;
+	    recs.add(new Rectangle(c.getX() + grap, c.getY() + grap, c.getWidth() + grap, c.getHeight() + grap));
+	}
+	Rectangle current_rec = new Rectangle(current.getX() + grap, current.getY() + grap, current.getWidth() + grap,
+		current.getHeight() + grap);
+
+	for (int i = 0; i < recs.size(); i++) {
+	    if (!current_rec.contains(mouse) && !recs.get(i).contains(mouse)) {
+		return true;
+	    }
+	    if (recs.get(i).intersects(current_rec)) {
+		return false;
 	    }
 	}
+
+	// go fuck this logic
+	// for (Component c : mobilePanel.getComponents()) {
+	// if (current != c) {
+	// double width = current.getWidth();
+	// double height = current.getHeight();
+	// int x = (int) (mouse.getX() - width / 2);
+	// int y = (int) (mouse.getY() - height / 2);
+	// Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int)
+	// height);
+	// if (invisibleRect.intersects(c.getBounds())) {
+	// return false;
+	// }
+	// }
+	// }
 	return true;
     }
 
