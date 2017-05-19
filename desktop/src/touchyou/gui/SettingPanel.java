@@ -97,16 +97,21 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
+		/* ignore unknown key code (ex. Fn key in Macbook w/ Touchbar model). */
+		if (e.getKeyCode() == 0)
+		    return;
 		System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
 		key.add(String.valueOf(e.getKeyCode()));
 		Controller.getInstance().getCurrentCommand().setCombination(String.join(":", key));
 		Controller.getInstance().updateCurrentCommand();
+		System.out.println(key);
 		e.consume();
 	    }
 
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		key.clear();
+		System.out.println(key);
 		e.consume();
 	    }
 
