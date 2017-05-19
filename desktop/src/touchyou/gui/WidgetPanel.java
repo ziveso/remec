@@ -23,6 +23,7 @@ import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  * 
@@ -73,13 +74,13 @@ public class WidgetPanel extends JPanel {
 	add(panel, gbc_panel);
 	panel.setLayout(new BorderLayout(0, 0));
 
-	JLabel lblComponentTree = new JLabel("Component Tree");
+	JLabel lblComponentTree = new JLabel("Command List");
+	lblComponentTree.setBorder(new EmptyBorder(5, 5, 5, 5));
 	lblComponentTree.setHorizontalAlignment(SwingConstants.CENTER);
 	lblComponentTree.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 	lblComponentTree.setOpaque(true);
 	lblComponentTree.setBackground(GUIUtil.getBackgroundColor());
 	lblComponentTree.setForeground(GUIUtil.getForegroundColor());
-	lblComponentTree.setBorder(BorderFactory.createEtchedBorder());
 	panel.add(lblComponentTree, BorderLayout.NORTH);
 
 	list = new JList<>();
@@ -95,6 +96,7 @@ public class WidgetPanel extends JPanel {
 	    }
 	});
 	JScrollPane scrollPane = new JScrollPane(list);
+	scrollPane.setBorder(null);
 	scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	panel.add(scrollPane, BorderLayout.CENTER);
     }

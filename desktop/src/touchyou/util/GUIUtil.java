@@ -35,9 +35,9 @@ public class GUIUtil {
     }
 
     public static Color getBackgroundColor() {
-	// return new Color(72, 72, 72);
 	return Color.decode("#424242");
     }
+
     public static Color getOrange() {
 	return Color.decode("#FF8019");
     }

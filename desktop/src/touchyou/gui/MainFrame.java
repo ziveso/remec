@@ -81,7 +81,6 @@ public class MainFrame extends JFrame {
 	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
 	gbc_widgetPanel.fill = GridBagConstraints.BOTH;
-	gbc_widgetPanel.insets = new Insets(5, 0, 0, 0);
 	gbc_widgetPanel.gridx = 2;
 	gbc_widgetPanel.gridy = 0;
 	workingPanel.add(widgetPanel, gbc_widgetPanel);
