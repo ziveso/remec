@@ -99,6 +99,7 @@ public class MainFrame extends JFrame {
 	controller.setWidgetPanel(widgetPanel);
 
 	this.pack();
+	this.setMinimumSize(this.getSize());
 	statusPanel.requestFocusInWindow();
 	setLocationRelativeTo(null);
 	controller.clear();

@@ -112,13 +112,10 @@ public class Command {
 	if (combination.trim().isEmpty())
 	    return "EMPTY COMMAND";
 	String[] array = combination.split(":");
-	List<String> keycodeText = Arrays.stream(array).map(keycode->{
-//	    System.out.println(keycode);
+	List<String> keycodeText = Arrays.stream(array).map(keycode -> {
 	    return KeyEvent.getKeyText(Integer.parseInt(keycode));
 	}).collect(Collectors.toList());
-	
-	
-	
+
 	return String.join("", keycodeText);
     }
 }
