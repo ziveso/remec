@@ -21,6 +21,8 @@ import touchyou.Command;
 import touchyou.gui.add.MouseOver;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * 
@@ -40,13 +42,14 @@ public class WidgetPanel extends JPanel {
      * Create the panel.
      */
     public WidgetPanel(int width, int height) {
-	this.setPreferredSize(new Dimension(width, height));
+	this.setPreferredSize(new Dimension(200, 334));
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
+	
 	JButton btnNewButton = new JButton("Add Button");
 	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
 	btnNewButton.setOpaque(true);
@@ -54,6 +57,7 @@ public class WidgetPanel extends JPanel {
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
 	btnNewButton.addActionListener(e -> Controller.getInstance().addCommand());
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+	gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 	gbc_btnNewButton.gridwidth = 4;
 	gbc_btnNewButton.gridx = 0;
 	gbc_btnNewButton.gridy = 0;
@@ -79,7 +83,8 @@ public class WidgetPanel extends JPanel {
 	panel.add(lblComponentTree, BorderLayout.NORTH);
 
 	list = new JList<>();
-	list.setFont(new Font(Font.MONOSPACED, 0, 14));
+	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	list.setFont(new Font("Arial", Font.PLAIN, 16));
 	model = new DefaultListModel<>();
 	list.setModel(model);
 	list.addListSelectionListener(new ListSelectionListener() {
@@ -89,7 +94,9 @@ public class WidgetPanel extends JPanel {
 		    Controller.getInstance().update(list.getSelectedValue());
 	    }
 	});
-	panel.add(new JScrollPane(list), BorderLayout.CENTER);
+	JScrollPane scrollPane = new JScrollPane(list);
+	scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+	panel.add(scrollPane, BorderLayout.CENTER);
     }
 
     public void addCommand(Command command) {

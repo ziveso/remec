@@ -46,18 +46,23 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
     private JRadioButton rdbtnNone;
+    private JLabel lblText;
+    private JRadioButton rdbtnCommandAsLabel;
+    private JRadioButton rdbtnCustomLabel;
+    private JTextField customLabel;
+    private JRadioButton rdbtnNone_1;
 
     /**
      * Create the panel.
      */
     public SettingPanel() {
-	setOpaque(false);
+    	setBackground(GUIUtil.getBackgroundColor());
 	// setBorder(GuiUtil.getBorder());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -124,6 +129,60 @@ public class SettingPanel extends JPanel {
 	gbc_combination.gridy = 1;
 	add(combination, gbc_combination);
 	combination.setColumns(10);
+	
+	lblText = new JLabel("Text:");
+	lblText.setForeground(Color.WHITE);
+	GridBagConstraints gbc_lblText = new GridBagConstraints();
+	gbc_lblText.anchor = GridBagConstraints.WEST;
+	gbc_lblText.insets = new Insets(0, 0, 5, 5);
+	gbc_lblText.gridx = 0;
+	gbc_lblText.gridy = 2;
+	add(lblText, gbc_lblText);
+	
+	ButtonGroup labelGroup = new ButtonGroup();
+	
+	rdbtnNone_1 = new JRadioButton("None");
+	rdbtnNone_1.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnNone_1 = new GridBagConstraints();
+	gbc_rdbtnNone_1.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnNone_1.gridwidth = 2;
+	gbc_rdbtnNone_1.insets = new Insets(0, 0, 5, 5);
+	gbc_rdbtnNone_1.gridx = 2;
+	gbc_rdbtnNone_1.gridy = 2;
+	add(rdbtnNone_1, gbc_rdbtnNone_1);
+	labelGroup.add(rdbtnNone_1);
+	
+	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
+	rdbtnCommandAsLabel.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnCommandAsLabel = new GridBagConstraints();
+	gbc_rdbtnCommandAsLabel.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnCommandAsLabel.gridwidth = 2;
+	gbc_rdbtnCommandAsLabel.insets = new Insets(0, 0, 5, 0);
+	gbc_rdbtnCommandAsLabel.gridx = 2;
+	gbc_rdbtnCommandAsLabel.gridy = 3;
+	add(rdbtnCommandAsLabel, gbc_rdbtnCommandAsLabel);
+	labelGroup.add(rdbtnCommandAsLabel);
+	
+	rdbtnCustomLabel = new JRadioButton("Custom label");
+	rdbtnCustomLabel.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnCustomLabel = new GridBagConstraints();
+	gbc_rdbtnCustomLabel.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnCustomLabel.gridwidth = 2;
+	gbc_rdbtnCustomLabel.insets = new Insets(0, 0, 5, 0);
+	gbc_rdbtnCustomLabel.gridx = 2;
+	gbc_rdbtnCustomLabel.gridy = 4;
+	add(rdbtnCustomLabel, gbc_rdbtnCustomLabel);
+	labelGroup.add(rdbtnCustomLabel);
+	
+	customLabel = new JTextField();
+	GridBagConstraints gbc_customLabel = new GridBagConstraints();
+	gbc_customLabel.insets = new Insets(0, 0, 5, 0);
+	gbc_customLabel.gridwidth = 2;
+	gbc_customLabel.fill = GridBagConstraints.BOTH;
+	gbc_customLabel.gridx = 2;
+	gbc_customLabel.gridy = 5;
+	add(customLabel, gbc_customLabel);
+	customLabel.setColumns(10);
 
 	JLabel lblIcon = new JLabel("Icon:");
 	lblIcon.setForeground(GUIUtil.getForegroundColor());
@@ -131,26 +190,27 @@ public class SettingPanel extends JPanel {
 	gbc_lblIcon.anchor = GridBagConstraints.WEST;
 	gbc_lblIcon.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIcon.gridx = 0;
-	gbc_lblIcon.gridy = 2;
+	gbc_lblIcon.gridy = 6;
 	add(lblIcon, gbc_lblIcon);
 
 	rdbtnNone = new JRadioButton("None");
 	rdbtnNone.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnNone = new GridBagConstraints();
-	gbc_rdbtnNone.anchor = GridBagConstraints.WEST;
-	gbc_rdbtnNone.insets = new Insets(0, 0, 5, 5);
+	gbc_rdbtnNone.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnNone.gridwidth = 2;
+	gbc_rdbtnNone.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnNone.gridx = 2;
-	gbc_rdbtnNone.gridy = 2;
+	gbc_rdbtnNone.gridy = 6;
 	add(rdbtnNone, gbc_rdbtnNone);
 
 	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
 	rdbtnImportFromComputer.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
-	gbc_rdbtnImportFromComputer.anchor = GridBagConstraints.WEST;
+	gbc_rdbtnImportFromComputer.fill = GridBagConstraints.HORIZONTAL;
 	gbc_rdbtnImportFromComputer.gridwidth = 2;
 	gbc_rdbtnImportFromComputer.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnImportFromComputer.gridx = 2;
-	gbc_rdbtnImportFromComputer.gridy = 3;
+	gbc_rdbtnImportFromComputer.gridy = 7;
 	add(rdbtnImportFromComputer, gbc_rdbtnImportFromComputer);
 
 	iconpath = new JTextField();
@@ -159,7 +219,7 @@ public class SettingPanel extends JPanel {
 	gbc_iconpath.insets = new Insets(0, 0, 5, 5);
 	gbc_iconpath.fill = GridBagConstraints.BOTH;
 	gbc_iconpath.gridx = 2;
-	gbc_iconpath.gridy = 4;
+	gbc_iconpath.gridy = 8;
 	add(iconpath, gbc_iconpath);
 	iconpath.setColumns(10);
 
@@ -169,17 +229,17 @@ public class SettingPanel extends JPanel {
 	gbc_btnBrowse.fill = GridBagConstraints.BOTH;
 	gbc_btnBrowse.insets = new Insets(0, 0, 5, 0);
 	gbc_btnBrowse.gridx = 3;
-	gbc_btnBrowse.gridy = 4;
+	gbc_btnBrowse.gridy = 8;
 	add(btnBrowse, gbc_btnBrowse);
 
 	rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
 	rdbtnCaptureFromScreen.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnCaptureFromScreen = new GridBagConstraints();
+	gbc_rdbtnCaptureFromScreen.fill = GridBagConstraints.HORIZONTAL;
 	gbc_rdbtnCaptureFromScreen.insets = new Insets(0, 0, 5, 0);
-	gbc_rdbtnCaptureFromScreen.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnCaptureFromScreen.gridwidth = 2;
 	gbc_rdbtnCaptureFromScreen.gridx = 2;
-	gbc_rdbtnCaptureFromScreen.gridy = 5;
+	gbc_rdbtnCaptureFromScreen.gridy = 9;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
 	JButton btnCapture = new CaptureButton();
@@ -189,7 +249,7 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.weightx = 10.0;
 	gbc_btnCapture.gridwidth = 2;
 	gbc_btnCapture.gridx = 2;
-	gbc_btnCapture.gridy = 6;
+	gbc_btnCapture.gridy = 10;
 	add(btnCapture, gbc_btnCapture);
 
 	ButtonGroup iconGroup = new ButtonGroup();
@@ -218,10 +278,10 @@ public class SettingPanel extends JPanel {
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
 	gbc_lblMode.insets = new Insets(0, 0, 5, 5);
 	gbc_lblMode.gridx = 0;
-	gbc_lblMode.gridy = 7;
+	gbc_lblMode.gridy = 11;
 	add(lblMode, gbc_lblMode);
 
-	rdbtnSingleTouch = new JRadioButton("Single Touch");
+	rdbtnSingleTouch = new JRadioButton("Tap");
 	rdbtnSingleTouch.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		Controller.getInstance().getCurrentCommand().setMode(0);
@@ -233,7 +293,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnSingleTouch.gridwidth = 2;
 	gbc_rdbtnSingleTouch.gridx = 2;
-	gbc_rdbtnSingleTouch.gridy = 7;
+	gbc_rdbtnSingleTouch.gridy = 11;
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
@@ -247,7 +307,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
-	gbc_rdbtnFollow.gridy = 8;
+	gbc_rdbtnFollow.gridy = 12;
 	add(rdbtnFollow, gbc_rdbtnFollow);
 
 	ButtonGroup modeGroup = new ButtonGroup();
