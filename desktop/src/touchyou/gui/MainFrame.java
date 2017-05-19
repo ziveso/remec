@@ -62,21 +62,21 @@ public class MainFrame extends JFrame {
 	gbc_settingPanel.gridy = 0;
 	workingPanel.add(settingPanel, gbc_settingPanel);
 	getContentPane().add(workingPanel);
-	JPanel Bound = new JPanel();
-	Bound.setPreferredSize(new Dimension(model_width, Height));
+	JPanel mobilePadding = new JPanel();
+	mobilePadding.setPreferredSize(new Dimension(model_width, Height));
 	// int sideGap = (int) ((GuiUtil.HEIGHT - mobileWidth) / 2.0);
-	Bound.setBorder(new EmptyBorder(0, 0, 0, 0));
-	Bound.setBackground(Color.decode("#282828")); // almost black;
-	Bound.setOpaque(true);
+	mobilePadding.setBorder(new EmptyBorder(0, 0, 0, 0));
+	mobilePadding.setBackground(Color.decode("#282828")); // almost black;
+	mobilePadding.setOpaque(true);
 	
 	MobilePanel mobilePanel = new MobilePanel();
-	Bound.add(mobilePanel);
-	GridBagConstraints gbc_modelPanel = new GridBagConstraints();
-	gbc_modelPanel.insets = new Insets(0, 0, 0, 0);
-	gbc_modelPanel.fill = GridBagConstraints.BOTH;
-	gbc_modelPanel.gridx = 1;
-	gbc_modelPanel.gridy = 0;
-	workingPanel.add(Bound, gbc_modelPanel);
+	mobilePadding.add(mobilePanel);
+	GridBagConstraints gbc_mobilePadding = new GridBagConstraints();
+	gbc_mobilePadding.insets = new Insets(0, 0, 0, 0);
+	gbc_mobilePadding.fill = GridBagConstraints.BOTH;
+	gbc_mobilePadding.gridx = 1;
+	gbc_mobilePadding.gridy = 0;
+	workingPanel.add(mobilePadding, gbc_mobilePadding);
 
 	WidgetPanel widgetPanel = new WidgetPanel(pane_width, Height);
 	GridBagConstraints gbc_widgetPanel = new GridBagConstraints();
