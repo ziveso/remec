@@ -1,14 +1,18 @@
 package touchyou;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.swing.KeyStroke;
 
 import com.sun.webkit.dom.KeyboardEventImpl;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
  * Command class contains essential information of a command button.
@@ -107,10 +111,14 @@ public class Command {
     public String toString() {
 	if (combination.trim().isEmpty())
 	    return "EMPTY COMMAND";
-	String[] texts = combination.split(":");
-	for (int i = 0; i < texts.length; i++) {
-	    texts[i] = KeyStroke.getKeyStroke(Integer.parseInt(texts[i]), 0).toString().substring(8);
-	}
-	return String.join("+", texts).replaceAll("META", "CMD");
+	String[] array = combination.split(":");
+	List<String> keycodeText = Arrays.stream(array).map(keycode->{
+//	    System.out.println(keycode);
+	    return KeyEvent.getKeyText(Integer.parseInt(keycode));
+	}).collect(Collectors.toList());
+	
+	
+	
+	return String.join("", keycodeText);
     }
 }

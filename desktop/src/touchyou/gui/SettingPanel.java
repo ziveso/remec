@@ -93,30 +93,21 @@ public class SettingPanel extends JPanel {
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.setEditable(false);
 	combination.addKeyListener(new KeyListener() {
-	    private int pressing = 0;
-	    private List<Integer> key = new ArrayList<>();
+	    private List<String> key = new ArrayList<>();
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
+		System.out.println(KeyEvent.getKeyText(e.getKeyCode()));
+		key.add(String.valueOf(e.getKeyCode()));
+		Controller.getInstance().getCurrentCommand().setCombination(String.join(":", key));
+		Controller.getInstance().updateCurrentCommand();
 		e.consume();
-		if (pressing == 0) {
-		    key.clear();
-		}
-		pressing++;
-		key.add(e.getKeyCode());
 	    }
 
 	    @Override
 	    public void keyReleased(KeyEvent e) {
-		pressing--;
-		if (pressing == 0) {
-		    StringBuffer string = new StringBuffer();
-		    for (int key : key) {
-			string.append(key + ":");
-		    }
-		    Controller.getInstance().getCurrentCommand().setCombination(string.toString());
-		    Controller.getInstance().updateCurrentCommand();
-		}
+		key.clear();
+		e.consume();
 	    }
 
 	    @Override
