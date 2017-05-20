@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.Command;
@@ -45,12 +47,12 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnCaptureFromScreen;
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
-    private JRadioButton rdbtnNone;
+    private JRadioButton rdbtnIconNone;
     private JLabel lblText;
     private JRadioButton rdbtnCommandAsLabel;
     private JRadioButton rdbtnCustomLabel;
     private JTextField customLabel;
-    private JRadioButton rdbtnNone_1;
+    private JRadioButton rdbtnTextNone;
 
     /**
      * Create the panel.
@@ -141,16 +143,16 @@ public class SettingPanel extends JPanel {
 	
 	ButtonGroup labelGroup = new ButtonGroup();
 	
-	rdbtnNone_1 = new JRadioButton("None");
-	rdbtnNone_1.setForeground(Color.WHITE);
-	GridBagConstraints gbc_rdbtnNone_1 = new GridBagConstraints();
-	gbc_rdbtnNone_1.fill = GridBagConstraints.HORIZONTAL;
-	gbc_rdbtnNone_1.gridwidth = 2;
-	gbc_rdbtnNone_1.insets = new Insets(0, 0, 5, 5);
-	gbc_rdbtnNone_1.gridx = 2;
-	gbc_rdbtnNone_1.gridy = 2;
-	add(rdbtnNone_1, gbc_rdbtnNone_1);
-	labelGroup.add(rdbtnNone_1);
+	rdbtnTextNone = new JRadioButton("None");
+	rdbtnTextNone.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnTextNone = new GridBagConstraints();
+	gbc_rdbtnTextNone.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnTextNone.gridwidth = 2;
+	gbc_rdbtnTextNone.insets = new Insets(0, 0, 5, 5);
+	gbc_rdbtnTextNone.gridx = 2;
+	gbc_rdbtnTextNone.gridy = 2;
+	add(rdbtnTextNone, gbc_rdbtnTextNone);
+	labelGroup.add(rdbtnTextNone);
 	
 	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
 	rdbtnCommandAsLabel.setForeground(Color.WHITE);
@@ -193,15 +195,19 @@ public class SettingPanel extends JPanel {
 	gbc_lblIcon.gridy = 6;
 	add(lblIcon, gbc_lblIcon);
 
-	rdbtnNone = new JRadioButton("None");
-	rdbtnNone.setForeground(Color.WHITE);
-	GridBagConstraints gbc_rdbtnNone = new GridBagConstraints();
-	gbc_rdbtnNone.fill = GridBagConstraints.HORIZONTAL;
-	gbc_rdbtnNone.gridwidth = 2;
-	gbc_rdbtnNone.insets = new Insets(0, 0, 5, 0);
-	gbc_rdbtnNone.gridx = 2;
-	gbc_rdbtnNone.gridy = 6;
-	add(rdbtnNone, gbc_rdbtnNone);
+	ButtonGroup iconGroup = new ButtonGroup();
+	
+	CaptureButton btnCapture = new CaptureButton();
+	
+	rdbtnIconNone = new JRadioButton("None");
+	rdbtnIconNone.setForeground(Color.WHITE);
+	GridBagConstraints gbc_rdbtnIconNone = new GridBagConstraints();
+	gbc_rdbtnIconNone.fill = GridBagConstraints.HORIZONTAL;
+	gbc_rdbtnIconNone.gridwidth = 2;
+	gbc_rdbtnIconNone.insets = new Insets(0, 0, 5, 0);
+	gbc_rdbtnIconNone.gridx = 2;
+	gbc_rdbtnIconNone.gridy = 6;
+	add(rdbtnIconNone, gbc_rdbtnIconNone);
 
 	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
 	rdbtnImportFromComputer.setForeground(GUIUtil.getForegroundColor());
@@ -242,7 +248,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCaptureFromScreen.gridy = 9;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
-	JButton btnCapture = new CaptureButton();
+	
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
 	gbc_btnCapture.fill = GridBagConstraints.BOTH;
@@ -252,8 +258,7 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.gridy = 10;
 	add(btnCapture, gbc_btnCapture);
 
-	ButtonGroup iconGroup = new ButtonGroup();
-	iconGroup.add(rdbtnNone);
+	iconGroup.add(rdbtnIconNone);
 	iconGroup.add(rdbtnImportFromComputer);
 	iconGroup.add(rdbtnCaptureFromScreen);
 	rdbtnImportFromComputer.addActionListener(e -> {
@@ -266,7 +271,7 @@ public class SettingPanel extends JPanel {
 	    btnBrowse.setEnabled(false);
 	    btnCapture.setEnabled(true);
 	});
-	rdbtnNone.addActionListener(e -> {
+	rdbtnIconNone.addActionListener(e -> {
 	    iconpath.setEnabled(false);
 	    btnBrowse.setEnabled(false);
 	    btnCapture.setEnabled(false);
@@ -322,6 +327,11 @@ public class SettingPanel extends JPanel {
     public void update(Command command) {
 	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());
+	if (command.getImage() == Command.BLANK_IMAGE) {
+	    rdbtnIconNone.setSelected(true);
+	}else {
+	    rdbtnCaptureFromScreen.setSelected(true);
+	}
 	switch (command.getMode()) {
 	case 0:
 	    rdbtnSingleTouch.setSelected(true);
