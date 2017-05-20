@@ -101,7 +101,6 @@ public class MobilePanel extends JLayeredPane {
 	command.setX(commandBtn.getX());
 	command.setY(commandBtn.getY());
 	this.add(commandBtn, new Integer(command.getId()));
-	System.out.println(command.getId());
 	Controller.getInstance().update(command);
     }
 
