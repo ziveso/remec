@@ -320,7 +320,7 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
-	this.combination.setText(command.getCombination());
+	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());
 	switch (command.getMode()) {
 	case 0:

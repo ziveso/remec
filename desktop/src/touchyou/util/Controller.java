@@ -165,10 +165,8 @@ public class Controller {
     public void update(Command command) {
 	if (app.getProfile().getCommands().size() > 0)
 	    enableSettingPanel();
-	settingPanel.update(command);
-	widgetPanel.update(command);
-	mobilePanel.update(command);
 	currentCommand = command;
+	updateCurrentCommand();
     }
 
     /**

@@ -15,6 +15,8 @@ import javax.swing.border.Border;
 
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
+import touchyou.Command;
+
 /**
  * Helper Class for writing the Application in GUI part
  * 
@@ -55,6 +57,7 @@ public class GUIUtil {
 
 
     public static String extractBytes(Image img) {
+	if (img == Command.BLANK_IMAGE) return "0";
 	BufferedImage bufferedImage = (BufferedImage) img;
 	ByteArrayOutputStream bos = null;
 	String[] array = null;

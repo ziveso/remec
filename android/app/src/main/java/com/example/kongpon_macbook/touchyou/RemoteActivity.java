@@ -3,8 +3,11 @@ package com.example.kongpon_macbook.touchyou;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -73,10 +76,15 @@ public class RemoteActivity extends Activity {
                     button.setLayoutParams(rect);
                     button.setTag(mode + ";" + combination);
                     button.setOnTouchListener(listener);
+                    System.out.println(getAssets());
+                    button.setTextSize(30);
+                    button.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/LucidaGrande.ttc"));
                     button.setText(text);
-                    byte[] b = convertStringToByteArray(img);
-                    Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(b, 0, b.length));
-                    button.setBackground(image);
+                    if (!img.equals("0")) {
+                        byte[] b = convertStringToByteArray(img);
+                        Drawable image = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(b, 0, b.length));
+                        button.setBackground(image);
+                    }
                     r.addView(button);
                 }
                 Controller.getInstance().commands.clear();
@@ -93,15 +101,16 @@ public class RemoteActivity extends Activity {
             Button button = (Button) v;
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    Controller.getInstance().sendMessage("PRESS="+button.getTag());
+                    Controller.getInstance().sendMessage("PRESS=" + button.getTag());
                     break;
                 case MotionEvent.ACTION_UP:
-                    Controller.getInstance().sendMessage("RELEASE="+button.getTag());
+                    Controller.getInstance().sendMessage("RELEASE=" + button.getTag());
                     break;
             }
             return false;
         }
     }
+
     private byte[] convertStringToByteArray(String data) {
         String[] bytesString = data.split(",");
         byte[] bytes = new byte[bytesString.length];
@@ -110,6 +119,7 @@ public class RemoteActivity extends Activity {
         }
         return bytes;
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

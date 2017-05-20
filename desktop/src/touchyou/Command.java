@@ -3,16 +3,9 @@ package touchyou;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import javax.swing.KeyStroke;
-
-import com.sun.webkit.dom.KeyboardEventImpl;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
  * Command class contains essential information of a command button.
@@ -21,6 +14,7 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
  *
  */
 public class Command {
+    public static final Image BLANK_IMAGE = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private int id;
     private String combination;
     /**
@@ -29,13 +23,10 @@ public class Command {
      */
     private int mode;
     private String imagePath;
-    private Image image;
+    private Image image = BLANK_IMAGE;
     private int width, height, x, y;
 
     public Image getImage() {
-	if (image == null) {
-	    return new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-	}
 	return image;
     }
 

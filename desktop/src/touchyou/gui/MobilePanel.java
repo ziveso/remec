@@ -92,7 +92,8 @@ public class MobilePanel extends JPanel {
 	commandBtn.setBounds((int) command.getX(), (int) command.getY(), (int) command.getWidth(),
 		(int) command.getHeight());
 	commandBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-	commandBtn.setFont(new Font(commandBtn.getFont().getFontName(), 0, 24));
+//	commandBtn.setFont(new Font(commandBtn.getFont().getFontName(), 0, 24));
+	commandBtn.setFont(new Font("Arial", 0, 24));
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
 	// TODO Add commandBtn to mobile with auto layout
