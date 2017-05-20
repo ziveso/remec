@@ -30,7 +30,7 @@ import touchyou.util.Controller;
  */
 public class MobilePanel extends JPanel {
 
-    private MouseAdapter commandMouseAdapter;
+    private MouseAdapter commandMouseAdapter = new CommandMouseAdapter();;
     private ComponentMover mover;
     private ComponentResizer resizer;
 
@@ -41,12 +41,11 @@ public class MobilePanel extends JPanel {
 
     protected MobilePanel() {
 	mover = new ComponentMover();
-	mover.setSnapSize(new Dimension(4,4));
+	mover.setSnapSize(new Dimension(4, 4));
 	mover.setDragInsets(new Insets(10, 10, 10, 10));
 
 	resizer = new ComponentResizer();
-	resizer.setSnapSize(new Dimension(4,4));
-	commandMouseAdapter = new CommandMouseAdapter();
+	resizer.setSnapSize(new Dimension(4, 4));
 	this.setOpaque(true);
 	setBackground(Color.white);
 	setLayout(null); // make it movable , no layout
@@ -86,13 +85,12 @@ public class MobilePanel extends JPanel {
 	commandBtn.addComponentListener(new ComponentAdapter() {
 	    @Override
 	    public void componentResized(ComponentEvent e) {
-	        Controller.getInstance().updateCurrentCommand();
+		Controller.getInstance().updateCurrentCommand();
 	    }
 	});
 	commandBtn.setBounds((int) command.getX(), (int) command.getY(), (int) command.getWidth(),
 		(int) command.getHeight());
 	commandBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-//	commandBtn.setFont(new Font(commandBtn.getFont().getFontName(), 0, 24));
 	commandBtn.setFont(new Font("Arial", 0, 24));
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
@@ -126,6 +124,15 @@ public class MobilePanel extends JPanel {
 	    JButton source = (JButton) e.getSource();
 	    String id = source.getActionCommand();
 	    Controller.getInstance().update(Controller.getInstance().getCommandById(id));
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	    JButton source = (JButton) e.getSource();
+	    Controller.getInstance().getCurrentCommand().setWidth(source.getWidth());
+	    Controller.getInstance().getCurrentCommand().setHeight(source.getHeight());
+	    Controller.getInstance().getCurrentCommand().setX(source.getX());
+	    Controller.getInstance().getCurrentCommand().setY(source.getY());
 	}
     }
 

@@ -315,8 +315,7 @@ public class ComponentResizer extends MouseAdapter {
 	if (source instanceof JComponent) {
 	    ((JComponent) source).setAutoscrolls(autoscrolls);
 	}
-	Controller.getInstance().getCurrentCommand().setWidth(source.getWidth());
-	Controller.getInstance().getCurrentCommand().setHeight(source.getHeight());
+
     }
 
     /**

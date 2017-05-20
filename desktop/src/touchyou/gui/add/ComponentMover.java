@@ -348,7 +348,6 @@ public class ComponentMover extends MouseAdapter {
 		destination.validate();
 	    }
 	}
-	Controller.getInstance().getCurrentCommand().setX(destination.getX());
-	Controller.getInstance().getCurrentCommand().setY(destination.getY());
+
     }
 }

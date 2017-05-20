@@ -59,37 +59,47 @@ public class RemoteActivity extends Activity {
             public void run() {
                 pd.show();
                 r.removeAllViews();
-                for (String commands : Controller.getInstance().commands) {
-                    String[] command = commands.split(";");
-                    String combination = command[0];
-                    int mode = Integer.parseInt(command[1]);
-                    int width = Integer.parseInt(command[2]);
-                    int height = Integer.parseInt(command[3]);
-                    int x = Integer.parseInt(command[4]);
-                    int y = Integer.parseInt(command[5]);
-                    String text = command[6];
-                    String img = command[7];
-                    RelativeLayout.LayoutParams rect = new RelativeLayout.LayoutParams(width, height);
-                    rect.leftMargin = x;
-                    rect.topMargin = y;
-                    final Button button = new Button(RemoteActivity.this);
-                    button.setLayoutParams(rect);
-                    button.setTag(mode + ";" + combination);
-                    button.setOnTouchListener(listener);
-                    System.out.println(getAssets());
-                    button.setTextSize(30);
-                    button.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/LucidaGrande.ttc"));
-                    button.setText(text);
-                    if (!img.equals("0")) {
-                        byte[] b = convertStringToByteArray(img);
-                        Drawable image = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(b, 0, b.length));
-                        button.setBackground(image);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (String commands : Controller.getInstance().commands) {
+                                    String[] command = commands.split(";");
+                                    String combination = command[0];
+                                    int mode = Integer.parseInt(command[1]);
+                                    int width = Integer.parseInt(command[2]);
+                                    int height = Integer.parseInt(command[3]);
+                                    int x = Integer.parseInt(command[4]);
+                                    int y = Integer.parseInt(command[5]);
+                                    String text = command[6];
+                                    String img = command[7];
+                                    RelativeLayout.LayoutParams rect = new RelativeLayout.LayoutParams(width, height);
+                                    rect.leftMargin = x;
+                                    rect.topMargin = y;
+                                    final Button button = new Button(RemoteActivity.this);
+                                    button.setLayoutParams(rect);
+                                    button.setTag(mode + ";" + combination);
+                                    button.setOnTouchListener(listener);
+                                    System.out.println(getAssets());
+                                    button.setTextSize(30);
+                                    button.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/LucidaGrande.ttc"));
+                                    button.setText(text);
+                                    if (!img.equals("0")) {
+                                        byte[] b = convertStringToByteArray(img);
+                                        Drawable image = new BitmapDrawable(getResources(), BitmapFactory.decodeByteArray(b, 0, b.length));
+                                        button.setBackground(image);
+                                    }
+                                    r.addView(button);
+                                }
+                                Controller.getInstance().commands.clear();
+                                System.out.println("sync finished");
+                                pd.dismiss();
+                            }
+                        });
                     }
-                    r.addView(button);
-                }
-                Controller.getInstance().commands.clear();
-                System.out.println("sync finished");
-                pd.dismiss();
+                }).start();
             }
         });
     }
