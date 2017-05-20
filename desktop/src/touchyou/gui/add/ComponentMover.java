@@ -288,10 +288,10 @@ public class ComponentMover extends MouseAdapter {
 
 	// Adjustments are finished, move the component
 
-	Point p = SwingUtilities.convertPoint(destination, e.getPoint(), destination.getParent());
-	if (!Controller.getInstance().placeable(destination,  p )){
-	    return ;
-	}
+//	Point p = SwingUtilities.convertPoint(destination, e.getPoint(), destination.getParent());
+//	if (!Controller.getInstance().placeable(destination,  p )){
+//	    return ;
+//	}
 	    destination.setLocation(locationX, locationY);
     }
 

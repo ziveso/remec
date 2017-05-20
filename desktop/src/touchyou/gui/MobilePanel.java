@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -28,9 +29,9 @@ import touchyou.util.Controller;
  * @author Thitiwat Thongbor
  *
  */
-public class MobilePanel extends JPanel {
+public class MobilePanel extends JLayeredPane {
 
-    private MouseAdapter commandMouseAdapter = new CommandMouseAdapter();;
+    private MouseAdapter commandMouseAdapter = new CommandMouseAdapter();
     private ComponentMover mover;
     private ComponentResizer resizer;
 
@@ -99,7 +100,8 @@ public class MobilePanel extends JPanel {
 	command.setHeight(commandBtn.getHeight());
 	command.setX(commandBtn.getX());
 	command.setY(commandBtn.getY());
-	this.add(commandBtn);
+	this.add(commandBtn, new Integer(command.getId()));
+	System.out.println(command.getId());
 	Controller.getInstance().update(command);
     }
 

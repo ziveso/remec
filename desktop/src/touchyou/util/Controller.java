@@ -184,9 +184,9 @@ public class Controller {
     }
 
     /**
-     * Update Command to the profile.
+     * Update Command to the profile. (Only use for loading profile).
      */
-    public void addCommand(Command command) {
+    private void addCommand(Command command) {
 	/* notify other Panels */
 	mobilePanel.addCommand(command);
 	widgetPanel.addCommand(command);
