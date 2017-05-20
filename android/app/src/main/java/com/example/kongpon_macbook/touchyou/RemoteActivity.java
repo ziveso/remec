@@ -3,7 +3,10 @@ package com.example.kongpon_macbook.touchyou;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -32,7 +35,6 @@ public class RemoteActivity extends Activity {
         pd.setTitle("Synchronizing");
         pd.setMessage("Downloading content...");
         sync();
-
     }
 
     public void sync() {
@@ -63,6 +65,7 @@ public class RemoteActivity extends Activity {
                     int x = Integer.parseInt(command[4]);
                     int y = Integer.parseInt(command[5]);
                     String text = command[6];
+                    String img = command[7];
                     RelativeLayout.LayoutParams rect = new RelativeLayout.LayoutParams(width, height);
                     rect.leftMargin = x;
                     rect.topMargin = y;
@@ -71,6 +74,9 @@ public class RemoteActivity extends Activity {
                     button.setTag(mode + ";" + combination);
                     button.setOnTouchListener(listener);
                     button.setText(text);
+                    byte[] b = convertStringToByteArray(img);
+                    Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(b, 0, b.length));
+                    button.setBackground(image);
                     r.addView(button);
                 }
                 Controller.getInstance().commands.clear();
@@ -96,7 +102,14 @@ public class RemoteActivity extends Activity {
             return false;
         }
     }
-
+    private byte[] convertStringToByteArray(String data) {
+        String[] bytesString = data.split(",");
+        byte[] bytes = new byte[bytesString.length];
+        for (int i = 0; i < bytes.length; ++i) {
+            bytes[i] = Byte.parseByte(bytesString[i]);
+        }
+        return bytes;
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,6 +83,12 @@ public class MobilePanel extends JPanel {
 	commandBtn.setPreferredSize(new Dimension((int) command.getWidth(), (int) command.getHeight()));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
+	commandBtn.addComponentListener(new ComponentAdapter() {
+	    @Override
+	    public void componentResized(ComponentEvent e) {
+	        Controller.getInstance().updateCurrentCommand();
+	    }
+	});
 	commandBtn.setBounds((int) command.getX(), (int) command.getY(), (int) command.getWidth(),
 		(int) command.getHeight());
 	commandBtn.setHorizontalTextPosition(SwingConstants.CENTER);

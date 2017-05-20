@@ -1,5 +1,6 @@
 package touchyou;
 
+import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import touchyou.gui.WelcomeFrame;
 import touchyou.util.Controller;
+import touchyou.util.GUIUtil;
 
 /**
  * Model for TouchYou application.
@@ -40,25 +42,18 @@ public class App {
      */
     public void sync(int wFactor, int hFactor) {
 	profile.getCommands().forEach(command -> {
-	    ByteArrayOutputStream b = new ByteArrayOutputStream();
-	    byte[] image = null;
-	    try {
-		ImageIO.write((RenderedImage) command.getImage(), "png", b);
-		image = b.toByteArray();
-	    } catch (IOException e) {
-		e.printStackTrace();
-	    }
 	    String combination = command.getCombination();
 	    int mode = command.getMode();
 	    int width = command.getWidth() * wFactor;
 	    int height = command.getHeight() * hFactor;
 	    int x = command.getX() * wFactor;
 	    int y = command.getY() * hFactor;
-	    String packet =
-		    String.format("%s;%d;%d;%d;%d;%d;%s", combination, mode, width, height, x, y, command.toString());
+	    String img = GUIUtil.extractBytes(command.getImage());
+	    String packet = String.format("%s;%d;%d;%d;%d;%d;%s;%s", combination, mode, width, height, x, y,
+		    command.toString(), img);
 	    server.sendToAllClients("SYNC_RESPONSE=" + packet);
 	});
-	server.sendToAllClients("SYNC_END");
+	server.sendToAllClients("SYNC_END=0");
     }
 
     public void save() {
@@ -226,7 +221,7 @@ public class App {
     }
 
     public void sendSyncRequest() {
-	server.sendToAllClients("SYNC_REQUEST");
+	server.sendToAllClients("SYNC_REQUEST=0");
     }
 }
 

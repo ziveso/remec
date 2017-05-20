@@ -1,13 +1,6 @@
 package com.example.kongpon_macbook.touchyou;
 
-import android.app.ActivityOptions;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-
 import com.example.kongpon_macbook.touchyou.client.AbstractClient;
-
-import java.util.ResourceBundle;
 
 
 /**
@@ -23,16 +16,34 @@ public class TCPClient extends AbstractClient {
     @Override
     protected void handleMessageFromServer(Object o) {
         System.out.println(o);
-        String data = (String) o;
-        if (data.equals("SYNC_REQUEST")) {
-            Controller.getInstance().remoteActivity.sync();
+        String[] data = ((String) o).split("=");
+        String header = data[0];
+        String body = data[1];
+        switch (header) {
+            case "SYNC_REQUEST":
+                Controller.getInstance().remoteActivity.sync();
+                break;
+            case "SYNC_RESPONSE":
+                Controller.getInstance().commands.add(body);
+                break;
+            case "SYNC_END":
+                Controller.getInstance().notifyRemoteActivity();
+                break;
+            default:
+                break;
         }
-        else if (data.contains("SYNC_RESPONSE")) {
-            String command = data.split("=")[1];
-            Controller.getInstance().commands.add(command);
-        } else if (data.equals("SYNC_END")) {
-            Controller.getInstance().notifyRemoteActivity();
-        }
+
+//          if (o instanceof String) {
+//            String data = (String) o;
+//            if (data.equals("SYNC_REQUEST")) {
+//                Controller.getInstance().remoteActivity.sync();
+//            } else if (data.contains("SYNC_RESPONSE")) {
+//                String command = data.split("=")[1];
+//                Controller.getInstance().commands.add(command);
+//            } else if (data.equals("SYNC_END")) {
+//                Controller.getInstance().notifyRemoteActivity();
+//            }
+//        }
     }
 
 

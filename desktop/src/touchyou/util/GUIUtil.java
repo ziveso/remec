@@ -2,11 +2,18 @@ package touchyou.util;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
+
+import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 /**
  * Helper Class for writing the Application in GUI part
@@ -44,5 +51,29 @@ public class GUIUtil {
 
     public static Color getForegroundColor() {
 	return Color.WHITE;
+    }
+
+
+    public static String extractBytes(Image img) {
+	BufferedImage bufferedImage = (BufferedImage) img;
+	ByteArrayOutputStream bos = null;
+	String[] array = null;
+	try {
+	    bos = new ByteArrayOutputStream();
+	    ImageIO.write(bufferedImage, "png", bos);
+	    byte[] bytearray = bos.toByteArray();
+	    array = new String[bytearray.length];
+	    for (int i = 0; i < bytearray.length; i++) {
+		array[i] = String.valueOf(bytearray[i]);
+	    }
+	} catch (IOException e) {
+	    return null;
+	} finally {
+	    try {
+		bos.close();
+	    } catch (Exception e) {
+	    }
+	}
+	return String.join(",", array);
     }
 }
