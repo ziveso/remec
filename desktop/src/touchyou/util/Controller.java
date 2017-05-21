@@ -16,6 +16,7 @@ import touchyou.UDPBroadcast;
 import touchyou.gui.MainFrame;
 import touchyou.gui.MobilePanel;
 import touchyou.gui.SettingPanel;
+import touchyou.gui.StatusPanel;
 import touchyou.gui.WidgetPanel;
 
 /**
@@ -33,6 +34,7 @@ public class Controller {
     private SettingPanel settingPanel;
     private WidgetPanel widgetPanel;
     private MobilePanel mobilePanel;
+    private StatusPanel statusPanel;
     private Command currentCommand;
     private UDPBroadcast broadcaster;
     private int id;
@@ -41,10 +43,22 @@ public class Controller {
 	broadcaster = new UDPBroadcast();
     }
 
+    /**
+     * Send a sync request to the mobile device. If the message arrived on
+     * mobile succesfully, this will invoke {@link #sync(int, int)} method.
+     */
     public void sendSyncRequest() {
 	app.sendSyncRequest();
     }
 
+    /**
+     * Start synchronization with mobile device (should not be called).
+     * 
+     * @param width
+     *            is the width of the device
+     * @param height
+     *            is the height of the device
+     */
     public void sync(int width, int height) {
 	int wFactor = (int) ((double) width / mobilePanel.getWidth());
 	int hFactor = (int) ((double) height / mobilePanel.getHeight());
@@ -72,58 +86,6 @@ public class Controller {
     }
 
     /**
-     * Check if a component can be placed at this mouse location.
-     * 
-     * @param current
-     *            is the subject component
-     * @param mouse
-     *            is current mouse position on the mobilePanel
-     * @param press_y
-     * @param press_x
-     * @return true if is placable, false otherwise
-     */
-    public boolean placeable(Component current, Point mouse) {
-	// constance between grap
-	int grap = 3;
-	Component[] components = mobilePanel.getComponents();
-	// TODO FIZ IT!!
-	// create rectangle
-	List<Rectangle> recs = new ArrayList<>();
-	for (Component c : components) {
-	    if (c == current)
-		continue;
-	    recs.add(new Rectangle(c.getX() + grap, c.getY() + grap, c.getWidth() + grap, c.getHeight() + grap));
-	}
-	Rectangle current_rec = new Rectangle(current.getX() + grap, current.getY() + grap, current.getWidth() + grap,
-		current.getHeight() + grap);
-
-	for (int i = 0; i < recs.size(); i++) {
-	    if (!current_rec.contains(mouse) && !recs.get(i).contains(mouse)) {
-		return true;
-	    }
-	    if (recs.get(i).intersects(current_rec)) {
-		return false;
-	    }
-	}
-
-	// go fuck this logic
-	// for (Component c : mobilePanel.getComponents()) {
-	// if (current != c) {
-	// double width = current.getWidth();
-	// double height = current.getHeight();
-	// int x = (int) (mouse.getX() - width / 2);
-	// int y = (int) (mouse.getY() - height / 2);
-	// Rectangle invisibleRect = new Rectangle(x, y, (int) width, (int)
-	// height);
-	// if (invisibleRect.intersects(c.getBounds())) {
-	// return false;
-	// }
-	// }
-	// }
-	return true;
-    }
-
-    /**
      * Return an instance of the Controller.
      * 
      * @return Controller instance
@@ -145,6 +107,7 @@ public class Controller {
 	settingPanel.clear();
 	widgetPanel.clear();
 	mobilePanel.clear();
+	statusPanel.clear();
     }
 
     /**
@@ -206,17 +169,21 @@ public class Controller {
     }
 
     public void showMainFrame() {
-//	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
+	// SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
 	mainFrame.setVisible(true);
     }
 
     public void hideMainFrame() {
-//	SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
+	// SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
 	mainFrame.setVisible(false);
     }
 
     public void setApp(App app) {
 	this.app = app;
+    }
+
+    public void setStatusPanel(StatusPanel statusPanel) {
+	this.statusPanel = statusPanel;
     }
 
     public void setMainFrame(MainFrame mainFrame) {

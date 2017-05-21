@@ -24,6 +24,7 @@ public class StatusPanel extends JPanel {
      * 
      */
     private static final long serialVersionUID = 2861841184923249614L;
+    private SyncButton syncButton;
 
     /**
      * Create the panel.
@@ -109,7 +110,7 @@ public class StatusPanel extends JPanel {
 	lblConnectedFrom.setForeground(Color.WHITE);
 	panel.add(lblConnectedFrom);
 
-	SyncButton syncButton = new SyncButton(200, 50);
+	syncButton = new SyncButton(200, 50);
 	syncButton.setBackground(Color.WHITE);
 	syncButton.setBorder(new EmptyBorder(20, 20, 20, 20));
 	GridBagConstraints gbc_syncButton = new GridBagConstraints();
@@ -132,4 +133,7 @@ public class StatusPanel extends JPanel {
 
     }
 
+    public void clear() {
+	syncButton.setEnabled(false);
+    }
 }

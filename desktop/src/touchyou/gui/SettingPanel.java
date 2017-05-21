@@ -194,18 +194,21 @@ public class SettingPanel extends JPanel {
 	customLabel.setColumns(10);
 
 	rdbtnTextNone.addActionListener(e -> {
+	    customLabel.setEnabled(false);
 	    Command command = Controller.getInstance().getCurrentCommand();
 	    command.setLabel("");
 	    command.setLableMode(0);
 	    Controller.getInstance().updateCurrentCommand();
 	});
 	rdbtnCommandAsLabel.addActionListener(e -> {
+	    customLabel.setEnabled(false);
 	    Command command = Controller.getInstance().getCurrentCommand();
 	    command.setLabel(command.toString());
 	    command.setLableMode(1);
 	    Controller.getInstance().updateCurrentCommand();
 	});
 	rdbtnCustomLabel.addActionListener(e -> {
+	    customLabel.setEnabled(true);
 	    Command command = Controller.getInstance().getCurrentCommand();
 	    command.setLabel(customLabel.getText());
 	    command.setLableMode(2);

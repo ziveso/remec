@@ -96,6 +96,7 @@ public class MainFrame extends JFrame {
 	controller.setMobilePanel(mobilePanel);
 	controller.setSettingPanel(settingPanel);
 	controller.setWidgetPanel(widgetPanel);
+	controller.setStatusPanel(statusPanel);
 
 	this.pack();
 	this.setMinimumSize(this.getSize());

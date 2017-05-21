@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -71,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-                
+                text2.setTextColor(Color.GRAY);
+
                 text1.setText(availableHost.get(position).getName());
                 text2.setText(availableHost.get(position).getAddress());
 
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 availableHost.addAll(Arrays.asList(strings));
                 if (availableHost.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Could not find any host", Toast.LENGTH_LONG).show();
-                    availableHost.add(new Host("Could not find any available servers", null));
+                    availableHost.add(new Host("Could not find any available servers", "Swipe down to refresh"));
                 }
                 adapter.notifyDataSetChanged();
                 mSwipeRefreshLayout.setRefreshing(false);
