@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
             AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
             alertDialogAndroid.show();
+            userInputDialogEditText.requestFocus();
             return true;
         } else {
             return super.onOptionsItemSelected(item);

@@ -50,7 +50,7 @@ public class App {
 	    int y = command.getY() * hFactor;
 	    String img = GUIUtil.extractBytes(command.getImage());
 	    String packet = String.format("%s;%d;%d;%d;%d;%d;%s;%s", combination, mode, width, height, x, y,
-		    command.toString(), img);
+		    command.getLabel(), img);
 	    server.sendToAllClients("SYNC_RESPONSE=" + packet);
 	});
 	server.sendToAllClients("SYNC_END=0");

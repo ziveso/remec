@@ -17,7 +17,7 @@ public class Command {
     public static final Image BLANK_IMAGE = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private int id;
     private String combination;
-    private String label;
+    private String label = "";
     private int lableMode;
     /**
      * mode 0 = TAP <br>
