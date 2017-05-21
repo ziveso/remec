@@ -8,6 +8,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -100,31 +103,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search_item) {
+            final InputMethodManager keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             LayoutInflater layoutInflaterAndroid = LayoutInflater.from(this);
             final View mView = layoutInflaterAndroid.inflate(R.layout.user_input_dialog_box, null);
-            AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(this);
-            alertDialogBuilderUserInput.setView(mView);
-            final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setView(mView);
+            final EditText editText = (EditText) mView.findViewById(R.id.userInputDialog);
 
-            alertDialogBuilderUserInput
-                    .setCancelable(false)
+            builder.setCancelable(true)
                     .setPositiveButton("Connect", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogBox, int id) {
-                            String address = userInputDialogEditText.getText().toString();
+                            String address = editText.getText().toString();
                             connect(new Host(null, address));
                         }
                     })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialogBox, int id) {
+                            dialogBox.cancel();
+                        }
+                    });
 
-                    .setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogBox, int id) {
-                                    dialogBox.cancel();
-                                }
-                            });
+            AlertDialog dialog = builder.create();
+            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    editText.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            keyboard.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                        }
+                    });
+                }
+            });
+            dialog.show();
+            editText.requestFocus();
 
-            AlertDialog alertDialogAndroid = alertDialogBuilderUserInput.create();
-            alertDialogAndroid.show();
-            userInputDialogEditText.requestFocus();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
