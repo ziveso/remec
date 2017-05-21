@@ -206,11 +206,13 @@ public class Controller {
     }
 
     public void showMainFrame() {
-	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
+//	SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
+	mainFrame.setVisible(true);
     }
 
     public void hideMainFrame() {
-	SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
+//	SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
+	mainFrame.setVisible(false);
     }
 
     public void setApp(App app) {

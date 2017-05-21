@@ -114,7 +114,7 @@ public class MobilePanel extends JLayeredPane {
 		button.setBorder(BorderFactory.createLineBorder(Color.red, 2));
 		button.setIcon(new ImageIcon(command.getImage().getScaledInstance(button.getWidth(), button.getHeight(),
 			Image.SCALE_SMOOTH)));
-		button.setText(command.toString());
+		button.setText(command.getLabel());
 	    }
 	}
     }

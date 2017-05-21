@@ -4,9 +4,9 @@ import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -22,7 +22,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -46,12 +46,14 @@ public class CaptureButton extends JButton {
 	public void actionPerformed(ActionEvent e) {
 	    SwingUtilities.invokeLater(() -> {
 		Controller.getInstance().hideMainFrame();
-		new CaptureFrame().setVisible(true);
+		CaptureFrame frame = new CaptureFrame();
+		frame.setVisible(true);
+		System.out.println(frame.getBackground());
 	    });
 	}
     }
 
-    private final class CaptureFrame extends JDialog {
+    private final class CaptureFrame extends JFrame {
 	/**
 	 * 
 	 */
@@ -62,9 +64,9 @@ public class CaptureButton extends JButton {
 	public CaptureFrame() {
 	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    this.setUndecorated(true);
-	    this.setBackground(new Color(0, 0, 0, 0.001f));
-	    this.setBounds(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds());
-	    this.add(new Drawer());
+	    this.setBackground(new Color(1, 1, 1, 0.0001f));
+	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    this.setContentPane(new Drawer());
 
 	    this.addKeyListener(new KeyAdapter() {
 		@Override
@@ -76,17 +78,17 @@ public class CaptureButton extends JButton {
 		    case KeyEvent.VK_ENTER:
 			try {
 			    rect.y += CaptureFrame.this.getLocationOnScreen().getY();
-			    System.out.println(CaptureFrame.this.getLocationOnScreen().getY());
 			    BufferedImage img = new Robot().createScreenCapture(rect);
 			    Controller.getInstance().getCurrentCommand().setImage(img);
 			    Controller.getInstance().updateCurrentCommand();
 			} catch (AWTException e1) {
 			    JOptionPane.showMessageDialog(CaptureFrame.this,
-				    "Failed to capture the screen with error: " + e1.getMessage(), "Info",
+				    "Failed to capture the screen: " + e1.getMessage(), "Info",
 				    JOptionPane.WARNING_MESSAGE);
 			    e1.printStackTrace();
+			} finally {
+			    CaptureFrame.this.dispose();
 			}
-			CaptureFrame.this.dispose();
 			break;
 		    default:
 			break;
@@ -97,22 +99,19 @@ public class CaptureButton extends JButton {
 	    this.addWindowListener(new WindowAdapter() {
 		@Override
 		public void windowClosed(WindowEvent e) {
-		    SwingUtilities.invokeLater(() -> {
-			Controller.getInstance().showMainFrame();
-		    });
+		    SwingUtilities.invokeLater(() -> Controller.getInstance().showMainFrame());
 		}
 	    });
 	}
 
 	private class Drawer extends JPanel {
-	    /**
-	     * 
-	     */
 	    private static final long serialVersionUID = 2718623225349403223L;
+	    private final Color DARK_FILTER = new Color(0, 0, 0, 0.0001f);
 
 	    public Drawer() {
+		this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		this.setOpaque(true);
-		this.setBackground(new Color(0, 0, 0, 0.1f));
+		this.setBackground(DARK_FILTER);
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 		    @Override
 		    public void mouseDragged(MouseEvent e) {
@@ -125,17 +124,22 @@ public class CaptureButton extends JButton {
 		    @Override
 		    public void mousePressed(MouseEvent e) {
 			start = e.getPoint();
+			repaint();
 		    }
 		});
+		repaint();
 	    }
 
 	    @Override
 	    protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.decode("#c91e46"));
-		BasicStroke dashedStroke = new BasicStroke(2, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f,
-			new float[] { 6 }, 0.0f);
+//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OVER));
+//		g2d.setColor(new Color(0, 0, 0, 0.1f));
+//		g2d.fillRect(0, 0, 1000, 1000);
+		g2d.setColor(Color.decode("#c91e46")); // RED
+		BasicStroke dashedStroke = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f,
+			new float[] { 8 }, 0.0f);
 		g2d.setStroke(dashedStroke);
 		if (rect != null) {
 		    g2d.drawRect(rect.x, rect.y, rect.width, rect.height);

@@ -17,6 +17,8 @@ public class Command {
     public static final Image BLANK_IMAGE = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private int id;
     private String combination;
+    private String label;
+    private int lableMode;
     /**
      * mode 0 = TAP <br>
      * mode 1 = FOLLOW
@@ -25,6 +27,22 @@ public class Command {
     private String imagePath;
     private Image image = BLANK_IMAGE;
     private int width, height, x, y;
+
+    public int getLableMode() {
+	return lableMode;
+    }
+
+    public void setLableMode(int lableMode) {
+	this.lableMode = lableMode;
+    }
+
+    public void setLabel(String label) {
+	this.label = label;
+    }
+
+    public String getLabel() {
+	return label;
+    }
 
     public Image getImage() {
 	return image;

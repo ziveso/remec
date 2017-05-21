@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -24,6 +25,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 import touchyou.Command;
 import touchyou.util.Controller;
@@ -58,13 +61,14 @@ public class SettingPanel extends JPanel {
      * Create the panel.
      */
     public SettingPanel() {
-    	setBackground(GUIUtil.getBackgroundColor());
+	setBackground(GUIUtil.getBackgroundColor());
 	// setBorder(GuiUtil.getBorder());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights =
+		new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -104,7 +108,10 @@ public class SettingPanel extends JPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {
-		/* ignore unknown key code (ex. Fn key in Macbook w/ Touchbar model). */
+		/*
+		 * ignore unknown key code (ex. Fn key in Macbook w/ Touchbar
+		 * model).
+		 */
 		if (e.getKeyCode() == 0)
 		    return;
 		key.add(String.valueOf(e.getKeyCode()));
@@ -131,7 +138,7 @@ public class SettingPanel extends JPanel {
 	gbc_combination.gridy = 1;
 	add(combination, gbc_combination);
 	combination.setColumns(10);
-	
+
 	lblText = new JLabel("Text:");
 	lblText.setForeground(Color.WHITE);
 	GridBagConstraints gbc_lblText = new GridBagConstraints();
@@ -140,9 +147,9 @@ public class SettingPanel extends JPanel {
 	gbc_lblText.gridx = 0;
 	gbc_lblText.gridy = 2;
 	add(lblText, gbc_lblText);
-	
+
 	ButtonGroup labelGroup = new ButtonGroup();
-	
+
 	rdbtnTextNone = new JRadioButton("None");
 	rdbtnTextNone.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnTextNone = new GridBagConstraints();
@@ -153,7 +160,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnTextNone.gridy = 2;
 	add(rdbtnTextNone, gbc_rdbtnTextNone);
 	labelGroup.add(rdbtnTextNone);
-	
+
 	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
 	rdbtnCommandAsLabel.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnCommandAsLabel = new GridBagConstraints();
@@ -164,7 +171,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCommandAsLabel.gridy = 3;
 	add(rdbtnCommandAsLabel, gbc_rdbtnCommandAsLabel);
 	labelGroup.add(rdbtnCommandAsLabel);
-	
+
 	rdbtnCustomLabel = new JRadioButton("Custom label");
 	rdbtnCustomLabel.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnCustomLabel = new GridBagConstraints();
@@ -175,7 +182,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCustomLabel.gridy = 4;
 	add(rdbtnCustomLabel, gbc_rdbtnCustomLabel);
 	labelGroup.add(rdbtnCustomLabel);
-	
+
 	customLabel = new JTextField();
 	GridBagConstraints gbc_customLabel = new GridBagConstraints();
 	gbc_customLabel.insets = new Insets(0, 0, 5, 0);
@@ -185,6 +192,33 @@ public class SettingPanel extends JPanel {
 	gbc_customLabel.gridy = 5;
 	add(customLabel, gbc_customLabel);
 	customLabel.setColumns(10);
+
+	rdbtnTextNone.addActionListener(e -> {
+	    Command command = Controller.getInstance().getCurrentCommand();
+	    command.setLabel("");
+	    command.setLableMode(0);
+	    Controller.getInstance().updateCurrentCommand();
+	});
+	rdbtnCommandAsLabel.addActionListener(e -> {
+	    Command command = Controller.getInstance().getCurrentCommand();
+	    command.setLabel(command.toString());
+	    command.setLableMode(1);
+	    Controller.getInstance().updateCurrentCommand();
+	});
+	rdbtnCustomLabel.addActionListener(e -> {
+	    Command command = Controller.getInstance().getCurrentCommand();
+	    command.setLabel(customLabel.getText());
+	    command.setLableMode(2);
+	    Controller.getInstance().updateCurrentCommand();
+	});
+	customLabel.addKeyListener(new KeyAdapter() {
+	    @Override
+	    public void keyTyped(KeyEvent e) {
+		Command command = Controller.getInstance().getCurrentCommand();
+		command.setLabel(customLabel.getText());
+		Controller.getInstance().updateCurrentCommand();
+	    }
+	});
 
 	JLabel lblIcon = new JLabel("Icon:");
 	lblIcon.setForeground(GUIUtil.getForegroundColor());
@@ -196,9 +230,8 @@ public class SettingPanel extends JPanel {
 	add(lblIcon, gbc_lblIcon);
 
 	ButtonGroup iconGroup = new ButtonGroup();
-	
-	CaptureButton btnCapture = new CaptureButton();
-	
+
+
 	rdbtnIconNone = new JRadioButton("None");
 	rdbtnIconNone.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnIconNone = new GridBagConstraints();
@@ -248,7 +281,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnCaptureFromScreen.gridy = 9;
 	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
 
-	
+	CaptureButton btnCapture = new CaptureButton();
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
 	gbc_btnCapture.fill = GridBagConstraints.BOTH;
@@ -329,7 +362,7 @@ public class SettingPanel extends JPanel {
 	this.iconpath.setText(command.getImagePath());
 	if (command.getImage() == Command.BLANK_IMAGE) {
 	    rdbtnIconNone.setSelected(true);
-	}else {
+	} else {
 	    rdbtnCaptureFromScreen.setSelected(true);
 	}
 	switch (command.getMode()) {

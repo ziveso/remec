@@ -110,7 +110,8 @@ public class WidgetPanel extends JPanel {
 	    return;
 	}
 	list.setSelectedValue(command, true);
-	this.validate();
+	this.repaint();
+	this.revalidate();
     }
 
     public void clear() {
