@@ -1,6 +1,7 @@
 package touchyou.util;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -38,11 +39,6 @@ public class GUIUtil {
 	return BorderFactory.createLineBorder(Color.BLACK);
     }
 
-    public static Image getImage(String URL) {
-	URL url = GUIUtil.class.getResource(URL);
-	return new ImageIcon(url).getImage();
-    }
-
     public static Color getBackgroundColor() {
 	return Color.decode("#424242");
     }
@@ -55,9 +51,20 @@ public class GUIUtil {
 	return Color.WHITE;
     }
 
+    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+	Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	Graphics2D g2d = dimg.createGraphics();
+	g2d.drawImage(tmp, 0, 0, null);
+	g2d.dispose();
+
+	return dimg;
+    }
 
     public static String extractBytes(Image img) {
-	if (img == Command.BLANK_IMAGE) return "0";
+	if (img == Command.BLANK_IMAGE)
+	    return "0";
 	BufferedImage bufferedImage = (BufferedImage) img;
 	ByteArrayOutputStream bos = null;
 	String[] array = null;

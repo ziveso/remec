@@ -6,7 +6,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -36,8 +42,8 @@ public class MainFrame extends JFrame {
      * construct MainFrame.
      */
     public MainFrame() {
-	setTitle("Touch You 0.1.4 Beta");
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	setTitle("Remec 1.0.1 Beta");
+	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	setSize(1004, 635);
 	setJMenuBar(new MenuBar());
 
@@ -52,7 +58,7 @@ public class MainFrame extends JFrame {
 	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 	workingPanel.setLayout(gbl_workingPanel);
-	
+
 	SettingPanel settingPanel = new SettingPanel();
 	settingPanel.setMinimumSize(new Dimension(200, 227));
 	GridBagConstraints gbc_settingPanel = new GridBagConstraints();
@@ -68,7 +74,7 @@ public class MainFrame extends JFrame {
 	mobilePadding.setBorder(new EmptyBorder(0, 0, 0, 0));
 	mobilePadding.setBackground(Color.decode("#282828")); // almost black;
 	mobilePadding.setOpaque(true);
-	
+
 	MobilePanel mobilePanel = new MobilePanel();
 	mobilePadding.add(mobilePanel);
 	GridBagConstraints gbc_mobilePadding = new GridBagConstraints();
@@ -98,6 +104,20 @@ public class MainFrame extends JFrame {
 	controller.setWidgetPanel(widgetPanel);
 	controller.setStatusPanel(statusPanel);
 
+	this.addWindowListener(new WindowAdapter() {
+	    @Override
+	    public void windowClosing(WindowEvent e) {
+		boolean close = false;
+		if (JOptionPane.showConfirmDialog(null,
+			"Are you sure u want to sxit without saving ?") == JOptionPane.YES_OPTION) {
+		    close = true;
+		}
+
+		if (close) {
+		    System.exit(0);
+		}
+	    }
+	});
 	this.pack();
 	this.setMinimumSize(this.getSize());
 	statusPanel.requestFocusInWindow();

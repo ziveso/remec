@@ -10,6 +10,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -66,6 +72,8 @@ public class App {
      * @param path
      */
     public void save(String path) {
+	saveImage();
+
 	PrintWriter writer = null;
 	try {
 	    writer = new PrintWriter(path, "UTF-8");
@@ -87,9 +95,40 @@ public class App {
 	}
     }
 
+    private void saveImage() {
+	Iterator<Command> commands = profile.getCommands().iterator();
+	while (commands.hasNext()) {
+	    // save image
+	    Command cmd = commands.next();
+	    File dir = new File("./profiles/" + profile.getName() + "/images/");
+	    List<String> files = new ArrayList<>();
+	    for (File file : dir.listFiles()) {
+		files.add(file.getPath());
+	    }
+	    if (cmd.getImage() != Command.BLANK_IMAGE) {
+		if (!dir.isDirectory()) {
+		    dir.mkdirs();
+		}
+		if (files.contains(cmd.getImagePath())) {
+		    final int randomizedName = new Random().nextInt(10000) + 1;
+		    String path = dir.getPath() + "/" + randomizedName + ".png";
+		    cmd.setImagePath(path);
+		    File output = new File(path);
+		    BufferedImage bi = (BufferedImage) cmd.getImage();
+		    try {
+			ImageIO.write(bi, "png", output);
+		    } catch (IOException e) {
+			e.printStackTrace();
+		    }
+		}
+	    }
+	}
+    }
+
     public void createNewProfile(String profileName) {
 	profile = new Profile(profileName);
 	String filepath = "./profiles/" + profileName + ".profile";
+	new File("./profiles/" + profileName).mkdir();
 	save(filepath);
 	open(filepath);
     }

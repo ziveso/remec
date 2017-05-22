@@ -23,6 +23,7 @@ import touchyou.Command;
 import touchyou.gui.add.ComponentMover;
 import touchyou.gui.add.ComponentResizer;
 import touchyou.util.Controller;
+import touchyou.util.GUIUtil;
 
 /**
  * 
@@ -77,6 +78,9 @@ public class MobilePanel extends JLayeredPane {
     public void addCommand(Command command) {
 	JButton commandBtn = new JButton();
 	/* Set JButton's behavior */
+	if (command.getImagePath() != null) {
+	    command.setImage(new ImageIcon(command.getImagePath()).getImage());
+	}
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);

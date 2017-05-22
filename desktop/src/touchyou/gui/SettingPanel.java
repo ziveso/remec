@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +13,19 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -69,8 +75,8 @@ public class SettingPanel extends JPanel {
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights =
-		new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -411,12 +417,26 @@ public class SettingPanel extends JPanel {
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 		File file = fc.getSelectedFile();
-		iconpath.setText(file.getPath());
-	    } else {
+		BufferedImage buff_image = null;
+		try {
+		    buff_image = (BufferedImage) ImageIO.read(file);
+		} catch (IOException e1) {
+		    e1.printStackTrace();
+		}
+		Command current = Controller.getInstance().getCurrentCommand();
+
+		if (buff_image.getHeight() > current.getHeight() + 300
+			|| buff_image.getWidth() > current.getWidth() + 300) {
+		    if (JOptionPane.showConfirmDialog(null,
+			    "Warning!!. Image size is very Big , Do you want to resize to fit button") == JOptionPane.OK_OPTION) {
+			buff_image = (GUIUtil.resize(buff_image, current.getWidth() + 300, current.getHeight() + 300));
+		    }
+		}
+		current.setImagePath(file.getPath());
+		current.setImage(buff_image);
+		Controller.getInstance().updateCurrentCommand();
 	    }
-
 	}
-
     }
 
     public void clear() {
