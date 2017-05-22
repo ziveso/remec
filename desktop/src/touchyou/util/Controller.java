@@ -243,4 +243,11 @@ public class Controller {
     public boolean getIsSave() {
 	return isSave;
     }
+
+    public void removeCurrentCommand() {
+	this.settingPanel.removeCommand(currentCommand);
+	this.mobilePanel.removeCommand(currentCommand);
+	this.widgetPanel.removeCommand(currentCommand);
+	this.app.profile.removeCommand(currentCommand);
+    }
 }

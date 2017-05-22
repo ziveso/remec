@@ -146,4 +146,16 @@ public class MobilePanel extends JLayeredPane {
 	this.removeAll();
 	this.repaint();
     }
+
+    public void removeCommand(Command currentCommand) {
+	int id = currentCommand.getId();
+	Component[] comps = getComponents();
+	for (Component com : comps) {
+	    JButton button = (JButton) com;
+	    if (button.getActionCommand().equals(String.valueOf(id))) {
+		this.remove(button);
+	    }
+	}
+	this.repaint();
+    }
 }

@@ -64,6 +64,7 @@ public class SettingPanel extends JPanel {
     private JRadioButton rdbtnCustomLabel;
     private JTextField customLabel;
     private JRadioButton rdbtnTextNone;
+    private JButton btnDeleteButton;
 
     /**
      * Create the panel.
@@ -73,10 +74,10 @@ public class SettingPanel extends JPanel {
 	// setBorder(GuiUtil.getBorder());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-		Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -163,7 +164,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_rdbtnTextNone = new GridBagConstraints();
 	gbc_rdbtnTextNone.fill = GridBagConstraints.HORIZONTAL;
 	gbc_rdbtnTextNone.gridwidth = 2;
-	gbc_rdbtnTextNone.insets = new Insets(0, 0, 5, 5);
+	gbc_rdbtnTextNone.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnTextNone.gridx = 2;
 	gbc_rdbtnTextNone.gridy = 2;
 	add(rdbtnTextNone, gbc_rdbtnTextNone);
@@ -360,6 +361,7 @@ public class SettingPanel extends JPanel {
 	rdbtnFollow.addActionListener(e -> Controller.getInstance().getCurrentCommand().setMode(1));
 	rdbtnFollow.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
+	gbc_rdbtnFollow.insets = new Insets(0, 0, 5, 0);
 	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
@@ -369,6 +371,14 @@ public class SettingPanel extends JPanel {
 	ButtonGroup modeGroup = new ButtonGroup();
 	modeGroup.add(rdbtnSingleTouch);
 	modeGroup.add(rdbtnFollow);
+
+	btnDeleteButton = new JButton("DELETE BUTTON");
+	GridBagConstraints gbc_btnDeleteButton = new GridBagConstraints();
+	gbc_btnDeleteButton.insets = new Insets(0, 0, 0, 5);
+	gbc_btnDeleteButton.gridx = 2;
+	gbc_btnDeleteButton.gridy = 16;
+	add(btnDeleteButton, gbc_btnDeleteButton);
+	btnDeleteButton.addActionListener((e) -> Controller.getInstance().removeCurrentCommand());
     }
 
     public void setProfileName(String profileName) {
@@ -436,5 +446,9 @@ public class SettingPanel extends JPanel {
 	for (Component c : this.getComponents()) {
 	    c.setEnabled(false);
 	}
+    }
+
+    public void removeCommand(Command currentCommand) {
+	this.clear();
     }
 }

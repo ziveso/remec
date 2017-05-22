@@ -119,4 +119,8 @@ public class WidgetPanel extends JPanel {
 	model.clear();
     }
 
+    public void removeCommand(Command currentCommand) {
+	model.removeElement(currentCommand);
+    }
+
 }

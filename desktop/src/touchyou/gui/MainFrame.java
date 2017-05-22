@@ -109,7 +109,7 @@ public class MainFrame extends JFrame {
 	    public void windowClosing(WindowEvent e) {
 		if (!Controller.getInstance().getIsSave()) {
 		    if (JOptionPane.showConfirmDialog(null,
-			    "Are you sure u want to sxit without saving ?") == JOptionPane.YES_OPTION) {
+			    "Are you sure u want to exit without saving ?") == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		    }
 		} else {
