@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -193,26 +195,32 @@ public class SettingPanel extends JPanel {
 	add(customLabel, gbc_customLabel);
 	customLabel.setColumns(10);
 
-	rdbtnTextNone.addActionListener(e -> {
-	    customLabel.setEnabled(false);
-	    Command command = Controller.getInstance().getCurrentCommand();
-	    command.setLabel("");
-	    command.setLableMode(0);
-	    Controller.getInstance().updateCurrentCommand();
+	rdbtnTextNone.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		customLabel.setEnabled(false);
+		Command command = Controller.getInstance().getCurrentCommand();
+		command.setLabel("");
+		command.setLableMode(0);
+		Controller.getInstance().updateCurrentCommand();
+	    }
 	});
-	rdbtnCommandAsLabel.addActionListener(e -> {
-	    customLabel.setEnabled(false);
-	    Command command = Controller.getInstance().getCurrentCommand();
-	    command.setLabel(command.toString());
-	    command.setLableMode(1);
-	    Controller.getInstance().updateCurrentCommand();
+	rdbtnCommandAsLabel.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		customLabel.setEnabled(false);
+		Command command = Controller.getInstance().getCurrentCommand();
+		command.setLabel(command.toString());
+		command.setLableMode(1);
+		Controller.getInstance().updateCurrentCommand();
+	    }
 	});
-	rdbtnCustomLabel.addActionListener(e -> {
-	    customLabel.setEnabled(true);
-	    Command command = Controller.getInstance().getCurrentCommand();
-	    command.setLabel(customLabel.getText());
-	    command.setLableMode(2);
-	    Controller.getInstance().updateCurrentCommand();
+	rdbtnCustomLabel.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		customLabel.setEnabled(true);
+		Command command = Controller.getInstance().getCurrentCommand();
+		command.setLabel(customLabel.getText());
+		command.setLableMode(2);
+		Controller.getInstance().updateCurrentCommand();
+	    }
 	});
 	customLabel.addKeyListener(new KeyAdapter() {
 	    @Override
@@ -233,7 +241,6 @@ public class SettingPanel extends JPanel {
 	add(lblIcon, gbc_lblIcon);
 
 	ButtonGroup iconGroup = new ButtonGroup();
-
 
 	rdbtnIconNone = new JRadioButton("None");
 	rdbtnIconNone.setForeground(Color.WHITE);
@@ -297,20 +304,30 @@ public class SettingPanel extends JPanel {
 	iconGroup.add(rdbtnIconNone);
 	iconGroup.add(rdbtnImportFromComputer);
 	iconGroup.add(rdbtnCaptureFromScreen);
-	rdbtnImportFromComputer.addActionListener(e -> {
-	    iconpath.setEnabled(true);
-	    btnBrowse.setEnabled(true);
-	    btnCapture.setEnabled(false);
+	rdbtnIconNone.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		iconpath.setEnabled(false);
+		btnBrowse.setEnabled(false);
+		btnCapture.setEnabled(false);
+		System.out.println("None clicked");
+	    }
 	});
-	rdbtnCaptureFromScreen.addActionListener(e -> {
-	    iconpath.setEnabled(false);
-	    btnBrowse.setEnabled(false);
-	    btnCapture.setEnabled(true);
+	rdbtnImportFromComputer.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		iconpath.setEnabled(true);
+		btnBrowse.setEnabled(true);
+		btnCapture.setEnabled(false);
+		System.out.println("Import clicked");
+	    }
 	});
-	rdbtnIconNone.addActionListener(e -> {
-	    iconpath.setEnabled(false);
-	    btnBrowse.setEnabled(false);
-	    btnCapture.setEnabled(false);
+	rdbtnCaptureFromScreen.addItemListener(e -> {
+	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		iconpath.setEnabled(false);
+		iconpath.setText("ASDFASDF");
+		btnBrowse.setEnabled(false);
+		btnCapture.setEnabled(true);
+		System.out.println("Capture clicked");
+	    }
 	});
 
 	JLabel lblMode = new JLabel("Mode:");
@@ -323,11 +340,7 @@ public class SettingPanel extends JPanel {
 	add(lblMode, gbc_lblMode);
 
 	rdbtnSingleTouch = new JRadioButton("Tap");
-	rdbtnSingleTouch.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		Controller.getInstance().getCurrentCommand().setMode(0);
-	    }
-	});
+	rdbtnSingleTouch.addActionListener(e -> Controller.getInstance().getCurrentCommand().setMode(0));
 	rdbtnSingleTouch.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
 	gbc_rdbtnSingleTouch.insets = new Insets(0, 0, 5, 0);
@@ -338,11 +351,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
-	rdbtnFollow.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		Controller.getInstance().getCurrentCommand().setMode(1);
-	    }
-	});
+	rdbtnFollow.addActionListener(e -> Controller.getInstance().getCurrentCommand().setMode(1));
 	rdbtnFollow.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
 	gbc_rdbtnFollow.gridwidth = 2;
@@ -367,6 +376,19 @@ public class SettingPanel extends JPanel {
 	    rdbtnIconNone.setSelected(true);
 	} else {
 	    rdbtnCaptureFromScreen.setSelected(true);
+	}
+	switch (command.getLableMode()) {
+	case 0:
+	    rdbtnTextNone.setSelected(true);
+	    break;
+	case 1:
+	    rdbtnCommandAsLabel.setSelected(true);
+	    break;
+	case 2:
+	    rdbtnCustomLabel.setSelected(true);
+	    break;
+	default:
+	    break;
 	}
 	switch (command.getMode()) {
 	case 0:
