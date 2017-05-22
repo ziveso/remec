@@ -229,6 +229,7 @@ public class Controller {
 	    }
 	});
 	app.getProfile().getCommands().forEach(this::addCommand);
+	setIsSave(true);
     }
 
     public Point getInitLocation(Command command) {
