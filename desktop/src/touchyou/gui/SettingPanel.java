@@ -417,23 +417,16 @@ public class SettingPanel extends JPanel {
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 		File file = fc.getSelectedFile();
-		BufferedImage buff_image = null;
+		Image image = null;
 		try {
-		    buff_image = (BufferedImage) ImageIO.read(file);
+		    image = ImageIO.read(file);
 		} catch (IOException e1) {
 		    e1.printStackTrace();
 		}
 		Command current = Controller.getInstance().getCurrentCommand();
-
-		if (buff_image.getHeight() > current.getHeight() + 300
-			|| buff_image.getWidth() > current.getWidth() + 300) {
-		    if (JOptionPane.showConfirmDialog(null,
-			    "Warning!!. Image size is very Big , Do you want to resize to fit button") == JOptionPane.OK_OPTION) {
-			buff_image = (GUIUtil.resize(buff_image, current.getWidth() + 300, current.getHeight() + 300));
-		    }
-		}
+		image = (GUIUtil.resize(image, current.getWidth(), current.getHeight()));
 		current.setImagePath(file.getPath());
-		current.setImage(buff_image);
+		current.setImage(image);
 		Controller.getInstance().updateCurrentCommand();
 	    }
 	}

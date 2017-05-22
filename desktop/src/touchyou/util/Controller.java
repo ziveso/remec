@@ -38,6 +38,7 @@ public class Controller {
     private Command currentCommand;
     private UDPBroadcast broadcaster;
     private int id;
+    private boolean isSave;
 
     private Controller() {
 	broadcaster = new UDPBroadcast();
@@ -114,6 +115,7 @@ public class Controller {
      * Update every panels to point at the current command.
      */
     public void updateCurrentCommand() {
+	isSave = false;
 	settingPanel.update(currentCommand);
 	widgetPanel.update(currentCommand);
 	mobilePanel.update(currentCommand);
@@ -232,5 +234,13 @@ public class Controller {
     public Point getInitLocation(Command command) {
 	Point xy = new Point(0, 0);
 	return xy;
+    }
+
+    public void setIsSave(boolean isSave) {
+	this.isSave = isSave;
+    }
+
+    public boolean getIsSave() {
+	return isSave;
     }
 }

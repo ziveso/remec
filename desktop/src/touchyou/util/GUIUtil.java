@@ -1,20 +1,14 @@
 package touchyou.util;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.border.Border;
-
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import touchyou.Command;
 
@@ -51,15 +45,8 @@ public class GUIUtil {
 	return Color.WHITE;
     }
 
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-	Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-	Graphics2D g2d = dimg.createGraphics();
-	g2d.drawImage(tmp, 0, 0, null);
-	g2d.dispose();
-
-	return dimg;
+    public static Image resize(Image img, int newW, int newH) {
+	return img.getScaledInstance(newW, newH, Image.SCALE_DEFAULT);
     }
 
     public static String extractBytes(Image img) {

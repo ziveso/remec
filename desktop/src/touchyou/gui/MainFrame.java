@@ -107,13 +107,12 @@ public class MainFrame extends JFrame {
 	this.addWindowListener(new WindowAdapter() {
 	    @Override
 	    public void windowClosing(WindowEvent e) {
-		boolean close = false;
-		if (JOptionPane.showConfirmDialog(null,
-			"Are you sure u want to sxit without saving ?") == JOptionPane.YES_OPTION) {
-		    close = true;
-		}
-
-		if (close) {
+		if (!Controller.getInstance().getIsSave()) {
+		    if (JOptionPane.showConfirmDialog(null,
+			    "Are you sure u want to sxit without saving ?") == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		    }
+		} else {
 		    System.exit(0);
 		}
 	    }

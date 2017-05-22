@@ -93,6 +93,7 @@ public class App {
 	} finally {
 	    writer.close();
 	}
+	Controller.getInstance().setIsSave(true);
     }
 
     private void saveImage() {
@@ -101,15 +102,10 @@ public class App {
 	    // save image
 	    Command cmd = commands.next();
 	    File dir = new File("./profiles/" + profile.getName() + "/images/");
-	    List<String> files = new ArrayList<>();
-	    for (File file : dir.listFiles()) {
-		files.add(file.getPath());
-	    }
+	    dir.mkdirs();
 	    if (cmd.getImage() != Command.BLANK_IMAGE) {
-		if (!dir.isDirectory()) {
-		    dir.mkdirs();
-		}
-		if (files.contains(cmd.getImagePath())) {
+		System.out.println(cmd.getImagePath());
+		if (cmd.getImagePath()==null) {
 		    final int randomizedName = new Random().nextInt(10000) + 1;
 		    String path = dir.getPath() + "/" + randomizedName + ".png";
 		    cmd.setImagePath(path);
