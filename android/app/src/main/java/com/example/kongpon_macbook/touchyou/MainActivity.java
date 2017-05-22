@@ -1,11 +1,9 @@
 package com.example.kongpon_macbook.touchyou;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,14 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.UnknownHostException;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -151,8 +142,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findServers() {
-        mSwipeRefreshLayout.setRefreshing(true);
         new AsyncTask<String, Integer, Host[]>() {
+            @Override
+            protected void onPreExecute() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+
             @Override
             protected Host[] doInBackground(String... params) {
                 return ServerFinder.getAvailableHost();
@@ -176,15 +171,11 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
     private void connect(Host host) {
         if (host.getAddress() == null) return;
         pd.setTitle("Connecting to " + host.toString());
         pd.setMessage("Connecting...");
+        pd.show();
         new AsyncTask<Host, Integer, Void>() {
             @Override
             protected Void doInBackground(Host... params) {
@@ -211,47 +202,5 @@ public class MainActivity extends AppCompatActivity {
                 pd.dismiss();
             }
         }.execute(host);
-
-        pd.show();
-    }
-
-    protected String wifiIpAddress(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
-        int ipAddress = wifiManager.getConnectionInfo().getIpAddress();
-
-        // Convert little-endian to big-endian if needed
-        if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
-            ipAddress = Integer.reverseBytes(ipAddress);
-        }
-
-        byte[] ipByteArray = BigInteger.valueOf(ipAddress).toByteArray();
-
-        String ipAddressString;
-        try {
-            ipAddressString = InetAddress.getByAddress(ipByteArray).getHostAddress();
-        } catch (UnknownHostException ex) {
-            Log.e("WIFIIP", "Unable to get host address.");
-            ipAddressString = null;
-        }
-
-        return ipAddressString;
-    }
-
-    public String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
-                 en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress().toString();
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Log.e("IP Address", ex.toString());
-        }
-        return null;
     }
 }
