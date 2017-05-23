@@ -20,8 +20,8 @@ import touchyou.gui.StatusPanel;
 import touchyou.gui.WidgetPanel;
 
 /**
- * A Controller class that contains every Panel's reference, in order to
- * communicate between each Panel. Every communication must be invoked using
+ * A singleton Controller class that contains every Panel's reference, in order
+ * to communicate between each Panel. Every communication must be invoked using
  * this class.
  * 
  * @author Kongpon Charanwattanakit
@@ -42,6 +42,64 @@ public class Controller {
 
     private Controller() {
 	broadcaster = new UDPBroadcast();
+    }
+
+    /**
+     * Create new profile with a given name.
+     * @param profileName is the name of the new profile.
+     */
+    public void newProfile(String profileName) {
+	app.createNewProfile(profileName);
+    }
+
+    /**
+     * Open a profile.
+     * @param file is the profile file to open.
+     */
+    public void openProfile(File file) {
+	app.open(file);
+    }
+
+    /**
+     * Save current profile.
+     */
+    public void save() {
+	app.save();
+    }
+
+    /**
+     * Save current profile to a specific path.
+     * @param file is the path to save as.
+     */
+    public void saveAs(File file) {
+	String path = file.getAbsolutePath() + ".profile";
+	app.save(path);
+    }
+
+    public void loadProfile() {
+	settingPanel.setProfileName(app.getProfile().getName());
+	app.getProfile().getCommands().forEach((e) -> {
+	    if (e.getId() > id) {
+		id = e.getId();
+	    }
+	});
+	app.getProfile().getCommands().forEach(this::addCommand);
+	setIsSave(true);
+    }
+
+    public void setIsSave(boolean isSave) {
+	this.isSave = isSave;
+    }
+
+    public boolean getIsSave() {
+	return isSave;
+    }
+
+    public void removeCurrentCommand() {
+	this.settingPanel.removeCommand(currentCommand);
+	this.mobilePanel.removeCommand(currentCommand);
+	this.widgetPanel.removeCommand(currentCommand);
+	this.app.profile.removeCommand(currentCommand);
     }
 
     /**
@@ -170,13 +228,17 @@ public class Controller {
 	return app.getProfile().getName();
     }
 
+    /**
+     * Show MainFrame.
+     */
     public void showMainFrame() {
-	// SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
 	mainFrame.setVisible(true);
     }
 
+    /**
+     * Hide MainFrame.
+     */
     public void hideMainFrame() {
-	// SwingUtilities.invokeLater(() -> mainFrame.setVisible(false));
 	mainFrame.setVisible(false);
     }
 
@@ -202,53 +264,5 @@ public class Controller {
 
     public void setMobilePanel(MobilePanel mobilePanel) {
 	this.mobilePanel = mobilePanel;
-    }
-
-    public void newProfile(String profileName) {
-	app.createNewProfile(profileName);
-    }
-
-    public void openProfile(File file) {
-	app.open(file);
-    }
-
-    public void save() {
-	app.save();
-    }
-
-    public void saveAs(File file) {
-	String path = file.getAbsolutePath() + ".profile";
-	app.save(path);
-    }
-
-    public void loadProfile() {
-	settingPanel.setProfileName(app.getProfile().getName());
-	app.getProfile().getCommands().forEach((e) -> {
-	    if (e.getId() > id) {
-		id = e.getId();
-	    }
-	});
-	app.getProfile().getCommands().forEach(this::addCommand);
-	setIsSave(true);
-    }
-
-    public Point getInitLocation(Command command) {
-	Point xy = new Point(0, 0);
-	return xy;
-    }
-
-    public void setIsSave(boolean isSave) {
-	this.isSave = isSave;
-    }
-
-    public boolean getIsSave() {
-	return isSave;
-    }
-
-    public void removeCurrentCommand() {
-	this.settingPanel.removeCommand(currentCommand);
-	this.mobilePanel.removeCommand(currentCommand);
-	this.widgetPanel.removeCommand(currentCommand);
-	this.app.profile.removeCommand(currentCommand);
     }
 }
