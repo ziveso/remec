@@ -70,6 +70,7 @@ public class StatusPanel extends JPanel {
 	lblRemoteConnection.setForeground(Color.WHITE);
 
 	JRadioButton rdbtnOn = new JRadioButton("On");
+	rdbtnOn.setOpaque(false);
 	rdbtnOn.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOn = new GridBagConstraints();
 	gbc_rdbtnOn.anchor = GridBagConstraints.WEST;
@@ -82,6 +83,7 @@ public class StatusPanel extends JPanel {
 	panel_1.add(rdbtnOn, gbc_rdbtnOn);
 
 	JRadioButton rdbtnOff = new JRadioButton("Off");
+	rdbtnOff.setOpaque(false);
 	rdbtnOff.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOff = new GridBagConstraints();
 	gbc_rdbtnOff.anchor = GridBagConstraints.WEST;
