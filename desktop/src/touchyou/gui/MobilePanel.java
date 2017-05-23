@@ -74,11 +74,6 @@ public class MobilePanel extends JLayeredPane {
 	this.validate();
     }
 
-    public void updateComponent() {
-	repaint();
-	revalidate();
-    }
-
     public void addCommand(Command command) {
 	JButton commandBtn = new JButton();
 	/* Set JButton's behavior */

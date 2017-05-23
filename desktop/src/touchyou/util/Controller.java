@@ -1,14 +1,7 @@
 package touchyou.util;
 
 import java.awt.Component;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.SwingUtilities;
 
 import touchyou.App;
 import touchyou.Command;
@@ -46,7 +39,9 @@ public class Controller {
 
     /**
      * Create new profile with a given name.
-     * @param profileName is the name of the new profile.
+     * 
+     * @param profileName
+     *            is the name of the new profile.
      */
     public void newProfile(String profileName) {
 	app.createNewProfile(profileName);
@@ -54,7 +49,9 @@ public class Controller {
 
     /**
      * Open a profile.
-     * @param file is the profile file to open.
+     * 
+     * @param file
+     *            is the profile file to open.
      */
     public void openProfile(File file) {
 	app.open(file);
@@ -69,7 +66,9 @@ public class Controller {
 
     /**
      * Save current profile to a specific path.
-     * @param file is the path to save as.
+     * 
+     * @param file
+     *            is the path to save as.
      */
     public void saveAs(File file) {
 	String path = file.getAbsolutePath() + ".profile";

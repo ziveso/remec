@@ -67,8 +67,8 @@ public class SettingPanel extends JPanel {
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
 	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-		0.0, 0.0, 0.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
@@ -318,6 +318,7 @@ public class SettingPanel extends JPanel {
 		iconpath.setEnabled(true);
 		btnBrowse.setEnabled(true);
 		btnCapture.setEnabled(true);
+		setImageToCommand(new File(iconpath.getText()));
 		System.out.println("Import clicked");
 	    }
 	});
@@ -416,18 +417,21 @@ public class SettingPanel extends JPanel {
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 		File file = fc.getSelectedFile();
-		BufferedImage image = null;
-		try {
-		    image = ImageIO.read(file);
-		} catch (IOException e1) {
-		    e1.printStackTrace();
-		}
-		Command current = Controller.getInstance().getCurrentCommand();
-//		image = (GUIUtil.resize(image, current.getWidth(), current.getHeight()));
-		System.out.println(image.getClass());
-		current.setImage(image);
-		Controller.getInstance().updateCurrentCommand();
+		setImageToCommand(file);
 	    }
+	}
+    }
+
+    private void setImageToCommand(File imgFile) {
+	if (!imgFile.exists())
+	    return;
+	try {
+	    BufferedImage image = ImageIO.read(imgFile);
+	    Command current = Controller.getInstance().getCurrentCommand();
+	    current.setImage(image);
+	    Controller.getInstance().updateCurrentCommand();
+	} catch (IOException e1) {
+	    e1.printStackTrace();
 	}
     }
 

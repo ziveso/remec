@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import javafx.geometry.Side;
+import sun.applet.Main;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 
@@ -108,12 +109,10 @@ public class MainFrame extends JFrame {
 	    @Override
 	    public void windowClosing(WindowEvent e) {
 		if (!Controller.getInstance().getIsSave()) {
-		    if (JOptionPane.showConfirmDialog(null,
-			    "Are you sure u want to exit without saving ?") == JOptionPane.YES_OPTION) {
-			System.exit(0);
-		    }
-		} else {
-		    System.exit(0);
+		    int result = JOptionPane.showConfirmDialog(MainFrame.this,
+			    "Are you sure u want to exit without saving ?");
+		    if (result == JOptionPane.YES_OPTION)
+			dispose();
 		}
 	    }
 	});
