@@ -17,6 +17,12 @@ Remec is an Iot (Internet of things) application which tranforms your android de
 - Invoke the commands on host's computer when taping on the buttons.
 - Disconnect automatically when the host computer disabled the remote connection.
 
+# Installation
+Click on the link to start downloading (Required Java version 8 or above).
+
+- Remec for <strong>Desktop</strong>: https://github.com/thitgorn/Remec/raw/master/desktop/Remec.jar 
+- Remec for <strong>Android</strong>: https://github.com/thitgorn/Remec/raw/master/android/Remec.apk
+
 # Contributors
 - [Kongpon Charanwattanakit](https://github.com/kykungz)
 - [Thitiwat Thongbot](https://github.com/thitgorn)
