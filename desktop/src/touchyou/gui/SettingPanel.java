@@ -427,15 +427,15 @@ public class SettingPanel extends JPanel {
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 		File file = fc.getSelectedFile();
-		Image image = null;
+		BufferedImage image = null;
 		try {
 		    image = ImageIO.read(file);
 		} catch (IOException e1) {
 		    e1.printStackTrace();
 		}
 		Command current = Controller.getInstance().getCurrentCommand();
-		image = (GUIUtil.resize(image, current.getWidth(), current.getHeight()));
-		current.setImagePath(file.getPath());
+//		image = (GUIUtil.resize(image, current.getWidth(), current.getHeight()));
+		System.out.println(image.getClass());
 		current.setImage(image);
 		Controller.getInstance().updateCurrentCommand();
 	    }

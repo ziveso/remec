@@ -1,5 +1,6 @@
 package touchyou;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.BufferedReader;
@@ -17,9 +18,11 @@ import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import sun.awt.image.ToolkitImage;
 import touchyou.gui.WelcomeFrame;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
@@ -104,19 +107,19 @@ public class App {
 	    File dir = new File("./profiles/" + profile.getName() + "/images/");
 	    dir.mkdirs();
 	    if (cmd.getImage() != Command.BLANK_IMAGE) {
-		System.out.println(cmd.getImagePath());
-		if (cmd.getImagePath()==null) {
-		    final int randomizedName = new Random().nextInt(10000) + 1;
-		    String path = dir.getPath() + "/" + randomizedName + ".png";
-		    cmd.setImagePath(path);
-		    File output = new File(path);
-		    BufferedImage bi = (BufferedImage) cmd.getImage();
-		    try {
-			ImageIO.write(bi, "png", output);
-		    } catch (IOException e) {
-			e.printStackTrace();
-		    }
+		String path = dir.getPath() + "/" + cmd.getId() + ".png";
+		cmd.setImagePath(path);
+		File output = new File(path);
+		BufferedImage bi = null;
+		System.out.println(cmd.getImage());
+		bi = (BufferedImage) cmd.getImage();
+		try {
+		    System.out.println(bi);
+		    ImageIO.write(bi, "png", output);
+		} catch (IOException e) {
+		    e.printStackTrace();
 		}
+
 	    }
 	}
     }

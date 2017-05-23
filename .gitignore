@@ -7,5 +7,6 @@
 /desktop/nbproject/private/
 
 /desktop/bin/
-/desktop/profile/
+/desktop/profiles/
 *.profile
+*.png
