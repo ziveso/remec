@@ -85,19 +85,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        findServers();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.search_item) {
             final InputMethodManager keyboard = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -134,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
             });
             dialog.show();
             editText.requestFocus();
-
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -171,15 +157,19 @@ public class MainActivity extends AppCompatActivity {
         }.execute();
     }
 
-    private void connect(Host host) {
+    private void connect(final Host host) {
         if (host.getAddress() == null) return;
-        pd.setTitle("Connecting to " + host.toString());
-        pd.setMessage("Connecting...");
-        pd.show();
-        new AsyncTask<Host, Void, Void>() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Void doInBackground(Host... params) {
-                TCPClient client = new TCPClient(params[0].getAddress(), PORT);
+            protected void onPreExecute() {
+                pd.setTitle("Connecting to " + host.toString());
+                pd.setMessage("Connecting...");
+                pd.show();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                TCPClient client = new TCPClient(host.getAddress(), PORT);
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
@@ -201,6 +191,19 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Done connecting");
                 pd.dismiss();
             }
-        }.execute(host);
+        }.execute();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findServers();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

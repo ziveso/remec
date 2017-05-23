@@ -24,14 +24,12 @@ import java.util.ResourceBundle;
 
 public class RemoteActivity extends Activity {
     private ProgressDialog pd;
-    RelativeLayout r;
     private static final CommandClickListener listener = new CommandClickListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote);
-        r = (RelativeLayout) findViewById(R.id.activity_remote);
         System.out.println("On create Remote");
         Controller.getInstance().remoteActivity = this;
         pd = new ProgressDialog(RemoteActivity.this);
@@ -63,6 +61,7 @@ public class RemoteActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                RelativeLayout r = (RelativeLayout) findViewById(R.id.activity_remote);
                 r.removeAllViews();
                 for (String commands : Controller.getInstance().commands) {
                     String[] command = commands.split(";");
