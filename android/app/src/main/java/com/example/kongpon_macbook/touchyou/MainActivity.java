@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         pd.setTitle("Connecting to " + host.toString());
         pd.setMessage("Connecting...");
         pd.show();
-        new AsyncTask<Host, Integer, Void>() {
+        new AsyncTask<Host, Void, Void>() {
             @Override
             protected Void doInBackground(Host... params) {
                 TCPClient client = new TCPClient(params[0].getAddress(), PORT);

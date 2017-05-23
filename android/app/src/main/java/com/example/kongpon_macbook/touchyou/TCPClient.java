@@ -34,7 +34,6 @@ public class TCPClient extends AbstractClient {
         }
     }
 
-
     @Override
     protected void connectionClosed() {
         super.connectionClosed();
