@@ -1,22 +1,22 @@
-# Remec
+# Remec - turn your android device into a custom remote control.
+Remec is an Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application to get ready for tranfering the remote design into your mobile.
 
-Remec is a remote control in Android Application.
+# Features
+## Desktop
+- Add/remove command buttons.
+- Import images from your computer, or use the capturing screen function to crop a part of your screen as icons.
+- Saving remote profiles into your local machine, and/or share your remote to other people.
+- Open exiting remote profiles to edit or use.
+- Open/close remote connection to enable/disable android device connecting to your computer.
+- Transfer your remote design to your android device.
 
-This is required the server on the Computer - in this Case run in JAVA.
+## Mobile
+- Search for available hosts name and IP-address.
+- Connect to a specific IP-address.
+- Receive remote profile from host's computer, and adjust the interface to match with the profile.
+- Invoke the commands on host's computer when taping on the buttons.
+- Disconnect automatically when the host computer disabled the remote connection.
 
-## Here are the features what it does
-# Desktop
-- can edit User Interface for sync the Android Application.
-- connecting the network in real-time is required.
-- It can save in many PROFILE.
-- Easy to use , just drag and drop.
-- server side can disconnect if there are not using it.
-
-# Mobile
-- send connection to the server.
-- when it's connected , it's automaticly sync with current srceen.
-- user can sync many time as they want.
-- can't use offline.
-
-<h1>Final project in OOP II.</h1>
-
+# Contributors
+- [Kongpon Charanwattanakit](https://github.com/kykungz)
+- [Thitiwat Thongbot](https://github.com/thitgorn)
