@@ -310,7 +310,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		iconpath.setEnabled(true);
 		btnBrowse.setEnabled(true);
-		btnCapture.setEnabled(false);
+		btnCapture.setEnabled(true);
 		System.out.println("Import clicked");
 	    }
 	});
