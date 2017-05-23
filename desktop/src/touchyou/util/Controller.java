@@ -265,4 +265,8 @@ public class Controller {
     public void setMobilePanel(MobilePanel mobilePanel) {
 	this.mobilePanel = mobilePanel;
     }
+
+    public void setRemoteConnection(boolean isOn) {
+	statusPanel.setRemoteConnection(isOn);
+    }
 }

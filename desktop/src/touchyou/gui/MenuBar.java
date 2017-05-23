@@ -22,18 +22,29 @@ public class MenuBar extends JMenuBar {
      * 
      */
     private static final long serialVersionUID = -3285079136056165470L;
+    private JMenu file;
+    private JMenuItem newprofile, open, save, saveAs, exit;
+    private JMenuItem undo;
+    private JMenuItem redo;
+    private JMenu edit;
+    private JMenuItem reset;
+    private JMenu phone;
+    private JMenuItem sync;
+    private JMenu connection;
+    private JMenuItem connect;
+    private JMenuItem disconnect;
 
     public MenuBar() {
 	int shortcut = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 	/**
 	 * FILE MENU
 	 */
-	JMenu file = new JMenu("File");
-	JMenuItem newprofile = new JMenuItem("New Profile");
-	JMenuItem open = new JMenuItem("Open Profile...");
-	JMenuItem save = new JMenuItem("Save");
-	JMenuItem saveAs = new JMenuItem("Save As...");
-	JMenuItem exit = new JMenuItem("Quit Touch You");
+	file = new JMenu("File");
+	newprofile = new JMenuItem("New Profile");
+	open = new JMenuItem("Open Profile...");
+	save = new JMenuItem("Save");
+	saveAs = new JMenuItem("Save As...");
+	exit = new JMenuItem("Quit Touch You");
 	file.addSeparator();
 	file.add(newprofile);
 	file.add(open);
@@ -48,7 +59,7 @@ public class MenuBar extends JMenuBar {
 	{
 	    save.addActionListener(e -> {
 		Controller.getInstance().save();
-		System.out.println("save");
+		System.out.println("saved");
 	    });
 	    open.addActionListener(e -> {
 		JFileChooser fileChooser = new JFileChooser();
@@ -92,13 +103,10 @@ public class MenuBar extends JMenuBar {
 	    newprofile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcut | InputEvent.SHIFT_MASK));
 	}
 
-	/**
-	 * EDIT MENU
-	 */
-	JMenu edit = new JMenu("Edit");
-	JMenuItem undo = new JMenuItem("Undo");
-	JMenuItem redo = new JMenuItem("Redo");
-	JMenuItem reset = new JMenuItem("Reset");
+	edit = new JMenu("Edit");
+	undo = new JMenuItem("Undo");
+	redo = new JMenuItem("Redo");
+	reset = new JMenuItem("Reset");
 	edit.add(undo);
 	edit.add(redo);
 	edit.addSeparator();
@@ -112,18 +120,15 @@ public class MenuBar extends JMenuBar {
 	    });
 	}
 
-	/**
-	 * PHONE MENU
-	 */
-	JMenu phone = new JMenu("Phone");
-	JMenuItem sync = new JMenuItem("Sync");
+	phone = new JMenu("Phone");
+	sync = new JMenuItem("Sync");
 	phone.add(sync);
 	this.add(phone);
 
 	// add action to Phone Menu
 	{
 	    sync.addActionListener((e) -> {
-		// Controller.getInstance().sync();
+		Controller.getInstance().sendSyncRequest();
 	    });
 	}
 
@@ -132,22 +137,19 @@ public class MenuBar extends JMenuBar {
 	    sync.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
 	}
 
-	/**
-	 * CONNECTION MENU
-	 */
-	JMenu connection = new JMenu("Connection");
-	JMenuItem connect = new JMenuItem("Enable Connection");
-	JMenuItem disconnect = new JMenuItem("Disable Connection");
+	connection = new JMenu("Connection");
+	connect = new JMenuItem("Enable Connection");
+	disconnect = new JMenuItem("Disable Connection");
 	connection.add(connect);
 	connection.add(disconnect);
 
 	// add action to connection
 	{
 	    connect.addActionListener((e) -> {
-		// TODO ENABLE CONNECTION
+		Controller.getInstance().setRemoteConnection(true);
 	    });
 	    disconnect.addActionListener((e) -> {
-		// TODO DISABLE CONNECTION
+		Controller.getInstance().setRemoteConnection(false);
 	    });
 	}
 
@@ -158,5 +160,14 @@ public class MenuBar extends JMenuBar {
 	}
 	this.add(connection);
 
+    }
+
+    public MenuBar welcomeBar() {
+	this.save.setEnabled(false);
+	this.saveAs.setEnabled(false);
+	this.edit.setEnabled(false);
+	this.connection.setEnabled(false);
+	this.phone.setEnabled(false);
+	return this;
     }
 }
