@@ -11,7 +11,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -79,8 +83,14 @@ public class MobilePanel extends JLayeredPane {
 	JButton commandBtn = new JButton();
 	/* Set JButton's behavior */
 	if (command.getImagePath() != null) {
-	    command.setImage(GUIUtil.resize(new ImageIcon(command.getImagePath()).getImage(), command.getWidth(),
-		    command.getHeight()));
+	    File img = new File(command.getImagePath());
+	    BufferedImage buf_img = null;
+	    try {
+		buf_img = ImageIO.read(img);
+	    } catch (IOException e1) {
+		e1.printStackTrace();
+	    }
+	    command.setImage(buf_img);
 	}
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
