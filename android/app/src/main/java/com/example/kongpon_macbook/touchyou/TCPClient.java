@@ -32,20 +32,7 @@ public class TCPClient extends AbstractClient {
             default:
                 break;
         }
-
-//          if (o instanceof String) {
-//            String data = (String) o;
-//            if (data.equals("SYNC_REQUEST")) {
-//                Controller.getInstance().remoteActivity.sync();
-//            } else if (data.contains("SYNC_RESPONSE")) {
-//                String command = data.split("=")[1];
-//                Controller.getInstance().commands.add(command);
-//            } else if (data.equals("SYNC_END")) {
-//                Controller.getInstance().notifyRemoteActivity();
-//            }
-//        }
     }
-
 
     @Override
     protected void connectionClosed() {

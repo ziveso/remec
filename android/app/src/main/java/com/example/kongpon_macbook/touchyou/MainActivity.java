@@ -176,19 +176,19 @@ public class MainActivity extends AppCompatActivity {
         pd.setTitle("Connecting to " + host.toString());
         pd.setMessage("Connecting...");
         pd.show();
-        new AsyncTask<Host, Integer, Void>() {
+        new AsyncTask<Host, Void, Void>() {
             @Override
             protected Void doInBackground(Host... params) {
                 TCPClient client = new TCPClient(params[0].getAddress(), PORT);
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
-                    Intent intent = new Intent(Controller.getInstance().mainActivity, RemoteActivity.class);
+                    Intent intent = new Intent(MainActivity.this, RemoteActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     Controller.getInstance().client = client;
                     pd.dismiss();
                     System.out.println("Changing page");
-                    Controller.getInstance().mainActivity.startActivity(intent);
+                    startActivity(intent);
                 } catch (IOException e) {
                     System.out.println("Connection Timeout");
                     e.printStackTrace();
