@@ -139,7 +139,7 @@ public class App {
      *            is the .profile file path
      */
     public void open(String path) {
-	profile = generateProfile(new File(path));
+	open(new File(path));
     }
 
     /**
@@ -223,10 +223,10 @@ public class App {
 		BufferedImage buff_img = null;
 		try {
 		    buff_img = ImageIO.read(img);
+		    cmd.setImage(buff_img);
 		} catch (IOException e1) {
 		    e1.printStackTrace();
 		}
-		cmd.setImage(buff_img);
 	    }
 	}
 	System.out.println("done");

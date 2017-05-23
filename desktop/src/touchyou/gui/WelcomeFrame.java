@@ -27,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import touchyou.util.Controller;
@@ -102,22 +104,27 @@ public class WelcomeFrame extends JFrame {
 	list.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
-	try {
-	    for (String f : new File("./profiles/").list()) {
-		if (f.contains(".profile")) {
-		    model.addElement(f);
+	File profileDir = new File("./profiles/");
+	if (!profileDir.exists()) {
+	    profileDir.mkdir();
+	    System.out.println("making " + profileDir.getPath());
+	}
+	for (String f : new File("./profiles/").list()) {
+	    if (f.contains(".profile")) {
+		model.addElement(f);
+	    }
+	}
+	list.addListSelectionListener(new ListSelectionListener() {
+	    @Override
+	    public void valueChanged(ListSelectionEvent e) {
+		if (e.getValueIsAdjusting()) {
+		    String profileName = list.getSelectedValue();
+		    System.out.println("clicked " + profileName);
+		    File file = new File("./profiles/" + profileName);
+		    Controller.getInstance().openProfile(file);
+		    runMainFrame();
 		}
 	    }
-	} catch (NullPointerException ne) {
-	    File file = new File("./profiles/");
-	    file.mkdir();
-	    System.out.println(file.getPath());
-	}
-	list.addListSelectionListener((e) -> {
-	    String profileName = list.getSelectedValue();
-	    File file = new File("./profiles/" + profileName);
-	    Controller.getInstance().openProfile(file);
-	    runMainFrame();
 	});
 	listPanel.add(new JScrollPane(list));
 
@@ -239,6 +246,7 @@ public class WelcomeFrame extends JFrame {
     }
 
     private void runMainFrame() {
+	System.out.println(Thread.currentThread());
 	SwingUtilities.invokeLater(() -> {
 	    new MainFrame().setVisible(true);
 	    this.dispose();
