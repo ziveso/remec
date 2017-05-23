@@ -13,6 +13,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -107,11 +108,15 @@ public class WelcomeFrame extends JFrame {
 	File profileDir = new File("./profiles/");
 	if (!profileDir.exists()) {
 	    profileDir.mkdir();
-	    System.out.println("making " + profileDir.getPath());
 	}
-	for (String f : new File("./profiles/").list()) {
-	    if (f.contains(".profile")) {
-		model.addElement(f);
+	for (File f : profileDir.listFiles()) {
+	    if (f.listFiles() == null) {
+		continue;
+	    }
+	    for (String sf : new File("./profiles/" + f.getName()).list()) {
+		if (sf.contains(".profile")) {
+		    model.addElement(sf);
+		}
 	    }
 	}
 	list.addListSelectionListener(new ListSelectionListener() {
@@ -119,8 +124,8 @@ public class WelcomeFrame extends JFrame {
 	    public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting()) {
 		    String profileName = list.getSelectedValue();
-		    System.out.println("clicked " + profileName);
-		    File file = new File("./profiles/" + profileName);
+		    String folder = profileName.replaceAll(".profile", "");
+		    File file = new File("./profiles/" + folder + "/" + profileName);
 		    Controller.getInstance().openProfile(file);
 		    runMainFrame();
 		}
