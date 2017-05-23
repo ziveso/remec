@@ -123,7 +123,7 @@ public class MenuBar extends JMenuBar {
 	// add action to Phone Menu
 	{
 	    sync.addActionListener((e) -> {
-//		Controller.getInstance().sync();
+		// Controller.getInstance().sync();
 	    });
 	}
 

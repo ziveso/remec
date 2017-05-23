@@ -113,6 +113,8 @@ public class MainFrame extends JFrame {
 			    "Are you sure u want to exit without saving ?");
 		    if (result == JOptionPane.YES_OPTION)
 			dispose();
+		}else {
+		    dispose();
 		}
 	    }
 	});
