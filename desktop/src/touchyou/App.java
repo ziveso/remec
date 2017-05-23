@@ -66,7 +66,7 @@ public class App {
     }
 
     public void save() {
-	save("./profiles/" + profile.getName() + ".profile");
+	save("./profiles/" + profile.getName() + "/" + profile.getName() + ".profile");
     }
 
     /**
@@ -126,7 +126,7 @@ public class App {
 
     public void createNewProfile(String profileName) {
 	profile = new Profile(profileName);
-	String filepath = "./profiles/" + profileName + ".profile";
+	String filepath = "./profiles/" + profileName + "/" + profileName + ".profile";
 	new File("./profiles/" + profileName).mkdir();
 	save(filepath);
 	open(filepath);
