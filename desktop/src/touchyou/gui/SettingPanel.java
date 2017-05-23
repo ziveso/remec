@@ -155,6 +155,7 @@ public class SettingPanel extends JPanel {
 	ButtonGroup labelGroup = new ButtonGroup();
 
 	rdbtnTextNone = new JRadioButton("None");
+	rdbtnTextNone.setOpaque(false);
 	rdbtnTextNone.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnTextNone = new GridBagConstraints();
 	gbc_rdbtnTextNone.fill = GridBagConstraints.HORIZONTAL;
@@ -167,6 +168,7 @@ public class SettingPanel extends JPanel {
 
 	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
 	rdbtnCommandAsLabel.setForeground(Color.WHITE);
+	rdbtnCommandAsLabel.setOpaque(false);
 	GridBagConstraints gbc_rdbtnCommandAsLabel = new GridBagConstraints();
 	gbc_rdbtnCommandAsLabel.fill = GridBagConstraints.HORIZONTAL;
 	gbc_rdbtnCommandAsLabel.gridwidth = 2;
@@ -178,6 +180,7 @@ public class SettingPanel extends JPanel {
 
 	rdbtnCustomLabel = new JRadioButton("Custom label");
 	rdbtnCustomLabel.setForeground(Color.WHITE);
+	rdbtnCustomLabel.setOpaque(false);
 	GridBagConstraints gbc_rdbtnCustomLabel = new GridBagConstraints();
 	gbc_rdbtnCustomLabel.fill = GridBagConstraints.HORIZONTAL;
 	gbc_rdbtnCustomLabel.gridwidth = 2;
@@ -246,6 +249,7 @@ public class SettingPanel extends JPanel {
 	ButtonGroup iconGroup = new ButtonGroup();
 
 	rdbtnIconNone = new JRadioButton("None");
+	rdbtnIconNone.setOpaque(false);
 	rdbtnIconNone.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnIconNone = new GridBagConstraints();
 	gbc_rdbtnIconNone.fill = GridBagConstraints.HORIZONTAL;
@@ -256,6 +260,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnIconNone, gbc_rdbtnIconNone);
 
 	rdbtnImportFromComputer = new JRadioButton("Import From Computer");
+	rdbtnImportFromComputer.setOpaque(false);
 	rdbtnImportFromComputer.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnImportFromComputer = new GridBagConstraints();
 	gbc_rdbtnImportFromComputer.fill = GridBagConstraints.HORIZONTAL;
@@ -276,6 +281,7 @@ public class SettingPanel extends JPanel {
 	iconpath.setColumns(10);
 
 	JButton btnBrowse = new JButton("Browse");
+	btnBrowse.setOpaque(false);
 	btnBrowse.addActionListener(new Browse());
 	GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
 	gbc_btnBrowse.fill = GridBagConstraints.BOTH;
@@ -285,6 +291,7 @@ public class SettingPanel extends JPanel {
 	add(btnBrowse, gbc_btnBrowse);
 
 	CaptureButton btnCapture = new CaptureButton();
+	btnCapture.setOpaque(false);
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
 	gbc_btnCapture.fill = GridBagConstraints.BOTH;
@@ -310,7 +317,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		iconpath.setEnabled(true);
 		btnBrowse.setEnabled(true);
-		btnCapture.setEnabled(false);
+		btnCapture.setEnabled(true);
 		System.out.println("Import clicked");
 	    }
 	});
@@ -326,6 +333,7 @@ public class SettingPanel extends JPanel {
 	add(lblMode, gbc_lblMode);
 
 	rdbtnSingleTouch = new JRadioButton("Tap");
+	rdbtnSingleTouch.setOpaque(false);
 	rdbtnSingleTouch.addActionListener(e -> Controller.getInstance().getCurrentCommand().setMode(0));
 	rdbtnSingleTouch.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnSingleTouch = new GridBagConstraints();
@@ -337,6 +345,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
+	rdbtnFollow.setOpaque(false);
 	rdbtnFollow.addActionListener(e -> Controller.getInstance().getCurrentCommand().setMode(1));
 	rdbtnFollow.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_rdbtnFollow = new GridBagConstraints();
@@ -352,6 +361,7 @@ public class SettingPanel extends JPanel {
 	modeGroup.add(rdbtnFollow);
 
 	btnDeleteButton = new JButton("DELETE BUTTON");
+	btnDeleteButton.setOpaque(false);
 	GridBagConstraints gbc_btnDeleteButton = new GridBagConstraints();
 	gbc_btnDeleteButton.insets = new Insets(0, 0, 0, 5);
 	gbc_btnDeleteButton.gridx = 2;
