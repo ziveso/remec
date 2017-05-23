@@ -11,23 +11,17 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import touchyou.Command;
 import touchyou.gui.add.ComponentMover;
 import touchyou.gui.add.ComponentResizer;
 import touchyou.util.Controller;
-import touchyou.util.GUIUtil;
 
 /**
  * 
