@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,20 +19,14 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 import touchyou.Command;
 import touchyou.util.Controller;
@@ -81,6 +73,7 @@ public class SettingPanel extends JPanel {
 	setLayout(gridBagLayout);
 
 	JLabel lblProfile = new JLabel("Profile:");
+	lblProfile.setOpaque(false);
 	lblProfile.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblProfile = new GridBagConstraints();
 	gbc_lblProfile.anchor = GridBagConstraints.WEST;
@@ -90,6 +83,7 @@ public class SettingPanel extends JPanel {
 	add(lblProfile, gbc_lblProfile);
 
 	profilename = new JLabel(Controller.getInstance().getProfileName());
+	profilename.setOpaque(false);
 	profilename.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_profilename = new GridBagConstraints();
 	gbc_profilename.gridwidth = 2;
@@ -101,6 +95,7 @@ public class SettingPanel extends JPanel {
 	add(profilename, gbc_profilename);
 
 	JLabel lblNewLabel = new JLabel("Command:");
+	lblNewLabel.setOpaque(false);
 	lblNewLabel.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 	gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
@@ -149,6 +144,7 @@ public class SettingPanel extends JPanel {
 	combination.setColumns(10);
 
 	lblText = new JLabel("Text:");
+	lblText.setOpaque(false);
 	lblText.setForeground(Color.WHITE);
 	GridBagConstraints gbc_lblText = new GridBagConstraints();
 	gbc_lblText.anchor = GridBagConstraints.WEST;
@@ -239,6 +235,7 @@ public class SettingPanel extends JPanel {
 	});
 
 	JLabel lblIcon = new JLabel("Icon:");
+	lblIcon.setOpaque(false);
 	lblIcon.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblIcon = new GridBagConstraints();
 	gbc_lblIcon.anchor = GridBagConstraints.WEST;
@@ -338,6 +335,7 @@ public class SettingPanel extends JPanel {
 	});
 
 	JLabel lblMode = new JLabel("Mode:");
+	lblMode.setOpaque(false);
 	lblMode.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblMode = new GridBagConstraints();
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
