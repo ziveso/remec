@@ -47,7 +47,6 @@ public class SettingPanel extends JPanel {
     private JTextField combination;
     private JLabel profilename;
     private JRadioButton rdbtnImportFromComputer;
-    private JRadioButton rdbtnCaptureFromScreen;
     private JRadioButton rdbtnSingleTouch;
     private JRadioButton rdbtnFollow;
     private JRadioButton rdbtnIconNone;
@@ -66,9 +65,9 @@ public class SettingPanel extends JPanel {
 	// setBorder(GuiUtil.getBorder());
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 28, 90, 72, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 		0.0, 0.0, 0.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
 
@@ -285,16 +284,6 @@ public class SettingPanel extends JPanel {
 	gbc_btnBrowse.gridy = 8;
 	add(btnBrowse, gbc_btnBrowse);
 
-	rdbtnCaptureFromScreen = new JRadioButton("Screen Capture");
-	rdbtnCaptureFromScreen.setForeground(GUIUtil.getForegroundColor());
-	GridBagConstraints gbc_rdbtnCaptureFromScreen = new GridBagConstraints();
-	gbc_rdbtnCaptureFromScreen.fill = GridBagConstraints.HORIZONTAL;
-	gbc_rdbtnCaptureFromScreen.insets = new Insets(0, 0, 5, 0);
-	gbc_rdbtnCaptureFromScreen.gridwidth = 2;
-	gbc_rdbtnCaptureFromScreen.gridx = 2;
-	gbc_rdbtnCaptureFromScreen.gridy = 9;
-	add(rdbtnCaptureFromScreen, gbc_rdbtnCaptureFromScreen);
-
 	CaptureButton btnCapture = new CaptureButton();
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
@@ -302,17 +291,18 @@ public class SettingPanel extends JPanel {
 	gbc_btnCapture.weightx = 10.0;
 	gbc_btnCapture.gridwidth = 2;
 	gbc_btnCapture.gridx = 2;
-	gbc_btnCapture.gridy = 10;
+	gbc_btnCapture.gridy = 9;
 	add(btnCapture, gbc_btnCapture);
 
 	iconGroup.add(rdbtnIconNone);
 	iconGroup.add(rdbtnImportFromComputer);
-	iconGroup.add(rdbtnCaptureFromScreen);
 	rdbtnIconNone.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		iconpath.setEnabled(false);
 		btnBrowse.setEnabled(false);
 		btnCapture.setEnabled(false);
+		Controller.getInstance().getCurrentCommand().setImage(Command.BLANK_IMAGE);
+		Controller.getInstance().updateCurrentCommand();
 		System.out.println("None clicked");
 	    }
 	});
@@ -324,15 +314,6 @@ public class SettingPanel extends JPanel {
 		System.out.println("Import clicked");
 	    }
 	});
-	rdbtnCaptureFromScreen.addItemListener(e -> {
-	    if (e.getStateChange() == ItemEvent.SELECTED) {
-		iconpath.setEnabled(false);
-		iconpath.setText("ASDFASDF");
-		btnBrowse.setEnabled(false);
-		btnCapture.setEnabled(true);
-		System.out.println("Capture clicked");
-	    }
-	});
 
 	JLabel lblMode = new JLabel("Mode:");
 	lblMode.setOpaque(false);
@@ -341,7 +322,7 @@ public class SettingPanel extends JPanel {
 	gbc_lblMode.anchor = GridBagConstraints.WEST;
 	gbc_lblMode.insets = new Insets(0, 0, 5, 5);
 	gbc_lblMode.gridx = 0;
-	gbc_lblMode.gridy = 11;
+	gbc_lblMode.gridy = 10;
 	add(lblMode, gbc_lblMode);
 
 	rdbtnSingleTouch = new JRadioButton("Tap");
@@ -352,7 +333,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnSingleTouch.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnSingleTouch.gridwidth = 2;
 	gbc_rdbtnSingleTouch.gridx = 2;
-	gbc_rdbtnSingleTouch.gridy = 11;
+	gbc_rdbtnSingleTouch.gridy = 10;
 	add(rdbtnSingleTouch, gbc_rdbtnSingleTouch);
 
 	rdbtnFollow = new JRadioButton("Follow");
@@ -363,7 +344,7 @@ public class SettingPanel extends JPanel {
 	gbc_rdbtnFollow.gridwidth = 2;
 	gbc_rdbtnFollow.anchor = GridBagConstraints.WEST;
 	gbc_rdbtnFollow.gridx = 2;
-	gbc_rdbtnFollow.gridy = 12;
+	gbc_rdbtnFollow.gridy = 11;
 	add(rdbtnFollow, gbc_rdbtnFollow);
 
 	ButtonGroup modeGroup = new ButtonGroup();
@@ -374,7 +355,7 @@ public class SettingPanel extends JPanel {
 	GridBagConstraints gbc_btnDeleteButton = new GridBagConstraints();
 	gbc_btnDeleteButton.insets = new Insets(0, 0, 0, 5);
 	gbc_btnDeleteButton.gridx = 2;
-	gbc_btnDeleteButton.gridy = 16;
+	gbc_btnDeleteButton.gridy = 15;
 	add(btnDeleteButton, gbc_btnDeleteButton);
 	btnDeleteButton.addActionListener((e) -> Controller.getInstance().removeCurrentCommand());
     }
@@ -389,7 +370,7 @@ public class SettingPanel extends JPanel {
 	if (command.getImage() == Command.BLANK_IMAGE) {
 	    rdbtnIconNone.setSelected(true);
 	} else {
-	    rdbtnCaptureFromScreen.setSelected(true);
+	    rdbtnImportFromComputer.setSelected(true);
 	}
 	switch (command.getLableMode()) {
 	case 0:
