@@ -183,12 +183,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     System.out.println("Start connecting");
                     client.openConnection();
-                    Intent intent = new Intent(Controller.getInstance().mainActivity, RemoteActivity.class);
+                    Intent intent = new Intent(MainActivity.this, RemoteActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     Controller.getInstance().client = client;
                     pd.dismiss();
                     System.out.println("Changing page");
-                    Controller.getInstance().mainActivity.startActivity(intent);
+                    startActivity(intent);
                 } catch (IOException e) {
                     System.out.println("Connection Timeout");
                     e.printStackTrace();
