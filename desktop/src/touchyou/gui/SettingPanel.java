@@ -431,6 +431,7 @@ public class SettingPanel extends JPanel {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    JFileChooser fc = new JFileChooser();
+	    fc.setAcceptAllFileFilterUsed(false);
 	    fc.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png"));
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
