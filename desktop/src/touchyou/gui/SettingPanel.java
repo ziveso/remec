@@ -93,7 +93,7 @@ public class SettingPanel extends JPanel {
 	gbc_profilename.gridy = 0;
 	add(profilename, gbc_profilename);
 
-	JLabel lblNewLabel = new JLabel("Command:");
+	JLabel lblNewLabel = new JLabel("Shortcuts:");
 	lblNewLabel.setOpaque(false);
 	lblNewLabel.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -142,7 +142,7 @@ public class SettingPanel extends JPanel {
 	add(combination, gbc_combination);
 	combination.setColumns(10);
 
-	lblText = new JLabel("Text:");
+	lblText = new JLabel("Button Name:");
 	lblText.setOpaque(false);
 	lblText.setForeground(Color.WHITE);
 	GridBagConstraints gbc_lblText = new GridBagConstraints();
@@ -166,7 +166,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnTextNone, gbc_rdbtnTextNone);
 	labelGroup.add(rdbtnTextNone);
 
-	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
+	rdbtnCommandAsLabel = new JRadioButton("Use shortcuts as label");
 	rdbtnCommandAsLabel.setForeground(Color.WHITE);
 	rdbtnCommandAsLabel.setOpaque(false);
 	GridBagConstraints gbc_rdbtnCommandAsLabel = new GridBagConstraints();
@@ -204,7 +204,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		customLabel.setEnabled(false);
 		Command command = Controller.getInstance().getCurrentCommand();
-		command.setLabel("");
+		command.setLabel(" ");
 		command.setLableMode(0);
 		Controller.getInstance().updateCurrentCommand();
 	    }
@@ -229,7 +229,7 @@ public class SettingPanel extends JPanel {
 	});
 	customLabel.addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyTyped(KeyEvent e) {
+	    public void keyReleased(KeyEvent e) {
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(customLabel.getText());
 		Controller.getInstance().updateCurrentCommand();
@@ -376,6 +376,7 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
+	this.customLabel.setText(command.getLabel());
 	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());
 	if (command.getImage() == Command.BLANK_IMAGE) {
