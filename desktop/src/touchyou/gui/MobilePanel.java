@@ -82,18 +82,6 @@ public class MobilePanel extends JLayeredPane {
     public void addCommand(Command command) {
 	JButton commandBtn = new JButton();
 	/* Set JButton's behavior */
-	if(command.getImagePath()!=null){
-	if (!command.getImagePath().equals("null")) {
-	    File img = new File(command.getImagePath());
-	    BufferedImage buf_img = null;
-	    try {
-		buf_img = ImageIO.read(img);
-	    } catch (IOException e1) {
-		e1.printStackTrace();
-	    }
-	    command.setImage(buf_img);
-	}
-	}
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);

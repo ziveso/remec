@@ -185,6 +185,19 @@ public class App {
 		    }
 		    line = line.split("=")[1];
 		    methods[i].run(command, line);
+		    // if (i == 3) {// ImagePath
+		    // System.out.println(i + line);
+		    // if (!line.equals("null")) {
+		    // File img = new File(command.getImagePath());
+		    // BufferedImage buff_img = null;
+		    // try {
+		    // buff_img = ImageIO.read(img);
+		    // } catch (IOException e1) {
+		    // e1.printStackTrace();
+		    // }
+		    // command.setImage(buff_img);
+		    // }
+		    // }
 		    if (i == 7) {
 			profile.addCommand(command);
 		    }
@@ -195,8 +208,28 @@ public class App {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
-
+	if (!profile.getCommands().isEmpty()) {
+	    generateImage(profile);
+	}
 	return profile;
+    }
+
+    private void generateImage(Profile profile) {
+	System.out.println("here");
+	List<Command> cmds = profile.getCommands();
+	for (Command cmd : cmds) {
+	    if (!cmd.getImagePath().equals("null")) {
+		File img = new File(cmd.getImagePath());
+		BufferedImage buff_img = null;
+		try {
+		    buff_img = ImageIO.read(img);
+		} catch (IOException e1) {
+		    e1.printStackTrace();
+		}
+		cmd.setImage(buff_img);
+	    }
+	}
+	System.out.println("done");
     }
 
     /**

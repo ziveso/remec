@@ -69,7 +69,7 @@ public class WelcomeFrame extends JFrame {
 	gbc_panel.gridy = 0;
 	contentPane.add(panel, BorderLayout.NORTH);
 
-	JLabel lblNewLabel_2 = new JLabel("Welcome to Touch You Pro 2017");
+	JLabel lblNewLabel_2 = new JLabel("Welcome to Remec Pro 2017");
 	lblNewLabel_2.setForeground(foreground);
 	lblNewLabel_2.setFont(new Font("Lantinghei TC", Font.PLAIN, 30));
 	panel.add(lblNewLabel_2);
