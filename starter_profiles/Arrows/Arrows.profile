@@ -1,0 +1,11 @@
+name=Arrows
+id=5
+label= 
+labelmode=0
+com= 
+mo=0
+img=null
+w=50
+h=50
+x=128
+y=72

@@ -66,7 +66,8 @@ public class App {
     }
 
     public void save() {
-	save("./profiles/" + profile.getName() + "/" + profile.getName() + ".profile");
+	System.out.println(profile.getDir().getPath());
+	save(profile.getDir().getPath());
     }
 
     /**
@@ -98,6 +99,8 @@ public class App {
 	} finally {
 	    writer.close();
 	}
+
+	profile.setDir(new File(path));
 	Controller.getInstance().setIsSave(true);
     }
 
@@ -129,7 +132,9 @@ public class App {
     public void createNewProfile(String profileName) {
 	profile = new Profile(profileName);
 	String filepath = "./profiles/" + profileName + "/" + profileName + ".profile";
-	new File("./profiles/" + profileName).mkdir();
+	File dir = new File("./profiles/" + profileName);
+	dir.mkdir();
+	profile.setDir(dir);
 	save(filepath);
 	open(filepath);
     }
@@ -152,6 +157,7 @@ public class App {
      */
     public void open(File file) {
 	profile = generateProfile(file);
+	profile.setDir(file);
     }
 
     /**
