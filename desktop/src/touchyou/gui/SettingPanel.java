@@ -240,7 +240,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		customLabel.setEnabled(true);
 		Command command = Controller.getInstance().getCurrentCommand();
-		command.setLabel(customLabel.getText());
+		command.setLabel(" ");
 		command.setLableMode(2);
 		Controller.getInstance().updateCurrentCommand();
 	    }
