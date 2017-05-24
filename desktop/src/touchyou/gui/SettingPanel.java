@@ -115,12 +115,14 @@ public class SettingPanel extends JPanel {
 	combination.addMouseListener(new MouseAdapter() {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
+		Controller.getInstance().disableMenuBar(true);
 		combination.setBorder(BorderFactory.createLineBorder(new Color(65, 65, 192), 5));
 	    }
 	});
 	combination.addFocusListener(new FocusAdapter() {
 	    @Override
 	    public void focusLost(FocusEvent e) {
+		Controller.getInstance().disableMenuBar(false);
 		combination.setBorder(iconpath.getBorder());
 	    }
 	});
@@ -454,9 +456,12 @@ public class SettingPanel extends JPanel {
     private void setImageToCommand(File imgFile) {
 	if (!imgFile.exists())
 	    return;
+	Command current = Controller.getInstance().getCurrentCommand();
+	if (current.getImage() != Command.BLANK_IMAGE) {
+	    return; // already has image.
+	}
 	try {
 	    BufferedImage image = ImageIO.read(imgFile);
-	    Command current = Controller.getInstance().getCurrentCommand();
 	    current.setImage(image);
 	    Controller.getInstance().updateCurrentCommand();
 	} catch (IOException e1) {

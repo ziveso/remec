@@ -7,6 +7,7 @@ import touchyou.App;
 import touchyou.Command;
 import touchyou.UDPBroadcast;
 import touchyou.gui.MainFrame;
+import touchyou.gui.MenuBar;
 import touchyou.gui.MobilePanel;
 import touchyou.gui.SettingPanel;
 import touchyou.gui.StatusPanel;
@@ -269,5 +270,14 @@ public class Controller {
 
     public void setRemoteConnection(boolean isOn) {
 	statusPanel.setRemoteConnection(isOn);
+    }
+
+    public void disableMenuBar(boolean isDisable) {
+	MenuBar mb = (MenuBar) mainFrame.getJMenuBar();
+	if (isDisable) {
+	    mb.disableKey();
+	} else {
+	    mb.enableKey();
+	}
     }
 }
