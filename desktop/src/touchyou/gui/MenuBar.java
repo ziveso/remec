@@ -33,9 +33,10 @@ public class MenuBar extends JMenuBar {
     private JMenu connection;
     private JMenuItem connect;
     private JMenuItem disconnect;
+    private int shortcut;
 
     public MenuBar() {
-	int shortcut = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+	shortcut = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
 	/**
 	 * FILE MENU
 	 */
@@ -96,13 +97,6 @@ public class MenuBar extends JMenuBar {
 	    exit.addActionListener((e) -> System.exit(0));
 	}
 
-	// add hotkey to FILE MENU
-	{
-	    save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcut));
-	    saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcut | InputEvent.SHIFT_MASK));
-	    newprofile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcut | InputEvent.SHIFT_MASK));
-	}
-
 	edit = new JMenu("Edit");
 	undo = new JMenuItem("Undo");
 	redo = new JMenuItem("Redo");
@@ -132,11 +126,6 @@ public class MenuBar extends JMenuBar {
 	    });
 	}
 
-	// add hotkey to Sync
-	{
-	    sync.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
-	}
-
 	connection = new JMenu("Connection");
 	connect = new JMenuItem("Enable Connection");
 	disconnect = new JMenuItem("Disable Connection");
@@ -153,13 +142,47 @@ public class MenuBar extends JMenuBar {
 	    });
 	}
 
+	this.add(connection);
+
+	enableKey();
+    }
+
+    public void disableKey() {
+	// add hotkey to FILE MENU
+	{
+	    save.setAccelerator(null);
+	    saveAs.setAccelerator(null);
+	    newprofile.setAccelerator(null);
+	}
+	// add hotkey to Sync
+	{
+	    sync.setAccelerator(null);
+	}
+
+	// add hotkey to connection
+	{
+	    connect.setAccelerator(null);
+	    disconnect.setAccelerator(null);
+	}
+    }
+
+    public void enableKey() {
+	// add hotkey to FILE MENU
+	{
+	    save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcut));
+	    saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcut | InputEvent.SHIFT_MASK));
+	    newprofile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, shortcut | InputEvent.SHIFT_MASK));
+	}
+	// add hotkey to Sync
+	{
+	    sync.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0));
+	}
+
 	// add hotkey to connection
 	{
 	    connect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
 	    disconnect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
 	}
-	this.add(connection);
-
     }
 
     public MenuBar welcomeBar() {
