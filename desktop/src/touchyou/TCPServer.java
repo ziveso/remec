@@ -49,22 +49,32 @@ public class TCPServer extends AbstractServer {
     protected void handleMessageFromClient(Object o, ConnectionToClient client) {
 	System.out.println("Client: " + o);
 	String msg = (String) o;
-	if (msg.contains("SYNC_REQUEST")) {
-	    String[] size = msg.split("=")[1].split(";");
+	String[] commands;
+	String[] data = msg.split("=");
+	String header = data[0];
+	String body = data[1];
+	switch (header) {
+	case "SYNC_REQUEST":
+	    String[] size = body.split(";");
 	    Controller.getInstance().sync(Integer.parseInt(size[0]), Integer.parseInt(size[1]));
-	} else if (msg.contains("PRESS")) {
-	    String[] commands = msg.split("=")[1].split(";");
+	    break;
+	case "PRESS":
+	    commands = body.split(";");
 	    System.out.println(Arrays.toString(commands));
-	    if (commands[0].equals("0")) {
+	    switch (commands[0]) {
+	    case "0":
 		invoke.tap(commands[1]);
-	    } else if (commands[0].equals("1")) {
+		break;
+	    case "1":
 		invoke.press(commands[1]);
+		break;
 	    }
-	} else if (msg.contains("RELEASE")) {
-	    String[] commands = msg.split("=")[1].split(";");
-	    if (commands[0].equals("1")) {
+	    break;
+	case "RELEASE":
+	    commands = body.split(";");
+	    if (commands[0].equals("1"))
 		invoke.release(commands[1]);
-	    }
+	    break;
 	}
     }
 

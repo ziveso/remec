@@ -42,6 +42,7 @@ public class CommandInvoker {
      *            is a combination of key code to press
      */
     public void press(String combination) {
+	if (combination.trim().isEmpty()) return;
 	String[] keys = combination.split(":");
 	System.out.println("PRESSED");
 	Arrays.stream(keys).map(Integer::parseInt).forEach(robot::keyPress);
@@ -54,6 +55,7 @@ public class CommandInvoker {
      *            is a combination of key code to release
      */
     public void release(String combination) {
+	if (combination.trim().isEmpty()) return;
 	String[] keys = combination.split(":");
 	System.out.println("RELEASED");
 	Arrays.stream(keys).map(Integer::parseInt).forEach(robot::keyRelease);
