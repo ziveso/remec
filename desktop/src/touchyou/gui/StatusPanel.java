@@ -140,10 +140,10 @@ public class StatusPanel extends JPanel {
     public void setRemoteConnection(boolean isOn){
 	if(isOn){
 	    Controller.getInstance().startBroadcast();
-	    rdbtnOn.setSelected(true);
+	    syncButton.setEnabled(true);
 	} else {
 	    Controller.getInstance().stopBroadcast();
-	    rdbtnOff.setSelected(true);
+	    syncButton.setEnabled(false);
 	}
     }
 
