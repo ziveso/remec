@@ -249,12 +249,17 @@ public class SettingPanel extends JPanel {
 	    @Override
 	    public void keyReleased(KeyEvent e) {
 		Command command = Controller.getInstance().getCurrentCommand();
+		command.setLabel(customLabel.getText());
+		Controller.getInstance().updateCurrentCommand();
+	    }
+	});
+
+	customLabel.addFocusListener(new FocusAdapter() {
+	    @Override
+	    public void focusLost(FocusEvent e) {
 		if (customLabel.getText().length() < 1) {
 		    JOptionPane.showMessageDialog(null, "Cannot leave this field blank");
-		} else {
-		    command.setLabel(customLabel.getText());
 		}
-		Controller.getInstance().updateCurrentCommand();
 	    }
 	});
 
