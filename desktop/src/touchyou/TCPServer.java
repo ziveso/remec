@@ -30,6 +30,7 @@ public class TCPServer extends AbstractServer {
     @Override
     protected void clientConnected(ConnectionToClient client) {
 	super.clientConnected(client);
+	Controller.getInstance().updateStatus(true);
 	System.out.println("Client connected.");
     }
 
@@ -42,6 +43,7 @@ public class TCPServer extends AbstractServer {
     @Override
     protected synchronized void clientDisconnected(ConnectionToClient client) {
 	super.clientDisconnected(client);
+	Controller.getInstance().updateStatus(false);
 	System.out.println("Client disconnected.");
     }
 

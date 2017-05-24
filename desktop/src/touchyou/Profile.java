@@ -1,5 +1,6 @@
 package touchyou;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  *
  */
 public class Profile {
+    private File dir;
     private String name;
     private List<Command> commands;
 
@@ -96,6 +98,14 @@ public class Profile {
 		return command;
 	}
 	return null;
+    }
+
+    public File getDir() {
+	return dir;
+    }
+
+    public void setDir(File dir) {
+	this.dir = dir;
     }
 
 }

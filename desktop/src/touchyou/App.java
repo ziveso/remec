@@ -66,7 +66,8 @@ public class App {
     }
 
     public void save() {
-	save("./profiles/" + profile.getName() + "/" + profile.getName() + ".profile");
+	System.out.println(profile.getDir().getPath());
+	save(profile.getDir().getPath());
     }
 
     /**
@@ -98,6 +99,8 @@ public class App {
 	} finally {
 	    writer.close();
 	}
+
+	profile.setDir(new File(path));
 	Controller.getInstance().setIsSave(true);
     }
 
@@ -111,9 +114,9 @@ public class App {
 	    File dir = new File(path + "/images/");
 	    dir.mkdirs();
 	    if (cmd.getImage() != Command.BLANK_IMAGE) {
-		String path2 = dir.getPath() + "/" + cmd.getId() + ".png";
+		String path2 = "/images/" + cmd.getId() + ".png";
 		cmd.setImagePath(path2);
-		File output = new File(path2);
+		File output = new File(dir.getPath() + "/" + cmd.getId() + ".png");
 		BufferedImage bi = null;
 		bi = (BufferedImage) cmd.getImage();
 		try {
@@ -129,7 +132,9 @@ public class App {
     public void createNewProfile(String profileName) {
 	profile = new Profile(profileName);
 	String filepath = "./profiles/" + profileName + "/" + profileName + ".profile";
-	new File("./profiles/" + profileName).mkdir();
+	File dir = new File("./profiles/" + profileName);
+	dir.mkdir();
+	profile.setDir(dir);
 	save(filepath);
 	open(filepath);
     }
@@ -201,6 +206,7 @@ public class App {
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
+	profile.setDir(file);
 	if (!profile.getCommands().isEmpty()) {
 	    generateImage(profile);
 	}
@@ -208,11 +214,13 @@ public class App {
     }
 
     private void generateImage(Profile profile) {
+	String img_path = profile.getDir().getPath().replace(profile.getName() + ".profile", "");
 	List<Command> cmds = profile.getCommands();
 	for (Command cmd : cmds) {
 	    if (cmd.getImagePath() == null)
 		continue;
-	    File img = new File(cmd.getImagePath());
+	    File img = new File(img_path + cmd.getImagePath());
+	    System.out.println(img.getPath());
 	    BufferedImage buff_img = null;
 	    try {
 		buff_img = ImageIO.read(img);

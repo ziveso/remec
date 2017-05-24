@@ -3,6 +3,7 @@ package touchyou.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -13,6 +14,9 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -105,16 +109,15 @@ public class WelcomeFrame extends JFrame {
 	DefaultListModel<String> model = new DefaultListModel<>();
 	list.setModel(model);
 	File profileDir = new File("./profiles/");
-	if (!profileDir.exists()) {
-	    profileDir.mkdir();
-	}
-	for (File f : profileDir.listFiles()) {
-	    if (f.listFiles() == null) {
-		continue;
-	    }
-	    for (String sf : new File("./profiles/" + f.getName()).list()) {
-		if (sf.contains(".profile")) {
-		    model.addElement(sf);
+	if (profileDir.exists()) {
+	    for (File f : profileDir.listFiles()) {
+		if (f.listFiles() == null) {
+		    continue;
+		}
+		for (String sf : new File("./profiles/" + f.getName()).list()) {
+		    if (sf.contains(".profile")) {
+			model.addElement(sf);
+		    }
 		}
 	    }
 	}
@@ -185,6 +188,9 @@ public class WelcomeFrame extends JFrame {
 	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
 		    JOptionPane.QUESTION_MESSAGE, icon, null, null);
 	    if (name != null && name.length() != 0) {
+		if (!profileDir.exists()) {
+		    profileDir.mkdirs();
+		}
 		Controller.getInstance().newProfile(name);
 		runMainFrame();
 	    }
@@ -220,6 +226,15 @@ public class WelcomeFrame extends JFrame {
 	btnDownload.setBackground(new Color(245, 245, 245));
 	btnDownload.addMouseListener(mouseAdapter);
 	panel_2.add(btnDownload);
+	btnDownload.addActionListener((e) -> {
+	    if (Desktop.isDesktopSupported()) {
+		try {
+		    Desktop.getDesktop().browse(new URI("https://github.com/thitgorn/remec/tree/master/starter_profiles"));
+		} catch (IOException | URISyntaxException e1) {
+		    e1.printStackTrace();
+		}
+	    }
+	});
 
 	JButton btnSetting = new JButton("About");
 	btnSetting.addActionListener(e -> {
