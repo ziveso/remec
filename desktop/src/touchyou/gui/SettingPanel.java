@@ -27,6 +27,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -239,7 +240,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		customLabel.setEnabled(true);
 		Command command = Controller.getInstance().getCurrentCommand();
-		command.setLabel(customLabel.getText());
+		command.setLabel(" ");
 		command.setLableMode(2);
 		Controller.getInstance().updateCurrentCommand();
 	    }
@@ -250,6 +251,15 @@ public class SettingPanel extends JPanel {
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(customLabel.getText());
 		Controller.getInstance().updateCurrentCommand();
+	    }
+	});
+
+	customLabel.addFocusListener(new FocusAdapter() {
+	    @Override
+	    public void focusLost(FocusEvent e) {
+		if (customLabel.getText().length() < 1) {
+		    JOptionPane.showMessageDialog(null, "Cannot leave this field blank");
+		}
 	    }
 	});
 
