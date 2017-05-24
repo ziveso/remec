@@ -65,7 +65,7 @@ public class CaptureButton extends JButton {
 	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    this.setAlwaysOnTop(true);
 	    this.setUndecorated(true);
-	    this.setBackground(new Color(1, 1, 1, 0.1f));
+	    this.setBackground(new Color(0,0,0, 0.3f));
 	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	    this.setContentPane(new Drawer());
 
@@ -107,12 +107,12 @@ public class CaptureButton extends JButton {
 
 	private class Drawer extends JPanel {
 	    private static final long serialVersionUID = 2718623225349403223L;
-	    private final Color DARK_FILTER = new Color(0, 0, 0, 0.0001f);
+	    private final Color DARK_FILTER = new Color(0, 0, 0, 0.1f);
 
 	    public Drawer() {
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-		this.setOpaque(true);
-		this.setBackground(DARK_FILTER);
+		this.setOpaque(false);
+//		this.setBackground(DARK_FILTER);
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 		    @Override
 		    public void mouseDragged(MouseEvent e) {
@@ -135,9 +135,9 @@ public class CaptureButton extends JButton {
 	    protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OVER));
-//		g2d.setColor(new Color(0, 0, 0, 0.1f));
-//		g2d.fillRect(0, 0, 1000, 1000);
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
+		g2d.setColor(new Color(0, 0, 0, 0.1f));
+		g2d.fillRect(0, 0, 1000, 1000);
 		g2d.setColor(Color.decode("#c91e46")); // RED
 		BasicStroke dashedStroke = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f,
 			new float[] { 8 }, 0.0f);
