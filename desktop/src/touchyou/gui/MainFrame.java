@@ -122,9 +122,9 @@ public class MainFrame extends JFrame {
 		    if (result == JOptionPane.CLOSED_OPTION) {
 			return;
 		    }
-		    dispose();
+		    System.exit(0);
 		} else
-		    dispose();
+		    System.exit(0);
 	    }
 	});
 	this.pack();
