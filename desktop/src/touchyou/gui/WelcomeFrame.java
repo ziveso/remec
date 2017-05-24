@@ -46,10 +46,10 @@ public class WelcomeFrame extends JFrame {
      * Create the frame.
      */
     public WelcomeFrame() {
-	setJMenuBar(new MenuBar());
+	setJMenuBar(new MenuBar().welcomeBar());
 	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	Color foreground = GUIUtil.getForegroundColor();
-	setTitle("Touch You Pro");
+	setTitle("Remec Pro");
 	setLocation(new Point(0, 0));
 	setResizable(false);
 	setMinimumSize(new Dimension(650, 400));
@@ -107,11 +107,15 @@ public class WelcomeFrame extends JFrame {
 	File profileDir = new File("./profiles/");
 	if (!profileDir.exists()) {
 	    profileDir.mkdir();
-	    System.out.println("making " + profileDir.getPath());
 	}
-	for (String f : new File("./profiles/").list()) {
-	    if (f.contains(".profile")) {
-		model.addElement(f);
+	for (File f : profileDir.listFiles()) {
+	    if (f.listFiles() == null) {
+		continue;
+	    }
+	    for (String sf : new File("./profiles/" + f.getName()).list()) {
+		if (sf.contains(".profile")) {
+		    model.addElement(sf);
+		}
 	    }
 	}
 	list.addListSelectionListener(new ListSelectionListener() {
@@ -119,8 +123,8 @@ public class WelcomeFrame extends JFrame {
 	    public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting()) {
 		    String profileName = list.getSelectedValue();
-		    System.out.println("clicked " + profileName);
-		    File file = new File("./profiles/" + profileName);
+		    String folder = profileName.replaceAll(".profile", "");
+		    File file = new File("./profiles/" + folder + "/" + profileName);
 		    Controller.getInstance().openProfile(file);
 		    runMainFrame();
 		}
@@ -170,7 +174,7 @@ public class WelcomeFrame extends JFrame {
 	    }
 	};
 
-	JButton btnNew = new JButton("Create a new Touch You profile");
+	JButton btnNew = new JButton("Create a new Remec profile");
 	btnNew.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnNew.setHorizontalAlignment(SwingConstants.LEFT);
 	btnNew.setBorder(new EmptyBorder(0, 20, 0, 20));
@@ -180,7 +184,7 @@ public class WelcomeFrame extends JFrame {
 	    Icon icon = null;
 	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
 		    JOptionPane.QUESTION_MESSAGE, icon, null, null);
-	    if (name != null) {
+	    if (name != null && name.length() != 0) {
 		Controller.getInstance().newProfile(name);
 		runMainFrame();
 	    }
@@ -188,7 +192,7 @@ public class WelcomeFrame extends JFrame {
 	btnNew.addMouseListener(mouseAdapter);
 	panel_2.add(btnNew);
 
-	JButton btnOpen = new JButton("Open existing Touch You profile");
+	JButton btnOpen = new JButton("Open existing Remec profile");
 	btnOpen.addActionListener(e -> {
 	    JFileChooser fileChooser = new JFileChooser();
 	    fileChooser.setCurrentDirectory(new File("./profiles/"));
@@ -208,7 +212,7 @@ public class WelcomeFrame extends JFrame {
 	btnOpen.addMouseListener(mouseAdapter);
 	panel_2.add(btnOpen);
 
-	JButton btnDownload = new JButton("Download profile from Touch You Community");
+	JButton btnDownload = new JButton("Download profile from Remec Community");
 	btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnDownload.setHorizontalAlignment(SwingConstants.LEFT);
 	btnDownload.setBorder(new EmptyBorder(0, 20, 0, 20));
@@ -235,7 +239,7 @@ public class WelcomeFrame extends JFrame {
 	lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
 	panel_2.add(lblNewLabel_3);
 
-	JLabel lblThisProjectIs = new JLabel("Version: 0.1.4 Beta");
+	JLabel lblThisProjectIs = new JLabel("Version: " + GUIUtil.version);
 	lblThisProjectIs.setBorder(new EmptyBorder(0, 6, 0, 6));
 	lblThisProjectIs.setOpaque(true);
 	lblThisProjectIs.setBackground(new Color(245, 245, 245));

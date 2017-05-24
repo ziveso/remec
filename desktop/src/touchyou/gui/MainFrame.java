@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,8 +18,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import javafx.geometry.Side;
-import sun.applet.Main;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 
@@ -43,7 +41,13 @@ public class MainFrame extends JFrame {
      * construct MainFrame.
      */
     public MainFrame() {
-	setTitle("Remec 1.0.1 Beta");
+	addMouseListener(new MouseAdapter() {
+	    @Override
+	    public void mousePressed(MouseEvent e) {
+		requestFocus();
+	    }
+	});
+	setTitle("Remec " + GUIUtil.version);
 	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	setSize(1004, 635);
 	setJMenuBar(new MenuBar());
@@ -109,10 +113,16 @@ public class MainFrame extends JFrame {
 	    @Override
 	    public void windowClosing(WindowEvent e) {
 		if (!Controller.getInstance().getIsSave()) {
-		    int result = JOptionPane.showConfirmDialog(MainFrame.this,
-			    "Are you sure u want to exit without saving ?");
-		    if (result == JOptionPane.YES_OPTION)
-			dispose();
+		    Object[] options = { "Yes", "No" };
+		    int result = JOptionPane.showOptionDialog(null, "Do you want to save before exit?", "Exit Remec",
+			    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+		    if (result == JOptionPane.OK_OPTION) {
+			Controller.getInstance().save();
+		    }
+		    if (result == JOptionPane.CLOSED_OPTION) {
+			return;
+		    }
+		    dispose();
 		} else
 		    dispose();
 	    }

@@ -71,7 +71,8 @@ public class Controller {
      *            is the path to save as.
      */
     public void saveAs(File file) {
-	String path = file.getAbsolutePath() + ".profile";
+	new File(file.getAbsolutePath() + "/").mkdirs();
+	String path = file.getAbsolutePath() + "/" + getProfileName() + ".profile";
 	app.save(path);
     }
 
@@ -263,5 +264,9 @@ public class Controller {
 
     public void setMobilePanel(MobilePanel mobilePanel) {
 	this.mobilePanel = mobilePanel;
+    }
+
+    public void setRemoteConnection(boolean isOn) {
+	statusPanel.setRemoteConnection(isOn);
     }
 }

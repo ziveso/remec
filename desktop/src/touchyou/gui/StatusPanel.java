@@ -25,6 +25,8 @@ public class StatusPanel extends JPanel {
      */
     private static final long serialVersionUID = 2861841184923249614L;
     private SyncButton syncButton;
+    private JRadioButton rdbtnOn;
+    private JRadioButton rdbtnOff;
 
     /**
      * Create the panel.
@@ -69,7 +71,7 @@ public class StatusPanel extends JPanel {
 	panel_1.add(lblRemoteConnection, gbc_lblRemoteConnection);
 	lblRemoteConnection.setForeground(Color.WHITE);
 
-	JRadioButton rdbtnOn = new JRadioButton("On");
+	rdbtnOn = new JRadioButton("On");
 	rdbtnOn.setOpaque(false);
 	rdbtnOn.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOn = new GridBagConstraints();
@@ -78,11 +80,11 @@ public class StatusPanel extends JPanel {
 	gbc_rdbtnOn.gridx = 1;
 	gbc_rdbtnOn.gridy = 0;
 	rdbtnOn.addActionListener(e -> {
-	    Controller.getInstance().startBroadcast();
+	    setRemoteConnection(true);
 	});
 	panel_1.add(rdbtnOn, gbc_rdbtnOn);
 
-	JRadioButton rdbtnOff = new JRadioButton("Off");
+	rdbtnOff = new JRadioButton("Off");
 	rdbtnOff.setOpaque(false);
 	rdbtnOff.setForeground(Color.WHITE);
 	GridBagConstraints gbc_rdbtnOff = new GridBagConstraints();
@@ -91,7 +93,7 @@ public class StatusPanel extends JPanel {
 	gbc_rdbtnOff.gridx = 2;
 	gbc_rdbtnOff.gridy = 0;
 	rdbtnOff.addActionListener(e -> {
-	    Controller.getInstance().stopBroadcast();
+	    setRemoteConnection(false);
 	});
 	panel_1.add(rdbtnOff, gbc_rdbtnOff);
 
@@ -133,6 +135,16 @@ public class StatusPanel extends JPanel {
 	    }
 	}).start();
 
+    }
+    
+    public void setRemoteConnection(boolean isOn){
+	if(isOn){
+	    Controller.getInstance().startBroadcast();
+	    rdbtnOn.setSelected(true);
+	} else {
+	    Controller.getInstance().stopBroadcast();
+	    rdbtnOff.setSelected(true);
+	}
     }
 
     public void clear() {

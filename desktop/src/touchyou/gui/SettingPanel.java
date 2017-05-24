@@ -7,10 +7,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -93,7 +98,7 @@ public class SettingPanel extends JPanel {
 	gbc_profilename.gridy = 0;
 	add(profilename, gbc_profilename);
 
-	JLabel lblNewLabel = new JLabel("Command:");
+	JLabel lblNewLabel = new JLabel("Shortcuts:");
 	lblNewLabel.setOpaque(false);
 	lblNewLabel.setForeground(GUIUtil.getForegroundColor());
 	GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -106,6 +111,18 @@ public class SettingPanel extends JPanel {
 	combination = new JTextField();
 	combination.setHorizontalAlignment(SwingConstants.TRAILING);
 	combination.setEditable(false);
+	combination.addMouseListener(new MouseAdapter() {
+	    @Override
+	    public void mouseClicked(MouseEvent e) {
+		combination.setBorder(BorderFactory.createLineBorder(new Color(65, 65, 192), 5));
+	    }
+	});
+	combination.addFocusListener(new FocusAdapter() {
+	    @Override
+	    public void focusLost(FocusEvent e) {
+		combination.setBorder(iconpath.getBorder());
+	    }
+	});
 	combination.addKeyListener(new KeyListener() {
 	    private List<String> key = new ArrayList<>();
 
@@ -142,7 +159,7 @@ public class SettingPanel extends JPanel {
 	add(combination, gbc_combination);
 	combination.setColumns(10);
 
-	lblText = new JLabel("Text:");
+	lblText = new JLabel("Button Name:");
 	lblText.setOpaque(false);
 	lblText.setForeground(Color.WHITE);
 	GridBagConstraints gbc_lblText = new GridBagConstraints();
@@ -166,7 +183,7 @@ public class SettingPanel extends JPanel {
 	add(rdbtnTextNone, gbc_rdbtnTextNone);
 	labelGroup.add(rdbtnTextNone);
 
-	rdbtnCommandAsLabel = new JRadioButton("Use command as label");
+	rdbtnCommandAsLabel = new JRadioButton("Use shortcuts as label");
 	rdbtnCommandAsLabel.setForeground(Color.WHITE);
 	rdbtnCommandAsLabel.setOpaque(false);
 	GridBagConstraints gbc_rdbtnCommandAsLabel = new GridBagConstraints();
@@ -204,7 +221,7 @@ public class SettingPanel extends JPanel {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		customLabel.setEnabled(false);
 		Command command = Controller.getInstance().getCurrentCommand();
-		command.setLabel("");
+		command.setLabel(" ");
 		command.setLableMode(0);
 		Controller.getInstance().updateCurrentCommand();
 	    }
@@ -376,6 +393,7 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
+	this.customLabel.setText(command.getLabel());
 	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());
 	if (command.getImage() == Command.BLANK_IMAGE) {
@@ -413,6 +431,7 @@ public class SettingPanel extends JPanel {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 	    JFileChooser fc = new JFileChooser();
+	    fc.setAcceptAllFileFilterUsed(false);
 	    fc.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png"));
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
