@@ -27,6 +27,8 @@ public class StatusPanel extends JPanel {
     private SyncButton syncButton;
     private JRadioButton rdbtnOn;
     private JRadioButton rdbtnOff;
+    private JLabel lblConnectedFrom;
+    private JLabel lblConnectionStatus;
 
     /**
      * Create the panel.
@@ -106,11 +108,11 @@ public class StatusPanel extends JPanel {
 	lblYourIpAddress.setForeground(Color.WHITE);
 	panel.add(lblYourIpAddress);
 
-	JLabel lblConnectionStatus = new JLabel("Connection Status: -");
+	lblConnectionStatus = new JLabel("Connection Status: -");
 	lblConnectionStatus.setForeground(Color.WHITE);
 	panel.add(lblConnectionStatus);
 
-	JLabel lblConnectedFrom = new JLabel("Connected From: -");
+	lblConnectedFrom = new JLabel("Connected From: -");
 	lblConnectedFrom.setForeground(Color.WHITE);
 	panel.add(lblConnectedFrom);
 
@@ -146,8 +148,20 @@ public class StatusPanel extends JPanel {
 	    syncButton.setEnabled(false);
 	}
     }
+    
+    public void setConnectedForm(String IP){
+	lblConnectedFrom.setText("Connected Form: " + IP);
+    }
 
     public void clear() {
 	syncButton.setEnabled(false);
+    }
+
+    public void updateConnectionStatus(boolean connecting) {
+	if(connecting){
+	    lblConnectionStatus.setText("Connection Status: connected");
+	} else {
+	    lblConnectionStatus.setText("Connection Status: -");
+	}
     }
 }

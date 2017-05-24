@@ -279,4 +279,12 @@ public class Controller {
 	    mb.enableKey();
 	}
     }
+
+    public void updateIP(String hostAddress) {
+	statusPanel.setConnectedForm(hostAddress);
+    }
+
+    public void updateStatus(boolean b) {
+	statusPanel.updateConnectionStatus(b);
+    }
 }

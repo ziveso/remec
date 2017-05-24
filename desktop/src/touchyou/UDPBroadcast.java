@@ -5,6 +5,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import touchyou.util.Controller;
+
 /**
  * UDP Broadcaster for broadcasting this computer IP Address to android devices.
  * 
@@ -69,6 +71,7 @@ public class UDPBroadcast {
 
 			System.out.println(getClass().getName() + ">>>Sent packet to: "
 				+ sendPacket.getAddress().getHostAddress());
+			Controller.getInstance().updateIP(sendPacket.getAddress().getHostAddress());
 		    }
 		}
 	    } catch (IOException ex) {
