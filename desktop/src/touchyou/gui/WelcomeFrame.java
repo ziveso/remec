@@ -229,7 +229,7 @@ public class WelcomeFrame extends JFrame {
 	btnDownload.addActionListener((e) -> {
 	    if (Desktop.isDesktopSupported()) {
 		try {
-		    Desktop.getDesktop().browse(new URI("https://github.com/thitgorn/remec/starter_profiles"));
+		    Desktop.getDesktop().browse(new URI("https://github.com/thitgorn/remec/tree/master/starter_profiles"));
 		} catch (IOException | URISyntaxException e1) {
 		    e1.printStackTrace();
 		}
