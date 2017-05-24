@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
 		requestFocus();
 	    }
 	});
-	setTitle("Remec 1.0.1 Beta");
+	setTitle("Remec " + GUIUtil.version);
 	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	setSize(1004, 635);
 	setJMenuBar(new MenuBar());

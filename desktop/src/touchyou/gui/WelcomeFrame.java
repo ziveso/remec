@@ -49,7 +49,7 @@ public class WelcomeFrame extends JFrame {
 	setJMenuBar(new MenuBar().welcomeBar());
 	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	Color foreground = GUIUtil.getForegroundColor();
-	setTitle("Touch You Pro");
+	setTitle("Remec Pro");
 	setLocation(new Point(0, 0));
 	setResizable(false);
 	setMinimumSize(new Dimension(650, 400));
@@ -174,7 +174,7 @@ public class WelcomeFrame extends JFrame {
 	    }
 	};
 
-	JButton btnNew = new JButton("Create a new Touch You profile");
+	JButton btnNew = new JButton("Create a new Remec profile");
 	btnNew.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnNew.setHorizontalAlignment(SwingConstants.LEFT);
 	btnNew.setBorder(new EmptyBorder(0, 20, 0, 20));
@@ -192,7 +192,7 @@ public class WelcomeFrame extends JFrame {
 	btnNew.addMouseListener(mouseAdapter);
 	panel_2.add(btnNew);
 
-	JButton btnOpen = new JButton("Open existing Touch You profile");
+	JButton btnOpen = new JButton("Open existing Remec profile");
 	btnOpen.addActionListener(e -> {
 	    JFileChooser fileChooser = new JFileChooser();
 	    fileChooser.setCurrentDirectory(new File("./profiles/"));
@@ -212,7 +212,7 @@ public class WelcomeFrame extends JFrame {
 	btnOpen.addMouseListener(mouseAdapter);
 	panel_2.add(btnOpen);
 
-	JButton btnDownload = new JButton("Download profile from Touch You Community");
+	JButton btnDownload = new JButton("Download profile from Remec Community");
 	btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	btnDownload.setHorizontalAlignment(SwingConstants.LEFT);
 	btnDownload.setBorder(new EmptyBorder(0, 20, 0, 20));

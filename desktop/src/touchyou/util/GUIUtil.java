@@ -21,6 +21,7 @@ import touchyou.Command;
 public class GUIUtil {
     public static int WIDTH = 1000;
     public static int HEIGHT = 500;
+    public static String version = "1.0.1 beta";
 
     /**
      * get the Factory Border use it for debug. in case of you don't want border

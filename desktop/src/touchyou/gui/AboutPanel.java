@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import touchyou.util.GUIUtil;
+
 /**
  * Panel for displaying information about this application and authors.
  * 
@@ -40,7 +42,7 @@ public class AboutPanel extends JPanel {
 	gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 	panel.setLayout(gbl_panel);
 
-	JLabel label = new JLabel("Touch You Remote Shortcut Application");
+	JLabel label = new JLabel("Remec Remote Shortcut Application");
 	GridBagConstraints gbc_label = new GridBagConstraints();
 	gbc_label.anchor = GridBagConstraints.WEST;
 	gbc_label.insets = new Insets(0, 0, 5, 0);
@@ -48,7 +50,7 @@ public class AboutPanel extends JPanel {
 	gbc_label.gridy = 0;
 	panel.add(label, gbc_label);
 
-	JLabel label_1 = new JLabel("Version: 0.1.4 Beta");
+	JLabel label_1 = new JLabel("Version: " + GUIUtil.version);
 	GridBagConstraints gbc_label_1 = new GridBagConstraints();
 	gbc_label_1.anchor = GridBagConstraints.WEST;
 	gbc_label_1.insets = new Insets(0, 0, 5, 0);
