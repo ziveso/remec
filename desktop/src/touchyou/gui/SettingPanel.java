@@ -404,7 +404,6 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
-	System.out.println("update setting");
 	this.customLabel.setText(command.getLabel());
 	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());

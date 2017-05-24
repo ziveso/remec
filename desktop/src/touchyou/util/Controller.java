@@ -175,7 +175,6 @@ public class Controller {
      */
     public void updateCurrentCommand() {
 	if (app.getProfile().getCommands().size() > 0)
-	    System.out.println("enable all setting");
 	    enableSettingPanel();
 	isSave = false;
 	settingPanel.update(currentCommand);

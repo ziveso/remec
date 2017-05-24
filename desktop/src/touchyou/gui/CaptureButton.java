@@ -65,7 +65,7 @@ public class CaptureButton extends JButton {
 	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    this.setAlwaysOnTop(true);
 	    this.setUndecorated(true);
-	    this.setBackground(new Color(0,0,0, 0.3f));
+	    this.setBackground(new Color(0,0,0,10));
 	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	    this.setContentPane(new Drawer());
 
