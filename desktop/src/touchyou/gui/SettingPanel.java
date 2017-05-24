@@ -229,7 +229,7 @@ public class SettingPanel extends JPanel {
 	});
 	customLabel.addKeyListener(new KeyAdapter() {
 	    @Override
-	    public void keyTyped(KeyEvent e) {
+	    public void keyReleased(KeyEvent e) {
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(customLabel.getText());
 		Controller.getInstance().updateCurrentCommand();
