@@ -1,6 +1,7 @@
 package touchyou.gui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -30,6 +31,10 @@ public class SyncButton extends JButton {
 	public SyncButton(int width, int height) {
 		super("SYNC");
 		this.setPreferredSize(new Dimension(width, height));
+		this.setBorderPainted(false);
+		this.setFocusPainted(false);
+		this.setContentAreaFilled(false);
+		this.setFont(new Font(this.getFont().getFontName(), 0, 24));
 		this.addActionListener((e) -> Controller.getInstance().sendSyncRequest());
 		this.setBorder(BorderFactory.createEmptyBorder());
 		this.setOpaque(true);
