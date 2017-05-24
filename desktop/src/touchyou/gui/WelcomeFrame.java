@@ -184,7 +184,7 @@ public class WelcomeFrame extends JFrame {
 	    Icon icon = null;
 	    String name = (String) JOptionPane.showInputDialog(this, "New Profile Name : ", "Creating New Profile",
 		    JOptionPane.QUESTION_MESSAGE, icon, null, null);
-	    if (name != null) {
+	    if (name != null && name.length() != 0) {
 		Controller.getInstance().newProfile(name);
 		runMainFrame();
 	    }
@@ -239,7 +239,7 @@ public class WelcomeFrame extends JFrame {
 	lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
 	panel_2.add(lblNewLabel_3);
 
-	JLabel lblThisProjectIs = new JLabel("Version: 0.1.4 Beta");
+	JLabel lblThisProjectIs = new JLabel("Version: " + GUIUtil.version);
 	lblThisProjectIs.setBorder(new EmptyBorder(0, 6, 0, 6));
 	lblThisProjectIs.setOpaque(true);
 	lblThisProjectIs.setBackground(new Color(245, 245, 245));

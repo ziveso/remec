@@ -102,10 +102,8 @@ public class App {
     }
 
     private void saveImage(String path) {
-	System.out.println(path);
 	path = path.substring(0, path.length() - 8);
 	path = path.replaceFirst(profile.getName() + "/", "");
-	System.out.println(path);
 	Iterator<Command> commands = profile.getCommands().iterator();
 	while (commands.hasNext()) {
 	    // save image
@@ -117,10 +115,8 @@ public class App {
 		cmd.setImagePath(path2);
 		File output = new File(path2);
 		BufferedImage bi = null;
-		System.out.println(cmd.getImage());
 		bi = (BufferedImage) cmd.getImage();
 		try {
-		    System.out.println(bi);
 		    ImageIO.write(bi, "png", output);
 		} catch (IOException e) {
 		    e.printStackTrace();
@@ -191,6 +187,9 @@ public class App {
 			command = new Command();
 		    }
 		    line = line.split("=")[1];
+		    if (line.equals("null")) {
+			line = null;
+		    }
 		    methods[i].run(command, line);
 		    if (i == 9) {
 			profile.addCommand(command);
@@ -211,15 +210,15 @@ public class App {
     private void generateImage(Profile profile) {
 	List<Command> cmds = profile.getCommands();
 	for (Command cmd : cmds) {
-	    if (!cmd.getImagePath().equals("null")) {
-		File img = new File(cmd.getImagePath());
-		BufferedImage buff_img = null;
-		try {
-		    buff_img = ImageIO.read(img);
-		    cmd.setImage(buff_img);
-		} catch (IOException e1) {
-		    e1.printStackTrace();
-		}
+	    if (cmd.getImagePath() == null)
+		continue;
+	    File img = new File(cmd.getImagePath());
+	    BufferedImage buff_img = null;
+	    try {
+		buff_img = ImageIO.read(img);
+		cmd.setImage(buff_img);
+	    } catch (IOException e1) {
+		e1.printStackTrace();
 	    }
 	}
     }
