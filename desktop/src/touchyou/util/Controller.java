@@ -174,6 +174,9 @@ public class Controller {
      * Update every panels to point at the current command.
      */
     public void updateCurrentCommand() {
+	if (app.getProfile().getCommands().size() > 0)
+	    System.out.println("enable all setting");
+	    enableSettingPanel();
 	isSave = false;
 	settingPanel.update(currentCommand);
 	widgetPanel.update(currentCommand);
@@ -187,8 +190,6 @@ public class Controller {
      *            is the command that is being dealt with
      */
     public void update(Command command) {
-	if (app.getProfile().getCommands().size() > 0)
-	    enableSettingPanel();
 	currentCommand = command;
 	updateCurrentCommand();
     }
