@@ -27,4 +27,13 @@ public class Host {
         if (name == null) return address;
         return String.format("%s (%s)", address, name);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj.getClass() != this.getClass()) return false;
+        Host h = (Host) obj;
+        return h.name.equals(this.name) && h.address.equals(this.address);
+    }
+
 }
