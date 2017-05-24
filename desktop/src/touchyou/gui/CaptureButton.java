@@ -135,9 +135,9 @@ public class CaptureButton extends JButton {
 	    protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
-		g2d.setColor(new Color(0, 0, 0, 0.1f));
-		g2d.fillRect(0, 0, 1000, 1000);
+//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
+//		g2d.setColor(new Color(0, 0, 0, 0.1f));
+//		g2d.fillRect(0, 0, 1000, 1000);
 		g2d.setColor(Color.decode("#c91e46")); // RED
 		BasicStroke dashedStroke = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f,
 			new float[] { 8 }, 0.0f);
