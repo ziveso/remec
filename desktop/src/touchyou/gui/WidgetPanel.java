@@ -53,6 +53,9 @@ public class WidgetPanel extends JPanel {
 	
 	JButton btnNewButton = new JButton("Add Button");
 	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
+	btnNewButton.setBorderPainted(false);
+	btnNewButton.setFocusPainted(false);
+	btnNewButton.setContentAreaFilled(false);
 	btnNewButton.setOpaque(true);
 	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
