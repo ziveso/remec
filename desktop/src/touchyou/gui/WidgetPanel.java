@@ -57,7 +57,7 @@ public class WidgetPanel extends JPanel {
 	btnNewButton.setBorderPainted(false);
 	btnNewButton.setFocusPainted(false);
 	btnNewButton.setContentAreaFilled(false);
-	btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+	btnNewButton.setFont(new Font(btnNewButton.getFont().getFontName(), Font.PLAIN, 16));
 	btnNewButton.setOpaque(true);
 	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));

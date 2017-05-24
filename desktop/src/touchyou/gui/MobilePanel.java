@@ -74,9 +74,7 @@ public class MobilePanel extends JLayeredPane {
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);
-	commandBtn.setBorderPainted(false);
 	commandBtn.setFocusPainted(false);
-	commandBtn.setContentAreaFilled(false);
 	commandBtn.setPreferredSize(new Dimension((int) command.getWidth(), (int) command.getHeight()));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
