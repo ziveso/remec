@@ -447,6 +447,7 @@ public class SettingPanel extends JPanel {
 	    int returnVal = fc.showOpenDialog(SettingPanel.this);
 	    if (returnVal == JFileChooser.APPROVE_OPTION) {
 		File file = fc.getSelectedFile();
+		iconpath.setText(file.getPath());
 		setImageToCommand(file);
 	    }
 	}
@@ -455,11 +456,8 @@ public class SettingPanel extends JPanel {
     private void setImageToCommand(File imgFile) {
 	if (!imgFile.exists())
 	    return;
-	Command current = Controller.getInstance().getCurrentCommand();
-	if (current.getImage() != Command.BLANK_IMAGE) {
-	    return; // already has image.
-	}
 	try {
+	    Command current = Controller.getInstance().getCurrentCommand();
 	    BufferedImage image = ImageIO.read(imgFile);
 	    current.setImage(image);
 	    Controller.getInstance().updateCurrentCommand();
