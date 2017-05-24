@@ -21,7 +21,7 @@ public class ServerFinder {
     /* port to send broadcast packets */
     private static final int PORT = 5910;
     /* maximum time to wait for reply */
-    private static final int TIMEOUT = 3000; // 3 seconds
+    private static final int TIMEOUT = 2000; // 3 seconds
     private static final int MAX_PACKET_SIZE = 1024; // 1024 bytes
 
     public static Host[] getAvailableHost() {
