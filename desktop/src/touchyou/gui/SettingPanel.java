@@ -220,29 +220,29 @@ public class SettingPanel extends JPanel {
 
 	rdbtnTextNone.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
-		customLabel.setEnabled(false);
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(" ");
 		command.setLableMode(0);
 		Controller.getInstance().updateCurrentCommand();
+		customLabel.setEnabled(false);
 	    }
 	});
 	rdbtnCommandAsLabel.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
-		customLabel.setEnabled(false);
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(command.toString());
 		command.setLableMode(1);
 		Controller.getInstance().updateCurrentCommand();
+		customLabel.setEnabled(false);
 	    }
 	});
 	rdbtnCustomLabel.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
-		customLabel.setEnabled(true);
 		Command command = Controller.getInstance().getCurrentCommand();
 		command.setLabel(" ");
 		command.setLableMode(2);
 		Controller.getInstance().updateCurrentCommand();
+		customLabel.setEnabled(true);
 	    }
 	});
 	customLabel.addKeyListener(new KeyAdapter() {
@@ -332,20 +332,19 @@ public class SettingPanel extends JPanel {
 	iconGroup.add(rdbtnImportFromComputer);
 	rdbtnIconNone.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		Controller.getInstance().getCurrentCommand().setImage(Command.BLANK_IMAGE);
+		Controller.getInstance().updateCurrentCommand();
 		iconpath.setEnabled(false);
 		btnBrowse.setEnabled(false);
 		btnCapture.setEnabled(false);
-		Controller.getInstance().getCurrentCommand().setImage(Command.BLANK_IMAGE);
-		Controller.getInstance().updateCurrentCommand();
-		System.out.println("None clicked");
 	    }
 	});
 	rdbtnImportFromComputer.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
+		setImageToCommand(new File(iconpath.getText()));
 		iconpath.setEnabled(true);
 		btnBrowse.setEnabled(true);
 		btnCapture.setEnabled(true);
-		setImageToCommand(new File(iconpath.getText()));
 		System.out.println("Import clicked");
 	    }
 	});
@@ -403,6 +402,7 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
+	System.out.println("update setting");
 	this.customLabel.setText(command.getLabel());
 	this.combination.setText(command.toString());
 	this.iconpath.setText(command.getImagePath());
