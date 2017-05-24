@@ -58,8 +58,8 @@ public class MainFrame extends JFrame {
 	int model_width = Width * 5 / 10;
 	int pane_width = Width * 2 / 10;
 	GridBagLayout gbl_workingPanel = new GridBagLayout();
-	gbl_workingPanel.columnWidths = new int[] { 272, 331, 203, 0 };
-	gbl_workingPanel.rowHeights = new int[] { 515, 0 };
+	gbl_workingPanel.columnWidths = new int[] {272, 580, 203, 0};
+	gbl_workingPanel.rowHeights = new int[] {610, 0};
 	gbl_workingPanel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 	gbl_workingPanel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 	workingPanel.setLayout(gbl_workingPanel);

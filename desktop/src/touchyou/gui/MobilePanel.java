@@ -54,8 +54,8 @@ public class MobilePanel extends JLayeredPane {
 	 * pixel phone has 1080 x 1776 resolution.
 	 */
 
-	int mobileWidth = 1080 / 4;
-	int mobileHeight = 1776 / 4;
+	int mobileWidth = 1080 / 3;
+	int mobileHeight = 1776 / 3;
 	setMobileSize(mobileWidth, mobileHeight);
 
 	// setBorder(new CompoundBorder(GuiUtil.getBorder(), new EmptyBorder(0,
@@ -74,6 +74,9 @@ public class MobilePanel extends JLayeredPane {
 	commandBtn.setActionCommand(String.valueOf(command.getId()));
 	commandBtn.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	commandBtn.setOpaque(true);
+	commandBtn.setBorderPainted(false);
+	commandBtn.setFocusPainted(false);
+	commandBtn.setContentAreaFilled(false);
 	commandBtn.setPreferredSize(new Dimension((int) command.getWidth(), (int) command.getHeight()));
 	commandBtn.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 	commandBtn.addMouseListener(commandMouseAdapter);
@@ -89,7 +92,6 @@ public class MobilePanel extends JLayeredPane {
 	commandBtn.setFont(new Font("Arial", 0, 24));
 	mover.registerComponent(commandBtn);
 	resizer.registerComponent(commandBtn);
-	// TODO Add commandBtn to mobile with auto layout
 	command.setWidth(commandBtn.getWidth());
 	command.setHeight(commandBtn.getHeight());
 	command.setX(commandBtn.getX());

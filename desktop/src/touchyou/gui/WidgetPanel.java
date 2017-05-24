@@ -24,6 +24,7 @@ import touchyou.util.GUIUtil;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Insets;
 
 /**
  * 
@@ -43,24 +44,26 @@ public class WidgetPanel extends JPanel {
      * Create the panel.
      */
     public WidgetPanel(int width, int height) {
-	this.setPreferredSize(new Dimension(200, 334));
+	this.setPreferredSize(new Dimension(200, 406));
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0 };
-	gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0 };
+	gridBagLayout.rowHeights = new int[] { 0, 0, 0 };
 	gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-	gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+	gridBagLayout.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 	setLayout(gridBagLayout);
-	
-	JButton btnNewButton = new JButton("Add Button");
+
+	JButton btnNewButton = new JButton("Add");
 	btnNewButton.setPreferredSize(new Dimension(width, height / 10));
 	btnNewButton.setBorderPainted(false);
 	btnNewButton.setFocusPainted(false);
 	btnNewButton.setContentAreaFilled(false);
+	btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 	btnNewButton.setOpaque(true);
 	btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 	btnNewButton.addMouseListener(new MouseOver(btnNewButton));
 	btnNewButton.addActionListener(e -> Controller.getInstance().addCommand());
 	GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+	gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 	gbc_btnNewButton.fill = GridBagConstraints.BOTH;
 	gbc_btnNewButton.gridwidth = 4;
 	gbc_btnNewButton.gridx = 0;
@@ -73,7 +76,7 @@ public class WidgetPanel extends JPanel {
 	gbc_panel.gridwidth = 4;
 	gbc_panel.fill = GridBagConstraints.BOTH;
 	gbc_panel.gridx = 0;
-	gbc_panel.gridy = 2;
+	gbc_panel.gridy = 1;
 	add(panel, gbc_panel);
 	panel.setLayout(new BorderLayout(0, 0));
 
