@@ -335,6 +335,7 @@ public class SettingPanel extends JPanel {
 	rdbtnIconNone.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		Controller.getInstance().getCurrentCommand().setImage(Command.BLANK_IMAGE);
+		Controller.getInstance().getCurrentCommand().setImagePath(null);
 		Controller.getInstance().updateCurrentCommand();
 		iconpath.setEnabled(false);
 		btnBrowse.setEnabled(false);

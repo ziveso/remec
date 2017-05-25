@@ -25,4 +25,4 @@ Click on the link to start downloading (Required Java version 8 or above).
 
 # Contributors
 - [Kongpon Charanwattanakit](https://github.com/kykungz)
-- [Thitiwat Thongbor](https://github.com/thitgorn)
+- [Thitiwat Thonglhor](https://github.com/thitgorn)
