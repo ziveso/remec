@@ -100,12 +100,12 @@ public class App {
 	path = path.substring(0, path.length() - 8);
 	path = path.replaceFirst(profile.getName() + "/", "");
 	Iterator<Command> commands = profile.getCommands().iterator();
+	File dir = new File(path + "/images/");
+	if (dir.exists())
+	    removeAllFile(dir);
 	while (commands.hasNext()) {
 	    // save image
 	    Command cmd = commands.next();
-	    File dir = new File(path + "/images/");
-	    if (dir.exists())
-		removeAllFile(dir);
 	    dir.mkdirs();
 	    if (cmd.getImage() != Command.BLANK_IMAGE) {
 		String path2 = "/images/" + cmd.getId() + ".png";
