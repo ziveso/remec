@@ -112,7 +112,8 @@ public class App {
 	    // save image
 	    Command cmd = commands.next();
 	    File dir = new File(path + "/images/");
-	    removeAllFile(dir);
+	    if (dir.exists())
+		removeAllFile(dir);
 	    dir.mkdirs();
 	    if (cmd.getImage() != Command.BLANK_IMAGE) {
 		String path2 = "/images/" + cmd.getId() + ".png";
@@ -131,7 +132,7 @@ public class App {
     }
 
     private void removeAllFile(File dir) {
-	for(File file : dir.listFiles()){
+	for (File file : dir.listFiles()) {
 	    file.delete();
 	}
     }
