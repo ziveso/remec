@@ -241,7 +241,7 @@ public class SettingPanel extends JPanel {
 	rdbtnCustomLabel.addItemListener(e -> {
 	    if (e.getStateChange() == ItemEvent.SELECTED) {
 		Command command = Controller.getInstance().getCurrentCommand();
-		command.setLabel(" ");
+		command.setLabel(command.getLabel());
 		command.setLableMode(2);
 		Controller.getInstance().updateCurrentCommand();
 		customLabel.setEnabled(true);
@@ -261,6 +261,7 @@ public class SettingPanel extends JPanel {
 	    public void focusLost(FocusEvent e) {
 		if (customLabel.getText().length() < 1) {
 		    JOptionPane.showMessageDialog(null, "Cannot leave this field blank");
+		    Controller.getInstance().getCurrentCommand().setLabel(" ");
 		}
 	    }
 	});
