@@ -1,41 +1,146 @@
-<!DOCTYPE HTML>
-<html>
-<header>
-	<title>Touch You - A flexible key remote controller</title>
-</header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Remec - Custom Desktop Remote Control</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet">
+	<style media="screen">
+		* {
+			font-family: 'Khula', sans-serif;
+		}
+
+		p,
+		li {
+			font-size: 20px;
+		}
+
+		.content {
+			max-width: 1000px;
+		}
+
+		h1 {
+			font-size: 40px;
+			color: rgb(255, 136, 37);
+		}
+		.hint {
+			font-size: 18px;
+		}
+	</style>
+</head>
 
 <body>
-	<div>
-		<h1>Touch You</h1>
+	<div class="container">
+		<div class="page-header">
+			<div class="jumbotron">
+				<h1><strong>Remec</strong><br><small>Customizable Desktop Remote Control</small></h1>
+			</div>
+		</div>
 	</div>
-	<div>
-		<h2>Introduction</h2>
-		TouchYou Application is the Android remote controller application that can adjust everything you want - Key , Icon , Size
-		, Position. <br /> The best thing is that You can record the key and make it as the shortcuts for your work. For example
-		, copying : ctrl+c : in one button in the mobile phone. <br /> Imagine, If you are using Adobe Photoshop , they have something
-		like Control + Alt + T to Free transform the image. You don't want to remember that key so you Put it into TouchYou Application
-		and save as some profile ! !.
+	<div class="container content">
+
+		<div>
+			<div class="page-header">
+				<h1><strong>About</strong> <small></small></h1>
+			</div>
+			<p>&nbsp;&nbsp;&nbsp;<strong>Remec</strong> is an <a href="https://github.com/thitgorn/remec">open-source</a> Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can
+				design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application
+				to get ready for tranfering the remote design into your mobile.
+			</p>
+		</div>
+		<hr>
+		<div>
+			<div class="page-header">
+				<h1><strong>Features</strong> <small></small></h1>
+			</div>
+			<h2><u>Desktop</u></h2>
+			<div class="row">
+				<div class="col-md-6">
+					<img class="img-responsive" src="./assets/images/welcome.png">
+				</div>
+				<div class="col-md-6">
+
+				</div>
+			</div>
+			<br>
+			<ul>
+				<li>Add/remove command buttons.</li>
+				<li>Import images from your computer, or use the capturing screen function to crop a part of your screen as icons.</li>
+				<li>Saving remote profiles into your local machine, and/or share your remote to other people.</li>
+				<li>Open exiting remote profiles to edit or use.</li>
+				<li>Open/close remote connection to enable/disable android device connecting to your computer.</li>
+				<li>Transfer your remote design to your android device.</li>
+			</ul>
+			<h2><u>Android</u></h2>
+			<div class="row">
+				<div class="col-md-6">
+					<img class="img-responsive" src="./assets/images/welcome.png">
+				</div>
+				<div class="col-md-6">
+
+				</div>
+			</div>
+			<br>
+			<ul>
+				<li>Search for available hosts name and IP-address.</li>
+				<li>Connect to a specific IP-address.</li>
+				<li>Receive remote profile from host's computer, and adjust the interface to match with the profile.</li>
+				<li>Invoke the commands on host's computer when taping on the buttons.</li>
+				<li>Disconnect automatically when the host computer disabled the remote connection.</li>
+			</ul>
+		</div>
+		<hr>
+		<div>
+			<div class="page-header">
+				<h1><strong>Installation</strong> <small>(Required <a target="_blank" href="https://www.java.com/en/">Java version 8 or above</a>).</small></h1>
+			</div>
+			<p>
+				<h2><u>For Desktop</u></h2>
+				<p>
+					Make sure you already have
+					<a target="_blank" href="https://www.java.com/en/">Java version 8 or above</a>.
+					<br> Remec for <strong>Desktop</strong>: <a href="https://github.com/thitgorn/Remec/raw/master/Remec.jar">https://github.com/thitgorn/Remec/raw/master/Remec.jar</a>
+				</p>
+				<h2><u>For Android</u></h2>
+				<p>
+					In your android, go to <strong>Settings > Security > and check Unknown Sources</strong> to allow your phone to install apps from sources other than the Google Play Store.
+					<br> Remec for <strong>Android</strong>: <a href="https://github.com/thitgorn/Remec/raw/master/Remec.apk">https://github.com/thitgorn/Remec/raw/master/Remec.apk</a>
+					<br><span class="hint">(Tap the link from your android device)</span>
+				</p>
+			</p>
+		</div>
+		<hr>
+		<div>
+			<div class="page-header">
+			  <h1><strong>How to use</strong></h1>
+				<img class="img-responsive" src="./assets/images/welcome.png">
+			</div>
+		</div>
+		<hr>
+		<div>
+			<div class="page-header">
+				<h1><strong>Contributors</strong></h1>
+				<ul>
+					<li>
+						<a href="https://github.com/kykungz">Kongpon Charanwattanakit</a>
+					</li>
+					<li>
+						<a href="https://github.com/thitgorn">Thitiwat Thonglhor</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<div>
-		<h2>System Requirement</h2>
-		Java version 8 or higher in the computer. <br /> Android version 6 or higher in the mobile phone. <br />
-	</div>
-	<div>
-		<h2>How To Install</h2>
-		Download TouchYou.jar <br /> Download TouchYou.apk - android <br />
-	</div>
-	<div>
-		<h2>How To Use</h2>
-	</div>
-	<div>
-		<h2>Source Code</h2>
-		<a href="https://github.com/thitgorn/Remec">https://github.com/thitgorn/Remec</a>
-	</div>
-	<div>
-		<h2>Contributors</h2>
-		Kongpon<br /> Thitiwat
-		<br />
-	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 
 </html>

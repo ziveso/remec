@@ -53,7 +53,7 @@ public class WelcomeFrame extends JFrame {
 	setJMenuBar(new MenuBar().welcomeBar());
 	setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 	Color foreground = GUIUtil.getForegroundColor();
-	setTitle("Remec Pro");
+	setTitle("Remec Beta");
 	setLocation(new Point(0, 0));
 	setResizable(false);
 	setMinimumSize(new Dimension(650, 400));
@@ -75,7 +75,7 @@ public class WelcomeFrame extends JFrame {
 	gbc_panel.gridy = 0;
 	contentPane.add(panel, BorderLayout.NORTH);
 
-	JLabel lblNewLabel_2 = new JLabel("Welcome to Remec Pro 2017");
+	JLabel lblNewLabel_2 = new JLabel("Welcome to Remec v1.0.1 Beta");
 	lblNewLabel_2.setForeground(foreground);
 	lblNewLabel_2.setFont(new Font("Lantinghei TC", Font.PLAIN, 30));
 	panel.add(lblNewLabel_2);
@@ -116,7 +116,7 @@ public class WelcomeFrame extends JFrame {
 		}
 		for (String sf : new File("./profiles/" + f.getName()).list()) {
 		    if (sf.contains(".profile")) {
-			model.addElement(sf);
+			model.addElement(sf.replaceAll(".profile", ""));
 		    }
 		}
 	    }
@@ -126,8 +126,7 @@ public class WelcomeFrame extends JFrame {
 	    public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting()) {
 		    String profileName = list.getSelectedValue();
-		    String folder = profileName.replaceAll(".profile", "");
-		    File file = new File("./profiles/" + folder + "/" + profileName);
+		    File file = new File("./profiles/" + profileName + "/" + profileName+".profile");
 		    Controller.getInstance().openProfile(file);
 		    runMainFrame();
 		}
