@@ -97,8 +97,9 @@ public class App {
     }
 
     private void saveImage(String path) {
-	path = path.substring(0, path.length() - 8);
-	path = path.replaceFirst(profile.getName() + "/", "");
+	System.out.println(path);
+	path = path.substring(0, path.length() - 8).substring(0, path.length() - 8 - profile.getName().length());
+	System.out.println(path);
 	Iterator<Command> commands = profile.getCommands().iterator();
 	File dir = new File(path + "/images/");
 	if (dir.exists())
