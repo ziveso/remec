@@ -26,11 +26,34 @@
 
 		h1 {
 			font-size: 40px;
-			color: rgb(255, 136, 37);
+			color: rgb(255, 146, 55);
 		}
 
 		.hint {
 			font-size: 18px;
+		}
+
+		.jumbotron {
+			background-image: url("https://s-media-cache-ak0.pinimg.com/originals/8b/a8/19/8ba819100838b2c39ef496deef6ad633.jpg");
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			shape-outside: circle();
+		}
+
+		.jumbotron strong {
+			font-size: 70px;
+			color: white;
+			text-shadow: 2px 2px gray;
+		}
+
+		.jumbotron small {
+			color: rgb(240, 240, 240);
+		}
+
+		.textbox-dark {
+			border-radius: 20px;
+			background-color: #f2f2f2;
 		}
 	</style>
 </head>
@@ -47,7 +70,9 @@
 
 		<div>
 			<div class="page-header">
-				<h1><strong>About</strong> <small></small></h1>
+				<div class="textbox-dark container-fluid">
+					<h1><strong>About</strong> <small></small></h1>
+				</div>
 			</div>
 			<p>&nbsp;&nbsp;&nbsp;<strong>Remec</strong> is an <a href="https://github.com/thitgorn/remec">open-source</a> Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can
 				design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application
@@ -57,7 +82,9 @@
 		<hr>
 		<div>
 			<div class="page-header">
-				<h1><strong>Features</strong> <small></small></h1>
+				<div class="textbox-dark container-fluid">
+					<h1><strong>Features</strong> <small></small></h1>
+				</div>
 			</div>
 			<h2><u>Desktop</u></h2>
 			<div class="row">
@@ -98,7 +125,9 @@
 		<hr>
 		<div>
 			<div class="page-header">
-				<h1><strong>Installation</strong> <small>(Required <a target="_blank" href="https://www.java.com/en/">Java version 8 or above</a>).</small></h1>
+				<div class="textbox-dark container-fluid">
+					<h1><strong>Installation</strong> <small>(Required <a target="_blank" href="https://www.java.com/en/">Java version 8 or above</a>).</small></h1>
+				</div>
 			</div>
 			<p>
 				<h2><u>For Desktop</u></h2>
@@ -118,25 +147,30 @@
 		<hr>
 		<div>
 			<div class="page-header">
-				<h1><strong>Instructions</strong></h1>
+				<div class="textbox-dark container-fluid">
+					<h1><strong>Instructions</strong></h1>
+				</div>
 			</div>
 			<img class="img-responsive" src="./assets/images/howto.png">
 		</div>
 		<hr>
 		<div>
 			<div class="page-header">
-				<h1><strong>Contributors</strong></h1>
-				<ul>
-					<li>
-						<a href="https://github.com/kykungz">Kongpon Charanwattanakit</a>
-					</li>
-					<li>
-						<a href="https://github.com/thitgorn">Thitiwat Thonglhor</a>
-					</li>
-				</ul>
+				<div class="textbox-dark container-fluid">
+					<h1><strong>Contributors</strong></h1>
+				</div>
 			</div>
+			<ul>
+				<li>
+					<a href="https://github.com/kykungz">Kongpon Charanwattanakit</a>
+				</li>
+				<li>
+					<a href="https://github.com/thitgorn">Thitiwat Thonglhor</a>
+				</li>
+			</ul>
 		</div>
 	</div>
+	<hr>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
