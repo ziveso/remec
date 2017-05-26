@@ -48,7 +48,6 @@ public class CaptureButton extends JButton {
 		Controller.getInstance().hideMainFrame();
 		CaptureFrame frame = new CaptureFrame();
 		frame.setVisible(true);
-		System.out.println(frame.getBackground());
 	    });
 	}
     }
@@ -86,7 +85,7 @@ public class CaptureButton extends JButton {
 			    JOptionPane.showMessageDialog(CaptureFrame.this,
 				    "Failed to capture the screen: " + e1.getMessage(), "Info",
 				    JOptionPane.WARNING_MESSAGE);
-			    e1.printStackTrace();
+			    
 			} finally {
 			    CaptureFrame.this.dispose();
 			}

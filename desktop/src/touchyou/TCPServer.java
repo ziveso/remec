@@ -31,7 +31,6 @@ public class TCPServer extends AbstractServer {
     protected void clientConnected(ConnectionToClient client) {
 	super.clientConnected(client);
 	Controller.getInstance().updateStatus(true);
-	System.out.println("Client connected.");
     }
 
     @Override
@@ -44,12 +43,10 @@ public class TCPServer extends AbstractServer {
     protected synchronized void clientDisconnected(ConnectionToClient client) {
 	super.clientDisconnected(client);
 	Controller.getInstance().updateStatus(false);
-	System.out.println("Client disconnected.");
     }
 
     @Override
     protected void handleMessageFromClient(Object o, ConnectionToClient client) {
-	System.out.println("Client: " + o);
 	String msg = (String) o;
 	String[] commands;
 	String[] data = msg.split("=");
@@ -62,7 +59,6 @@ public class TCPServer extends AbstractServer {
 	    break;
 	case "PRESS":
 	    commands = body.split(";");
-	    System.out.println(Arrays.toString(commands));
 	    switch (commands[0]) {
 	    case "0":
 		invoke.tap(commands[1]);

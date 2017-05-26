@@ -264,7 +264,6 @@ public class WelcomeFrame extends JFrame {
     }
 
     private void runMainFrame() {
-	System.out.println(Thread.currentThread());
 	SwingUtilities.invokeLater(() -> {
 	    new MainFrame().setVisible(true);
 	    this.dispose();

@@ -35,7 +35,6 @@ public class App {
      */
     public App() {
 	server = new TCPServer(PORT);
-	System.out.println("Server Running on port: " + PORT);
     }
 
     /**
@@ -58,7 +57,6 @@ public class App {
     }
 
     public void save() {
-	System.out.println(profile.getDir().getPath());
 	save(profile.getDir().getPath());
     }
 
@@ -87,7 +85,7 @@ public class App {
 		writer.println("y=" + command.getY());
 	    }
 	} catch (FileNotFoundException | UnsupportedEncodingException e) {
-	    e.printStackTrace();
+	    
 	} finally {
 	    writer.close();
 	}
@@ -97,9 +95,7 @@ public class App {
     }
 
     private void saveImage(String path) {
-	System.out.println(path);
 	path = path.substring(0, path.length() - 8).substring(0, path.length() - 8 - profile.getName().length());
-	System.out.println(path);
 	Iterator<Command> commands = profile.getCommands().iterator();
 	File dir = new File(path + "/images/");
 	if (dir.exists())
@@ -117,7 +113,7 @@ public class App {
 		try {
 		    ImageIO.write(bi, "png", output);
 		} catch (IOException e) {
-		    e.printStackTrace();
+		    
 		}
 
 	    }
@@ -205,7 +201,7 @@ public class App {
 		reader.close();
 	    }
 	} catch (Exception e) {
-	    e.printStackTrace();
+	    
 	}
 	profile.setDir(file);
 	if (!profile.getCommands().isEmpty()) {
@@ -221,7 +217,6 @@ public class App {
 	    if (cmd.getImagePath() == null)
 		continue;
 	    File img = new File(img_path + cmd.getImagePath());
-	    System.out.println(img.getPath());
 	    BufferedImage buff_img = null;
 	    try {
 		buff_img = ImageIO.read(img);
@@ -248,7 +243,7 @@ public class App {
 	try {
 	    server.listen();
 	} catch (IOException e) {
-	    e.printStackTrace();
+	    
 	}
     }
 
@@ -259,7 +254,7 @@ public class App {
 	try {
 	    server.close();
 	} catch (IOException e) {
-	    e.printStackTrace();
+	    
 	}
     }
 
@@ -284,7 +279,7 @@ public class App {
 	    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 		| UnsupportedLookAndFeelException e) {
-	    e.printStackTrace();
+	    
 	}
 	App app = new App();
 	Controller.getInstance().setApp(app);

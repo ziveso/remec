@@ -60,7 +60,6 @@ public class MenuBar extends JMenuBar {
 	{
 	    save.addActionListener(e -> {
 		Controller.getInstance().save();
-		System.out.println("saved");
 	    });
 	    open.addActionListener(e -> {
 		JFileChooser fileChooser = new JFileChooser();

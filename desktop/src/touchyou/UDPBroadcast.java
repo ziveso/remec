@@ -33,7 +33,6 @@ public class UDPBroadcast {
 
     private void stopBroadcast() {
 	socket.close();
-	System.out.println(socket.isConnected());
     }
 
     private void startBroadcast() {
@@ -46,7 +45,6 @@ public class UDPBroadcast {
 		socket.setBroadcast(true);
 
 		while (true) {
-		    System.out.println(getClass().getName() + ">>>Ready to receive broadcast packets!");
 
 		    // Receive a packet
 		    byte[] recvBuf = new byte[2048];
@@ -54,10 +52,10 @@ public class UDPBroadcast {
 		    socket.receive(packet);
 
 		    // Packet received
-		    System.out.println(getClass().getName() + ">>>Discovery packet received from: "
-			    + packet.getAddress().getHostAddress());
-		    System.out.println(
-			    getClass().getName() + ">>>Packet received; data: " + new String(packet.getData()));
+//		    System.out.println(getClass().getName() + ">>>Discovery packet received from: "
+//			    + packet.getAddress().getHostAddress());
+//		    System.out.println(
+//			    getClass().getName() + ">>>Packet received; data: " + new String(packet.getData()));
 
 		    // See if the packet holds the right command (message)
 		    String message = new String(packet.getData()).trim();
@@ -69,8 +67,8 @@ public class UDPBroadcast {
 				new DatagramPacket(sendData, sendData.length, packet.getAddress(), packet.getPort());
 			socket.send(sendPacket);
 
-			System.out.println(getClass().getName() + ">>>Sent packet to: "
-				+ sendPacket.getAddress().getHostAddress());
+//			System.out.println(getClass().getName() + ">>>Sent packet to: "
+//				+ sendPacket.getAddress().getHostAddress());
 			Controller.getInstance().updateIP(sendPacket.getAddress().getHostAddress());
 		    }
 		}
