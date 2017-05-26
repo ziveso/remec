@@ -62,6 +62,8 @@ public class SettingPanel extends JPanel {
     private JTextField customLabel;
     private JRadioButton rdbtnTextNone;
     private JButton btnDeleteButton;
+    private CaptureButton btnCapture;
+    private JButton btnBrowse;
 
     /**
      * Create the panel.
@@ -310,7 +312,7 @@ public class SettingPanel extends JPanel {
 	add(iconpath, gbc_iconpath);
 	iconpath.setColumns(10);
 
-	JButton btnBrowse = new JButton("Browse");
+	btnBrowse = new JButton("Browse");
 	btnBrowse.setOpaque(false);
 	btnBrowse.addActionListener(new Browse());
 	GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
@@ -320,7 +322,7 @@ public class SettingPanel extends JPanel {
 	gbc_btnBrowse.gridy = 8;
 	add(btnBrowse, gbc_btnBrowse);
 
-	CaptureButton btnCapture = new CaptureButton();
+	btnCapture = new CaptureButton();
 	btnCapture.setOpaque(false);
 	GridBagConstraints gbc_btnCapture = new GridBagConstraints();
 	gbc_btnCapture.insets = new Insets(0, 0, 5, 0);
@@ -406,20 +408,23 @@ public class SettingPanel extends JPanel {
     }
 
     public void update(Command command) {
-	this.customLabel.setText(command.getLabel());
-	this.combination.setText(command.toString());
-	this.iconpath.setText(command.getImagePath());
 	if (command.getImage() == Command.BLANK_IMAGE) {
 	    rdbtnIconNone.setSelected(true);
+	    btnCapture.setEnabled(false);
+	    btnBrowse.setEnabled(false);
+	    iconpath.setEnabled(false);
 	} else {
 	    rdbtnImportFromComputer.setSelected(true);
 	}
 	switch (command.getLableMode()) {
 	case 0:
 	    rdbtnTextNone.setSelected(true);
+	    customLabel.setEnabled(false);
 	    break;
 	case 1:
+	    command.setLabel(command.toString());
 	    rdbtnCommandAsLabel.setSelected(true);
+	    customLabel.setEnabled(false);
 	    break;
 	case 2:
 	    rdbtnCustomLabel.setSelected(true);
@@ -437,6 +442,9 @@ public class SettingPanel extends JPanel {
 	default:
 	    break;
 	}
+	this.customLabel.setText(command.getLabel());
+	this.combination.setText(command.toString());
+	this.iconpath.setText(command.getImagePath());
     }
 
     private class Browse implements ActionListener {
