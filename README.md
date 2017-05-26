@@ -30,8 +30,8 @@ Remec is an Iot (Internet of things) application which tranforms your android de
 # Installation
 Click on the link to start downloading (Required Java version 8 or above).
 
-- Remec for <strong>Desktop</strong>: https://github.com/thitgorn/Remec/blob/master/Remec.jar
-- Remec for <strong>Android</strong>: https://github.com/thitgorn/Remec/blob/master/Remec.apk
+- Remec for <strong>Desktop</strong>: https://github.com/thitgorn/Remec/raw/master/Remec.jar
+- Remec for <strong>Android</strong>: https://github.com/thitgorn/Remec/raw/master/Remec.apk
 
 # Instructions
 <img style="max-width:600px" src="./docs/assets/images/howto.png">
