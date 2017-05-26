@@ -1,5 +1,5 @@
 # Remec - turn your android device into a custom remote control.
-Remec is an Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application to get ready for tranfering the remote design into your mobile.
+Remec is an Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application to get ready for tranfering the remote design into your mobile. See [Project Website](https://thitgorn.github.io/remec/) for more information.
 
 # Features
 ## Desktop
