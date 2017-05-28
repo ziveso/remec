@@ -33,6 +33,7 @@ public class Controller {
     private UDPBroadcast broadcaster;
     private int id;
     private boolean isSave;
+    private boolean isConnected;
 
     private Controller() {
 	broadcaster = new UDPBroadcast();
@@ -85,6 +86,9 @@ public class Controller {
 	    }
 	});
 	app.getProfile().getCommands().forEach(this::addCommand);
+	if(isConnected){
+	    statusPanel.setRemoteConnection(isConnected);
+	}
 	setIsSave(true);
     }
 
@@ -282,6 +286,8 @@ public class Controller {
     }
 
     public void updateStatus(boolean b) {
+	isConnected = b;
 	statusPanel.updateConnectionStatus(b);
     }
+
 }
