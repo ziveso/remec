@@ -56,6 +56,9 @@ public class App {
 	server.sendToAllClients("SYNC_END=0");
     }
 
+    /**
+     * save the profile data by using their directory of current profile.
+     */
     public void save() {
 	save(profile.getDir().getPath());
     }
@@ -85,7 +88,7 @@ public class App {
 		writer.println("y=" + command.getY());
 	    }
 	} catch (FileNotFoundException | UnsupportedEncodingException e) {
-	    
+
 	} finally {
 	    writer.close();
 	}
@@ -94,6 +97,12 @@ public class App {
 	Controller.getInstance().setIsSave(true);
     }
 
+    /**
+     * save all the images to current path. /images/{ID}.png
+     * 
+     * @param path
+     *            the current path of .profile
+     */
     private void saveImage(String path) {
 	path = path.substring(0, path.length() - 8).substring(0, path.length() - 8 - profile.getName().length());
 	Iterator<Command> commands = profile.getCommands().iterator();
@@ -113,19 +122,32 @@ public class App {
 		try {
 		    ImageIO.write(bi, "png", output);
 		} catch (IOException e) {
-		    
+
 		}
 
 	    }
 	}
     }
 
+    /**
+     * remove all the file including sub files.
+     * 
+     * @param dir
+     *            folder directory of the folder , file that want to delete.
+     */
     private void removeAllFile(File dir) {
 	for (File file : dir.listFiles()) {
 	    file.delete();
 	}
     }
 
+    /**
+     * make the profile directory and setting the profile directory. mostly it
+     * is behind the jar file . directory would be /profiles/ profile-name;
+     * 
+     * @param profileName
+     *            the profile name.
+     */
     public void createNewProfile(String profileName) {
 	profile = new Profile(profileName);
 	String filepath = "./profiles/" + profileName + "/" + profileName + ".profile";
@@ -201,7 +223,7 @@ public class App {
 		reader.close();
 	    }
 	} catch (Exception e) {
-	    
+
 	}
 	profile.setDir(file);
 	if (!profile.getCommands().isEmpty()) {
@@ -210,6 +232,12 @@ public class App {
 	return profile;
     }
 
+    /**
+     * save the images to the profile folder.
+     * 
+     * @param profile
+     *            current profile in the app.
+     */
     private void generateImage(Profile profile) {
 	String img_path = profile.getDir().getPath().replace(profile.getName() + ".profile", "");
 	List<Command> cmds = profile.getCommands();
@@ -222,7 +250,7 @@ public class App {
 		buff_img = ImageIO.read(img);
 		cmd.setImage(buff_img);
 	    } catch (IOException e1) {
-		e1.printStackTrace();
+		// NOT USE
 	    }
 	}
     }
@@ -243,7 +271,7 @@ public class App {
 	try {
 	    server.listen();
 	} catch (IOException e) {
-	    
+
 	}
     }
 
@@ -254,10 +282,15 @@ public class App {
 	try {
 	    server.close();
 	} catch (IOException e) {
-	    
+
 	}
     }
 
+    /**
+     * allow the income connection
+     * 
+     * @param choice
+     */
     public void allowConnection(boolean choice) {
 	if (choice && server.isClosed()) {
 	    enableConnection();
@@ -279,13 +312,16 @@ public class App {
 	    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 	} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 		| UnsupportedLookAndFeelException e) {
-	    
+
 	}
 	App app = new App();
 	Controller.getInstance().setApp(app);
 	new WelcomeFrame().setVisible(true);
     }
 
+    /**
+     * send the sync request to the android application.
+     */
     public void sendSyncRequest() {
 	server.sendToAllClients("SYNC_REQUEST=0");
     }

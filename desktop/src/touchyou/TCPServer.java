@@ -1,7 +1,5 @@
 package touchyou;
 
-import java.util.Arrays;
-
 import com.lloseng.ocsf.server.AbstractServer;
 import com.lloseng.ocsf.server.ConnectionToClient;
 

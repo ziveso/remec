@@ -35,6 +35,9 @@ public class Controller {
     private boolean isSave;
     private boolean isConnected;
 
+    /**
+     * SINGLETON PATTHEN
+     */
     private Controller() {
 	broadcaster = new UDPBroadcast();
     }
@@ -78,6 +81,9 @@ public class Controller {
 	app.save(path);
     }
 
+    /**
+     * load current profile.
+     */
     public void loadProfile() {
 	settingPanel.setProfileName(app.getProfile().getName());
 	app.getProfile().getCommands().forEach((e) -> {
@@ -86,20 +92,33 @@ public class Controller {
 	    }
 	});
 	app.getProfile().getCommands().forEach(this::addCommand);
-	if(isConnected){
+	if (isConnected) {
 	    statusPanel.setRemoteConnection(isConnected);
 	}
 	setIsSave(true);
     }
 
+    /**
+     * set the variable that show saving or not
+     * 
+     * @param isSave
+     */
     public void setIsSave(boolean isSave) {
 	this.isSave = isSave;
     }
 
+    /**
+     * get is save.
+     * 
+     * @return isSave.
+     */
     public boolean getIsSave() {
 	return isSave;
     }
 
+    /**
+     * remove the button and current button updating all the panels
+     */
     public void removeCurrentCommand() {
 	this.settingPanel.removeCommand(currentCommand);
 	this.mobilePanel.removeCommand(currentCommand);
@@ -281,10 +300,22 @@ public class Controller {
 	}
     }
 
+    /**
+     * update current IP setting it to status panel.
+     * 
+     * @param hostAddress
+     *            String IP address that connected to.
+     */
     public void updateIP(String hostAddress) {
 	statusPanel.setConnectedForm(hostAddress);
     }
 
+    /**
+     * set the status in status panel
+     * 
+     * @param b
+     *            the boolean, true if connecting , false is not connecting.
+     */
     public void updateStatus(boolean b) {
 	isConnected = b;
 	statusPanel.updateConnectionStatus(b);

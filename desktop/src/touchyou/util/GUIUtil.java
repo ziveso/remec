@@ -34,22 +34,40 @@ public class GUIUtil {
 	return BorderFactory.createLineBorder(Color.BLACK);
     }
 
+    /**
+     * get the current background color.
+     * 
+     * @return the color
+     */
     public static Color getBackgroundColor() {
 	return Color.decode("#424242");
     }
 
+    /**
+     * get the current orange color.
+     * 
+     * @return the orange color.
+     */
     public static Color getOrange() {
 	return Color.decode("#FF8019");
     }
 
+    /**
+     * get the foreground color.
+     * 
+     * @return color
+     */
     public static Color getForegroundColor() {
 	return Color.WHITE;
     }
 
-    public static Image resize(Image img, int newW, int newH) {
-	return img.getScaledInstance(newW, newH, Image.SCALE_DEFAULT);
-    }
-
+    /**
+     * create the image and convert into byte.
+     * 
+     * @param img
+     *            to convert
+     * @return String byte.
+     */
     public static String extractBytes(Image img) {
 	if (img == Command.BLANK_IMAGE)
 	    return "0";
