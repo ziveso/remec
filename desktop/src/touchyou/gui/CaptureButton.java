@@ -29,12 +29,18 @@ import javax.swing.SwingUtilities;
 
 import touchyou.util.Controller;
 
+/**
+ * Screen capturing button.
+ * 
+ * @author Kongpon Charanwattanakit
+ *
+ */
 public class CaptureButton extends JButton {
 
     /**
      * 
      */
-    private static final long serialVersionUID = -5403131372428628249L;
+    private static final long serialVersionUID = 1L;
 
     public CaptureButton() {
 	super("Capture");
@@ -64,7 +70,7 @@ public class CaptureButton extends JButton {
 	    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    this.setAlwaysOnTop(true);
 	    this.setUndecorated(true);
-	    this.setBackground(new Color(0,0,0,10));
+	    this.setBackground(new Color(0, 0, 0, 10));
 	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	    this.setContentPane(new Drawer());
 
@@ -85,7 +91,7 @@ public class CaptureButton extends JButton {
 			    JOptionPane.showMessageDialog(CaptureFrame.this,
 				    "Failed to capture the screen: " + e1.getMessage(), "Info",
 				    JOptionPane.WARNING_MESSAGE);
-			    
+
 			} finally {
 			    CaptureFrame.this.dispose();
 			}
@@ -111,7 +117,7 @@ public class CaptureButton extends JButton {
 	    public Drawer() {
 		this.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		this.setOpaque(false);
-//		this.setBackground(DARK_FILTER);
+		// this.setBackground(DARK_FILTER);
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 		    @Override
 		    public void mouseDragged(MouseEvent e) {
@@ -134,9 +140,9 @@ public class CaptureButton extends JButton {
 	    protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-//		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
-//		g2d.setColor(new Color(0, 0, 0, 0.1f));
-//		g2d.fillRect(0, 0, 1000, 1000);
+		// g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC));
+		// g2d.setColor(new Color(0, 0, 0, 0.1f));
+		// g2d.fillRect(0, 0, 1000, 1000);
 		g2d.setColor(Color.decode("#c91e46")); // RED
 		BasicStroke dashedStroke = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER, 10.0f,
 			new float[] { 8 }, 0.0f);

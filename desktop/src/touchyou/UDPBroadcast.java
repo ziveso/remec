@@ -14,28 +14,28 @@ import touchyou.util.Controller;
  *
  */
 public class UDPBroadcast {
-    DatagramSocket socket;
+    private DatagramSocket socket;
 
     /**
-     * Set broadcast status. True to start broadcasting, false to stop
-     * broadcasting.
+     * Set broadcast listening status. True to start listening to the broadcast, false to stop
+     * listening to broadcast.
      * 
      * @param choice
-     *            is the broadcast status
+     *            is the broadcast listening status
      */
-    public void setBroadcast(boolean choice) {
+    public void setListening(boolean choice) {
 	if (socket == null || (choice && socket.isClosed())) {
-	    startBroadcast();
+	    startListen();
 	} else if (!choice) {
-	    stopBroadcast();
+	    stopListen();
 	}
     }
 
-    private void stopBroadcast() {
+    private void stopListen() {
 	socket.close();
     }
 
-    private void startBroadcast() {
+    private void startListen() {
 	new Thread(() -> {
 	    try {
 		// Keep a socket open to listen to all the UDP trafic that

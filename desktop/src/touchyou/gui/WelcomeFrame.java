@@ -38,11 +38,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import touchyou.util.Controller;
 import touchyou.util.GUIUtil;
 
+/**
+ * Welcome window.
+ * 
+ * @author Kongpon Charanwattanakit
+ *
+ */
 public class WelcomeFrame extends JFrame {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -3124625665383364874L;
     private JPanel contentPane;
 
@@ -126,7 +129,7 @@ public class WelcomeFrame extends JFrame {
 	    public void valueChanged(ListSelectionEvent e) {
 		if (e.getValueIsAdjusting()) {
 		    String profileName = list.getSelectedValue();
-		    File file = new File("./profiles/" + profileName + "/" + profileName+".profile");
+		    File file = new File("./profiles/" + profileName + "/" + profileName + ".profile");
 		    Controller.getInstance().openProfile(file);
 		    runMainFrame();
 		}
@@ -228,7 +231,8 @@ public class WelcomeFrame extends JFrame {
 	btnDownload.addActionListener((e) -> {
 	    if (Desktop.isDesktopSupported()) {
 		try {
-		    Desktop.getDesktop().browse(new URI("https://github.com/thitgorn/remec/tree/master/starter_profiles"));
+		    Desktop.getDesktop()
+			    .browse(new URI("https://github.com/thitgorn/remec/tree/master/starter_profiles"));
 		} catch (IOException | URISyntaxException e1) {
 		    e1.printStackTrace();
 		}

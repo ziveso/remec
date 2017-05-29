@@ -117,14 +117,14 @@ public class SettingPanel extends JPanel {
 	combination.addMouseListener(new MouseAdapter() {
 	    @Override
 	    public void mouseClicked(MouseEvent e) {
-		Controller.getInstance().disableMenuBar(true);
+		Controller.getInstance().setMenuBarDisabled(true);
 		combination.setBorder(BorderFactory.createLineBorder(new Color(65, 65, 192), 5));
 	    }
 	});
 	combination.addFocusListener(new FocusAdapter() {
 	    @Override
 	    public void focusLost(FocusEvent e) {
-		Controller.getInstance().disableMenuBar(false);
+		Controller.getInstance().setMenuBarDisabled(false);
 		combination.setBorder(iconpath.getBorder());
 	    }
 	});

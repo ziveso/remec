@@ -152,7 +152,7 @@ public class Controller {
      * Allow android devices to search for this computer.
      */
     public void startBroadcast() {
-	broadcaster.setBroadcast(true);
+	broadcaster.setListening(true);
 	app.allowConnection(true);
     }
 
@@ -161,7 +161,7 @@ public class Controller {
      * this computer.
      */
     public void stopBroadcast() {
-	broadcaster.setBroadcast(false);
+	broadcaster.setListening(false);
 	app.allowConnection(false);
     }
 
@@ -291,7 +291,13 @@ public class Controller {
 	statusPanel.setRemoteConnection(isOn);
     }
 
-    public void disableMenuBar(boolean isDisable) {
+    /**
+     * Set menubar disable status.
+     * 
+     * @param isDisable
+     *            is a boolean, true to disable to menubar, false to enable.
+     */
+    public void setMenuBarDisabled(boolean isDisable) {
 	MenuBar mb = (MenuBar) mainFrame.getJMenuBar();
 	if (isDisable) {
 	    mb.disableKey();
