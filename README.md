@@ -1,5 +1,5 @@
 # Remec - turn your android device into a custom remote control.
-Remec is an Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application to get ready for tranfering the remote design into your mobile. See [Project Website](https://thitgorn.github.io/remec/) for more information.
+Remec is an Iot (Internet of things) application which tranforms your android device into a custom computer remote control with your own design. You can design your own remote interface and its key combinations. Decorate it with images or labels to help remember each button using the Remec desktop application and save it to your local machine. When the remote is ready, open the Remec android application to get ready for tranfering the remote design into your mobile. See [Project Website](https://ziveso.github.io/remec/) for more information.
 
 # Features
 ## Desktop
@@ -30,12 +30,12 @@ Remec is an Iot (Internet of things) application which tranforms your android de
 # Installation
 Click on the link to start downloading (Required Java version 8 or above).
 
-- Remec for <strong>Desktop</strong>: https://github.com/thitgorn/Remec/raw/master/Remec.jar
-- Remec for <strong>Android</strong>: https://github.com/thitgorn/Remec/raw/master/Remec.apk
+- Remec for <strong>Desktop</strong>: https://github.com/ziveso/Remec/raw/master/Remec.jar
+- Remec for <strong>Android</strong>: https://github.com/ziveso/Remec/raw/master/Remec.apk
 
 # Instructions
 <img style="max-width:600px" src="./docs/assets/images/howto.png">
 
 # Contributors
 - [Kongpon Charanwattanakit](https://github.com/kykungz)
-- [Thitiwat Thonglhor](https://github.com/thitgorn)
+- [Thitiwat Thonglhor](https://github.com/ziveso)
